@@ -24,10 +24,11 @@ js-NCU_MIS_SA/statics/js
 
 會員中心
 
+每個商品 模組
 
-男人館
-女人館
-兒童館
+每個賣家 模組
+
+男人館/女人館/兒童館 模組
 
 
 
@@ -40,7 +41,11 @@ js-NCU_MIS_SA/statics/js
 
 分工:
 1.ren
+
 johnvspeter
+
 fire
+
 wuchaohan
+
 AlightQQ
