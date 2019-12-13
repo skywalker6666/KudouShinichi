@@ -1,10 +1,13 @@
 # KudouShinichi
 前端各類型檔案上傳位置:
+
 html-NCU_MIS_SA
 
 css-NCU_MIS_SA/statics/css
 
 js-NCU_MIS_SA/statics/js
+
+需要頁面:
 
 
 主頁
