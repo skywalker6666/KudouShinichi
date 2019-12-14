@@ -16,12 +16,13 @@
     border: 0px solid;
     border-radius: 5px;
     margin: 10px;
+    padding-bottom:300px;
 }
 
 .generalbox {
     width: 1250px;
     height: 200px;
-    background-color: white;
+    background-color: rgb(199, 219, 21);
     color: blue;
     font-style: oblique;
     font-family: cursive;
