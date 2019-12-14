@@ -1,5 +1,6 @@
 body {
 	background-color: #BCE2FF;
+
 }
 ul {
     list-style-type: none;
@@ -48,7 +49,8 @@ li a {
     position: relative;
     top: 6px;
     border: none;
-    padding: 24px 24px;
+    padding-top: 24px;
+    padding-right: 24px;
     text-align: center;
     font-family: cursive;
     text-decoration: none;
@@ -66,6 +68,26 @@ li a {
 
 .navbarItemSide:hover {
     background-color: #FBEE98;
+    text-decoration: underline;
+    color: blue;
+}
+.navbarFloating {
+    
+    color: blue;
+    position: relative;
+    top: 2px;
+    border: none;
+
+    text-align: center;
+    font-family: cursive;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    border-radius: 10px;
+
+}
+div li a:hover{
+	background-color: #FBEE98;
     text-decoration: underline;
     color: blue;
 }

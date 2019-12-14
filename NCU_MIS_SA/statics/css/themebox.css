@@ -21,7 +21,7 @@
 .generalbox {
     width: 1250px;
     height: 200px;
-    background-color: rgb(199, 219, 21);
+    background-color: white;
     color: blue;
     font-style: oblique;
     font-family: cursive;
@@ -29,4 +29,21 @@
     border: 0px solid;
     border-radius: 5px;
     margin: 10px;
+    padding-bottom:100px;
+}
+.smallbox{
+	display:inline;
+	width: 200px;
+    height: 12px;
+    background-color: #E6E6E6;
+    color: blue;
+    font-style: normal;
+    font-family: cursive;
+    font-size: 14px;
+    border: 1px solid;
+    border-radius: 1px;
+    margin: 5px;
+    padding-bottom:10px;
+    padding-right:10px;
+	
 }
