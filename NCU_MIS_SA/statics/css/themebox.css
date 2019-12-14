@@ -1,0 +1,32 @@
+.frame {
+    position: absolute;
+    top: 20%;
+    box-align: center;
+
+}
+
+.topbox {
+    width: 1250px;
+    height: 300px;
+    background-color: rgb(199, 219, 21);
+    color: blue;
+    font-style: oblique;
+    font-family: cursive;
+    font-size: 14px;
+    border: 0px solid;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.generalbox {
+    width: 1250px;
+    height: 200px;
+    background-color: white;
+    color: blue;
+    font-style: oblique;
+    font-family: cursive;
+    font-size: 14px;
+    border: 0px solid;
+    border-radius: 5px;
+    margin: 10px;
+}
