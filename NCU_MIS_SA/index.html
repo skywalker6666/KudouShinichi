@@ -21,7 +21,8 @@
   </style>
   <!-- Custom styles for this template -->
   <link href="statics/css/product.css" rel="stylesheet">
-  <link rel="stylesheet" href="../statics/css/navbar.css">
+  <link rel="stylesheet" href="statics/css/navbar.css">
+  <link rel="stylesheet" href="statics/css/themebox.css">
 
   <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
@@ -30,27 +31,32 @@
   <div>
     <nav>
     <ul>
-        <li><img src="../statics/img/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+    
+        <li><img src="statics/img/icon.png" style="float: left" height="100px" width="100px" ></img></li>
         <li><a class="navbarItem" href="home.html">商品總覽</a></li>
         <li style="float:right"><a class="navbarItemSide" href="register.html">會員登入/註冊</a></li>
     </ul>
-    <h5 class="my-0 mr-md-auto font-weight-normal">NCU_MIS-SA</h5>
-    
     </nav>
-    <a class="btn btn-outline-primary" href="cart.html">購物車</a>
   </div>
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">商品列表</h1>
-    <p class="lead">以下是所有商品包含其ID、品名、價格與說明</p>
-  </div>
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div id="product_panel" class="row">
-      </div>
+ 
+  <div class="frame">
+        <div class="topbox">促銷專區
+           <div class="album py-5 bg-light">
+    		<div class="container">
+      			<div id="product_panel" class="row">
+      			</div>
+    		</div>
+    		</div>
+  		</div>
+        
+        <div class="generalbox">新品上市</div>
+        <div class="generalbox">工藤秒殺</div>
+        <div class="generalbox">賣家專區</div>
+        <div class="generalbox">每日主題</div>
     </div>
-  </div>
+
+ 
 
   <script>   
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
