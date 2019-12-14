@@ -7,6 +7,8 @@ css-NCU_MIS_SA/statics/css
 
 js-NCU_MIS_SA/statics/js
 
+img-js-NCU_MIS_SA/statics/img
+
 需要頁面:
 
 
