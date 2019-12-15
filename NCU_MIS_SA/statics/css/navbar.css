@@ -2,7 +2,7 @@ body {
 	background-color: #BCE2FF;
 
 }
-ul {
+ul.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -15,12 +15,12 @@ ul {
     z-index: 1;
 }
 
-li {
+li.navbar {
     float: left;
-    padding: 0;
+    
 }
 
-li a {
+li.navbar a {
     display: block;
     text-align: center;
     padding: 0;
@@ -69,25 +69,24 @@ li a {
 .navbarItemSide:hover {
     background-color: #FBEE98;
     text-decoration: underline;
-    color: blue;
+    color: blue;   
+}
+a.navbarFloating:hover {
+    
+    text-decoration: underline;
+    color: blue;   
 }
 .navbarFloating {
     
-    color: blue;
+    color: #520ef1;
     position: relative;
     top: 2px;
     border: none;
-
     text-align: center;
     font-family: cursive;
     text-decoration: none;
     display: block;
-    font-size: 12px;
+    font-size: 16px;
     border-radius: 10px;
 
-}
-div li a:hover{
-	background-color: #FBEE98;
-    text-decoration: underline;
-    color: blue;
 }
