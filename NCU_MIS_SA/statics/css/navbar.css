@@ -20,7 +20,7 @@ li.navbar {
     
 }
 
-li.navbar a {
+li a.navbar  {
     display: block;
     text-align: center;
     padding: 0;
