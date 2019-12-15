@@ -8,29 +8,25 @@
  	<link rel="stylesheet" href="statics/css/register&login.css">
  	<link rel="stylesheet" href="statics/css/navbar.css">
 </head>
-<body bgcolor="#BCE2FF">	
+<body bgcolor="#BCE2FF">
 	<ul>
         <li><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
         <li><a class="navbarItem" href="index.html">商品總覽</a></li>
-        <li style="float:right"><a class="navbarItemSide" href="register.html">會員註冊</a></li>
+        <li style="float:right"><a class="navbarItemSide" href="">我還不知這邊要填什麼</a></li>
     </ul>
 	<div class="box" >
-			<label class="box_text" >會員登入</label>
+			<label class="box_text" >會員中心</label>
 		<div class="box2" >		
 			<form class="form" id="form" accept-charset="utf-8" style="margin-top:100px">				
-				<div class="input text required">
-					<label for="member_name" >會員帳號</label>
-					<input class="field" name="name" type="text" id="member_name" required="required">
+				<div>
+					<input class="button" type="button" style="margin-top:60px" value="更改密碼" onclick="location.href='member_change_pwd.html'">
+					<input class="button" type="button" style="margin-top:60px" value="更改電子郵件" onclick="location.href='member_change_email.html'">
+					<input class="button" type="button" style="margin-top:60px" value="更改生日" onclick="location.href='member_change_birth.html'">
 				</div>
-				<div class="input password required" >
-					<label for="password">會員密碼</label>
-					<input class="field" name="password" type="password" id="member_password" required="required" >				   
-				</div>
-				<div type="submit">
-					<button class="button" id="login" >登入</button>
-				</div>
+				
 			</form>
 		</div>
+		
 	</div>
 </body>
 </html>

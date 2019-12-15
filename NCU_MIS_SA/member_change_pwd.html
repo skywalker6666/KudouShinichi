@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	</style>
+ 	<link rel="stylesheet" href="statics/css/register&login.css">
+ 	<link rel="stylesheet" href="statics/css/navbar.css">
+</head>
+<body bgcolor="#BCE2FF">
+	<ul>
+        <li><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li><a class="navbarItem" href="index.html">商品總覽</a></li>
+        <li style="float:right"><a class="navbarItemSide" href="">我還不知這邊要填什麼</a></li>
+    </ul>
+	<div class="box" >
+			<label class="box_text" >會員中心_更改密碼</label>
+			<a class="box_text" href="member_change.html" style="margin-left:180px;text-decoration:none">上一頁</a>
+		<div class="box2" >		
+			<form class="form" id="form" accept-charset="utf-8" style="margin-top:100px">				
+				<div>
+					<label for="password">會員原密碼</label>
+					<input class="field" name="password" type="password" id="member_password" required="required" >				   
+				</div>
+				<div>
+					<label for="password">會員新密碼</label>
+					<input class="field" name="password" type="password" id="member_password" required="required" >				   
+				</div>
+				<div>
+					<label for="password">確認新密碼</label>
+					<input class="field" name="password" type="password" id="member_password" required="required" >				   
+				</div>
+				<div type="submit">
+                     <button class="button" id="save">儲存</button>
+                     <input class="button" type="button" value="取消" onclick="location.href='member_change_pwd.html'">
+                </div>
+			</form>
+		</div>
+		
+	</div>
+</body>
+</html>

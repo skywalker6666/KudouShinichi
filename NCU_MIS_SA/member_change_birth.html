@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	</style>
+ 	<link rel="stylesheet" href="statics/css/register&login.css">
+ 	<link rel="stylesheet" href="statics/css/navbar.css">
+</head>
+<body bgcolor="#BCE2FF">
+	<ul>
+        <li><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li><a class="navbarItem" href="index.html">商品總覽</a></li>
+        <li style="float:right"><a class="navbarItemSide" href="">我還不知這邊要填什麼</a></li>
+    </ul>
+	<div class="box" >
+			<label class="box_text" >會員中心_更改生日</label>
+			<a class="box_text" href="member_change.html" style="margin-left:180px;text-decoration:none">上一頁</a>
+		<div class="box2" >		
+			<form class="form" id="form" accept-charset="utf-8" style="margin-top:100px">		
+				<div>
+					<label for="member_email">會員生日</label>
+					 <input placeholder="會員生日年"  class="field_birthY " name="birth1" type="birth" id="birth1" required="required">年
+                     <input placeholder="會員生日月"  class="field_birthMandD" name="birth2" type="birth" id="birth2" required="required">月
+                     <input placeholder="會員生日日"  class="field_birthMandD" name="birth3" type="birth" id="birth3" required="required">日
+				</div>				
+				<div type="submit">
+                     <button class="button" id="save">儲存</button>
+                     <input class="button" type="button" value="取消" onclick="location.href='member_change_birth.html'">
+                </div>
+			</form>
+		</div>
+		
+	</div>
+</body>
+</html>
