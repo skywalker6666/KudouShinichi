@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>CakePHP: the rapid development php framework: Members</title>
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
+
+    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <h1><a href="http://cakephp.org/">CakePHP: the rapid development php framework</a></h1>
+        </div>
+        
+        <div id="content">
+            <h2>註冊會員資料</h2>
+            <a href="index.html">會員清單</a>
+            <a href="product.html">購物車模組</a>
+            
+            <div id="flashMessage" class="message" style="display: none;"></div>
+
+            <form id="form" accept-charset="utf-8">
+                <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                <div class="input text required">
+                    <label for="member_name">姓名</label>
+                    <input name="name" maxlength="30" type="text" id="member_name" required="required">
+                </div>
+                <div class="input email required">
+                    <label for="member_email">電郵</label>
+                    <input name="email" maxlength="50" type="email" id="member_email" required="required">
+                </div>
+                <div class="input password required">
+                    <label for="member_password">密碼</label>
+                    <input name="password" maxlength="30" type="password" id="member_password" required="required">
+                </div>
+                <div class="submit"><input type="button" value="註冊" id="submit"></div>
+            </form>
+            
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    // 處理表單點擊事件
+                    var $form = $('#submit');
+                    $form.click(function() {
+                        submit();
+                    });
+
+                    function submit() {
+                        var name = $('#member_name').val();
+                        var email = $('#member_email').val();
+                        var password = $('#member_password').val();
+
+                        var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                        var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+                        if (!email_rule.test(email)) {
+                            alert("Email格式不符！");
+                        }
+                        else if(!password_rule.test(password)) {
+                            alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+                        }
+                        else {
+                            // 將資料組成JSON格式
+                            var data_object = {
+                                "name": name,
+                                "email": email,
+                                "password": password
+                            };
+
+                            // 將JSON格式轉換成字串
+                            var data_string = JSON.stringify(data_object);
+
+                            // 發出POST的AJAX請求
+                            $.ajax({
+                                    type: "POST",
+                                    url: "api/member.do",
+                                    data: data_string,
+                                    crossDomain: true,
+                                    cache: false,
+                                    dataType: 'json',
+                                    timeout: 5000,
+                                    success: function (response) {
+                                        $('#flashMessage').html(response.message);
+                                        $('#flashMessage').show();
+                                        if(response.status == 200){
+                                            updateSQLTable(response.response);
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("無法連線到伺服器！");
+                                    }
+                            });
+                        }
+                    }
+
+                    function updateSQLTable(data) {
+                        $("#sql_log > tbody").empty();
+                        var time = (data.time / 1000000).toFixed(2);
+                        var table_html = "";
+
+                        table_html += '<tr>';
+                        table_html += '<td>' + '1' + '</td>';
+                        table_html += '<td>' + data.sql + '</td>';
+                        table_html += '<td style="text-align: right">' + '0' + '</td>';
+                        table_html += '<td style="text-align: right">' + data.row + '</td>';
+                        table_html += '<td style="text-align: right">' + data.row + '</td>';
+                        table_html += '<td style="text-align: right">' + time + '</td>';
+                        table_html += '</tr>';
+                        $("#sql_log > tbody").append(table_html);
+                        $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+                    }
+                });
+            </script>
+
+        </div>
+        
+        <div id="footer">
+            <a href="http://www.cakephp.org/" target="_blank" id="cake-powered"><img src="statics/img/cake.power.gif" alt="CakePHP: the rapid development php framework" border="0"></a>
+            <p>CakePHP 2.6.10</p>
+        </div>
+    </div>
+
+    <table class="cake-sql-log" id="sql_log" summary="Cake SQL Log" cellspacing="0">
+        <caption id="sql_summary">(default) 0 queries took 0 ms</caption>
+        <thead>
+            <tr>
+                <th>Nr</th>
+                <th>Query</th>
+                <th>Error</th>
+                <th>Affected</th>
+                <th>Num. rows</th>
+                <th>Took (ms)</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

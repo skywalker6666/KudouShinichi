@@ -1,161 +1,166 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CakePHP: the rapid development php framework: Members</title>
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" type="text/css" href="statics/css/cake.generic.css">
+  <meta charset="utf-8">
+  <title>Home</title>
 
-    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap core CSS -->
+
+
+  <style>
+
+  </style>
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="statics/css/navbar.css">
+  <link rel="stylesheet" href="statics/css/themebox.css">
+
+  <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
-<body>
-    <div id="container">
-        <div id="header">
-            <h1><a href="http://cakephp.org/">CakePHP: the rapid development php framework</a></h1>
-        </div>
-        <div id="content">
-            <h2>會員清單</h2>
-            <a href="register.html">新增會員</a>
-            <a href="product.html">購物車模組</a>
+<body bgcolor="#BCE2FF">
 
-            <div id="flashMessage" class="message" style="display: none;"></div>
+  <ul>
+    <li><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px"></img></li>
+    <li><a class="navbarItem" href="index.html">商品總覽</a></li>
+    <li><a class="navbarItem" href="">訂單追蹤</a></li>
+    <li><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+    <li style="float:right"> <a class="navbarItemSide" href="register.html">會員登入/註冊</a></li>
+  </ul>
 
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th>編號</th>
-                        <th>姓名</th>
-                        <th>電郵</th>
-                        <th>更新時間</th>
-                        <th>會員組別</th>
-                        <th>功能</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <script type="text/javascript">
-                // 全域變數紀錄SQL指令下的次數
-                var sql_num = 0;
-                function deleteMember(id) {
-                    var check = window.confirm("確認刪除會員？");
-                    if (check == true) {
-                        console.log("You pressed OK!");
-                        var request = {'id': id};
-                        var data_string = JSON.stringify(request);
-                        $.ajax({
-                            type: "DELETE",
-                            url: "api/member.do",
-                            crossDomain: true,
-                            data: data_string,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                if(response.status == 200){
-                                    $("#flashMessage").html("成功! 已經成功刪除會員...");
-                                    $("#flashMessage").show();
-                                    getAllMember();
-                                }
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                        });
-                    }
-                    else {
-                        console.log("You pressed Cancel!");
-                    }
-                }
+  <div class="frame">
+    <div class="topbox">促銷專區 </div>
+    <div class="generalbox">新品上市</div>
+    <div class="generalbox">工藤秒殺</div>
+    <div class="generalbox">賣家專區</div>
+    <div class="generalbox">每日主題</div>
+  </div>
 
-                function getAllMember() {
-                    // 發出POST的GET請求取得所有會員列表
-                    $.ajax({
-                            type: "GET",
-                            url: "api/member.do",
-                            crossDomain: true,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                if(response.status == 200){
-                                    updateTable(response.response.data);
-                                    updateSQLTable(response.response);
-                                }
-                                console.log(response);
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-                            }
-                    });
-                }
-                
-                // 更新會員列表表格
-                function updateTable(data) {
-                    $("#table > tbody").empty();
-                    var table_html = '';
-                    $.each(data, function(index, value) {
-                        table_html += '<tr><td scope="row">' + value['id'] + '</td>';
-                        table_html += '<td>' + value['name'] + '</td>';
-                        table_html += '<td>' + value['email'] + '</td>';
-                        table_html += '<td>' + value['login_times'] + '</td>';
-                        table_html += '<td>' + value['status'] + '</td>';
-                        table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
-                        table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
-                    })
 
-                    $("#table > tbody").append(table_html);
-                }
-                
-                // 更新SQL指令歷史表格
-                function updateSQLTable(data) {
-                    $("#sql_log > tbody").empty();
-                    var time = (data.time / 1000000).toFixed(2);
-                    var table_html = "";
-                    
-                    sql_num = 0;
-                    sql_num += 1
 
-                    table_html += '<tr>';
-                    table_html += '<td>' + sql_num + '</td>';
-                    table_html += '<td>' + data.sql + '</td>';
-                    table_html += '<td style="text-align: right">' + '0' + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + data.row + '</td>';
-                    table_html += '<td style="text-align: right">' + time + '</td>';
-                    table_html += '</tr>';
-                    $("#sql_log > tbody").append(table_html);
-                    $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
-                }
-                $(document).ready(function() {
-                    getAllMember();
-                });
-            </script>
-        </div>
-        <div id="footer">
-            <a href="http://www.cakephp.org/" target="_blank" id="cake-powered"><img src="statics/img/cake.power.gif" alt="CakePHP: the rapid development php framework" border="0"></a>
-            <p>CakePHP 2.6.10</p>
-        </div>
+  <script>
+    var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+
+    function getAllProduct() {
+      $.ajax({
+        type: "GET",
+        url: "api/product.do",
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+          if (response.status == 200) {
+            var product_panel = '';
+
+            $.each(response.response.data, function () {
+              product_panel += addProduct(this);
+            })
+
+            $("#product_panel").append(product_panel);
+            setButtonFunction();
+            checkIfExistInCart();
+          }
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
+
+    getAllProduct();
+
+    function addProduct(data) {
+      let inner_html = '';
+      inner_html += '<div class="col-md-4">';
+      inner_html += '<div class="card-header">';
+      inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+      inner_html += '</div>';
+      inner_html += '<div class="card mb-4 shadow-sm">';
+      inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+      inner_html += '<div class="card-body">';
+      inner_html += '<h1 class="card-title pricing-card-title">$' + data.price +
+        ' <small class="text-muted">/ USD</small></h1>';
+      inner_html += '<p class="card-text">' + data.describe + '</p>';
+      inner_html += '<div class="d-flex justify-content-between align-items-center">';
+      inner_html += '<div class="btn-group">';
+      inner_html += '<button id="add_cart_' + data.id +
+        '" name="add_cart" type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>';
+      inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+      inner_html += '</div></div></div></div>';
+
+      return inner_html;
+    }
+
+    function setButtonFunction() {
+      $('button[name="add_cart"]').click(function () {
+        var action = (this.id).split('_')[0];
+        var destination = (this.id).split('_')[1];
+        var id = (this.id).split('_')[2];
+        addProductToCart(id, 1);
+      });
+    }
+
+    function getCartDataFromClient() {
+      let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+      let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+      cart = !cart ? new Array() : cart;
+      amount = !amount ? new Array() : amount;
+      return [cart, amount];
+    }
+
+    function addProductToCart(id, amount) {
+      if (!(client_cart_obj.includes(id))) {
+        client_cart_obj.push(id);
+        client_cart_amount.push(amount);
+        updateCartDataToClent();
+      }
+
+      checkIfExistInCart();
+    }
+
+    function updateCartDataToClent() {
+      localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+      localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+    }
+
+    function checkIfExistInCart() {
+      $('button[name="add_cart"]').each(function () {
+        var action = (this.id).split('_')[0];
+        var destination = (this.id).split('_')[1];
+        var id = (this.id).split('_')[2];
+        if (client_cart_obj.includes(id)) {
+          setButtonState(this.id, false);
+        } else {
+          setButtonState(this.id, true);
+        }
+
+      });
+    }
+
+    function setButtonState(id, action) {
+      if (!action) {
+        $('#' + id).prop('disabled', true);
+        $('#' + id).addClass('disabled');
+        $('#' + id).html('已加入');
+      } else {
+        $('#' + id).prop('disabled', false);
+        $('#' + id).removeClass('disabled');
+        $('#' + id).html('加入購物車');
+      }
+    }
+
+  </script>
+
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
     </div>
-    <table class="cake-sql-log" id="sql_log" summary="Cake SQL Log" cellspacing="0">
-        <caption id="sql_summary">(default) 0 query took 0 ms</caption>
-        <thead>
-            <tr>
-                <th>Nr</th>
-                <th>Query</th>
-                <th>Error</th>
-                <th>Affected</th>
-                <th>Num. rows</th>
-                <th>Took (ms)</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+  </footer>
+
+
 </body>
 
 </html>
