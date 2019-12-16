@@ -19,8 +19,9 @@
 }
 
 .generalbox {
-    width: 1250px;
-    height: 200px;
+	float:center;
+    width: 1300px;
+    height: 1250px;
     background-color: white;
     color: blue;
     font-famil:;
