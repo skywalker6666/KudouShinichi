@@ -1,4 +1,8 @@
-ul {
+body {
+	background-color: #BCE2FF;
+
+}
+ul.navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -11,12 +15,12 @@ ul {
     z-index: 1;
 }
 
-li {
+li.navbar {
     float: left;
-    padding: 0;
+    
 }
 
-li a {
+li a.navbar  {
     display: block;
     text-align: center;
     padding: 0;
@@ -45,7 +49,8 @@ li a {
     position: relative;
     top: 6px;
     border: none;
-    padding: 24px 24px;
+    padding-top: 24px;
+    padding-right: 24px;
     text-align: center;
     font-family: cursive;
     text-decoration: none;
@@ -64,5 +69,24 @@ li a {
 .navbarItemSide:hover {
     background-color: #FBEE98;
     text-decoration: underline;
-    color: blue;
+    color: blue;   
+}
+a.navbarFloating:hover {
+    
+    text-decoration: underline;
+    color: blue;   
+}
+.navbarFloating {
+    
+    color: #520ef1;
+    position: relative;
+    top: 2px;
+    border: none;
+    text-align: center;
+    font-family: cursive;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    border-radius: 10px;
+
 }

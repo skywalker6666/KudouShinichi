@@ -2,137 +2,142 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-       
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
+<meta charset="BIG5" name="viewport" content="width=device-width, initial-scale=1">
 
-        
-        input:checked+.slider {
-            background-color: #2196F3;
-        }
+<title>Register</title>
+<style>
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
 
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
+input:checked+.slider {
+	background-color: #2196F3;
+}
 
-        input:checked+.slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
+input:focus+.slider {
+	box-shadow: 0 0 1px #2196F3;
+}
 
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
 
-        .slider.round:before {
-            border-radius: 50%;
-        }
+.slider.round:before {
+	border-radius: 50%;
+}
 
-        .box {
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            left: 50%;
-            top: 60%;
-            margin-top: -250px;
-            margin-left: -400px;
-        }
+.box {
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	margin-top: -250px;
+	margin-left: -400px;
+}
 
-        .box2 {
-            width: 600px;
-            height: 400px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-top: -200px;
-            margin-left: -300px;
-        }
+.box2 {
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
+}
 
-        .button {
-            background-color: #FF8787;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 10px;
-        }
-        .button:hover {
-            background-color: #f44336;
-            color: white;
-        }
-        
-    </style>
-    <link rel="stylesheet" href="statics/css/navbar.css">
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.button:hover {
+	background-color: #f44336;
+	color: white;
+}
+</style>
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/register&login.css">
 </head>
-
 <body bgcolor="#BCE2FF">
-    <ul>
-        <li><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
-        <li><a class="navbarItem" href="index.html">商品總覽</a></li>
-        <li style="float:right"><a class="navbarItemSide" href="register.html">會員登入</a></li>
-    </ul>
-        <div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
-            <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員註冊</font>
-            <div class="box2" style="border:0px #FBEE98 solid;text-align:center; border-radius:50px;background-color:white;">
-                <font face="DFKai-sb">
-                
-                    <form id="form" accept-charset="utf-8">
-                        <div style="display:none ;"><input type="hidden" name="_method" value="POST"></div>
-                        <div class="input text required">
-                            <Br>
-                            <label for="member_name">會員帳號:</label>
-                            <input name="name" maxlength="30" type="text" id="member_name" required="required"
-                                style=width:300px height="30px">
-                        </div>
 
-                        <div class="input password required">
-                            <Br>
-                            <label for="member_password">登入密碼:</label>
-                            <input name="password" maxlength="30" type="password" id="member_password"
-                                required="required" style=width:300px height="30px">
-                        </div>
-                        <div class="input confirmpassword required">
-                            <Br>
-                            <label for="member_confirmpassword">確認密碼:</label>
-                            <input name="confirmpassword" maxlength="30" type="confirmpassword"
-                                id="member_confirmpassword" required="required" style=width:300px height="30px">
-                        </div>
-                        <div class="input email required">
-                            <Br>
-                            <label for="member_email">電子郵件:</label>
-                            <input name="email" maxlength="50" type="email" id="member_email" required="required"
-                                style=width:300px height="30px">
-                        </div>
-                        <div class="input birth required">
-                            <Br>
-                            <label for="member_birth">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生日:</label>
-                            <input name="birth1" maxlength="50" type="birth" id="birth1" required="required"
-                                style=width:120px height="30px">年
-                            <input name="birth2" maxlength="50" type="birth" id="birth2" required="required"
-                                style=width:60px height="30px">月
-                            <input name="birth3" maxlength="50" type="birth" id="birth3" required="required"
-                                style=width:60px height="30px">日
-                        </div>
-                        <div class="submit"><Br><Br><button class="button" id="submit_buyer">註冊為買家帳號</button>&nbsp;&nbsp;<button class="button" id="submit_seller">註冊為賣家帳號</button></div>
-                    </form>
-                </font>
-            </div>
-        </div>
-    </p>
-    
+	<ul class="navbar">
+		<li class="navbar"><img src="statics/img/navbar/icon.png"
+			style="float: left" height="100px" width="100px"></img></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+		<li class="navbar"><a class="navbarItem"
+			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="register.html">註冊</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="login.html">會員登入/</a></li>
+	</ul>
 
-</html>
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員註冊</font>
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+			<font face="DFKai-sb">
+
+				<form id="form" accept-charset="utf-8">
+					<div style="display: none;">
+						<input type="hidden" name="_method" value="POST">
+					</div>
+					<div class="input text required">
+						<label for="member_name">會員帳號:</label> <input class="field"
+							name="name" type="text" id="member_name" required="required">
+					</div>
+					<div class="input password required">
+						<label for="member_password">登入密碼:</label> <input class="field"
+							name="password" type="password" id="member_password"
+							required="required">
+					</div>
+					<div class="input confirmpassword required">
+						<label for="member_confirmpassword">確認密碼:</label> <input
+							class="field" name="confirmpassword" type="password"
+							id="member_confirmpassword" required="required">
+					</div>
+					<div class="input email required">
+						<label for="member_email">電子郵件:</label> <input class="field"
+							name="email" type="email" id="member_email" required="required">
+					</div>
+					<div class="input birth required">
+						<label for="member_birth">西元生日:</label> <input
+							class="field_birthY " name="birth1" type="birth" id="birth1"
+							required="required">年 <input class="field_birthMandD"
+							name="birth2" type="birth" id="birth2" required="required">月
+						<input class="field_birthMandD" name="birth3" type="birth"
+							id="birth3" required="required">日
+					</div>
+					<div type="submit">
+						<button class="button" id="submit_buyer">註冊為買家帳號</button>
+						<button class="button" id="submit_seller">註冊為賣家帳號</button>
+					</div>
+				</form>
+		</div>
+	</div>
+
+
+
+
 </body>
 
 </html>
