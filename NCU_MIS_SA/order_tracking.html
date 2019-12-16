@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        .box {
+            width: 800px;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            margin-top: -250px;
+            margin-left: -400px;
+        }
+        .box2 {
+            width: 600px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -300px;
+        }
+        .button {
+            background-color: #FF8787;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        .button:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="statics/css/navbar.css">
+    <link rel="stylesheet" href="statics/css/themebox.css">
+    <link rel="stylesheet" href="statics/css/order_tracking.css">
+</head>
+
+<body bgcolor="#BCE2FF">
+  	<ul class="navbar">
+    	<li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>           
+       	    
+	    <div class="mediumbox"  style="float:right">     
+        		<li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+        		<li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
+        		</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+        	</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li class="navbarFloating">user</li>
+        	</div>          
+	</ul>
+    <div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
+        <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;訂單XXX</font>
+        <font face="DFKai-sb">
+            <ol class="__inline" id="menu" style="list-style-type:none;">
+                <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
+                        width="100px"></img>
+                    <p><Br>訂單建立</p>
+                </li>
+                <li><img src="statics/img/ordertrace/371293-200.png" style="float: left" height="100px"
+                        width="100px"></img>
+                    <p><Br>到店寄件</p>
+                </li>
+                <li><img src="statics/img/ordertrace/e-commerce-29-512.png" style="float: left" height="100px"
+                        width="100px"></img>
+                    <p><Br>抵達取件門市</p>
+                </li>
+                <li><img src="statics/img/ordertrace/Success-Place-Order-Complete-Shopping-Tick-512.png"
+                        style="float: left" height="100px" width="100px"></img>
+                    <p><Br>完成取貨</p>
+                </li>
+            </ol>
+        </font>
+        <font face="DFKai-sb">
+            <ol class="point" id="" style="list-style-type:none; ">
+                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 1.png" style="float: left"
+                        height="50px" width="50px"></img>
+                    <p>------------</p>
+
+                </li>
+                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                        height="50px" width="50px"></img>
+                    <p>------------</p>
+                </li>
+                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                        height="50px" width="50px"></img>
+                    <p>------------</p>
+                </li>
+                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                        height="50px" width="50px"></img>
+                    <p>------------</p>
+                </li>
+            </ol>
+        </font>
+        <table bgcolor="white" style="width:100%">
+            <thead>
+                <tr>
+                    <th>訂單編號</th>
+                    <th>商品總金額</th>
+                    <th>運費</th>
+                    <th>訂單類別</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+
+</html>

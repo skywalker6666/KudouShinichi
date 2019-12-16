@@ -1,140 +1,131 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="BIG5">
-  <title>ShoppingCart</title>
-  <style>
-    #customers {
-      align: center;
-      font-family: "å¾®è»Ÿæ­£é»‘é«”", Arial, Helvetica, sans-serif;
-      border: 3px;
-      border-style: dashed;
-      width: 100%;
-    }
+<meta charset="BIG5">
+<title>ShoppingCart</title>
+<style>
+	#customers {
+		align:center;
+		font-family: "·L³n¥¿¶ÂÅé", Arial, Helvetica, sans-serif;
+		border:3px;
+		border-style:dashed;
+		width: 100%;
+	}
 
-    #customers td,
-    #customers th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+	#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	}
 
-    #customers tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
+	#customers tr:nth-child(even){background-color: #f2f2f2;}
 
-    #customers tr:hover {
-      background-color: #ddd;
-    }
+	#customers tr:hover {background-color: #ddd;}
 
-    #customers th {
-      position: sticky;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-      background-color: #4CAF50;
-      color: white;
-    }
+	#customers th {
+	position:sticky;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+	}	
+	div.absolute{
+		position:absolute;
+		align:center;
+		
+		top:100px;
+	}
 
-    div.absolute {
-      position: absolute;
-      align: center;
-      top: 100px;
-    }
-
-  </style>
-  <link rel="stylesheet" href="statics/css/navbar.css">
-  <link rel="stylesheet" href="statics/css/themebox.css">
+</style>
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/themebox.css">
 </head>
-
 <body bgcolor="#BCE2FF">
-  <div>
-    <ul class="navbar">
-      <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px"></img>
-      </li>
-      <li class="navbar"><a class="navbarItem" href="index.html">å•†å“ç¸½è¦½</a></li>
-      <li class="navbar"><a class="navbarItem" href="">è¨‚å–®è¿½è¹¤</a></li>
-      <li class="navbar"><a class="navbarItem" href="shoppingcart.html">è³¼ç‰©è»Š</a></li>
-
-
-
-      <!-- é€™è£¡æ˜¯é é¢å³ä¸Šæ–¹çš„å°box -->
-      <div class="mediumbox" style="float:right">
-        <li style="float: left"><a class="navbarFloating" href="register.html">æœƒå“¡ä¸­å¿ƒ</a></li>
-        <li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;ç™»å‡º </a></li>
-      </div>
-      <div class="smallbox" style="float:right">
-        <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>
-        <li><a class="navbarFloating" href="shoppingcart.html">è³¼ç‰©è»Š</a></li>
-      </div>
-      <div class="smallbox" style="float:right">
-        <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
-        <li class="navbarFloating">user</li>
-      </div>
+<div>
+	<ul class="navbar">
+        <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li class="navbar"><a class="navbarItem" href="index.html">°Ó«~Á`Äı</a></li>
+        <li class="navbar"><a class="navbarItem" href="order_tracking.html">­q³æ°lÂÜ</a></li>
+        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">ÁÊª«¨®</a></li>           
+       	
+	    
+        
+        <!-- ³o¸Ì¬O­¶­±¥k¤W¤èªº¤pbox -->
+        	<div class="mediumbox"  style="float:right">     
+        		<li style="float: left"><a class="navbarFloating" href="member_change.html">·|­û¤¤¤ß</a></li>
+        		<li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;µn¥X </a></li>
+        		</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li><a class="navbarFloating" href="shoppingcart.html">ÁÊª«¨®</a></li>
+        	</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li class="navbarFloating">user</li>
+        	</div>          	        
     </ul>
-  </div>
+</div>	
 
-  <div class="absolute" style=" overflow-x:auto;">
-    <table id="customers">
-      <tr>
-        <th>åˆªé™¤</th>
-        <th>å•†å“ç·¨è™Ÿ</th>
-        <th>åç¨±</th>
-        <th>å–®åƒ¹</th>
-        <th>æ•¸é‡</th>
-        <th>é‡‘é¡</th>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Christina Berglund</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Roland Mendel</td>
-        <td>Austria</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Helen Bennett</td>
-        <td>UK</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>Philip Cramer</td>
-        <td>Germany</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-        <td>Sweden</td>
-      </tr>
-
-    </table>
-  </div>
+    <div class="absolute" style=" overflow-x:auto;">
+		<table id="customers">
+			<tr>
+				<th>§R°£</th>
+				<th>°Ó«~½s¸¹</th>
+				<th>¦WºÙ</th>
+				<th>³æ»ù</th>
+				<th>¼Æ¶q</th>
+				<th>ª÷ÃB</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Maria Anders</td>
+				<td>Germany</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Christina Berglund</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Francisco Chang</td>
+				<td>Mexico</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Roland Mendel</td>
+				<td>Austria</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Helen Bennett</td>
+				<td>UK</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Philip Cramer</td>
+				<td>Germany</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+				<td>Sweden</td>
+			</tr>
+			
+		</table>
+	</div>
 </body>
-
 </html>

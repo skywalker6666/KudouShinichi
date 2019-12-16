@@ -1,0 +1,75 @@
+.box {
+            width: 800px;
+            height: 500px;
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            margin-top: -250px;
+            margin-left: -400px;
+            border:0px #FBEE98 solid;
+            border-radius:50px;
+            background-color:#FBEE98;
+      }
+.box_text{
+			font-family:DFKai-sb;
+			font-size:35px;
+			color:blue;
+			margin-left:32px;
+			line-height:50px;
+		 }
+.box2 {
+            width: 600px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -300px;
+            border:0px #FBEE98 solid;
+            text-align:center;
+            border-radius:50px;
+            background-color:white;
+            font-family:DFKai-sb;
+        }
+.button {
+	
+            background-color: #FF8787;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 40px 20px;
+            font-family:DFKai-sb;
+        }
+.button:hover {
+            background-color: #f44336;
+            color: white;
+        	  }
+.form{
+			line-height:50px; 
+	 }
+.field {
+			 width:300px;
+			 height:20px;
+			 maxlength:30; 
+	   }
+.field_birthY {
+			 width:130px;
+			 height:20px;
+			 maxlength:30; 
+	   }
+.field_birthMandD {
+			 width:50px;
+		 	height:20px;
+		 	maxlength:30; 
+<<<<<<< HEAD
+	   }
+
+=======
+	   }
+>>>>>>> branch 'tooth' of https://github.com/skywalker6666/KudouShinichi.git

@@ -33,17 +33,37 @@
 }
 .smallbox{
 	display:inline;
-	width: 200px;
+	width: 90px;
     height: 12px;
     background-color: #E6E6E6;
-    color: blue;
+    color: #fd3136;
     font-style: normal;
     font-family: cursive;
     font-size: 14px;
-    border: 1px solid;
+    border: 1.5px ;
+    border-style:solid;
     border-radius: 1px;
     margin: 5px;
     padding-bottom:10px;
+    padding-left:5px;
+    padding-right:5px;
+	
+}
+.mediumbox{
+	display:inline;
+	width: 200px;
+    height: 12px;
+    background-color: #E6E6E6;
+    color: #fd3136;
+    font-style: normal;
+    font-family: cursive;
+    font-size: 14px;
+    border: 2px;
+    border-style:dashed;
+    border-radius: 1px;
+    margin: 5px;
+    padding-bottom:10px;
+    padding-left:10px;
     padding-right:10px;
 	
 }
