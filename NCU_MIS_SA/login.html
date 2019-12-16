@@ -1,75 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
-		.box {
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            left: 50%;
-            top: 60%;
-            margin-top: -250px;
-            margin-left: -400px;
-        }
-		.box2 {
-            width: 600px;
-            height: 400px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-top: -200px;
-            margin-left: -300px;
-        }
-		.button {
-            background-color: #FF8787;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 50px 2px
-        }
-        .button:hover {
-            background-color: #f44336;
-            color: white;
-	</style>
- 	<link rel="stylesheet" href="statics/css/navbar.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+</style>
+<link rel="stylesheet" href="statics/css/register&login.css">
+<link rel="stylesheet" href="statics/css/navbar.css">
 </head>
-<body bgcolor="#BCE2FF">	
+<body bgcolor="#BCE2FF">
+
 	<ul class="navbar">
-    	<li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="">訂單追蹤</a></li>
-        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>           
-       	<li style="float:right"> <a class="navbarItemSide" href="register.html">會員登入/註冊</a></li>
-	    </ul>
-	
-	<div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue" >
-			<label style="margin-left:32px; line-height:50px">會員登入</label>
+		<li class="navbar"><img src="statics/img/navbar/icon.png"
+			style="float: left" height="100px" width="100px"></img></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+		<li class="navbar"><a class="navbarItem"
+			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="register.html">註冊</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="login.html">會員登入/</a></li>
+	</ul>
+
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> <label
+			style="margin-left: 32px; line-height: 50px">會員登入</label>
 		</font>
-		<div class="box2" style="border:0px #FBEE98 solid;text-align:center; border-radius:50px;background-color:white;">		
-		<font face="DFKai-sb">
-			<form id="form" accept-charset="utf-8"  style="line-height:50px; margin-top: 100px">				
-				<div class="input text required">
-					<label for="member_name" >會員帳號</label>
-					<input name="name" maxlength="30" type="text" id="member_name" required="required" 
-				  		   style=width:300px height="30px" >
-				</div>
-				<div class="input password required" >
-					<label for="password">會員密碼</label>
-					<input name="password" maxlength="30" type="password" id="member_password" required="required"
-			   			   style=width:300px height="30px" >				   
-				</div>
-				<div class="submit"><button class="button" id="submit_buyer" >登入</button></div>
-			</form>
-			</font>
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+			<font face="DFKai-sb">
+				<form id="form" accept-charset="utf-8"
+					style="line-height: 50px; margin-top: 100px">
+
+					<div class="input text required">
+						<label for="member_name">會員帳號</label> <input class="field"
+							name="name" type="text" id="member_name" required="required">
+					</div>
+					<div class="input password required">
+						<label for="password">會員密碼</label> <input class="field"
+							name="password" type="password" id="member_password"
+							required="required">
+					</div>
+					<div type="submit">
+						<button class="button" id="login">登入</button>
+					</div>
+				</form>
 		</div>
 	</div>
 </body>

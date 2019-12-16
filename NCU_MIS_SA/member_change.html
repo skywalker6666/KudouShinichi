@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	</style>
+ 	<link rel="stylesheet" href="statics/css/register&login.css">
+ 	<link rel="stylesheet" href="statics/css/navbar.css">
+ 	<link rel="stylesheet" href="statics/css/themebox.css">
+</head>
+<body bgcolor="#BCE2FF">
+	<ul class="navbar">
+        <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>           
+       	
+	    
+        
+        <!-- 這裡是頁面右上方的小box -->
+        	<div class="mediumbox"  style="float:right">     
+        		<li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+        		<li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
+        		</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+        	</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li class="navbarFloating">user</li>
+        	</div>          	        
+    </ul>
+	<div class="box" >
+			<label class="box_text" >會員中心</label>
+		<div class="box2" >		
+			<form class="form" id="form" accept-charset="utf-8" style="margin-top:100px">				
+				<div>
+					<input class="button" type="button" style="margin-top:60px" value="更改密碼" onclick="location.href='member_change_pwd.html'">
+					<input class="button" type="button" style="margin-top:60px" value="更改電子郵件" onclick="location.href='member_change_email.html'">
+					<input class="button" type="button" style="margin-top:60px" value="更改生日" onclick="location.href='member_change_birth.html'">
+				</div>
+				
+			</form>
+		</div>
+		
+	</div>
+</body>
+</html>
