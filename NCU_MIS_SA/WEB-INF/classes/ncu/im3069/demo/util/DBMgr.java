@@ -29,7 +29,7 @@ public class DBMgr {
 
     /** PASS常數，所有使用之資料庫使用者密碼 */
 
-    static final String PASS = "root";
+    static final String PASS = "yoyo922922";
 
 
 
