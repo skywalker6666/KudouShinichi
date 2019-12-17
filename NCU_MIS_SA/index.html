@@ -7,10 +7,29 @@
 <title>Home</title>
 
 <!-- Bootstrap core CSS -->
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
 
 
 <style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 </style>
+
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="statics/css/navbar.css">
 <link rel="stylesheet" href="statics/css/themebox.css">
@@ -34,16 +53,20 @@
 	</ul>
 
 	<div class="frame">
+			<div class="container">
+				<div id="product_panel" class="row"></div>
+			</div>
+		
+
 		<div class="topbox">促銷專區</div>
 		<div class="generalbox">新品上市</div>
 		<div class="generalbox">工藤秒殺</div>
 		<div class="generalbox">賣家專區</div>
 		<div class="generalbox">每日主題</div>
 	</div>
+</body>
 
-
-
-	<script>   
+<script>   
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
     
     function getAllProduct() {
@@ -156,15 +179,15 @@
     }
   </script>
 
-	<footer class="text-muted">
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-		</div>
-	</footer>
+<footer class="text-muted">
+	<div class="container">
+		<p class="float-right">
+			<a href="#">Back to top</a>
+		</p>
+	</div>
+</footer>
 
 
-</body>
+
 
 </html>
