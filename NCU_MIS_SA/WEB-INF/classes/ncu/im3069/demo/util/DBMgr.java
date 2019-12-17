@@ -27,7 +27,6 @@ public class DBMgr {
     /** USER常數，所要使用之資料庫使用者帳號 */
     static final String USER = "root";
 
-    /** PASS常數，所有使用之資料庫使用者密碼 */
 
 
     static final String PASS = "";

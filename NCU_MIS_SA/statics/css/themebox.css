@@ -19,12 +19,12 @@
 }
 
 .generalbox {
-    width: 1250px;
-    height: 200px;
+	float:center;
+    width: 1300px;
+    height: 1250px;
     background-color: white;
     color: blue;
-    font-style: oblique;
-    font-family: cursive;
+    font-famil:;
     font-size: 14px;
     border: 0px solid;
     border-radius: 5px;

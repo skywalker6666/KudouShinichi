@@ -7,32 +7,29 @@
 <title>Home</title>
 
 <!-- Bootstrap core CSS -->
-<link href="statics/css/bootstrap.min.css" rel="stylesheet">
-<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-<link href="statics/icon/favicon.ico" type="image/x-icon"
-	rel="shortcut icon">
 
 
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
+   .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
 </style>
-
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="statics/css/navbar.css">
 <link rel="stylesheet" href="statics/css/themebox.css">
+<link rel="stylesheet" href="statics/css/card.css">
+<link rel="stylesheet" href="statics/css/product.css">
 
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
@@ -53,20 +50,22 @@
 	</ul>
 
 	<div class="frame">
-			<div class="container">
-				<div id="product_panel" class="row"></div>
-			</div>
 		
-
-		<div class="topbox">促銷專區</div>
-		<div class="generalbox">新品上市</div>
-		<div class="generalbox">工藤秒殺</div>
-		<div class="generalbox">賣家專區</div>
-		<div class="generalbox">每日主題</div>
+		<div class="generalbox">
+		<p>商品目錄</p>
+			<div class="album py-5 bg-light">
+			    <div class="container">
+			      <div id="product_panel" class="row">
+			      </div>
+			    </div>
+			</div>		
+		</div>
+	
 	</div>
-</body>
 
-<script>   
+
+
+	<script>   
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
     
     function getAllProduct() {
@@ -100,7 +99,7 @@
     
     function addProduct(data) {
     	let inner_html = '';
-    	inner_html += '<div class="col-md-4">';
+    	inner_html += '<div class="col-md-4" style="float:left;">';
    		inner_html += '<div class="card-header">';
    		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
  		inner_html += '</div>';
@@ -111,7 +110,7 @@
 		inner_html += '<p class="card-text">' + data.describe + '</p>';
 		inner_html += '<div class="d-flex justify-content-between align-items-center">';
 		inner_html += '<div class="btn-group">';
-		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="btn btn-lg btn-block btn-outline-primary">加入購物車</button>';
+		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
 		inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
 		inner_html += '</div></div></div></div>';
     	
@@ -179,15 +178,15 @@
     }
   </script>
 
-<footer class="text-muted">
-	<div class="container">
-		<p class="float-right">
-			<a href="#">Back to top</a>
-		</p>
-	</div>
-</footer>
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</div>
+	</footer>
 
 
-
+</body>
 
 </html>
