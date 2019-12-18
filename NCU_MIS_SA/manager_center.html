@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ManagerCenter</title>
+	<style>
+	#customers {
+		align:center;
+		font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
+		border:3px;
+		border-style:dashed;
+		width: 100%;
+	}
+
+	#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	}
+
+	#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+	#customers tr:hover {background-color: #ddd;}
+
+	#customers th {
+	position:sticky;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+	}	
+	div.absolute{
+		position:absolute;
+		align:center;
+		
+		top:100px;
+		}
+	
+	</style>
+ 	<link rel="stylesheet" href="statics/css/register&login.css">
+ 	<link rel="stylesheet" href="statics/css/navbar.css">
+ 	<link rel="stylesheet" href="statics/css/themebox.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script>
+ 		function display_managers(){
+ 				$('#display_member').html("");
+ 				$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
+ 				  		'<input placeholder="搜尋"  class="field" >'+
+ 				  		'<button type="submit">搜尋</button>'+//還沒設定
+ 					'<table id="customers">'+
+ 						'<tr>'+
+ 							'<th>刪除</th>'+
+ 							'<th>管理員帳號</th>'+
+ 							'<th>電子郵件</th>'+
+ 							'<th>生日</th>'+
+ 							'<th>上次登入時間</th>'+		
+ 						'</tr>'+
+ 						'<tr>'+
+ 							'<td><input type="checkbox" name="delete" value="manager"></td>'+
+ 							'<td>Maria Anders</td>'+
+ 							'<td>Germanydsafasfasfsa@gmail.com</td>'+
+ 							'<td>2555-12-12</td>'+
+ 							'<td>2019-10-10 22:22:44</td>'+				
+ 						'</tr>'+
+ 					'</table>'+
+ 						'<div>'+
+ 	                     	'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+ 	                     	'<input class="button" type="button" value="取消" onclick="display_managers()">'+
+ 	                	'</div>'+
+ 	                '</div>').appendTo('#display_member')
+ 		}
+ 		
+ 		function display_sellers(){
+ 			$('#display_member').html("");
+ 			$('<div class="absolute" style="margin-top:30px;margin-left:30px">'+
+				'<input placeholder="搜尋"  class="field" >'+
+				'<button type="submit">搜尋</button>'+
+			    '<table id="customers">'+
+					'<tr>'+
+						'<th>刪除</th>'+
+						'<th>賣家會員帳號</th>'+
+						'<th>電子郵件</th>'+
+						'<th>生日</th>'+
+						'<th>上次登入時間</th>'+		
+					'</tr>'+
+					'<tr>'+
+						'<td><input type="checkbox" name="delete" value="seller"></td>'+
+						'<td>Maria Anders</td>'+
+						'<td>Germanydsafasfasfsa@gmail.com</td>'+
+						'<td>2555-12-12</td>'+
+						'<td>2019-10-10 22:22:44</td>'+			
+					'</tr>'+
+				'</table>'+
+					'<div>'+
+            			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+           			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
+       				'</div>').appendTo('#display_member')
+ 		}
+ 		
+ 		function display_buyers(){
+ 			$('#display_member').html("");
+ 			$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
+				'<input placeholder="搜尋"  class="field" >'+
+				'<button type="submit">搜尋</button>'+
+			    '<table id="customers">'+
+					'<tr>'+
+						'<th>刪除</th>'+
+						'<th>買家會員帳號</th>'+
+						'<th>電子郵件</th>'+
+						'<th>生日</th>'+
+						'<th>上次登入時間</th>'+		
+					'</tr>'+
+					'<tr>'+
+						'<td><input type="checkbox" name="delete" value="seller"></td>'+
+						'<td>Maria Anders</td>'+
+						'<td>Germanydsafasfasfsa@gmail.com</td>'+
+						'<td>2555-12-12</td>'+
+						'<td>2019-10-10 22:22:44</td>'+			
+					'</tr>'+
+				'</table>'+
+					'<div>'+
+            			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+           			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
+       				'</div>').appendTo('#display_member')
+ 		
+ 			
+ 		}
+ 	</script>
+</head>
+<body bgcolor="#BCE2FF">
+	<ul class="navbar">
+        <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
+        <li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>           
+       	
+	    
+        
+        <!-- 這裡是頁面右上方的小box -->
+        	<div class="mediumbox"  style="float:right">     
+        		<li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+        		<li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
+        		</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+        	</div>
+        	<div class="smallbox"  style="float:right">                   	
+        		<li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>    
+        		<li class="navbarFloating">user</li>
+        	</div>          	        
+    </ul>
+	<div class="box" >
+			<label class="box_text" >管理員中心</label>
+			<form class="form" id="form" accept-charset="utf-8" >				
+				<input class="button" type="button"  style="margin-top:20px;margin-left:130px" value="檢視所有管理員" onclick="display_managers()">
+				<input class="button" type="button"  style="margin-top:20px;margin-left:0px" value="檢視所有賣家" onclick="display_sellers()">
+				<input class="button" type="button"  style="margin-top:20px;margin-left:0px" value="檢視所有買家" onclick="display_buyers()">
+				<p id="display_member"></p>				
+			</form>
+		</div>
+		
+	</div>
+</body>
+</html>

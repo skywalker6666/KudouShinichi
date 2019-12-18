@@ -65,6 +65,12 @@
 	<script>   
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
     
+    /**
+     * 取得所有商品
+     * @call：addProduct()：畫出一筆商品
+     * @call：setButtonFunction()：
+     * @call：checkIfExistInCart()：
+     */
     function getAllProduct() {
       $.ajax({
         type: "GET",
@@ -94,6 +100,9 @@
 
     getAllProduct();
     
+    /**
+     * 畫出一筆商品
+     */
     function addProduct(data) {
     	let inner_html = '';
     	inner_html += '<div class="col-md-4" style="float:left;">';
@@ -114,6 +123,10 @@
 		return inner_html;
     }
     
+    /**
+     * 
+     * @call：addProductToCart()：
+     */
     function setButtonFunction() {
     	$('button[name="add_cart"]').click(function () {
     		var action = (this.id).split('_')[0];
@@ -123,6 +136,9 @@
         });
     }
     
+    /**
+     * 從 Client 端的 localstorage 取回儲存於購物車資訊
+     */
     function getCartDataFromClient() {
     	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
     	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
@@ -131,21 +147,32 @@
     	return [cart, amount];
     }
     
+    /**
+     * 
+     * @call：updateCartDataToClent()：
+     * @call：checkIfExistInCart()：
+     */
     function addProductToCart(id, amount) {
     	if (!(client_cart_obj.includes(id))) {
     		client_cart_obj.push(id);
     		client_cart_amount.push(amount);
     		updateCartDataToClent();
     	}
-    	
     	checkIfExistInCart();
     }
     
+    /**
+     * 更新客戶端的Cart資料
+     */
     function updateCartDataToClent() {
     	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
     	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
     }
     
+    /**
+     * 確認是否已在Cart中
+     * @call：setButtonState：
+     */
     function checkIfExistInCart() {
     	$('button[name="add_cart"]').each(function (){
     		var action = (this.id).split('_')[0];
@@ -161,6 +188,9 @@
         });
     }
     
+    /**
+     * 設定按鈕狀態
+     */
     function setButtonState(id, action) {
     	if (!action) {
     	    $('#' + id).prop('disabled', true);
