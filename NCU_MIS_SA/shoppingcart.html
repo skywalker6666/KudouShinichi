@@ -3,152 +3,116 @@
 <head>
 <meta charset="BIG5">
 <title>ShoppingCart</title>
-<style>
-	#customers {
-		align:center;
-		font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
-		border:3px;
-		border-style:dashed;
-		width: 100%;
-	}
 
-	#customers td, #customers th {
+<!-- Bootstrap core CSS -->
+
+
+<style>
+#customers {
+	align: center;
+	font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
+	border: 3px;
+	border-style: dashed;
+	width: 100%;
+}
+
+#customers td, #customers th {
 	border: 1px solid #ddd;
 	padding: 8px;
-	}
+}
 
-	#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-	#customers tr:hover {background-color: #ddd;}
+#customers tr:hover {
+	background-color: #ddd;
+}
 
-	#customers th {
-	position:sticky;
+#customers th {
+	position: sticky;
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
 	background-color: #4CAF50;
 	color: white;
-	}	
-	div.absolute{
-		position:absolute;
-		align:center;
-		
-		top:100px;
-	}
+}
 
+div.absolute {
+	position: absolute;
+	align: center;
+	top: 100px;
+}
 </style>
- <link href="statics/css/product.css" rel="stylesheet">
-  <link href="statics/css/jquery-confirm.css" rel="stylesheet">
-  <script src="statics/js/jquery-3.4.1.min.js"></script>
-  <script src="statics/js/jquery-confirm.js"></script>
+<link href="statics/css/product.css" rel="stylesheet">
+<link href="statics/css/jquery-confirm.css" rel="stylesheet">
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-confirm.js"></script>
 <link rel="stylesheet" href="statics/css/navbar.css">
 <link rel="stylesheet" href="statics/css/themebox.css">
 </head>
 <body bgcolor="#BCE2FF">
-<div>
-	<ul class="navbar">
-        <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>           
-       	
-	    
-        
-        <!-- 這裡是頁面右上方的小box -->
-        	<div class="mediumbox"  style="float:right">     
-        		<li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
-        		<li style="float: left"><a class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
-        		</div>
-        	<div class="smallbox"  style="float:right">                   	
-        		<li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img></li>    
-        		<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-        	</div>
-        	<div class="smallbox"  style="float:right">                   	
-        		<li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>    
-        		<li class="navbarFloating">user</li>
-        	</div>          	        
-    </ul>
-</div>	
+	<div>
+		<ul class="navbar">
+			<li class="navbar"><a href="index.html"><img
+					src="statics/img/navbar/icon.png" style="float: left"
+					height="100px" width="100px"></img></a></li>
+			<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+			<li class="navbar"><a class="navbarItem"
+				href="productIndex.html">商品總覽</a></li>
+			<li class="navbar"><a class="navbarItem"
+				href="order_tracking.html">訂單追蹤</a></li>
+			<li class="navbar"><a class="navbarItem"
+				href="shoppingcart.html">購物車</a></li>
 
-    <div class="absolute" style=" overflow-x:auto;">
-		<table id="customers">
-			<tr>
-				<th>刪除</th>
-				<th>商品編號</th>
-				<th>名稱</th>
-				<th>單價</th>
-				<th>數量</th>
-				<th>金額</th>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Maria Anders</td>
-				<td>Germany</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Christina Berglund</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Francisco Chang</td>
-				<td>Mexico</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Roland Mendel</td>
-				<td>Austria</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Helen Bennett</td>
-				<td>UK</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>Philip Cramer</td>
-				<td>Germany</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-				<td>Sweden</td>
-			</tr>
-			
-		</table>
-		   <div class="row">
-				    <div class="table-responsive">
-			        <table id="cart_table" class="table table-striped table-sm">
-			          <thead>
-			            <tr>
-			              <th class="text-center" style="width: 10%">商品編號</th>
-			              <th class="text-center" style="width: 30%">品名</th>
-			              <th class="text-center" style="width: 15%">單價</th>
-			              <th class="text-center" style="width: 10%">數量</th>
-			              <th class="text-center" style="width: 15%">小計</th>
-			              <th class="text-center" style="width: 10%">刪除</th>
-			            </tr>
-			          </thead>
-			          <tbody>
-			          </tbody>
-			        </table>
-			      </div>
-		      </div>
+
+
+			<!-- 這裡是頁面右上方的小box -->
+			<div class="mediumbox" style="float: right">
+				<li style="float: left"><a class="navbarFloating"
+					href="member_change.html">會員中心</a></li>
+				<li style="float: left"><a class="navbarFloating"
+					href="index.html">&nbsp;登出 </a></li>
+			</div>
+			<div class="smallbox" style="float: right">
+				<li><img src="statics/img/navbar/shoppingcart.png"
+					style="float: left" height="20px" width="20px"></img></li>
+				<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+			</div>
+			<div class="smallbox" style="float: right">
+				<li><img src="statics/img/navbar/user.png" style="float: left"
+					height="20px" width="20px"></img></li>
+				<li class="navbarFloating">user</li>
+			</div>
+		</ul>
 	</div>
+
+	<div class="absolute" style="overflow-x: auto;">
+
+		<div class="row">
+			<div class="table-responsive">
+				<table id="cart_table" class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th class="text-center" style="width: 10%">商品編號</th>
+							<th class="text-center" style="width: 30%">品名</th>
+							<th class="text-center" style="width: 15%">單價</th>
+							<th class="text-center" style="width: 10%">數量</th>
+							<th class="text-center" style="width: 15%">小計</th>
+							<th class="text-center" style="width: 10%">刪除</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<a href="checkout.html" class="btn btn-success"><button><strong>結帳</strong></button>
+		</a>
+	</div>
+
+
+
 </body>
 <script>
 var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
