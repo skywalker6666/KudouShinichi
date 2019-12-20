@@ -44,7 +44,7 @@ div.absolute {
 	top: 100px;
 }
 </style>
-<link href="statics/css/product.css" rel="stylesheet">
+
 <link href="statics/css/jquery-confirm.css" rel="stylesheet">
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 <script src="statics/js/jquery-confirm.js"></script>
@@ -308,6 +308,7 @@ function updateCartTable(data) {
     	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
     	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">²¾°£</button></td>';
     	table_html += '</tr>';
+    	//id.amount=$('#quantity_'+value.id).serialize();
     })
 
   $("#cart_table > tbody").append(table_html);

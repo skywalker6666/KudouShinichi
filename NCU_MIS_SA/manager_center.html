@@ -42,92 +42,7 @@
  	<link rel="stylesheet" href="statics/css/navbar.css">
  	<link rel="stylesheet" href="statics/css/themebox.css">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 	<script>
- 		function display_managers(){
- 				$('#display_member').html("");
- 				$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
- 				  		'<input placeholder="搜尋"  class="field" >'+
- 				  		'<button type="submit">搜尋</button>'+//還沒設定
- 					'<table id="customers">'+
- 						'<tr>'+
- 							'<th>刪除</th>'+
- 							'<th>管理員帳號</th>'+
- 							'<th>電子郵件</th>'+
- 							'<th>生日</th>'+
- 							'<th>上次登入時間</th>'+		
- 						'</tr>'+
- 						'<tr>'+
- 							'<td><input type="checkbox" name="delete" value="manager"></td>'+
- 							'<td>Maria Anders</td>'+
- 							'<td>Germanydsafasfasfsa@gmail.com</td>'+
- 							'<td>2555-12-12</td>'+
- 							'<td>2019-10-10 22:22:44</td>'+				
- 						'</tr>'+
- 					'</table>'+
- 						'<div>'+
- 	                     	'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
- 	                     	'<input class="button" type="button" value="取消" onclick="display_managers()">'+
- 	                	'</div>'+
- 	                '</div>').appendTo('#display_member')
- 		}
- 		
- 		function display_sellers(){
- 			$('#display_member').html("");
- 			$('<div class="absolute" style="margin-top:30px;margin-left:30px">'+
-				'<input placeholder="搜尋"  class="field" >'+
-				'<button type="submit">搜尋</button>'+
-			    '<table id="customers">'+
-					'<tr>'+
-						'<th>刪除</th>'+
-						'<th>賣家會員帳號</th>'+
-						'<th>電子郵件</th>'+
-						'<th>生日</th>'+
-						'<th>上次登入時間</th>'+		
-					'</tr>'+
-					'<tr>'+
-						'<td><input type="checkbox" name="delete" value="seller"></td>'+
-						'<td>Maria Anders</td>'+
-						'<td>Germanydsafasfasfsa@gmail.com</td>'+
-						'<td>2555-12-12</td>'+
-						'<td>2019-10-10 22:22:44</td>'+			
-					'</tr>'+
-				'</table>'+
-					'<div>'+
-            			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
-           			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
-       				'</div>').appendTo('#display_member')
- 		}
- 		
- 		function display_buyers(){
- 			$('#display_member').html("");
- 			$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
-				'<input placeholder="搜尋"  class="field" >'+
-				'<button type="submit">搜尋</button>'+
-			    '<table id="customers">'+
-					'<tr>'+
-						'<th>刪除</th>'+
-						'<th>買家會員帳號</th>'+
-						'<th>電子郵件</th>'+
-						'<th>生日</th>'+
-						'<th>上次登入時間</th>'+		
-					'</tr>'+
-					'<tr>'+
-						'<td><input type="checkbox" name="delete" value="seller"></td>'+
-						'<td>Maria Anders</td>'+
-						'<td>Germanydsafasfasfsa@gmail.com</td>'+
-						'<td>2555-12-12</td>'+
-						'<td>2019-10-10 22:22:44</td>'+			
-					'</tr>'+
-				'</table>'+
-					'<div>'+
-            			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
-           			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
-       				'</div>').appendTo('#display_member')
- 		
- 			
- 		}
- 	</script>
-</head>
+ 	</head>
 <body bgcolor="#BCE2FF">
 	<ul class="navbar">
         <li class="navbar"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></li>
@@ -160,7 +75,103 @@
 				<p id="display_member"></p>				
 			</form>
 		</div>
-		
 	</div>
+	<script>
+	function display_managers(){
+			$('#display_member').html("");
+			$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
+			  		'<input placeholder="搜尋"  class="field" >'+
+			  		'<button type="submit">搜尋</button>'+//還沒設定
+				'<table id="customers">'+
+					'<tr>'+
+						'<th>刪除</th>'+
+						'<th>管理員帳號</th>'+
+						'<th>電子郵件</th>'+
+						'<th>生日</th>'+
+						'<th>上次登入時間</th>'+		
+					'</tr>'+
+					'<tr>'+
+						'<td><input type="checkbox" name="delete" value="manager"></td>'+
+						'<td>Maria Anders</td>'+
+						'<td>Germanydsafasfasfsa@gmail.com</td>'+
+						'<td>2555-12-12</td>'+
+						'<td>2019-10-10 22:22:44</td>'+				
+					'</tr>'+
+				'</table>'+
+					'<div>'+
+                  	'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+                  	'<input class="button" type="button" value="取消" onclick="display_managers()">'+
+             	'</div>'+
+             '</div>').appendTo('#display_member')
+	}
+	
+	function display_sellers(){
+		$('#display_member').html("");
+		$('<div class="absolute" style="margin-top:30px;margin-left:30px">'+
+		'<input placeholder="搜尋"  class="field" >'+
+		'<button type="submit">搜尋</button>'+
+	    '<table id="customers">'+
+			'<tr>'+
+				'<th>刪除</th>'+
+				'<th>賣家會員帳號</th>'+
+				'<th>電子郵件</th>'+
+				'<th>生日</th>'+
+				'<th>上次登入時間</th>'+		
+			'</tr>'+
+			'<tr>'+
+				'<td><input type="checkbox" name="delete" value="seller"></td>'+
+				'<td>Maria Anders</td>'+
+				'<td>Germanydsafasfasfsa@gmail.com</td>'+
+				'<td>2555-12-12</td>'+
+				'<td>2019-10-10 22:22:44</td>'+			
+			'</tr>'+
+		'</table>'+
+			'<div>'+
+    			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+   			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
+				'</div>').appendTo('#display_member')
+	}
+	
+	function display_buyers(){
+		$('#display_member').html("");
+		$('<div class="absolute"  style="margin-top:30px;margin-left:30px">'+
+		'<input placeholder="搜尋"  class="field" >'+
+		'<button type="submit">搜尋</button>'+
+	    '<table id="customers">'+
+			'<tr>'+
+				'<th>刪除</th>'+
+				'<th>買家會員帳號</th>'+
+				'<th>電子郵件</th>'+
+				'<th>生日</th>'+
+				'<th>上次登入時間</th>'+		
+			'</tr>'+
+			'<tr>'+
+				'<td><input type="checkbox" name="delete" value="seller"></td>'+
+				'<td>Maria Anders</td>'+
+				'<td>Germanydsafasfasfsa@gmail.com</td>'+
+				'<td>2555-12-12</td>'+
+				'<td>2019-10-10 22:22:44</td>'+			
+			'</tr>'+
+		'</table>'+
+			'<div>'+
+    			'<button class="button" id="save" style="margin-left:260px">儲存</button>'+
+   			 	'<input class="button" type="button" value="取消" onclick="display_sellers()">'+
+				'</div>').appendTo('#display_member')
+	
+		
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</script>
 </body>
 </html>

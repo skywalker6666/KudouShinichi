@@ -16,8 +16,7 @@
 <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 <link href="statics/css/font-awesome.min.css" rel="stylesheet">
 <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-<link href="statics/icon/favicon.ico" type="image/x-icon"
-	rel="shortcut icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
 
 <style>
@@ -48,6 +47,7 @@
 </head>
 
 <body>
+<div>
 	<ul class="navbar">
 		<li class="navbar"><a href="index.html"><img
 				src="statics/img/navbar/icon.png" style="float: left" height="100px"
@@ -57,10 +57,27 @@
 		<li class="navbar"><a class="navbarItem"
 			href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
+		
+			
+			<!-- 這裡是頁面右上方的小box -->
+			<div class="mediumbox" style="float: right">
+				<li style="float: left"><a class="navbarFloating"
+					href="member_change.html">會員中心</a></li>
+				<li style="float: left"><a class="navbarFloating"
+					href="index.html">&nbsp;登出 </a></li>
+			</div>
+			<div class="smallbox" style="float: right">
+				<li><img src="statics/img/navbar/shoppingcart.png"
+					style="float: left" height="20px" width="20px"></img></li>
+				<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+			</div>
+			<div class="smallbox" style="float: right">
+				<li><img src="statics/img/navbar/user.png" style="float: left"
+					height="20px" width="20px"></img></li>
+				<li class="navbarFloating">user</li>
+			</div>
 	</ul>
-
+</div>
 	<div class="frame">
 		<div class="container">
 			<div class="py-5">
@@ -151,9 +168,9 @@
 								id="dropdownMenuButton" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">運送方式</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">超商取貨</a> <a
-									class="dropdown-item" href="#">宅配到府</a> <a
-									class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item" href="#">超商取貨</a> 
+								<a class="dropdown-item" href="#">宅配到府</a> 
+								<a class="dropdown-item" href="#">Something else here</a>
 							</div>
 						</div>
 
@@ -162,21 +179,7 @@
 			</div>
 		</div>
 	</div>
-	<footer class="text-muted">
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>Album example is &copy; Bootstrap, but please download and
-				customize it for yourself!</p>
-			<p>
-				New to Bootstrap? <a href="https://getbootstrap.com/">Visit the
-					homepage</a> or read our <a
-					href="/docs/4.3/getting-started/introduction/">getting started
-					guide</a>.
-			</p>
-		</div>
-	</footer>
+	
 	<script src="statics/js/jquery-3.4.1.min.js"></script>
 	<script src="statics/js/jquery-confirm.js"></script>
 	<script src="statics/js/popper.min.js"></script>
@@ -371,10 +374,12 @@
         	table_html += '<td class="align-middle text-center">' + value.id + '</td>';
         	table_html += '<td class="align-middle"><p class="text-break">' + value.name + '</p></td>';
         	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
-        	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.id + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.id + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+        	///	table_html += '<td class="align-middle text-center"><span id="quantity_' + value.id + '">' + value.amount + '</td>';
         	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
         	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
         	table_html += '</tr>';
+        
         })
 
       $("#cart_table > tbody").append(table_html);
