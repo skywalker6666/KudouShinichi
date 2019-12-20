@@ -152,11 +152,12 @@ public class MemberHelper {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
+                String headSticker = rs.getString("headSticker");
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, login_times, status);
+                m = new Member(member_id, email, password, name, headSticker,login_times, status);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -234,11 +235,12 @@ public class MemberHelper {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
+                String headSticker = rs.getString("headSticker");
                 int login_times = rs.getInt("login_times");
                 String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, login_times, status);
+                m = new Member(member_id, email, password, name, headSticker, login_times, status);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -386,13 +388,14 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`members`(`name`, `email`, `password`, `modified`, `created`, `login_times`, `status`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`members`(`name`, `email`, `password`, `headSticker`, `modified`, `created`, `login_times`, `status`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = m.getName();
             String email = m.getEmail();
             String password = m.getPassword();
+            String headSticker = m.getheadSticker();
             int login_times = m.getLoginTimes();
             String status = m.getStatus();
             
@@ -401,10 +404,11 @@ public class MemberHelper {
             pres.setString(1, name);
             pres.setString(2, email);
             pres.setString(3, password);
-            pres.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            pres.setString(4, headSticker);
             pres.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setInt(6, login_times);
-            pres.setString(7, status);
+            pres.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            pres.setInt(7, login_times);
+            pres.setString(8, status);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();

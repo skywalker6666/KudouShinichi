@@ -63,12 +63,17 @@
 
 
 	<script>   
+	/**
+	 * 進入網頁時，先去 cookie 裡面找有無暫存資料，並把此暫存資料存到二維陣列中。
+     * 設定一個二維陣列：[商品編號,商品數量]。
+     * @call：getCartDataFromClient()：
+     */
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
     
     /**
      * 取得所有商品
      * @call：addProduct()：畫出一筆商品
-     * @call：setButtonFunction()：
+     * @call：setButtonFunction()：按鈕設置
      * @call：checkIfExistInCart()：
      */
     function getAllProduct() {
@@ -124,7 +129,8 @@
     }
     
     /**
-     * 
+     * 按鈕設置：如果按了，就新增一筆資料到 cookie
+     * 當按下任意一個「加入購物車」的按鈕後：呼叫addProductToCart()，把此商品加入購物車。
      * @call：addProductToCart()：
      */
     function setButtonFunction() {
@@ -148,8 +154,9 @@
     }
     
     /**
-     * 
-     * @call：updateCartDataToClent()：
+     * 新增一筆 cookie 
+     * 將此商品加入購物車：如果還沒買過此商品 ( 即 client_cart_obj 內沒有此id)，就新增一筆，就把此商品存放到 cookie [client_cart_obj,client_cart_amount]
+     * @call：updateCartDataToClent()：上傳二維陣列到 cookie 中
      * @call：checkIfExistInCart()：
      */
     function addProductToCart(id, amount) {
@@ -162,7 +169,9 @@
     }
     
     /**
-     * 更新客戶端的Cart資料
+     * 更新購物車資料到 localstorage
+     * 把存在二維陣列的資料，上傳到 cookie 中。
+     *（localStorage即cookie：刷新頁面後不會消失，會暫存一段時間。相反地，二維陣列再刷新頁面後會消失。所以得把二維陣列裡的資料上傳到localStorage）
      */
     function updateCartDataToClent() {
     	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
@@ -170,7 +179,7 @@
     }
     
     /**
-     * 確認是否已在Cart中
+     * 檢查商品是否已經在購物車當中
      * @call：setButtonState：
      */
     function checkIfExistInCart() {

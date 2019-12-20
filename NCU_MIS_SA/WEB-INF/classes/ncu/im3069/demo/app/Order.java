@@ -48,10 +48,10 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員姓名
      */
-    public Order(String first_name, String last_name, String email, String address, String phone) {
+    public Order(String first_name, String last_name, String address, String phone) {
         this.first_name = first_name;
         this.last_name = last_name;
-        this.email = email;
+//        this.email = email;
         this.address = address;
         this.phone = phone;
         this.create = Timestamp.valueOf(LocalDateTime.now());
@@ -70,11 +70,11 @@ public class Order {
      * @param create 訂單創建時間
      * @param modify 訂單修改時間
      */
-    public Order(int id, String first_name, String last_name, String email, String address, String phone, Timestamp create, Timestamp modify) {
+    public Order(int id, String first_name, String last_name, String address, String phone, Timestamp create, Timestamp modify) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.email = email;
+//        this.email = email;
         this.address = address;
         this.phone = phone;
         this.create = create;

@@ -46,9 +46,11 @@ public class MemberController extends HttpServlet {
         String email = jso.getString("email");
         String password = jso.getString("password");
         String name = jso.getString("name");
+        String headSticker = jso.getString("headSticker");
+
         
         /** 建立一個新的會員物件 */
-        Member m = new Member(email, password, name);
+        Member m = new Member(email, password, name, headSticker);
         
         /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
         if(email.isEmpty() || password.isEmpty() || name.isEmpty()) {
@@ -172,9 +174,11 @@ public class MemberController extends HttpServlet {
         String email = jso.getString("email");
         String password = jso.getString("password");
         String name = jso.getString("name");
+        String headSticker = jso.getString("headSticker");
+
 
         /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-        Member m = new Member(id, email, password, name);
+        Member m = new Member(id, email, password, name, headSticker);
         
         /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
         JSONObject data = m.update();
