@@ -29,6 +29,8 @@ public class Member {
     /** password，會員密碼 */
     private String password;
     
+    /** headSticker，會員頭貼 */
+    private String headSticker;
     /** login_times，更新時間的分鐘數 */
     private int login_times;
     
@@ -46,10 +48,11 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
-    public Member(String email, String password, String name) {
+    public Member(String email, String password, String name, String headSticker) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.headSticker=headSticker;
         update();
     }
 
@@ -62,11 +65,12 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
-    public Member(int id, String email, String password, String name) {
+    public Member(int id, String email, String password, String name, String headSticker) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.headSticker=headSticker;
         /** 取回原有資料庫內該名會員之更新時間分鐘數與組別 */
         getLoginTimesStatus();
         /** 計算會員之組別 */
@@ -84,11 +88,12 @@ public class Member {
      * @param login_times 更新時間的分鐘數
      * @param status the 會員之組別
      */
-    public Member(int id, String email, String password, String name, int login_times, String status) {
+    public Member(int id, String email, String password, String name, String headSticker, int login_times, String status) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
+        this.headSticker=headSticker;
         this.login_times = login_times;
         this.status = status;
     }
@@ -120,6 +125,15 @@ public class Member {
         return this.name;
     }
 
+    /**
+     * 取得會員之頭貼
+     *
+     * @return the headSticker 回傳會員頭貼
+     */
+    public String getheadSticker() {
+        return this.headSticker;
+    }
+    
     /**
      * 取得會員之密碼
      *
@@ -184,6 +198,7 @@ public class Member {
         jso.put("name", getName());
         jso.put("email", getEmail());
         jso.put("password", getPassword());
+        jso.put("headSticker", getheadSticker());
         jso.put("login_times", getLoginTimes());
         jso.put("status", getStatus());
         

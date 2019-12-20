@@ -107,8 +107,10 @@ div.absolute {
 				</table>
 			</div>
 		</div>
-		<a href="checkout.html" class="btn btn-success"><button><strong>結帳</strong></button>
-		</a>
+		<button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
+		<a href="checkout.html" class="btn btn-success"><button id="check" >
+				<strong>結帳</strong>
+			</button> </a>
 	</div>
 
 
@@ -125,59 +127,7 @@ if (client_cart_obj.length == 0) {
 else
 	getCartProduct();
 
-$("#check").click(function () {
-	var data = {
-			"first_name": $("#first_name").val(),
-			"last_name": $("#last_name").val(),
-			"email": $("#email").val(),
-			"phone": $("#phone").val(),
-			"address": $("#address").val(),
-			"item": client_cart_obj,
-			"quantity": client_cart_amount
-	}
 
-	// 驗證輸入的資料
-	pass_vaild = vaildData(data);
-	if (pass_vaild) {
-		var data_string = JSON.stringify(data);
-
-		// 發出POST的AJAX請求
-    $.ajax({
-      type: "POST",
-      url: "api/order.do",
-      data: data_string,
-      crossDomain: true,
-      cache: false,
-      dataType: 'json',
-      timeout: 5000,
-      success: function (response) {
-          if(response.status == 200){
-          	$.confirm({
-                theme: 'modern',
-                icon: 'fa fa-check-circle-o',
-                type: 'green',
-                animation: 'scale',
-                title: '系統提醒',
-                content: "「購物車結帳成功」，已完成新增訂單！",
-                buttons: {
-                    確定: {
-                        text: '確定',
-                        btnClass: 'btn-blue',
-                        action: function () {
-                      	  cleanAllData();
-                          document.location.href = "order.html";
-                        }
-                    }
-                }
-            });
-          }
-      },
-      error: function () {
-          alert("無法連線到伺服器！");
-      }
-    });
-	}
-});
 
 $("#clean").click(function () {
 	console.log("[@Action]清空購物車");

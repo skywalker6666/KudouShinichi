@@ -166,7 +166,7 @@
 						<div class="dropdown">
 							<button class="btn btn-secondary dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">運送方式</button>
+								aria-haspopup="true" aria-expanded="false">運送!方式</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<a class="dropdown-item" href="#">超商取貨</a> 
 								<a class="dropdown-item" href="#">宅配到府</a> 
@@ -199,7 +199,7 @@
     	var data = {
     			"first_name": $("#first_name").val(),
     			"last_name": $("#last_name").val(),
-    			"email": $("#email").val(),
+    			//"email": "keewe@gmail.com",
     			"phone": $("#phone").val(),
     			"address": $("#address").val(),
     			"item": client_cart_obj,
@@ -259,7 +259,7 @@
     	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
 
     	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "")  alert("必填寫欄位不得有空值！");
-    	else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
+    	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
     	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
     	else return true;
 
