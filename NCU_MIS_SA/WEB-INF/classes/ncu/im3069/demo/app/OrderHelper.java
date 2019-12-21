@@ -41,7 +41,7 @@ public class OrderHelper {
             String last_name = order.getLastName();           
             String address = order.getAddress();
             String phone = order.getPhone();
-            String product_delivery=order.getProductDelivery();
+            String product_delivery= order.getProductDelivery();
             Timestamp create = order.getCreateTime();
             Timestamp modify = order.getModifyTime();
             
@@ -52,8 +52,9 @@ public class OrderHelper {
 //            pres.setString(3, email);
             pres.setString(3, address);
             pres.setString(4, phone);
-            pres.setTimestamp(5, create);
-            pres.setTimestamp(6, modify);
+            pres.setString(5, product_delivery);
+            pres.setTimestamp(6, create);
+            pres.setTimestamp(7, modify);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             pres.executeUpdate();

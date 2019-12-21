@@ -1,7 +1,30 @@
 body {
 	background-color: #BCE2FF;
-
 }
+
+/*img{
+  float: left;
+  padding: 10px 20px;
+}
+nav{
+  float: left;
+  padding: 24px 60px;
+}
+
+nav li{
+  padding: 10px 20px;
+  float: left;
+}
+nav li:hover{ 
+   background-color: white;
+    text-decoration: underline;
+    color: blue; }   
+
+.content{
+  clear: both;
+}
+*/
+
 ul.navbar {
     list-style-type: none;
     margin: 0;
@@ -12,9 +35,8 @@ ul.navbar {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+   
 }
-
 li.navbar {
     float: left;
     
@@ -26,6 +48,7 @@ li a.navbar  {
     padding: 0;
     text-decoration: none;
 }
+*/
 
 .navbarItem {
     background-color: #FBEE98;
@@ -88,5 +111,6 @@ a.navbarFloating:hover {
     display: block;
     font-size: 16px;
     border-radius: 10px;
+    z-index: 1;
 
 }

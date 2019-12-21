@@ -43,12 +43,16 @@
 <link href="statics/css/product.css" rel="stylesheet">
 <link href="statics/css/jquery-confirm.css" rel="stylesheet">
 
-
 </head>
 
 <body>
-<div>
-	<ul class="navbar">
+<div id="header">
+  <!--容器分為左圖右導覽連結 -->
+  <div class="navbar">
+      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
+    <!--導覽列 -->
+    <nav>
+      <ul class="navbar">
 		<li class="navbar"><a href="index.html"><img
 				src="statics/img/navbar/icon.png" style="float: left" height="100px"
 				width="100px"></img></a></li>
@@ -57,26 +61,9 @@
 		<li class="navbar"><a class="navbarItem"
 			href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		
-			
-			<!-- 這裡是頁面右上方的小box -->
-			<div class="mediumbox" style="float: right">
-				<li style="float: left"><a class="navbarFloating"
-					href="member_change.html">會員中心</a></li>
-				<li style="float: left"><a class="navbarFloating"
-					href="index.html">&nbsp;登出 </a></li>
-			</div>
-			<div class="smallbox" style="float: right">
-				<li><img src="statics/img/navbar/shoppingcart.png"
-					style="float: left" height="20px" width="20px"></img></li>
-				<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-			</div>
-			<div class="smallbox" style="float: right">
-				<li><img src="statics/img/navbar/user.png" style="float: left"
-					height="20px" width="20px"></img></li>
-				<li class="navbarFloating">user</li>
-			</div>
-	</ul>
+		</ul>
+    </nav>
+  </div>
 </div>
 	<div class="frame">
 		<div class="container">
@@ -164,8 +151,8 @@
 						</div>
 					
 						<div>運送方式:<br>						
-								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨"> 超商取貨 <br>
-								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府"> 宅配到府
+								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨" onclick="getProductDelivery()"/> 超商取貨 <br>
+								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府" onclick="getProductDelivery()"/> 宅配到府
 								
 						</div>
 					
@@ -182,15 +169,17 @@
 
 	<script>
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
+	
     if (client_cart_obj.length == 0) {
     	alert("購物車沒有任何商品！");
     	calcSummaryInformation();
     	setButtonState("check", false);
     }
-    else
+    	else
     	getCartProduct();
-
+    
+    var product_del=getProductDelivery();
+    	
     $("#check").click(function () {
     
     	var data = {
@@ -198,7 +187,7 @@
     			"last_name": $("#last_name").val(),
     			//"email": "keewe@gmail.com",
     			"phone": $("#phone").val(),
-    			//"product_delivery": $("input[type='radio'][name=ProductDelivery]:checked").val()
+    			"product_delivery": product_del,
     			"address": $("#address").val(),
     			"item": client_cart_obj,
     			"quantity": client_cart_amount
@@ -254,11 +243,11 @@
 
     function vaildData(data) {
     	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-    	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
+    	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
 
     	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
     	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
-    	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
+    	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XXXXXXXX）！");
     	else return true;
 
     	return false;
@@ -433,14 +422,25 @@
           $('#' + id).html('請先新增商品');
       }
       else {
-    	  $('#' + id).prop('disabled', false);
+    	$('#' + id).prop('disabled', false);
         $('#' + id).removeClass('disabled');
         $('#' + id).html('結帳');
       }
+    }
+    function getProductDelivery(){
+    	
+    		var PD="";
+    		var pd=$("input[type=radio][name=ProductDelivery]:checked");
+    		
+    		if(PD.length>0){PD=pd.val()};
+			return PD;
+    		
+    	
     }
   </script>
 
 
 </body>
+
 
 </html>

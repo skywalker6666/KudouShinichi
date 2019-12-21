@@ -222,7 +222,7 @@ public class Order {
         jso.put("email", getEmail());
         jso.put("address", getAddress());
         jso.put("phone", getPhone());
-        jso.put("phone", getProductDelivery());
+        jso.put("product_delivery", getProductDelivery());
         jso.put("create", getCreateTime());
         jso.put("modify", getModifyTime());
 
