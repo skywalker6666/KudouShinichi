@@ -33,15 +33,15 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`orders`(`last_name`, `first_name`, `address`, `phone`, `create`, `modify`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`orders`(`last_name`, `first_name`, `address`, `phone`,`product_delivery`, `create`, `modify`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String first_name = order.getFirstName();
-            String last_name = order.getLastName();
-            String email = order.getEmail();
+            String last_name = order.getLastName();           
             String address = order.getAddress();
             String phone = order.getPhone();
+            String product_delivery=order.getProductDelivery();
             Timestamp create = order.getCreateTime();
             Timestamp modify = order.getModifyTime();
             
@@ -124,14 +124,14 @@ public class OrderHelper {
                 int id = rs.getInt("id");
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
-//                String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String product_delivery =rs.getString("product_delivery");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, create, modify);
+                o = new Order(id, first_name, last_name, address, phone, product_delivery, create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(o.getOrderAllInfo());
             }
@@ -202,11 +202,12 @@ public class OrderHelper {
 //                String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String product_delivery =rs.getString("product_delivery");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, create, modify);
+                o = new Order(id, first_name, last_name, address, phone, product_delivery, create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 data = o.getOrderAllInfo();
             }

@@ -86,11 +86,12 @@ public class OrderController extends HttpServlet {
 //        String email = jso.getString("email");
         String address = jso.getString("address");
         String phone = jso.getString("phone");
+        String product_delivery=jso.getString("product_delivery");
         JSONArray item = jso.getJSONArray("item");
         JSONArray quantity = jso.getJSONArray("quantity");
 
         /** 建立一個新的訂單物件 */
-        Order od = new Order(first_name, last_name, address, phone);
+        Order od = new Order(first_name, last_name, address, phone, product_delivery);
 
         /** 將每一筆訂單細項取得出來 */
         for(int i=0 ; i < item.length() ; i++) {

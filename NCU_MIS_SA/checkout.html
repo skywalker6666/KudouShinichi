@@ -162,17 +162,13 @@
 								class="form-control" id="address" maxlength="255"
 								placeholder="請輸入有效之地址！" required>
 						</div>
-
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">運送!方式</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">超商取貨</a> 
-								<a class="dropdown-item" href="#">宅配到府</a> 
-								<a class="dropdown-item" href="#">Something else here</a>
-							</div>
+					
+						<div>運送方式:<br>						
+								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨"> 超商取貨 <br>
+								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府"> 宅配到府
+								
 						</div>
+					
 
 					</div>
 				</div>
@@ -196,11 +192,13 @@
     	getCartProduct();
 
     $("#check").click(function () {
+    
     	var data = {
     			"first_name": $("#first_name").val(),
     			"last_name": $("#last_name").val(),
     			//"email": "keewe@gmail.com",
     			"phone": $("#phone").val(),
+    			//"product_delivery": $("input[type='radio'][name=ProductDelivery]:checked").val()
     			"address": $("#address").val(),
     			"item": client_cart_obj,
     			"quantity": client_cart_amount
@@ -258,7 +256,7 @@
     	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
 
-    	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "")  alert("必填寫欄位不得有空值！");
+    	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
     	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
     	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
     	else return true;
