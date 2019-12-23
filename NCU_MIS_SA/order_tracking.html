@@ -66,6 +66,8 @@
     <link rel="stylesheet" href="statics/css/navbar.css">
     <link rel="stylesheet" href="statics/css/themebox.css">
     <link rel="stylesheet" href="statics/css/order_tracking.css">
+    
+     <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
@@ -133,18 +135,69 @@
                 </li>
             </ol>
         </font>
-        <table bgcolor="white" style="width:100%">
+        <table bgcolor="white" style="width:100%" id="table">
             <thead>
                 <tr>
                     <th>訂單編號</th>
                     <th>商品總金額</th>
-                    <th>運費</th>
-                    <th>訂單類別</th>
+                    <th>付款方式</th>                                      
+                    <th>訂單建立時間</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
+           <script type="text/javascript">
+           function getAllOrder() {
+               // 發出GET請求取得所有訂單列表
+               $.ajax({
+                       type: "GET",
+                       url: "api/order.do",
+                       crossDomain: true,
+                       cache: false,
+                       dataType: 'json',
+                       timeout: 5000,
+                       success: function (response) {
+                           if(response.status == 200){
+                               updateTable(response.response.data);
+                             
+                           }
+                           console.log(response);
+                       },
+                       error: function () {
+                           alert("無法連線到伺服器！");
+                       }
+               });
+           }
+           
+           // 更新會員列表表格
+           function updateTable(data) {
+               $("#table > tbody").empty();
+               var table_html = '';
+               
+               $.each(data, function(index, value) {
+            	   var cost=0;
+            	   $.each(value['product_info'],function(index,value){
+            		   cost+=value['subtotal'];
+            		   
+            	   })
+                   table_html += '<tr><td scope="row" align="center">' + value['order_info']['id'] + '</td>';
+                   table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
+                   table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
+                   //table_html += '<td align="center">' + value['order_info']['delivery_fee'] + '</td>';
+                   table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
+                  // table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
+                   //table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
+               })
+
+               $("#table > tbody").append(table_html);
+           }
+           
+           
+           $(document).ready(function() {
+               getAllOrder();
+           });
+       </script>
     </div>
 
 
