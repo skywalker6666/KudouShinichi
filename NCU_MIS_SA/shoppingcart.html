@@ -92,9 +92,7 @@ div.absolute {
 			</div>
 		</div>
 		<button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
-		<a href="checkout.html" class="btn btn-success"><button id="check" >
-				<strong>結帳</strong>
-			</button> </a>
+		<button id="check" onclick="location.href='checkout.html'" ><strong>結帳</strong>	</button> 
 	</div>
 </div>
 	
@@ -218,7 +216,7 @@ function keyEventListen() {
 		updateCartDataToClent();
 		$('#row_' + id).remove();
 		if (client_cart_obj.length == 0)
-		      alert("購物車沒有任何商品！");
+		      alert("請先選擇欲購買商品！");
 		calcSummaryInformation();
 	});
 
@@ -241,7 +239,7 @@ function updateCartTable(data) {
     	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
     	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.id + '" maxlength="5" min="0" step="1"></td>';
     	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
-    	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+    	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class=" btn-danger">移除</button></td>';
     	table_html += '</tr>';
     	//id.amount=$('#quantity_'+value.id).serialize();
     })
@@ -294,12 +292,13 @@ function calcSummaryInformation() {
 
 function setButtonState(id, action) {
   if (!action) {
-      $('#' + id).prop('disabled', true);
+      $('#' + id).prop('disabled', false);
       $('#' + id).addClass('disabled');
+      $('#' + id).prop('onclick',location.href='productIndex.html');
       $('#' + id).html('請先新增商品');
   }
   else {
-	  $('#' + id).prop('disabled', false);
+	$('#' + id).prop('disabled', false);
     $('#' + id).removeClass('disabled');
     $('#' + id).html('結帳');
   }
