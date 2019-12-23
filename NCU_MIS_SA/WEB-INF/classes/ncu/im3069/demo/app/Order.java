@@ -28,7 +28,10 @@ public class Order {
     
     /** phone，會員產品運送方式 */
     private String product_delivery;
-
+    
+    /** phone，會員產品付款方式 */
+    private String payment;
+    
     /** list，訂單列表 */
     private ArrayList<OrderItem> list = new ArrayList<OrderItem>();
 
@@ -51,14 +54,16 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員手機
      * @param product_delivery 訂單運送方式
+     * @param payment 訂單付款方式
      */
-    public Order(String first_name, String last_name, String address, String phone, String product_delivery) {
+    public Order(String first_name, String last_name, String address, String phone, String product_delivery, String payment) {
         this.first_name = first_name;
         this.last_name = last_name;
 //        this.email = email;
         this.address = address;
         this.phone = phone;
-        this.product_delivery=product_delivery;
+        this.product_delivery = product_delivery;
+        this.payment = payment;
         this.create = Timestamp.valueOf(LocalDateTime.now());
         this.modify = Timestamp.valueOf(LocalDateTime.now());
     }
@@ -73,10 +78,11 @@ public class Order {
      * @param address 會員地址
      * @param phone 會員姓名
      * @param product_delivery 訂單運送方式
+     * @param payment 付款方式
      * @param create 訂單創建時間
      * @param modify 訂單修改時間
      */
-    public Order(int id, String first_name, String last_name, String address, String phone, String product_delivery, Timestamp create, Timestamp modify) {
+    public Order(int id, String first_name, String last_name, String address, String phone, String product_delivery, String payment, Timestamp create, Timestamp modify) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -84,6 +90,7 @@ public class Order {
         this.address = address;
         this.phone = phone;
         this.product_delivery=product_delivery;
+        this.payment=payment;
         this.create = create;
         this.modify = modify;
         getOrderProductFromDB();
@@ -184,12 +191,21 @@ public class Order {
     }
 
     /**
-     * 取得訂單電話
+     * 取得訂單運送方式
      *
-     * @return String 回傳訂單電話
+     * @return String 回傳運送方式
      */
     public String getProductDelivery() {
         return this.product_delivery;
+    }
+    /**
+  
+   * 取得訂單付款方式
+     *
+     * @return String 回傳付款方式
+     */
+    public String getPayment() {
+        return this.payment;
     }
     /**
 
@@ -223,6 +239,7 @@ public class Order {
         jso.put("address", getAddress());
         jso.put("phone", getPhone());
         jso.put("product_delivery", getProductDelivery());
+        jso.put("payment", getPayment());
         jso.put("create", getCreateTime());
         jso.put("modify", getModifyTime());
 

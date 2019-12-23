@@ -33,8 +33,8 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`orders`(`last_name`, `first_name`, `address`, `phone`,`product_delivery`, `create`, `modify`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`orders`(`last_name`, `first_name`, `address`, `phone`,`product_delivery`,`payment`, `create`, `modify`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String first_name = order.getFirstName();
@@ -42,6 +42,7 @@ public class OrderHelper {
             String address = order.getAddress();
             String phone = order.getPhone();
             String product_delivery= order.getProductDelivery();
+            String payment= order.getPayment();
             Timestamp create = order.getCreateTime();
             Timestamp modify = order.getModifyTime();
             
@@ -53,8 +54,9 @@ public class OrderHelper {
             pres.setString(3, address);
             pres.setString(4, phone);
             pres.setString(5, product_delivery);
-            pres.setTimestamp(6, create);
-            pres.setTimestamp(7, modify);
+            pres.setString(6, payment);
+            pres.setTimestamp(7, create);
+            pres.setTimestamp(8, modify);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             pres.executeUpdate();
@@ -128,11 +130,12 @@ public class OrderHelper {
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 String product_delivery =rs.getString("product_delivery");
+                String payment =rs.getString("payment");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, product_delivery, create, modify);
+                o = new Order(id, first_name, last_name, address, phone, product_delivery, payment, create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(o.getOrderAllInfo());
             }
@@ -204,11 +207,12 @@ public class OrderHelper {
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 String product_delivery =rs.getString("product_delivery");
+                String payment =rs.getString("payment");
                 Timestamp create = rs.getTimestamp("create");
                 Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, product_delivery, create, modify);
+                o = new Order(id, first_name, last_name, address, phone, product_delivery, payment,create, modify);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 data = o.getOrderAllInfo();
             }
