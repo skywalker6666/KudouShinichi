@@ -94,8 +94,11 @@
 	</ul>
     <div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
         <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;訂單追蹤</font>
-        <font face="DFKai-sb">
-            <ol class="__inline" id="menu" style="list-style-type:none;">
+        <br>
+        <button id="sent">已到店寄件</button>
+        <button id="reached">已送達目標門市</button>
+        <div style="font-family:DFKai-sb">
+            <ul class="__inline" id="menu" style="list-style-type:none;">
                 <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
                         width="100px"></img>
                     <p><Br>訂單建立</p>
@@ -112,35 +115,35 @@
                         style="float: left" height="100px" width="100px"></img>
                     <p><Br>完成取貨</p>
                 </li>
-            </ol>
-        </font>
-        <font face="DFKai-sb">
-            <ol class="point" id="" style="list-style-type:none; ">
-                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 1.png" style="float: left"
+            </ul>
+        </div>
+        <div style="font-family:DFKai-sb">
+            <ul class="point" id="" style="list-style-type:none; ">
+                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 1.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
 
                 </li>
-                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                <li style="width: 25%; float:left;"><img id="status2" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
                 </li>
-                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                <li style="width: 25%; float:left;"><img id="status3" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
                 </li>
-                <li style="width: 25%; float:left;"><img src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
+                <li style="width: 25%; float:left;"><img id="status4" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
                 </li>
-            </ol>
-        </font>
+            </ul>
+        </div>
         <table bgcolor="#FBEE98" style="width:100%" id="table">
             <thead>
                 <tr>
                     <th>訂單編號</th>
                     <th>商品總金額</th>
-                    <th>付款方式</th>                                      
+                    <th>運送方式</th>                                      
                     <th>訂單建立時間</th>
                 </tr>
             </thead>
@@ -196,6 +199,24 @@
            
            $(document).ready(function() {
                getAllOrder();
+           });
+           $("#sent").click(function(){
+        	   for(var i=1;i<=4;i++){
+        	   	if(i==2){
+        		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+        		   }
+        	   else
+        	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+        	   }
+        	});
+           $("#reached").click(function(){
+        	   for(var i=1;i<=4;i++){
+           	   	if(i==3){
+           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+           		   }
+           	   else
+           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+           	   }
            });
        </script>
     </div>
