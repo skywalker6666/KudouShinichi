@@ -30,13 +30,13 @@ public class OrderItemHelper {
         return oph;
     }
     
-    public JSONArray createByList(long order_id, List<OrderItem> orderproduct) {
+    public JSONArray createByList(long order_id, List<OrderProduct> orderproduct) {
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         
         for(int i=0 ; i < orderproduct.size() ; i++) {
-            OrderItem op = orderproduct.get(i);
+            OrderProduct op = orderproduct.get(i);
             
             /** 取得所需之參數 */
             int product_id = op.getProduct().getID();
@@ -87,12 +87,12 @@ public class OrderItemHelper {
         return jsa;
     }
     
-    public ArrayList<OrderItem> getOrderProductByOrderId(int order_id) {
-        ArrayList<OrderItem> result = new ArrayList<OrderItem>();
+    public ArrayList<OrderProduct> getOrderProductByOrderId(int order_id) {
+        ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         ResultSet rs = null;
-        OrderItem op;
+        OrderProduct op;
         
         try {
             /** 取得資料庫之連線 */
@@ -122,7 +122,7 @@ public class OrderItemHelper {
                 double subtotal = rs.getDouble("subtotal");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                op = new OrderItem(order_product_id, order_id, product_id, price, quantity, subtotal);
+                op = new OrderProduct(order_product_id, order_id, product_id, price, quantity, subtotal);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 result.add(op);
             }

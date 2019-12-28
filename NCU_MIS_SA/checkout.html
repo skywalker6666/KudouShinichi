@@ -124,22 +124,16 @@
 						<h4 class="mb-3">個人資訊</h4>
 						<hr class="mb-4">
 						<div class="row">
-							<div class="col-md-6 mb-2">
-								<label for="lastName">姓</label> <input type="text"
-									class="form-control" id="last_name" maxlength="10" value=""
-									required>
-							</div>
-
 							<div class="col-md-6 mb-4">
-								<label for="firstName">名</label> <input type="text"
-									class="form-control" id="first_name" maxlength="10"
+								<label for="firstName">姓名</label> <input type="text"
+									class="form-control" id="buyer_name" maxlength="10"
 									placeholder="" value="" required>
 							</div>
 						</div>
 
 
 						<div class="mb-3">
-							<label for="phonenum">手機號碼:</label><br /> <input id="phone"
+							<label for="phonenum">手機號碼:</label><br /> <input id="cellphone"
 								type="tel" class="form-control" maxlength="12"
 								placeholder="09xx-xxx-xxx" required>
 						</div>
@@ -174,7 +168,7 @@
 	<script>
 	
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-	//var product_del=getProductDelivery();
+
 	
     if (client_cart_obj.length == 0) {
     	alert("購物車沒有任何商品！");
@@ -188,15 +182,14 @@
    
     $("#check").click(function () {
     	var data = {
-    			"first_name": $("#first_name").val(),
-    			"last_name": $("#last_name").val(),
-    			//"email": "keewe@gmail.com",
-    			"phone": $("#phone").val(),
+    			
+    			"buyer_name": $("#buyer_name").val(),
+    			"ship_address": $("#address").val(),
+    			"cellphone": $("#cellphone").val(),
     			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
-    			"payment": $("input[name='Payment']:checked").val(),
-    			"address": $("#address").val(),
-    			"item": client_cart_obj,
-    			"quantity": client_cart_amount
+    			"payment": $("input[name='Payment']:checked").val(),    			
+    			"item": client_cart_obj
+    			//"total_price":
     	}
 
     	// 驗證輸入的資料
@@ -251,9 +244,9 @@
     	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
 
-    	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
+    	if (data["first_name"] == "" || data["last_name"] == "" || data['cellphone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
     	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
-    	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XXXXXXXX）！");
+    	else if (!phone_rule.test(data['cellphone'])) alert("手機格式不符（應為09XXXXXXXX）！");
     	else return true;
 
     	return false;

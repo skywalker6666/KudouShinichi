@@ -150,7 +150,7 @@
             <tbody>
             </tbody>
         </table>
-           <script type="text/javascript">
+ <script type="text/javascript">
            function getAllOrder() {
                // 發出GET請求取得所有訂單列表
                $.ajax({
@@ -182,15 +182,12 @@
             	   var cost=0;
             	   $.each(value['product_info'],function(index,value){
             		   cost+=value['subtotal'];
-            		   
-            	   })
+            		})
                    table_html += '<tr><td scope="row" align="center">' + value['order_info']['id'] + '</td>';
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
-                   //table_html += '<td align="center">' + value['order_info']['delivery_fee'] + '</td>';
                    table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
-                  // table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
-                   //table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
+                  
                })
 
                $("#table > tbody").append(table_html);
@@ -201,6 +198,7 @@
                getAllOrder();
            });
            $("#sent").click(function(){
+        	   
         	   for(var i=1;i<=4;i++){
         	   	if(i==2){
         		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
