@@ -30,7 +30,7 @@ public class OrderProductHelper {
         return oph;
     } 
     
-    public JSONArray createByList(long orderID, List<OrderProduct> orderproduct) {
+    public JSONArray createByList(int orderID, List<OrderProduct> orderproduct) {
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";

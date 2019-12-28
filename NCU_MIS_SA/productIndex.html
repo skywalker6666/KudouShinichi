@@ -112,17 +112,17 @@
     	let inner_html = '';
     	inner_html += '<div class="col-md-4" style="float:left;">';
    		inner_html += '<div class="card-header">';
-   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
  		inner_html += '</div>';
  		inner_html += '<div class="card mb-4 shadow-sm">';
  		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
 		inner_html += '<div class="card-body">';
-		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
-		inner_html += '<p class="card-text">' + data.describe + '</p>';
+		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price +' <small class="text-muted">/ USD</small></h1>';
+		inner_html += '<p class="card-text">' + data.product_info + '</p>';
 		inner_html += '<div class="d-flex justify-content-between align-items-center">';
 		inner_html += '<div class="btn-group">';
-		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
-		inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+		inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
+		inner_html += '</div><small class="text-muted">id: '+ data.idtbl_product + '</small>';
 		inner_html += '</div></div></div></div>';
     	
 		return inner_html;

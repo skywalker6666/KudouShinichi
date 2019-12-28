@@ -11,8 +11,8 @@ public class Order {
     /** idtbl_order，訂單編號 */
     private int idtbl_order;
 
-    /** MemberID，會員ID*/
-    private int MemberID;
+    /** memberID，會員ID*/
+    private int memberID;
 
     /** buyer_name，會員姓名 */
     private String buyer_name;
@@ -30,7 +30,7 @@ public class Order {
     private String payment;
     
     /** order_status，會員訂單狀態 */
-    private String order_status; 
+    private int order_status; 
     
     /** _total_price，訂單總金額 */
     private int total_price;
@@ -50,7 +50,7 @@ public class Order {
      * 實例化（Instantiates）一個新的（new）Order 物件<br>
      * 採用多載（overload）方法進行，此建構子用於建立訂單資料時，產生一個新的訂單
      *
-     * @param MemberID 會員ID
+     * @param memberID 會員ID
      * @param buyer_name 會員姓名
      * @param ship_address 會員地址
      * @param cellphone 會員手機
@@ -59,8 +59,8 @@ public class Order {
      * @param order_status 訂單狀態
      * @param total_price 總金額
      */
-    public Order(int MemberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, String order_status, int total_price) {
-        this.MemberID = MemberID;
+    public Order(int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, int total_price) {
+        this.memberID = memberID;
         this.buyer_name = buyer_name;
         this.ship_address = ship_address;
         this.cellphone = cellphone;
@@ -76,7 +76,7 @@ public class Order {
      * 實例化（Instantiates）一個新的（new）Order 物件<br>
      * 採用多載（overload）方法進行，此建構子用於修改訂單資料時，新改資料庫已存在的訂單
      *
-     * @param MemberID 會員ID
+     * @param memberID 會員ID
      * @param buyer_name 會員姓名
      * @param ship_address 會員地址
      * @param cellphone 會員手機
@@ -86,9 +86,9 @@ public class Order {
      * @param total_price 總金額
      * @param create 訂單創建時間
      */
-    public Order(int idtbl_order, int MemberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, String order_status, int total_price, Timestamp create) {
+    public Order(int idtbl_order, int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, int total_price, Timestamp create) {
         this.idtbl_order = idtbl_order;
-        this.MemberID = MemberID;
+        this.memberID = memberID;
         this.buyer_name = buyer_name;
         this.ship_address = ship_address;
         this.cellphone = cellphone;
@@ -136,7 +136,7 @@ public class Order {
      * @return String 回傳訂單會員的名
      */
     public int getMemberID() {
-        return this.MemberID;
+        return this.memberID;
     }
 
     /**
@@ -192,7 +192,7 @@ public class Order {
      *
      * @return String 回傳訂單狀態
      */
-    public String getOrderStatus() {
+    public int getOrderStatus() {
         return this.order_status;
     }
     /**

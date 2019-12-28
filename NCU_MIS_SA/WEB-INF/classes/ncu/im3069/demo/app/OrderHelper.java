@@ -26,7 +26,7 @@ public class OrderHelper {
     public JSONObject create(Order order) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
-        long idtbl_order = -1;
+        int idtbl_order = -1;
         JSONArray opa = new JSONArray();
         
         try {
@@ -43,7 +43,7 @@ public class OrderHelper {
             String cellphone = order.getCellphone();
             String product_delivery= order.getProductDelivery();
             String payment= order.getPayment();
-            String order_status= order.getOrderStatus();
+            int order_status= order.getOrderStatus();
             int total_price = order.getTotalPrice();
             Timestamp create = order.getCreateTime();
             
@@ -55,7 +55,7 @@ public class OrderHelper {
             pres.setString(4, cellphone);
             pres.setString(5, product_delivery);
             pres.setString(6, payment);
-            pres.setString(7, order_status);
+            pres.setInt(7, order_status);
             pres.setInt(8, total_price);
             pres.setTimestamp(9, create);
             
@@ -69,7 +69,7 @@ public class OrderHelper {
             ResultSet rs = pres.getGeneratedKeys();
 
             if (rs.next()) {
-                idtbl_order = rs.getLong(1);
+                idtbl_order = rs.getInt(1);
                 ArrayList<OrderProduct> opd = order.getOrderProduct();
                 opa = oph.createByList(idtbl_order, opd);
             }
@@ -132,7 +132,7 @@ public class OrderHelper {
                 String cellphone = rs.getString("cellphone");
                 String product_delivery = rs.getString("product_delivery");
                 String payment = rs.getString("payment");
-                String order_status=rs.getString("order_status");
+                int order_status=rs.getInt("order_status");
                 int total_price=rs.getInt("_total_price");
                 Timestamp create = rs.getTimestamp("create");
                 
@@ -209,7 +209,7 @@ public class OrderHelper {
                 String cellphone = rs.getString("cellphone");
                 String product_delivery =rs.getString("product_delivery");
                 String payment =rs.getString("payment");
-                String order_status =rs.getString("order_status");
+                int order_status =rs.getInt("order_status");
                 int total_price = rs.getInt("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 

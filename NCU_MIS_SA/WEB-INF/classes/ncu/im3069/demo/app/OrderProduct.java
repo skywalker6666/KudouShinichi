@@ -123,8 +123,8 @@ public class OrderProduct {
      */
     public JSONObject getData() {
         JSONObject data = new JSONObject();
-        data.put("id", getId());
-        data.put("product", getProduct().getData());
+        data.put("idtbl_orderproduct", getId());
+        data.put("productID", getProduct().getData());
         data.put("price", getPrice());
         data.put("product_quantities", getQuantity());
         data.put("subtotal", getSubTotal());

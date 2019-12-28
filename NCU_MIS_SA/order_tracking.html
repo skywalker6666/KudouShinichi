@@ -183,7 +183,7 @@
             	   $.each(value['product_info'],function(index,value){
             		   cost+=value['subtotal'];
             		})
-                   table_html += '<tr><td scope="row" align="center">' + value['order_info']['id'] + '</td>';
+                   table_html += '<tr><td scope="row" align="center">' + value['order_info']['idtbl_order'] + '</td>';
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
                    table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
