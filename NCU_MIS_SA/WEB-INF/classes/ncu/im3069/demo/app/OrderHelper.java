@@ -133,7 +133,7 @@ public class OrderHelper {
                 String product_delivery = rs.getString("product_delivery");
                 String payment = rs.getString("payment");
                 int order_status=rs.getInt("order_status");
-                int total_price=rs.getInt("_total_price");
+                int total_price=rs.getInt("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
