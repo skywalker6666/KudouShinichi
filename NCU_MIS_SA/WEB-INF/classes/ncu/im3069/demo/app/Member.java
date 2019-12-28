@@ -31,6 +31,13 @@ public class Member {
     
     /** headSticker，會員頭貼 */
     private String headSticker;
+    
+    /** birthday，會員生日 */
+    private String birthday;
+    
+    /** isSeller，會員是否為賣家 */
+    private int isSeller;
+    
     /** login_times，更新時間的分鐘數 */
     private int login_times;
     
@@ -48,11 +55,13 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
-    public Member(String email, String password, String name, String headSticker) {
+    public Member(String email, String password, String name, String headSticker, String birthday, int isSeller) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.headSticker=headSticker;
+        this.birthday=birthday;
+        this.isSeller=isSeller;
         update();
     }
 
@@ -65,12 +74,14 @@ public class Member {
      * @param password 會員密碼
      * @param name 會員姓名
      */
-    public Member(int id, String email, String password, String name, String headSticker) {
+    public Member(int id, String email, String password, String name, String headSticker, String birthday, int isSeller) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.headSticker=headSticker;
+        this.birthday=birthday;//
+        this.isSeller=isSeller;//
         /** 取回原有資料庫內該名會員之更新時間分鐘數與組別 */
         getLoginTimesStatus();
         /** 計算會員之組別 */
@@ -88,12 +99,14 @@ public class Member {
      * @param login_times 更新時間的分鐘數
      * @param status the 會員之組別
      */
-    public Member(int id, String email, String password, String name, String headSticker, int login_times, String status) {
+    public Member(int id, String email, String password, String name, String headSticker, String birthday, int isSeller, int login_times, String status) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.headSticker=headSticker;
+        this.birthday=birthday;//
+        this.isSeller=isSeller;//
         this.login_times = login_times;
         this.status = status;
     }
@@ -134,6 +147,23 @@ public class Member {
         return this.headSticker;
     }
     
+    /**
+     * 取得會員之生日
+     *
+     * @return the headSticker 回傳會員頭貼
+     */
+    public String getBirthday() {
+        return this.birthday;
+    }
+    
+    /**
+     * 取得會員之頭貼
+     *
+     * @return the headSticker 回傳會員頭貼
+     */
+    public int getIsSeller() {
+        return this.isSeller;
+    }
     /**
      * 取得會員之密碼
      *
@@ -194,11 +224,13 @@ public class Member {
     public JSONObject getData() {
         /** 透過JSONObject將該名會員所需之資料全部進行封裝*/ 
         JSONObject jso = new JSONObject();
-        jso.put("id", getID());
+        jso.put("idtbl_member", getID());
         jso.put("name", getName());
         jso.put("email", getEmail());
         jso.put("password", getPassword());
+        jso.put("birthday", getBirthday());
         jso.put("headSticker", getheadSticker());
+        jso.put("isSeller", getIsSeller());
         jso.put("login_times", getLoginTimes());
         jso.put("status", getStatus());
         

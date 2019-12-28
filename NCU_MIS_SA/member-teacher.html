@@ -29,6 +29,8 @@
                         <th>編號</th>
                         <th>姓名</th>
                         <th>電郵</th>
+                        <th>生日</th>
+                        <th>買方賣方</th>
                         <th>更新時間</th>
                         <th>會員組別</th>
                         <th>功能</th>
@@ -48,7 +50,7 @@
                     var check = window.confirm("確認刪除會員？");
                     if (check == true) {
                         console.log("You pressed OK!");
-                        var request = {'id': id};
+                        var request = {'idtbl_member': id};
                         var data_string = JSON.stringify(request);
                         $.ajax({
                             type: "DELETE",
@@ -103,13 +105,15 @@
                     $("#table > tbody").empty();
                     var table_html = '';
                     $.each(data, function(index, value) {
-                        table_html += '<tr><td scope="row">' + value['id'] + '</td>';
+                        table_html += '<tr><td scope="row">' + value['idtbl_member'] + '</td>';
                         table_html += '<td>' + value['name'] + '</td>';
                         table_html += '<td>' + value['email'] + '</td>';
+                        table_html += '<td>' + value['birthday'] + '</td>';
+                        table_html += '<td>' + value['isSeller'] + '</td>';
                         table_html += '<td>' + value['login_times'] + '</td>';
                         table_html += '<td>' + value['status'] + '</td>';
-                        table_html += '<td>' + '<a href="edit.html?id=' + value['id'] + '">編輯</a> | ';
-                        table_html += '<a href="javascript: deleteMember(' + value['id'] + ');">刪除</a></td></tr>';
+                        table_html += '<td>' + '<a href="edit-teacher.html?id=' + value['idtbl_member'] + '">編輯</a> | ';
+                        table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
                     })
 
                     $("#table > tbody").append(table_html);
