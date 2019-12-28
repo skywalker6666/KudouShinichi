@@ -234,13 +234,13 @@ function updateCartTable(data) {
 	table_html = '';
 	$("#cart_table > tbody").empty();
     $.each(data, function(index, value) {
-    	table_html += '<tr id="row_' + value.id + '">';
-    	table_html += '<td class="align-middle text-center">' + value.id + '</td>';
-    	table_html += '<td class="align-middle"><p class="text-break">' + value.name + '</p></td>';
-    	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
-    	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.id + '" maxlength="5" min="0" step="1"></td>';
-    	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
-    	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class=" btn-danger">²¾°£</button></td>';
+    	table_html += '<tr id="row_' + value.idtbl_product + '">';
+    	table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
+    	table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
+    	table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
+    	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1"></td>';
+    	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
+    	table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class=" btn-danger">²¾°£</button></td>';
     	table_html += '</tr>';
     	//id.amount=$('#quantity_'+value.id).serialize();
     })

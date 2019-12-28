@@ -43,7 +43,7 @@ public class OrderHelper {
             String cellphone = order.getCellphone();
             String product_delivery= order.getProductDelivery();
             String payment= order.getPayment();
-            String order_status= order.getOrderStatus();
+            int order_status= order.getOrderStatus();
             int total_price = order.getTotalPrice();
             Timestamp create = order.getCreateTime();
             
@@ -55,7 +55,7 @@ public class OrderHelper {
             pres.setString(4, cellphone);
             pres.setString(5, product_delivery);
             pres.setString(6, payment);
-            pres.setString(7, order_status);
+            pres.setInt(7, order_status);
             pres.setInt(8, total_price);
             pres.setTimestamp(9, create);
             
@@ -132,8 +132,8 @@ public class OrderHelper {
                 String cellphone = rs.getString("cellphone");
                 String product_delivery = rs.getString("product_delivery");
                 String payment = rs.getString("payment");
-                String order_status=rs.getString("order_status");
-                int total_price=rs.getInt("_total_price");
+                int order_status=rs.getInt("order_status");
+                int total_price=rs.getInt("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
@@ -209,7 +209,7 @@ public class OrderHelper {
                 String cellphone = rs.getString("cellphone");
                 String product_delivery =rs.getString("product_delivery");
                 String payment =rs.getString("payment");
-                String order_status =rs.getString("order_status");
+                int order_status =rs.getInt("order_status");
                 int total_price = rs.getInt("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 

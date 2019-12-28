@@ -65,7 +65,7 @@ public class Product {
      * @param image 產品圖片
      * @param product_info 產品敘述
      */
-	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, int is_deleted, String image, String prduct_info) {
+	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, int is_deleted, String image, String product_info) {
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
@@ -73,6 +73,7 @@ public class Product {
 		this.shopID=shopID;
 		this.is_deleted=is_deleted;
 		this.image = image;
+		this.product_info = product_info;
 	}
 
     /**
@@ -160,7 +161,9 @@ public class Product {
         jso.put("price", getPrice());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
-
+        jso.put("inventory", getInventory());
+        jso.put("shopID", getShopID());
+        jso.put("is_deleted", getIsDeleted());
         return jso;
     }
 }

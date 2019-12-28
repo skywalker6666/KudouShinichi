@@ -87,8 +87,9 @@ public class OrderController extends HttpServlet {
         String cellphone = jso.getString("cellphone");
         String product_delivery=jso.getString("product_delivery");
         String payment=jso.getString("payment");
-        String order_status=jso.getString("order_status");
+        int order_status=jso.getInt("order_status");
         int total_price=jso.getInt("total_price");
+        
         JSONArray item = jso.getJSONArray("item");
         JSONArray quantity = jso.getJSONArray("quantity");
 

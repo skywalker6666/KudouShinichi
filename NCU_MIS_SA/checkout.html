@@ -183,14 +183,17 @@
    
     $("#check").click(function () {
     	var data = {
-    			
+    			"memberID":1,
     			"buyer_name": $("#buyer_name").val(),
     			"ship_address": $("#address").val(),
     			"cellphone": $("#cellphone").val(),
     			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
-    			"payment": $("input[name='Payment']:checked").val(),    			
-    			"item": client_cart_obj
-    			//"total_price":
+    			"payment": $("input[name='Payment']:checked").val(),
+    			"order_status":1,
+    			"item": client_cart_obj,
+    			"quantity": client_cart_amount,
+    			"total_price":100
+    			//total_price
     	}
 
     	// 驗證輸入的資料
@@ -357,14 +360,14 @@
     	table_html = '';
     	$("#cart_table > tbody").empty();
         $.each(data, function(index, value) {
-        	table_html += '<tr id="row_' + value.id + '">';
-        	table_html += '<td class="align-middle text-center">' + value.id + '</td>';
-        	table_html += '<td class="align-middle"><p class="text-break">' + value.name + '</p></td>';
-        	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
-        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.id + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+        	table_html += '<tr id="row_' + value.idtbl_product + '">';
+        	table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
+        	table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
+        	table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
+        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
         	///	table_html += '<td class="align-middle text-center"><span id="quantity_' + value.id + '">' + value.amount + '</td>';
-        	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
-        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+        	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
+        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
         	table_html += '</tr>';
         
         })
