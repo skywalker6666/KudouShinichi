@@ -12,7 +12,7 @@ public class OrderHelper {
     private static OrderHelper oh;
     private Connection conn = null;
     private PreparedStatement pres = null;
-    private OrderItemHelper oph =  OrderItemHelper.getHelper();
+    private OrderProductHelper oph =  OrderProductHelper.getHelper();
     
     private OrderHelper() {
     }
@@ -26,37 +26,38 @@ public class OrderHelper {
     public JSONObject create(Order order) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
-        long id = -1;
+        long idtbl_order = -1;
         JSONArray opa = new JSONArray();
         
         try {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`orders`(`last_name`, `first_name`, `address`, `phone`,`product_delivery`,`payment`, `create`, `modify`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`tbl_order`(`memberID`, `buyer_name`, `ship_address`, `cellphone`,`product_delivery`,`payment`,`order_status`,`total_price`, `create`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
-            String first_name = order.getFirstName();
-            String last_name = order.getLastName();           
-            String address = order.getAddress();
-            String phone = order.getPhone();
+            int memberID = order.getMemberID();
+            String buyer_name = order.getBuyerName();           
+            String ship_address = order.getShipAddress();
+            String cellphone = order.getCellphone();
             String product_delivery= order.getProductDelivery();
             String payment= order.getPayment();
+            String order_status= order.getOrderStatus();
+            int total_price = order.getTotalPrice();
             Timestamp create = order.getCreateTime();
-            Timestamp modify = order.getModifyTime();
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pres.setString(1, last_name);
-            pres.setString(2, first_name);
-//            pres.setString(3, email);
-            pres.setString(3, address);
-            pres.setString(4, phone);
+            pres.setInt(1, memberID);
+            pres.setString(2, buyer_name);
+            pres.setString(3, ship_address);
+            pres.setString(4, cellphone);
             pres.setString(5, product_delivery);
             pres.setString(6, payment);
-            pres.setTimestamp(7, create);
-            pres.setTimestamp(8, modify);
+            pres.setString(7, order_status);
+            pres.setInt(8, total_price);
+            pres.setTimestamp(9, create);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             pres.executeUpdate();
@@ -68,9 +69,9 @@ public class OrderHelper {
             ResultSet rs = pres.getGeneratedKeys();
 
             if (rs.next()) {
-                id = rs.getLong(1);
-                ArrayList<OrderItem> opd = order.getOrderProduct();
-                opa = oph.createByList(id, opd);
+                idtbl_order = rs.getLong(1);
+                ArrayList<OrderProduct> opd = order.getOrderProduct();
+                opa = oph.createByList(idtbl_order, opd);
             }
         } catch (SQLException e) {
             /** 印出JDBC SQL指令錯誤 **/
@@ -85,7 +86,7 @@ public class OrderHelper {
 
         /** 將SQL指令、花費時間與影響行數，封裝成JSONObject回傳 */
         JSONObject response = new JSONObject();
-        response.put("order_id", id);
+        response.put("order_id", idtbl_order);
         response.put("order_product_id", opa);
 
         return response;
@@ -107,7 +108,7 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`orders`";
+            String sql = "SELECT * FROM `missa`.`tbl_order`";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -124,18 +125,19 @@ public class OrderHelper {
                 row += 1;
                 
                 /** 將 ResultSet 之資料取出 */
-                int id = rs.getInt("id");
-                String first_name = rs.getString("first_name");
-                String last_name = rs.getString("last_name");
-                String address = rs.getString("address");
-                String phone = rs.getString("phone");
-                String product_delivery =rs.getString("product_delivery");
-                String payment =rs.getString("payment");
+                int idtbl_order = rs.getInt("idtbl_order");
+                int memberID = rs.getInt("memberID");
+                String buyer_name = rs.getString("buyer_name");
+                String ship_address = rs.getString("ship_address");
+                String cellphone = rs.getString("cellphone");
+                String product_delivery = rs.getString("product_delivery");
+                String payment = rs.getString("payment");
+                String order_status=rs.getString("order_status");
+                int total_price=rs.getInt("_total_price");
                 Timestamp create = rs.getTimestamp("create");
-                Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, product_delivery, payment, create, modify);
+                o = new Order(idtbl_order, memberID, buyer_name, ship_address, cellphone, product_delivery, payment, order_status, total_price, create);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(o.getOrderAllInfo());
             }
@@ -182,7 +184,7 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`orders` WHERE `orders`.`id` = ?";
+            String sql = "SELECT * FROM `missa`.`tbl_order` WHERE `tbl_order`.`idtbl_order` = ?";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -200,19 +202,19 @@ public class OrderHelper {
                 row += 1;
                 
                 /** 將 ResultSet 之資料取出 */
-                int id = rs.getInt("id");
-                String first_name = rs.getString("first_name");
-                String last_name = rs.getString("last_name");
-//                String email = rs.getString("email");
-                String address = rs.getString("address");
-                String phone = rs.getString("phone");
+                int idtbl_order = rs.getInt("idtbl_order");
+                int memberID = rs.getInt("memberID");
+                String buyer_name = rs.getString("buyer_name");
+                String ship_address = rs.getString("ship_address");
+                String cellphone = rs.getString("cellphone");
                 String product_delivery =rs.getString("product_delivery");
                 String payment =rs.getString("payment");
+                String order_status =rs.getString("order_status");
+                int total_price = rs.getInt("total_price");
                 Timestamp create = rs.getTimestamp("create");
-                Timestamp modify = rs.getTimestamp("modify");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                o = new Order(id, first_name, last_name, address, phone, product_delivery, payment,create, modify);
+                o = new Order(idtbl_order, memberID, buyer_name, ship_address, cellphone, product_delivery, payment, order_status, total_price, create);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 data = o.getOrderAllInfo();
             }

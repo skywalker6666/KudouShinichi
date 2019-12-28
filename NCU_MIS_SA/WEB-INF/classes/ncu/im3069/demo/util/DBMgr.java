@@ -28,7 +28,6 @@ public class DBMgr {
     static final String USER = "general";
 
 
-
     static final String PASS = "Yankee40";
 
 

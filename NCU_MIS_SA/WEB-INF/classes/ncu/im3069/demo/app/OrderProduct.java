@@ -3,54 +3,54 @@ package ncu.im3069.demo.app;
 import org.json.JSONObject;
 import ncu.im3069.demo.util.Arith;
 
-public class OrderItem {
+public class OrderProduct {
 
     /** id，產品細項編號 */
-    private int id;
+    private int idtbl_ordeproduct;
 
-    /** pd，產品 */
+    /** pd，產品 */ 
     private Product pd;
 
-    /** quantity，產品數量 */
-    private int quantity;
+    /** product_quantities，產品數量 */
+    private int product_quantities;
 
     /** price，產品價格 */
-    private double price;
+    private int price;
 
     /** subtotal，產品小計 */
     private double subtotal;
 
-    /** ph，ProductHelper 之物件與 OrderItem 相關之資料庫方法（Sigleton） */
+    /** ph，ProductHelper 之物件與 OrderProduct 相關之資料庫方法（Sigleton） */
     private ProductHelper ph =  ProductHelper.getHelper();
 
     /**
-     * 實例化（Instantiates）一個新的（new）OrderItem 物件<br>
+     * 實例化（Instantiates）一個新的（new）OrderProduct 物件<br>
      * 採用多載（overload）方法進行，此建構子用於建立訂單細項時
      *
-     * @param pd 會員電子信箱
-     * @param quantity 會員密碼
+     * @param pd 產品
+     * @param product_quantities 產品數量
      */
-    public OrderItem(Product pd, int quantity) {
+    public OrderProduct(Product pd, int product_quantities) {
         this.pd = pd;
-        this.quantity = quantity;
+        this.product_quantities = product_quantities;
         this.price = this.pd.getPrice();
-        this.subtotal = Arith.mul((double) this.quantity, this.price);
+        this.subtotal = Arith.mul((double) this.product_quantities, this.price);
     }
 
     /**
-     * 實例化（Instantiates）一個新的（new）OrderItem 物件<br>
+     * 實例化（Instantiates）一個新的（new）OrderProduct 物件<br>
      * 採用多載（overload）方法進行，此建構子用於修改訂單細項時
      *
      * @param order_product_id 訂單產品編號
-     * @param order_id 會員密碼
+     * @param order_id 訂單id
      * @param product_id 產品編號
      * @param price 產品價格
-     * @param quantity 產品數量
+     * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderItem(int order_product_id, int order_id, int product_id, double price, int quantity, double subtotal) {
-        this.id = order_product_id;
-        this.quantity = quantity;
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int price, int product_quantities, double subtotal) {
+        this.idtbl_ordeproduct = idtbl_ordeproduct;
+        this.product_quantities = product_quantities;
         this.price = price;
         this.subtotal = subtotal;
         getProductFromDB(product_id);
@@ -76,8 +76,8 @@ public class OrderItem {
     /**
      * 設定訂單細項編號
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idtbl_ordeproduct) {
+        this.idtbl_ordeproduct = idtbl_ordeproduct;
     }
 
     /**
@@ -86,7 +86,7 @@ public class OrderItem {
      * @return int 回傳訂單細項編號
      */
     public int getId() {
-        return this.id;
+        return this.idtbl_ordeproduct;
     }
 
     /**
@@ -94,7 +94,7 @@ public class OrderItem {
      *
      * @return double 回傳產品價格
      */
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 
@@ -113,7 +113,7 @@ public class OrderItem {
      * @return int 回傳產品數量
      */
     public int getQuantity() {
-        return this.quantity;
+        return this.product_quantities;
     }
 
     /**
@@ -126,7 +126,7 @@ public class OrderItem {
         data.put("id", getId());
         data.put("product", getProduct().getData());
         data.put("price", getPrice());
-        data.put("quantity", getQuantity());
+        data.put("product_quantities", getQuantity());
         data.put("subtotal", getSubTotal());
 
         return data;

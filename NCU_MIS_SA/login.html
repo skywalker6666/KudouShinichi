@@ -8,6 +8,7 @@
 </style>
 <link rel="stylesheet" href="statics/css/register&login.css">
 <link rel="stylesheet" href="statics/css/navbar.css">
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 <body bgcolor="#BCE2FF">
 
@@ -28,7 +29,7 @@
 		</font>
 		<div class="box2"
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-			<font face="DFKai-sb">
+			
 				<form id="form" accept-charset="utf-8"
 					style="line-height: 50px; margin-top: 100px">
 
@@ -41,18 +42,17 @@
 							name="password" type="password" id="member_password"
 							required="required">
 					</div>
-					<div>
-						<button type="submit" class="button" id="login">登入</button>
-					</div>
+					
+						<button id="login" type="submit" class="button">登入</button>
 				</form>
 		</div>
 	</div>
 </body>
 <script>
-	$("#login").click(function () {
-		var LoginRes=ValidMemberLogin();
-		alert(LoginRes);
-	}
+
+	$("#login").click(function(){		
+		ValidMemberLogin();
+	});
 	    
 	
 			
@@ -69,7 +69,8 @@
             success: function (response) { 
             	var id_count=1;
                 if(response.status == 200){
-                	$.each(response.response.data, function (id_counter,value){
+                	alert(response.response.data.password.val());
+                	/*$.each(response.response.data, function (id_counter,value){
                 		if($("#member_name").val()==response['response']['data'][id_counter]['name']&&('member_password').val()== response['response']['data'][id_account]['password'])
                 		{	
                 			login_result=true;
@@ -77,7 +78,7 @@
                 		else
                 			login_result=false;
                 	})
-                	
+                	*/
                 	
                 }
                 console.log(response);
@@ -124,8 +125,6 @@
   });*/
  function ValidData(){}
  function GetAllMember(){}
-
-
 
 </script>
 </html>
