@@ -28,9 +28,9 @@ public class OrderItemHelper {
         if(oph == null) oph = new OrderItemHelper();
         
         return oph;
-    }
+    } 
     
-    public JSONArray createByList(long order_id, List<OrderProduct> orderproduct) {
+    public JSONArray createByList(long orderID, List<OrderProduct> orderproduct) {
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -39,24 +39,24 @@ public class OrderItemHelper {
             OrderProduct op = orderproduct.get(i);
             
             /** 取得所需之參數 */
-            int product_id = op.getProduct().getID();
+            int productID = op.getProduct().getID();
             double price = op.getPrice();
-            int quantity = op.getQuantity();
+            int product_quantities = op.getQuantity();
             double subtotal = op.getSubTotal();
             
             try {
                 /** 取得資料庫之連線 */
                 conn = DBMgr.getConnection();
                 /** SQL指令 */
-                String sql = "INSERT INTO `missa`.`order_product`(`order_id`, `product_id`, `price`, `quantity`, `subtotal`)"
+                String sql = "INSERT INTO `missa`.`order_product`(`orderID`, `productID`, `price`, `product_quantities`, `subtotal`)"
                         + " VALUES(?, ?, ?, ?, ?)";
                 
                 /** 將參數回填至SQL指令當中 */
                 pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pres.setLong(1, order_id);
-                pres.setInt(2, product_id);
+                pres.setLong(1, orderID);
+                pres.setInt(2, productID);
                 pres.setDouble(3, price);
-                pres.setInt(4, quantity);
+                pres.setInt(4, product_quantities);
                 pres.setDouble(5, subtotal);
                 
                 /** 執行新增之SQL指令並記錄影響之行數 */
@@ -87,7 +87,7 @@ public class OrderItemHelper {
         return jsa;
     }
     
-    public ArrayList<OrderProduct> getOrderProductByOrderId(int order_id) {
+    public ArrayList<OrderProduct> getOrderProductByOrderId(int orderID) {
         ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -98,11 +98,11 @@ public class OrderItemHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`order_product` WHERE `order_product`.`order_id` = ?";
+            String sql = "SELECT * FROM `missa`.`tbl_orderproduct` WHERE `tbl_orderproduct`.`orderID` = ?";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, order_id);
+            pres.setInt(1, orderID);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             rs = pres.executeQuery();
@@ -115,14 +115,14 @@ public class OrderItemHelper {
                 /** 每執行一次迴圈表示有一筆資料 */
                 
                 /** 將 ResultSet 之資料取出 */
-                int order_product_id = rs.getInt("id");
-                int product_id = rs.getInt("product_id");
+                int idtbl_orderproduct= rs.getInt("idtbl_orderproduct");
+                int productID = rs.getInt("productID");
                 double price = rs.getDouble("price");
-                int quantity = rs.getInt("quantity");
+                int product_quantities = rs.getInt("product_quantities");
                 double subtotal = rs.getDouble("subtotal");
                 
-                /** 將每一筆會員資料產生一名新Member物件 */
-                op = new OrderProduct(order_product_id, order_id, product_id, price, quantity, subtotal);
+                /** 將每一筆會員資料產生一名新orderproduct物件 */
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, price, product_quantities, subtotal);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 result.add(op);
             }
