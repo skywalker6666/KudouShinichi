@@ -15,7 +15,7 @@ public class OrderProduct {
     private int product_quantities;
 
     /** price，產品價格 */
-    private double price;
+    private int price;
 
     /** subtotal，產品小計 */
     private double subtotal;
@@ -48,7 +48,7 @@ public class OrderProduct {
      * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, double price, int product_quantities, double subtotal) {
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int price, int product_quantities, double subtotal) {
         this.idtbl_ordeproduct = idtbl_ordeproduct;
         this.product_quantities = product_quantities;
         this.price = price;
@@ -94,7 +94,7 @@ public class OrderProduct {
      *
      * @return double 回傳產品價格
      */
-    public double getPrice() {
+    public int getPrice() {
         return this.price;
     }
 

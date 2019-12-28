@@ -12,7 +12,7 @@ public class OrderHelper {
     private static OrderHelper oh;
     private Connection conn = null;
     private PreparedStatement pres = null;
-    private OrderItemHelper oph =  OrderItemHelper.getHelper();
+    private OrderProductHelper oph =  OrderProductHelper.getHelper();
     
     private OrderHelper() {
     }

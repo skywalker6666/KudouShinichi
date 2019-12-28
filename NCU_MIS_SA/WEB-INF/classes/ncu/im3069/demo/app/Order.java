@@ -44,7 +44,7 @@ public class Order {
 
     
     /** oph，OrderItemHelper 之物件與 Order 相關之資料庫方法（Sigleton） */
-    private OrderItemHelper oph = OrderItemHelper.getHelper();
+    private OrderProductHelper oph = OrderProductHelper.getHelper();
 
     /**
      * 實例化（Instantiates）一個新的（new）Order 物件<br>
