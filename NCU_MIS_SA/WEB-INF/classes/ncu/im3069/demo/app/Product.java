@@ -19,6 +19,9 @@ public class Product {
     /** shopID，賣場編號 */
     private int shopID;
 
+    /** is_deleted，是否被刪除 */
+    private int is_deleted;
+    
     /**image，產品圖片*/
     private String image;
 
@@ -43,9 +46,12 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String product_name, int price, int inventory, int shopID, String image) {
+	public Product(String product_name, int price, int inventory, int shopID, int is_deleted, String image) {
 		this.product_name = product_name;
 		this.price = price;
+		this.inventory=inventory;
+		this.shopID=shopID;
+		this.is_deleted=is_deleted;
 		this.image = image;
 	}
 
@@ -59,12 +65,14 @@ public class Product {
      * @param image 產品圖片
      * @param product_info 產品敘述
      */
-	public Product(int idtbl_product, String product_name, int price, String image, String product_info) {
+	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, int is_deleted, String image, String prduct_info) {
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
+		this.inventory=inventory;
+		this.shopID=shopID;
+		this.is_deleted=is_deleted;
 		this.image = image;
-		this.product_info = product_info;
 	}
 
     /**
@@ -90,10 +98,37 @@ public class Product {
      *
      * @return double 回傳產品價格
      */
-	public double getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
+	/**
+     * 取得產品庫存
+     *
+     * @return int 回傳產品庫存
+     */
+	public int getInventory() {
+		return this.inventory;
+	}
+	
+	/**
+     * 取得賣場ID
+     *
+     * @return int 回傳賣場ID
+     */
+	public int getShopID() {
+		return this.shopID;
+	}
+	
+	/**
+     * 取得產品狀態
+     *
+     * @return int 回傳產品是否被刪除
+     */
+	public int getIsDeleted() {
+		return this.is_deleted;
+	}	
+	
     /**
      * 取得產品圖片
      *

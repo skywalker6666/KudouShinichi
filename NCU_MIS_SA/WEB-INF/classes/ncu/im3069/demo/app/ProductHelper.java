@@ -61,12 +61,14 @@ public class ProductHelper {
                 int idtbl_product = rs.getInt("idtbl_product");
                 String product_name = rs.getString("product_name");
                 int price = rs.getInt("price");
-                int inventory=rs.getInt("inventory");
+                int inventory = rs.getInt("inventory");
+                int shopID = rs.getInt("shopID");
+                int is_deleted = rs.getInt("is_deleted");
                 String image = rs.getString("image");
                 String product_info = rs.getString("product_info");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(idtbl_product, product_name, price, image, product_info);
+                p = new Product(idtbl_product, product_name, price, inventory, shopID, is_deleted, image, product_info);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }
@@ -116,7 +118,7 @@ public class ProductHelper {
           conn = DBMgr.getConnection();
           String[] in_para = DBMgr.stringToArray(data, ",");
           /** SQL指令 */
-          String sql = "SELECT * FROM `missa`.`products` WHERE `products`.`idtbl_product`";
+          String sql = "SELECT * FROM `missa`.`tbl_product` WHERE `tbl_product`.`idtbl_product`";
           for (int i=0 ; i < in_para.length ; i++) {
               sql += (i == 0) ? "in (?" : ", ?";
               sql += (i == in_para.length-1) ? ")" : "";
@@ -142,12 +144,15 @@ public class ProductHelper {
               /** 將 ResultSet 之資料取出 */
               int idtbl_product = rs.getInt("idtbl_product");
               String product_name = rs.getString("product_name");
-              int price = rs.getDouble("price");
+              int price = rs.getInt("price");
+              int inventory = rs.getInt("inventory");
+              int shopID = rs.getInt("shopID");
+              int is_deleted = rs.getInt("is_deleted");
               String image = rs.getString("image");
               String product_info = rs.getString("product_info");
               
               /** 將每一筆商品資料產生一名新Product物件 */
-              p = new Product(idtbl_product, product_name, price, image, product_info);
+              p = new Product(idtbl_product, product_name, price, inventory, shopID, is_deleted, image, product_info);
               /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
               jsa.put(p.getData());
           }
@@ -205,14 +210,17 @@ public class ProductHelper {
             /** 透過 while 迴圈移動pointer，取得每一筆回傳資料 */
             while(rs.next()) {
                 /** 將 ResultSet 之資料取出 */
-                int idtbl_product = rs.getInt("idtbl_product");
+                int id = rs.getInt("idtbl_product");
                 String product_name = rs.getString("product_name");
-                int price = rs.getDouble("price");
+                int price = rs.getInt("price");
+                int inventory = rs.getInt("inventory");
+                int shopID = rs.getInt("shopID");
+                int is_deleted = rs.getInt("is_deleted");
                 String image = rs.getString("image");
                 String product_info = rs.getString("product_info");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(idtbl_product, product_name, price, image, product_info);
+                p = new Product(id, product_name, price, inventory, shopID, is_deleted,  image, product_info);
             }
 
         } catch (SQLException e) {
