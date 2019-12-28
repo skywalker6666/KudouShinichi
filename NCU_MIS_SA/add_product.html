@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Jekyll v3.8.5">
+
+<title>AddProduct</title>
+
+<!-- Bootstrap core CSS -->
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+.box {
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	margin-top: -250px;
+	margin-left: -400px;
+}
+
+.box2 {
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
+}
+input{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 9px 9px;
+    width: 225px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+textarea{
+ outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 9px 9px;
+    width: 225px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+textarea:focus{
+ border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.button:hover {
+	background-color: #f44336;
+	color: white;
+}
+</style>
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/themebox.css">
+<link rel="stylesheet" href="statics/css/card.css">
+<link href="statics/css/product.css" rel="stylesheet">
+<link href="statics/css/jquery-confirm.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="header">
+  <!--容器分為左圖右導覽連結 -->
+  <div class="navbar">
+      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
+    <!--導覽列 -->
+    <nav>
+      <ul class="navbar">
+		<li class="navbar"><a href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="100px"
+				width="100px"></img></a></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		<li class="navbar"><a class="navbarItem"
+			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		</ul>
+    </nav>
+  </div>
+</div>
+	<div class="box" style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
+		<div class="box2" style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+					
+
+					<div >
+						<font face="DFKai-sb">
+						
+						<div >
+							<label for="lastName">商品名稱</label> <input type="text"
+								 id="product_name" maxlength="45" value=""
+								required>
+						</div>
+						
+						
+
+						<div >
+							<label for="firstName">商品售價</label> <input type="text"
+								 id="product_price" maxlength="11"
+								placeholder="" value="" required>
+						</div>
+						
+
+
+						<div >
+							<label for="phonenum">商品庫存</label> <input
+								type="text" id="product_inventory"  maxlength="11"
+								required>
+						</div>
+						
+						
+
+						<div >
+							<label for="address" style="vertical-align:top;">商品簡介</label> <textarea cols="50" rows="5" id="address" maxlength="100" 
+								 required >
+						</textarea>
+						</div>
+						
+						<div>
+							<label for="lastName">商品圖片</label> <input type="text"
+								 id="last_name" maxlength="45" value=""
+								placeholder="請輸入完整路徑" required>
+						</div>
+						
+						<div >
+							<input type="button" class="button" value="完成" id="finish">
+						</div>
+						
+						</font>
+
+					</div>
+				</div>
+			</div>
+
+	
+	<script src="statics/js/jquery-3.4.1.min.js"></script>
+	<script src="statics/js/jquery-confirm.js"></script>
+	<script src="statics/js/popper.min.js"></script>
+
+	<script>
+	
+    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
+	//var product_del=getProductDelivery();
+	
+    if (client_cart_obj.length == 0) {
+    	alert("購物車沒有任何商品！");
+    	calcSummaryInformation();
+    	setButtonState("check", false);
+    }
+    	else
+    	getCartProduct();
+    
+    
+   
+    $("#check").click(function () {
+    	var data = {
+    			"first_name": $("#first_name").val(),
+    			"last_name": $("#last_name").val(),
+    			//"email": "keewe@gmail.com",
+    			"phone": $("#phone").val(),
+    			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
+    			"payment": $("input[name='Payment']:checked").val(),
+    			"address": $("#address").val(),
+    			"item": client_cart_obj,
+    			"quantity": client_cart_amount
+    	}
+
+    	// 驗證輸入的資料
+    	pass_vaild = vaildData(data);
+    	if (pass_vaild) {
+    		var data_string = JSON.stringify(data);
+
+    		// 發出POST的AJAX請求
+        $.ajax({
+          type: "POST",
+          url: "api/order.do",
+          data: data_string,
+          crossDomain: true,
+          cache: false,
+          dataType: 'json',
+          timeout: 5000,
+          success: function (response) {
+              if(response.status == 200){
+              	$.confirm({
+                    theme: 'modern',
+                    icon: 'fa fa-check-circle-o',
+                    type: 'green',
+                    animation: 'scale',
+                    title: '系統提醒',
+                    content: "「購物車結帳成功」，已完成新增訂單！",
+                    buttons: {
+                        確定: {
+                            text: '確定',
+                            btnClass: 'btn-blue',
+                            action: function () {
+                          	  cleanAllData();
+                              document.location.href = "order_tracking.html";
+                            }
+                        }
+                    }
+                });
+              }
+          },
+          error: function () {
+              alert("無法連線到伺服器！");
+          }
+        });
+    	}
+    });
+
+    $("#clean").click(function () {
+    	console.log("[@Action]清空購物車");
+    	cleanAllData();
+    });
+
+    function vaildData(data) {
+    	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
+
+    	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
+    	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
+    	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XXXXXXXX）！");
+    	else return true;
+
+    	return false;
+    }
+
+    function cleanAllData() {
+    	client_cart_obj = [];
+      client_cart_amount = [];
+      updateCartDataToClent();
+      $("#cart_table > tbody").empty();
+      $("#total_item").html('0');
+      $("#total_quantity").html('0');
+      $("#summary").html('0');
+      setButtonState("check", false);
+    }
+
+    function getCartProduct() {
+      $.ajax({
+        type: "GET",
+        url: "api/product.do",
+        crossDomain: true,
+        cache: false,
+        data: "id_list=" + client_cart_obj.toString(),
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+          if (response.status == 200) {
+        	  updateCartTable(response.response.data);
+        	  updateAllQuantitySubtotal();
+        	  keyEventListen();
+        	  calcSummaryInformation();
+          }
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
+
+    function updateAllQuantitySubtotal() {
+    	for (var i=0 ; i < client_cart_obj.length ; i++) {
+    		var id = client_cart_obj[i];
+    		var amount = client_cart_amount[i];
+    		var price = $('#price_' + id).html();
+    		$('#quantity_' + id).val(amount);
+    		var subtotal = calcSubTotal(price, amount);
+    		$('#subtotal_' + id).html(subtotal);
+    	}
+    }
+
+    function isNumberKey(evt){
+	    var charCode = (evt.which) ? evt.which : evt.keyCode
+	    if (charCode > 31 && (charCode < 48 || charCode > 57))
+	        return false;
+	    return true;
+    }
+
+    function keyEventListen() {
+    	$('input[name="quantity[]"').on(
+          'keypress',
+          function (e) {
+        	  return isNumberKey(e);
+          }
+      );
+
+    	$('input[name="quantity[]"').on(
+ 	        'keyup',
+ 	        function (e) {
+ 	        	var select = $(this).prop('id');
+ 	        	var action = select.split('_')[0];
+ 	        	var id = select.split('_')[1];
+ 	          var price = $('#price_' + id).html();
+ 	          var quantity =  $(this).val();
+ 	          var subtotal = calcSubTotal(price, quantity);
+ 	          $('#subtotal_' + id).html(subtotal);
+ 	          updateClentCartData(id, quantity);
+ 	          calcSummaryInformation();
+ 	        }
+ 	    );
+
+    	$('button[name="remove[]"').click(function () {
+    		var id = (this.id).split('_')[1];
+    		var i = client_cart_obj.indexOf(id);
+
+    		if (i > -1) {
+	    		client_cart_obj.splice(i, 1);
+	    		client_cart_amount.splice(i, 1);
+    		}
+
+    		updateCartDataToClent();
+    		$('#row_' + id).remove();
+    		if (client_cart_obj.length == 0)
+  		      alert("購物車沒有任何商品！");
+    		calcSummaryInformation();
+    	});
+
+
+    }
+
+    function calcSubTotal(price, quantity) {
+    	var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
+    	result = isNaN(result) ? 0.00 : result;
+    	return result;
+    }
+
+    function updateCartTable(data) {
+    	table_html = '';
+    	$("#cart_table > tbody").empty();
+        $.each(data, function(index, value) {
+        	table_html += '<tr id="row_' + value.id + '">';
+        	table_html += '<td class="align-middle text-center">' + value.id + '</td>';
+        	table_html += '<td class="align-middle"><p class="text-break">' + value.name + '</p></td>';
+        	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
+        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.id + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+        	///	table_html += '<td class="align-middle text-center"><span id="quantity_' + value.id + '">' + value.amount + '</td>';
+        	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
+        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+        	table_html += '</tr>';
+        
+        })
+
+      $("#cart_table > tbody").append(table_html);
+    }
+
+    function getCartDataFromClient() {
+    	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+    	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+    	cart = !cart ? new Array() : cart;
+    	amount = !amount ? new Array() : amount;
+    	return [cart, amount];
+    }
+
+    function updateCartDataToClent() {
+    	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+    	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+    }
+
+    function updateClentCartData(id, quantity) {
+    	var i = client_cart_obj.indexOf(id);
+    	client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
+    	updateCartDataToClent();
+    }
+
+    function calcSummaryInformation() {
+    	var total_item = client_cart_obj.length;
+    	var total_price = 0.00;
+    	var total_quantity = 0;
+
+    	for(var i=0 ; i < total_item ; i++) {
+    		var id = client_cart_obj[i];
+    		var price = $('#price_' + id).html();
+    		var quantity = $('#quantity_' + id).val()
+    		calc = parseFloat(price) * parseInt(quantity);
+    		total_price += isNaN(calc) ? 0.0 : calc;
+    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+    	}
+
+    	// Client端日期
+    	var date = new Date();
+    	var iso_date = date.toISOString();
+
+    	$("#date").html(iso_date.substring(0, 10));
+    	$("#total_item").html(total_item);
+    	$("#total_quantity").html(total_quantity);
+    	$("#summary").html(total_price.toFixed(2));
+    }
+
+    function setButtonState(id, action) {
+      if (!action) {
+          $('#' + id).prop('disabled', true);
+          $('#' + id).addClass('disabled');
+          $('#' + id).html('請先新增商品');
+      }
+      else {
+    	$('#' + id).prop('disabled', false);
+        $('#' + id).removeClass('disabled');
+        $('#' + id).html('結帳');
+      }
+    }
+    
+  </script>
+
+
+</body>
+
+
+</html>
