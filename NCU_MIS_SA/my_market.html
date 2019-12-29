@@ -47,12 +47,10 @@
     </ul>
 
     <div class="frame">
-
         <div class="generalbox">
-            <font face="DFKai-sb" size="6" color="blue"> 我的賣場</font>
-            <div><button id="add_product" name="add_product" type="button" class="productcard"  onclick="location.href='add_product.html'">新增商品</button><Br><Br>
-            </div>
-
+            <font face="DFKai-sb" size="6" color="blue"> 我的賣場</font>          
+            <div><button id="add_product" name="add_product" type="button" class="productcard"  onclick="location.href='add_product.html'">新增商品</button></div>
+			<br><br><br>
             <div class="album py-5 bg-light">
                 <div class="container">
                     <div id="product_panel" class="row">
@@ -109,12 +107,12 @@
          */
         function addProduct(data) {
             let inner_html = '';
-            inner_html += '<div class="col-md-4" style="float:left;">';
+            inner_html += '<div  class="col-md-4" style="float:left;padding-left="10px">';
             inner_html += '<div class="card-header">';
             inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
             inner_html += '</div>';
             inner_html += '<div class="card mb-4 shadow-sm">';
-            inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+            inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
             inner_html += '<div class="card-body">';
             inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
             inner_html += '<p class="card-text">' + data.product_info + '</p>';
