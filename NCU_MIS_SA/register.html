@@ -105,11 +105,11 @@ input:checked+.slider:before {
 						<input type="hidden" name="_method" value="POST">
 					</div>
 					<div class="input text required">
-						<label for="member_name">d會員帳號:</label> <input class="field"
+						<label for="member_name">會員帳號:</label> <input class="field"
 							name="name" type="text" id="member_name" required="required">
 					</div>
 					<div class="input password required">
-						<label for="member_password">d登入密碼:</label> <input class="field"
+						<label for="member_password">登入密碼:</label> <input class="field"
 							name="password" type="password" id="member_password"
 							required="required">
 					</div>
@@ -135,8 +135,8 @@ input:checked+.slider:before {
 							name="headSticker" id="member_headSticker" placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg">
 					</div>
 					
-					<div class="submit"><input type="button" class="button" value="註冊為買家帳號" id="submit_buyer"></div>
-					<div class="submit"><input type="button" class="button" value="註冊為賣家帳號" id="submit_buyer"></div>
+					<input type="button" class="button" value="註冊為買家帳號" id="submit_buyer">
+					<input type="button" class="button" value="註冊為賣家帳號" id="submit_seller">
 					
 				</form>
 		
@@ -146,14 +146,20 @@ input:checked+.slider:before {
 							// 處理表單點擊事件
 							var $form = $('#submit_buyer');
 							$form.click(function() {
-								submit();
+								submit_buyer();
 							});
-
-							function submit() {
+							var $form = $('#submit_seller');
+							$form.click(function() {
+								submit_seller();
+							});
+							
+							function submit_buyer() {
 								var name = $('#member_name').val();
 								var email = $('#member_email').val();
 								var password = $('#member_password').val();
+								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
 								var headSticker = $('#member_headSticker').val();
+								var isSeller = 0;
 
 
 								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
@@ -169,7 +175,68 @@ input:checked+.slider:before {
 										"name" : name,
 										"email" : email,
 										"password" : password,
-										"headSticker" : headSticker
+										"birthday" : birthday,
+										"headSticker" : headSticker,
+										"isSeller" : isSeller
+									};
+
+									// 將JSON格式轉換成字串
+									var data_string = JSON
+											.stringify(data_object);
+
+									// 發出POST的AJAX請求
+									$.ajax({
+												type : "POST",
+												url : "api/member.do",
+												data : data_string,
+												crossDomain : true,
+												cache : false,
+												dataType : 'json',
+												timeout : 5000,
+												success : function(response) {
+													$('#flashMessage').html(
+															response.message);
+													$('#flashMessage').show();
+													if (response.status == 200) {
+														updateSQLTable(response.response);
+														alert("註冊成功！");
+														document.location.href = "member_change.html"; 
+													}
+													
+													
+												},
+												error : function() {
+													alert("無法連線到伺服器！");
+												}
+											});
+								}
+							}
+							
+							function submit_seller() {
+								var name = $('#member_name').val();
+								var email = $('#member_email').val();
+								var password = $('#member_password').val();
+								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
+								var headSticker = $('#member_headSticker').val();
+								var isSeller = 1;
+
+
+								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+								if (!email_rule.test(email)) {
+									alert("Email格式不符！");
+								} else if (!password_rule.test(password)) {
+									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+								} else {
+									// 將資料組成JSON格式
+									var data_object = {
+										"name" : name,
+										"email" : email,
+										"password" : password,
+										"birthday" : birthday,
+										"headSticker" : headSticker,
+										"isSeller" : isSeller
 									};
 
 									// 將JSON格式轉換成字串

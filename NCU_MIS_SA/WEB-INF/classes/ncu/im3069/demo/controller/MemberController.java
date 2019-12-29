@@ -47,10 +47,13 @@ public class MemberController extends HttpServlet {
         String password = jso.getString("password");
         String name = jso.getString("name");
         String headSticker = jso.getString("headSticker");
+        String birthday = jso.getString("birthday");
+        int isSeller = jso.getInt("isSeller");
+
 
         
         /** 建立一個新的會員物件 */
-        Member m = new Member(email, password, name, headSticker);
+        Member m = new Member(email, password, name, headSticker, birthday, isSeller);
         
         /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
         if(email.isEmpty() || password.isEmpty() || name.isEmpty()) {
@@ -94,10 +97,12 @@ public class MemberController extends HttpServlet {
         /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
-        String id = jsr.getParameter("id");
-        
+        String id = jsr.getParameter("idtbl_member");
+        String isSeller =jsr.getParameter("isSeller");
+    
+
         /** 判斷該字串是否存在，若存在代表要取回個別會員之資料，否則代表要取回全部資料庫內會員之資料 */
-        if (id.isEmpty()) {
+        if (id.isEmpty()&&isSeller.isEmpty()) {
             /** 透過MemberHelper物件之getAll()方法取回所有會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getAll();
             
@@ -110,7 +115,20 @@ public class MemberController extends HttpServlet {
             /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
             jsr.response(resp, response);
         }
-        else {
+        if(!isSeller.isEmpty()){
+        	 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
+            JSONObject query = mh.getByIsSeller(isSeller);
+            
+            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+            JSONObject resp = new JSONObject();
+            resp.put("status", "200");
+            resp.put("message", "會員資料取得成功");
+            resp.put("response", query);
+    
+            /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+            jsr.response(resp, response);
+        }
+        if(!id.isEmpty()){
             /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getByID(id);
             
@@ -140,7 +158,7 @@ public class MemberController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("id");
+        int id = jso.getInt("idtbl_member");
         
         /** 透過MemberHelper物件的deleteByID()方法至資料庫刪除該名會員，回傳之資料為JSONObject物件 */
         JSONObject query = mh.deleteByID(id);
@@ -170,15 +188,18 @@ public class MemberController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("id");
+        int id = jso.getInt("idtbl_member");
         String email = jso.getString("email");
         String password = jso.getString("password");
         String name = jso.getString("name");
         String headSticker = jso.getString("headSticker");
+        String birthday = jso.getString("birthday");
+        int isSeller = jso.getInt("isSeller");
+
 
 
         /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-        Member m = new Member(id, email, password, name, headSticker);
+        Member m = new Member(id, email, password, name, headSticker, birthday, isSeller);
         
         /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
         JSONObject data = m.update();
