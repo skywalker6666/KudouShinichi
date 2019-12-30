@@ -2,68 +2,75 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <title>my_market</title>
+<title>my_market</title>
 
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="statics/css/navbar.css">
-    <link rel="stylesheet" href="statics/css/themebox.css">
-    <link rel="stylesheet" href="statics/css/card.css">
-    <link rel="stylesheet" href="statics/css/product.css">
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/themebox.css">
+<link rel="stylesheet" href="statics/css/card.css">
+<link rel="stylesheet" href="statics/css/product.css">
 
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
 
-    <ul class="navbar">
-        <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
-                    height="100px" width="100px"></img></a></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-        <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-        <li style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
-    </ul>
+	<ul class="navbar">
+		<li class="navbar"><a href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="100px"
+				width="100px"></img></a></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		<li class="navbar"><a class="navbarItem"
+			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="login_selected.html">會員註冊/登入</a></li>
+	</ul>
 
-    <div class="frame">
-        <div class="generalbox">
-            <font face="DFKai-sb" size="6" color="blue"> 我的賣場</font>          
-            <div><button id="add_product" name="add_product" type="button" class="productcard"  onclick="location.href='add_product.html'">新增商品</button></div>
-			<br><br><br>
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div id="product_panel" class="row">
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div class="frame">
+		<div class="generalbox">
+			<font face="DFKai-sb" size="6" color="blue"> 我的賣場</font>
+			<div>
+				<button id="add_product" name="add_product" type="button"
+					class="productcard" onclick="location.href='add_product.html'">新增商品</button>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="album py-5 bg-light">
+				<div class="container">
+					<div id="product_panel" class="row"></div>
+				</div>
+			</div>
+		</div>
 
-    </div>
+	</div>
 
 
 
-    <script>
+	<script>
 
 
 
@@ -77,8 +84,7 @@
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
-                crossDomain: true,
-                data: "isSeller=" + 1,
+                crossDomain: true,               
                 cache: false,
                 dataType: 'json',
                 timeout: 5000,
@@ -86,13 +92,16 @@
                     if (response.status == 200) {
                         var product_panel = '';
 
-                        $.each(response.response.data, function () {
-                            product_panel += addProduct(this);
-                        })
-
-                        $("#product_panel").append(product_panel);
+                       // $.each(response.response.data, function (){
+                       // 	if(response.response.data.shopID==2){                        	
+                        //    	product_panel += addProduct(this);
+                        //	}
+                        //})
+						updateCartTable(response.response.data);
+                        
 
                     }
+                    console.log(response);
                 },
                 error: function () {
                     alert("無法連線到伺服器！");
@@ -102,6 +111,42 @@
 
         getAllShopProduct();
 
+        
+        
+        function updateCartTable(data) {
+        	 var inner_html = '';
+            $.each(data, function(index, value) {
+            	if(data.shopID==2){
+                	inner_html += '<div class="col-md-4" style="float:left;">';
+               		inner_html += '<div class="card-header">';
+               		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
+             		inner_html += '</div>';
+             		inner_html += '<div class="card mb-4 shadow-sm">';
+             		inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
+            		inner_html += '<div class="card-body">';
+            		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price +' <small class="text-muted">/ USD</small></h1>';
+            		inner_html += '<p class="card-text">' + data.product_info + '</p>';
+            		inner_html += '<div class="d-flex justify-content-between align-items-center">';
+            		inner_html += '<div class="btn-group">';
+            		inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
+            		inner_html += '</div><small class="text-muted">id: '+ data.idtbl_product + '</small>';
+            		inner_html += '</div></div></div></div>';
+            		$("product_panel").append(inner_html);
+            	}
+
+	            })
+	        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         /**
          * 畫出一筆商品
          */
@@ -129,13 +174,13 @@
 
     </script>
 
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-        </div>
-    </footer>
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</div>
+	</footer>
 
 
 </body>

@@ -137,7 +137,7 @@ textarea:focus{
 		<div class="box2" style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 					
 
-					<div >
+					<div>
 						<font face="DFKai-sb">
 						
 						<div >
@@ -170,7 +170,7 @@ textarea:focus{
 						</textarea>
 						</div>
 						
-						<div>
+						
 							<label for="lastName">商品圖片</label> <input type="text"
 								 id="image_name" maxlength="45" value=""
 								placeholder="請輸入完整路徑" required>
@@ -203,7 +203,7 @@ textarea:focus{
 								var name = $('#product_name').val();
 								var price = $('#product_price').val();
 								var inventory = $('#product_inventory').val();
-								var shopID = 1
+								var shopID = 2;
 								var image = $('#image_name').val();
 								var productinfo = $('#productinfo').val();
 								
@@ -220,8 +220,7 @@ textarea:focus{
 									};
 
 									// 將JSON格式轉換成字串
-									var data_string = JSON
-											.stringify(data_object);
+									var data_string = JSON.stringify(data_object);
 
 									// 發出POST的AJAX請求
 									$.ajax({
@@ -233,8 +232,7 @@ textarea:focus{
 												dataType : 'json',
 												timeout : 5000,
 												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
+													$('#flashMessage').html(response.message);
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														alert("產品新增成功！");
