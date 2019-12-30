@@ -1,0 +1,25 @@
+ol.__inline {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+ 
+ol.__inline > li {
+  display: inline-block;
+}
+#menu {
+  display: flex;
+}
+ 
+#menu > li {
+  flex-grow: 1;
+  flex-basis: 0;
+  text-align: center;
+}
+.point {
+    text-align: center;
+}
+
+.point ol {
+    display: inline-block;
+}

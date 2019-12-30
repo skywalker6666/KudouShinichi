@@ -1,6 +1,30 @@
-.productCard{
-	
+.productcard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  margin: 10px;
+  align:center;
+  text-align: center;
+  font-family: arial;
+  display:inline-block;
 }
-.sellerCard{
-	
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.productcard button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 80%;
+  font-size: 18px;
+}
+
+.productcard button:hover {
+  opacity:0.3 ;
 }

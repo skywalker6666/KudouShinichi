@@ -18,8 +18,8 @@
         </div>
         <div id="content">
             <h2>會員清單</h2>
-            <a href="register.html">新增會員</a>
-            <a href="home.html">首頁</a>
+            <a href="register-teacher.html">新增會員</a>
+            <a href="product-teacher.html">首頁</a>
 
             <div id="flashMessage" class="message" style="display: none;"></div>
 
@@ -37,9 +37,13 @@
                 <tbody>
                 </tbody>
             </table>
+            
+
             <script type="text/javascript">
+
                 // 全域變數紀錄SQL指令下的次數
                 var sql_num = 0;
+                
                 function deleteMember(id) {
                     var check = window.confirm("確認刪除會員？");
                     if (check == true) {

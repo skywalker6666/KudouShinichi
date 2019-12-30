@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ManagerCenter</title>
+
+<!-- Bootstrap core CSS -->
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+<style>
+#customers {
+	align: center;
+	font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
+	border: 3px;
+	border-style: dashed;
+	width: 100%;
+}
+#customers td, #customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+#customers tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+#customers tr:hover {
+	background-color: #ddd;
+}
+#customers th {
+	position: sticky;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
+}
+div.absolute {
+	position: absolute;
+	align: center;
+	top: 100px;
+}
+</style>
+
+<link rel="stylesheet" href="statics/css/register&login.css">
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/themebox.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body bgcolor="#BCE2FF">
+	<ul class="navbar">
+		<li class="navbar"><img src="statics/img/navbar/icon.png"
+			style="float: left" height="100px" width="100px"></img></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
+		<li class="navbar"><a class="navbarItem"
+			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+
+
+		<!-- 這裡是頁面右上方的小box -->
+		<div class="mediumbox" style="float: right">
+			<li style="float: left"><a class="navbarFloating"
+				href="member_change.html">會員中心</a></li>
+			<li style="float: left"><a class="navbarFloating"
+				href="index.html">&nbsp;登出 </a></li>
+		</div>
+		<div class="smallbox" style="float: right">
+			<li><img src="statics/img/navbar/shoppingcart.png"
+				style="float: left" height="20px" width="20px"></img></li>
+			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+		</div>
+		<div class="smallbox" style="float: right">
+			<li><img src="statics/img/navbar/user.png" style="float: left"
+				height="20px" width="20px"></img></li>
+			<li class="navbarFloating">user</li>
+		</div>
+	</ul>
+	
+	<div class="box">
+		<label class="box_text">管理員中心</label>
+		<div>
+		<input class="button" type="button"
+				style="margin-top: 20px; margin-left: 30px" value="檢視所有成員"
+				id="member"> 
+			<input class="button" type="button"
+				style="margin-top: 20px; margin-left: 0px" value="檢視所有管理員"
+				id="manager"> 
+			<input class="button"
+				type="button" style="margin-top: 20px; margin-left: 0px"
+				value="檢視所有賣家" id="seller">
+			<input class="button" type="button"
+				style="margin-top: 20px; margin-left: 0px" value="檢視所有買家"
+				id="buyer">
+		</div>
+		<div class="container">
+		<table id="table" class="table table-striped">
+			<thead>
+				<tr>
+					<th>編號</th>
+					<th>姓名</th>
+					<th>電郵</th>
+					<th>生日</th>
+					<th>買賣方</th>
+					<th>功能</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		</div>
+	</div>
+	<script>
+		function display_managers() {
+			$('#display_member').html("");
+			$(
+					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
+							+ '<input placeholder="搜尋"  class="field" >'
+							+ '<button type="submit">搜尋</button>'
+							+ //還沒設定
+							'<table id="customers">'
+							+ '<tr>'
+							+ '<th>刪除</th>'
+							+ '<th>管理員帳號</th>'
+							+ '<th>電子郵件</th>'
+							+ '<th>生日</th>'
+							+ '<th>上次登入時間</th>'
+							+ '</tr>'
+							+ '<tr>'
+							+ '<td><input type="checkbox" name="delete" value="manager"></td>'
+							+ '<td>Maria Anders</td>'
+							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
+							+ '<td>2555-12-12</td>'
+							+ '<td>2019-10-10 22:22:44</td>'
+							+ '</tr>'
+							+ '</table>'
+							+ '<div>'
+							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
+							+ '<input class="button" type="button" value="取消" onclick="display_managers()">'
+							+ '</div>' + '</div>').appendTo('#display_member')
+		}
+		function display_sellers() {
+			$('#display_member').html("");
+			$(
+					'<div class="absolute" style="margin-top:30px;margin-left:30px">'
+							+ '<input placeholder="搜尋"  class="field" >'
+							+ '<button type="submit">搜尋</button>'
+							+ '<table id="customers">'
+							+ '<tr>'
+							+ '<th>刪除</th>'
+							+ '<th>賣家會員帳號</th>'
+							+ '<th>電子郵件</th>'
+							+ '<th>生日</th>'
+							+ '<th>上次登入時間</th>'
+							+ '</tr>'
+							+ '<tr>'
+							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
+							+ '<td>Maria Anders</td>'
+							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
+							+ '<td>2555-12-12</td>'
+							+ '<td>2019-10-10 22:22:44</td>'
+							+ '</tr>'
+							+ '</table>'
+							+ '<div>'
+							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
+							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
+							+ '</div>').appendTo('#display_member')
+		}
+		function display_buyers() {
+			$('#display_member').html("");
+			$(
+					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
+							+ '<input placeholder="搜尋"  class="field" >'
+							+ '<button type="submit">搜尋</button>'
+							+ '<table id="customers">'
+							+ '<tr>'
+							+ '<th>刪除</th>'
+							+ '<th>買家會員帳號</th>'
+							+ '<th>電子郵件</th>'
+							+ '<th>生日</th>'
+							+ '<th>上次登入時間</th>'
+							+ '</tr>'
+							+ '<tr>'
+							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
+							+ '<td>Maria Anders</td>'
+							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
+							+ '<td>2555-12-12</td>'
+							+ '<td>2019-10-10 22:22:44</td>'
+							+ '</tr>'
+							+ '</table>'
+							+ '<div>'
+							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
+							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
+							+ '</div>').appendTo('#display_member')
+		}
+	</script>
+	<script type="text/javascript">
+	var sql_num = 0;
+	
+	 function deleteMember(id) {
+         var check = window.confirm("確認刪除會員？");
+         if (check == true) {
+             console.log("You pressed OK!");
+             var request = {'idtbl_member': id};
+             var data_string = JSON.stringify(request);
+             $.ajax({
+                 type: "DELETE",
+                 url: "api/member.do",
+                 crossDomain: true,
+                 data: data_string,
+                 cache: false,
+                 dataType: 'json',
+                 timeout: 5000,
+                 success: function (response) {
+                     if(response.status == 200){
+                         $("#flashMessage").html("成功! 已經成功刪除會員...");
+                         $("#flashMessage").show();
+                         getAllMember();
+                     }
+                     console.log(response);
+                 },
+                 error: function () {
+                     alert("無法連線到伺服器！");
+                 }
+             });
+         }
+         else {
+             console.log("You pressed Cancel!");
+         }
+     }
+	 
+	function getAllMember() {
+        // 發出POST的GET請求取得所有會員列表
+        $.ajax({
+                type: "GET",
+                url: "api/member.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                        updateSQLTable(response.response);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+        });
+    }
+	
+	 function getBuyerMember() {
+         $.ajax({
+             type: "GET",
+             url: "api/member.do",
+             crossDomain: true,
+             data: "isSeller=" + 0,
+             cache: false,
+             dataType: 'json',
+             timeout: 5000,
+             success: function (response) {
+                 if(response.status == 200){
+                     updateTable(response.response.data);
+                 	updateSQLTable(response.response);
+                 	
+                 }
+                 console.log(response);
+             },
+             error: function () {
+                 alert("無法連線到伺服器！");
+             }
+         });
+     }		
+	 function getSellerMember() {
+         $.ajax({
+             type: "GET",
+             url: "api/member.do",
+             crossDomain: true,
+             data: "isSeller=" + 1,
+             cache: false,
+             dataType: 'json',
+             timeout: 5000,
+             success: function (response) {
+                 if(response.status == 200){
+                     updateTable(response.response.data);
+                 	updateSQLTable(response.response);
+                 	
+                 }
+                 console.log(response);
+             },
+             error: function () {
+                 alert("無法連線到伺服器！");
+             }
+         });
+     }		
+	// 更新會員列表表格
+     function updateTable(data) {
+         $("#table > tbody").empty();
+         var table_html = '';
+         $.each(data, function(index, value) {
+             table_html += '<tr><td scope="row">' + value['idtbl_member'] + '</td>';
+             table_html += '<td>' + value['name'] + '</td>';
+             table_html += '<td>' + value['email'] + '</td>';
+             table_html += '<td>' + value['birthday'] + '</td>';
+             table_html += '<td>' + value['isSeller'] + '</td>';
+             table_html += '<td>';
+             table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
+         })
+         $("#table > tbody").append(table_html);
+     }
+  // 更新SQL指令歷史表格
+     function updateSQLTable(data) {
+         var time = (data.time / 1000000).toFixed(2);
+         var table_html = "";
+         
+         sql_num += 1
+         table_html += '<tr>';
+         table_html += '<td>' + sql_num + '</td>';
+         table_html += '<td>' + data.sql + '</td>';
+         table_html += '<td style="text-align: right">' + '0' + '</td>';
+         table_html += '<td style="text-align: right">' + data.row + '</td>';
+         table_html += '<td style="text-align: right">' + data.row + '</td>';
+         table_html += '<td style="text-align: right">' + time + '</td>';
+         table_html += '</tr>';
+         $("#sql_log > tbody").append(table_html);
+         $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+     }
+  
+     $(document).ready(function() {
+		 getAllMember();
+		 $('#member').click(function(){
+			 getAllMember();
+			});
+		 $('#buyer').click(function(){
+			    getBuyerMember();
+			});
+		 $('#seller').click(function(){
+			    getSellerMember();
+			});
+     });
+	</script>
+</body>
+</html>
