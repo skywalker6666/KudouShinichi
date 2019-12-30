@@ -71,36 +71,27 @@
 
 
 	<script>
+	$(document).ready(function() {
+		 getMyShopMember();		 
+    });
 
 
-
-        /**
-         * 取得所有商品
-         * @call：addProduct()：畫出一筆商品
-         * @call：setButtonFunction()：按鈕設置
-         * @call：checkIfExistInCart()：
-         */
-        function getAllShopProduct() {
+        function getMyShopProduct() {
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
-                crossDomain: true,               
+                crossDomain: true, 
                 cache: false,
                 dataType: 'json',
                 timeout: 5000,
                 success: function (response) {
                     if (response.status == 200) {
                         var product_panel = '';
-
-                       // $.each(response.response.data, function (){
-                       // 	if(response.response.data.shopID==2){                        	
-                        //    	product_panel += addProduct(this);
-                        //	}
-                        //})
-						updateCartTable(response.response.data);
-                        
-
-                    }
+                        $.each(response.response.data, function (){                       	                     	
+                            	product_panel += addProduct(this);
+                           
+                      	})
+					}
                     console.log(response);
                 },
                 error: function () {
@@ -109,14 +100,14 @@
             });
         }
 
-        getAllShopProduct();
+        
 
         
         
         function updateCartTable(data) {
         	 var inner_html = '';
             $.each(data, function(index, value) {
-            	if(data.shopID==2){
+            	
                 	inner_html += '<div class="col-md-4" style="float:left;">';
                		inner_html += '<div class="card-header">';
                		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
