@@ -64,19 +64,18 @@ public class ProductController extends HttpServlet {
 	        JSONObject jso = jsr.getObject();
 	        
 	        /** 取出經解析到JSONObject之Request參數 */
-	        int idtbl_product = jso.getInt("idtbl_product");
+	       
 	        String product_name = jso.getString("product_name");
 	        int price = jso.getInt("price");
 	        int inventory = jso.getInt("inventory");
-	        int shopID = jso.getInt("shopID");
-	        int is_deleted = jso.getInt("is_deleted");
+	        int shopID = jso.getInt("shopID");	        
 	        String image = jso.getString("image");
 	        String product_info = jso.getString("product_info");
 	 
 
 	        
 	        /** 建立一個新的商品物件 */
-	        Product p = new Product(idtbl_product, product_name, price, inventory, shopID, is_deleted, image,  product_info);
+	        Product p = new Product(product_name, price, inventory, shopID, image,  product_info);
 	        
 	        /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
 	        if(image.isEmpty() || product_info.isEmpty() || product_name.isEmpty()) {
