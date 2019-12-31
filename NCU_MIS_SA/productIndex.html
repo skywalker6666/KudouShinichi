@@ -235,25 +235,32 @@
     
     /*------------登入登出實作member cookie-----------*/
     
-    var [client_id, client_name]  = getMemberDataFromClient();
+    var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
 
    function getMemberDataFromClient() {
    	let id = JSON.parse(localStorage.getItem("client_id"));
    	let name = JSON.parse(localStorage.getItem("client_name"));
+   	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
    	id = !id ? new Array() : id;
    	name = !name ? new Array() : name;
-   	return [id, name];
+   	isSeller = !isSeller ? new Array() : isSeller;
+   	return [id, name, isSeller];
    }
 	
     function updateMemberDataToClent() {
     	localStorage.setItem("client_id", JSON.stringify(client_id));
     	localStorage.setItem("client_name", JSON.stringify(client_name));
+    	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
     }
    
    function loguot() {
      client_id = [];
      client_name = [];
      updateMemberDataToClent();
+     client_isSeller = [];
+     updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
      $("#member_center1").hide();
      $("#member_center2").hide();
      $("#member_center3").hide();

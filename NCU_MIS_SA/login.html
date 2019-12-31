@@ -56,21 +56,26 @@
 		
 		var password = $('#member_password').val();
 		
-		var [client_id, client_name]  = getMemberDataFromClient();
+		var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
 		
 		function getMemberDataFromClient() {
 	    	let id = JSON.parse(localStorage.getItem("client_id"));
 	    	let name = JSON.parse(localStorage.getItem("client_name"));
+	    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
 	    	id = !id ? new Array() : id;
 	    	name = !name ? new Array() : name;
-	    	return [id, name];
+	    	isSeller = !isSeller ? new Array() : isSeller;
+
+	    	return [id, name, isSeller];
 	    }
 		
 		
-		function addDataToMember(id, name) {
+		function addDataToMember(id, name, isSeller) {
 	    	if (!(client_id.includes(id))) {
 	    		client_id.push(id);
 	    		client_name.push(name);
+	    		client_isSeller.push(isSeller)
 	    		updateMemberDataToClent();
 	    	}
 	    }
@@ -79,6 +84,8 @@
 	     function updateMemberDataToClent() {
 	     	localStorage.setItem("client_id", JSON.stringify(client_id));
 	     	localStorage.setItem("client_name", JSON.stringify(client_name));
+	     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
 	     }
 	     
 	     function getThisMember() {
@@ -103,9 +110,10 @@
 						if (response.status == 200) {
 							var id = response.response.data["0"].idtbl_member;
 							var name = response.response.data["0"].name;
-							
-							addDataToMember(id,name); 
-							document.location.href = "index.html"; 
+							var isSeller = response.response.data["0"].isSeller;
+
+							addDataToMember(id,name,isSeller); 
+ 							document.location.href = "index.html"; 
  
 						}
 						alert(response.message);
