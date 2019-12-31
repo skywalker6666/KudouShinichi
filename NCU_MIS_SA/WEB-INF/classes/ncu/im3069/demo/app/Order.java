@@ -61,6 +61,7 @@ public class Order {
      */
 
     public Order(int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, double total_price) {
+
         this.memberID = memberID;
         this.buyer_name = buyer_name;
         this.ship_address = ship_address;
@@ -89,6 +90,7 @@ public class Order {
      */
 
     public Order(int idtbl_order, int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, double total_price, Timestamp create) {
+
         this.idtbl_order = idtbl_order;
         this.memberID = memberID;
         this.buyer_name = buyer_name;
