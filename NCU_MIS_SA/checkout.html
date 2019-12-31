@@ -163,8 +163,8 @@
 						</div>
 					
 						<div>運送方式:<br>						
-								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨" onclick="getProductDelivery()"/> 超商取貨 <br>
-								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府" onclick="getProductDelivery()"/> 宅配到府
+								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨" /> 超商取貨 <br>
+								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府" /> 宅配到府
 						</div>
 						<div id="delivery_fee">運費</div>
 						<div>付款方式:<br>						
@@ -186,7 +186,7 @@
 	<script>
 	
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
+    
 	
     if (client_cart_obj.length == 0) {
     	alert("購物車沒有任何商品！");
@@ -199,18 +199,19 @@
     
    
     $("#check").click(function () {
+    	var total_price=ReturnTotalPrice();
+    	var [memberID,memberName]=getMemberDataFromClient();
     	var data = {
-    			"memberID":1,
+    			"memberID": parseInt(memberID),
     			"buyer_name": $("#buyer_name").val(),
     			"ship_address": $("#address").val(),
     			"cellphone": $("#cellphone").val(),
     			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
     			"payment": $("input[name='Payment']:checked").val(),
-    			"order_status":1,
-    			"item": client_cart_obj,
+    			"order_status": 1,
+    			"item": client_cart_obj ,
     			"quantity": client_cart_amount,
-    			"total_price":100
-    			//total_price
+    			"total_price": total_price
     	}
 
     	// 驗證輸入的資料
@@ -219,40 +220,40 @@
     		var data_string = JSON.stringify(data);
 
     		// 發出POST的AJAX請求
-        $.ajax({
-          type: "POST",
-          url: "api/order.do",
-          data: data_string,
-          crossDomain: true,
-          cache: false,
-          dataType: 'json',
-          timeout: 5000,
-          success: function (response) {
-              if(response.status == 200){
-              	$.confirm({
-                    theme: 'modern',
-                    icon: 'fa fa-check-circle-o',
-                    type: 'green',
-                    animation: 'scale',
-                    title: '系統提醒',
-                    content: "「購物車結帳成功」，已完成新增訂單！",
-                    buttons: {
-                        確定: {
-                            text: '確定',
-                            btnClass: 'btn-blue',
-                            action: function () {
-                          	  cleanAllData();
-                              document.location.href = "order_tracking.html";
-                            }
-                        }
-                    }
-                });
-              }
-          },
-          error: function () {
-              alert("無法連線到伺服器！");
-          }
-        });
+	        $.ajax({
+	          type: "POST",
+	          url: "api/order.do",
+	          data: data_string,
+	          crossDomain: true,
+	          cache: false,
+	          dataType: 'json',
+	          timeout: 5000,
+	          success: function (response) {
+	              if(response.status == 200){
+	              	$.confirm({
+	                    theme: 'modern',
+	                    icon: 'fa fa-check-circle-o',
+	                    type: 'green',
+	                    animation: 'scale',
+	                    title: '系統提醒',
+	                    content: "購物車結帳成功 "+memberName+" 恭喜您成功新增訂單！",
+	                    buttons: {
+	               		確定: {
+	                            text: '確定',
+	                            btnClass: 'btn-blue',
+	                            action: function () {
+	                          	  cleanAllData();
+	                              document.location.href = "order_tracking.html";
+	                            }
+	                       }
+	                    }
+	                });
+	              }
+	          },
+	          error: function () {
+	              alert("無法連線到伺服器！");
+	          }
+	        });
     	}
     });
 
@@ -262,10 +263,10 @@
     });
 
     function vaildData(data) {
-    	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    	
     	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
 
-    	if (data["first_name"] == "" || data["last_name"] == "" || data['cellphone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
+    	if (data["buyer_name"] == "" ||  data['cellphone'] == "" || data['ship_address'] == "" || data['product_delivery'] == ""|| data['payment'] == "")  alert("必填寫欄位不得有空值！");
     	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
     	else if (!phone_rule.test(data['cellphone'])) alert("手機格式不符（應為09XXXXXXXX）！");
     	else return true;
@@ -447,6 +448,21 @@
         $('#' + id).html('結帳');
       }
     }
+    function ReturnTotalPrice(){
+    	var total_item = client_cart_obj.length;
+    	var total_price = 0.0;
+    	var total_quantity = 0;
+
+    	for(var i=0 ; i < total_item ; i++) {
+    		var id = client_cart_obj[i];
+    		var price = $('#price_' + id).html();
+    		var quantity = $('#quantity_' + id).val()
+    		calc = parseFloat(price) * parseInt(quantity);
+    		total_price += isNaN(calc) ? 0 : calc;
+    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+    	}
+    	return total_price.toFixed(2);
+    }
     
     
     /*------------登入登出實作member cookie-----------*/
@@ -464,7 +480,7 @@
    	return [id, name, isSeller];
    }
 	
-    function updateMemberDataToClent() {
+    function updateMemberDataToClient() {
     	localStorage.setItem("client_id", JSON.stringify(client_id));
     	localStorage.setItem("client_name", JSON.stringify(client_name));
     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
@@ -474,9 +490,9 @@
    function loguot() {
      client_id = [];
      client_name = [];
-     updateMemberDataToClent();
      client_isSeller = [];
-     updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+     updateMemberDataToClient();
+     updateMemberDataToClient();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClient
      $("#member_center1").hide();
      $("#member_center2").hide();
      $("#member_center3").hide();
@@ -490,11 +506,11 @@
     });
    
    $(document).ready(function(){
-   	 if(client_id.length == 0){ //登出
+   	 if(client_id.length == 0){ //已登出
    		 $("#member_center1").hide();
    	     $("#member_center2").hide();
    	     $("#member_center3").hide();  
-   	 }else{//登入
+   	 }else{//已登入
    		 $("#user_name").html(client_name);
       	 	 $("#member_center1").show();
       	 	 $("#member_center2").show();
