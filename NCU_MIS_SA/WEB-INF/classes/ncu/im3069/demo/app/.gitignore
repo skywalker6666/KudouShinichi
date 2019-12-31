@@ -6,3 +6,7 @@
 /OrderItemHelper.class
 /Product.class
 /ProductHelper.class
+/OrderProduct.class
+/OrderProductHelper.class
+/ManagerHelper.class
+/Manager.class

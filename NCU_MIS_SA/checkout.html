@@ -16,8 +16,7 @@
 <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 <link href="statics/css/font-awesome.min.css" rel="stylesheet">
 <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-<link href="statics/icon/favicon.ico" type="image/x-icon"
-	rel="shortcut icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
 
 <style>
@@ -44,11 +43,16 @@
 <link href="statics/css/product.css" rel="stylesheet">
 <link href="statics/css/jquery-confirm.css" rel="stylesheet">
 
-
 </head>
 
 <body>
-	<ul class="navbar">
+<div id="header">
+  <!--容器分為左圖右導覽連結 -->
+  <div class="navbar">
+      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
+    <!--導覽列 -->
+    <nav>
+      <ul class="navbar">
 		<li class="navbar"><a href="index.html"><img
 				src="statics/img/navbar/icon.png" style="float: left" height="100px"
 				width="100px"></img></a></li>
@@ -57,10 +61,11 @@
 		<li class="navbar"><a class="navbarItem"
 			href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
-	</ul>
-
+		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+		</ul>
+    </nav>
+  </div>
+</div>
 	<div class="frame">
 		<div class="container">
 			<div class="py-5">
@@ -120,22 +125,16 @@
 						<h4 class="mb-3">個人資訊</h4>
 						<hr class="mb-4">
 						<div class="row">
-							<div class="col-md-6 mb-2">
-								<label for="lastName">姓</label> <input type="text"
-									class="form-control" id="last_name" maxlength="10" value=""
-									required>
-							</div>
-
 							<div class="col-md-6 mb-4">
-								<label for="firstName">名</label> <input type="text"
-									class="form-control" id="first_name" maxlength="10"
+								<label for="firstName">姓名</label> <input type="text"
+									class="form-control" id="buyer_name" maxlength="10"
 									placeholder="" value="" required>
 							</div>
 						</div>
 
 
 						<div class="mb-3">
-							<label for="phonenum">手機號碼:</label><br /> <input id="phone"
+							<label for="phonenum">手機號碼:</label><br /> <input id="cellphone"
 								type="tel" class="form-control" maxlength="12"
 								placeholder="09xx-xxx-xxx" required>
 						</div>
@@ -145,64 +144,59 @@
 								class="form-control" id="address" maxlength="255"
 								placeholder="請輸入有效之地址！" required>
 						</div>
-
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false">運送方式</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">超商取貨</a> <a
-									class="dropdown-item" href="#">宅配到府</a> <a
-									class="dropdown-item" href="#">Something else here</a>
-							</div>
+					
+						<div>運送方式:<br>						
+								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨" onclick="getProductDelivery()"/> 超商取貨 <br>
+								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府" onclick="getProductDelivery()"/> 宅配到府
 						</div>
+						<div id="delivery_fee">運費</div>
+						<div>付款方式:<br>						
+								<input  type="radio" name="Payment"  value="貨到付款"/> 貨到付款 <br>
+								<input  type="radio" name="Payment"  value="信用卡付款"/>信用卡付款 
+						</div>
+					
 
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<footer class="text-muted">
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-			<p>Album example is &copy; Bootstrap, but please download and
-				customize it for yourself!</p>
-			<p>
-				New to Bootstrap? <a href="https://getbootstrap.com/">Visit the
-					homepage</a> or read our <a
-					href="/docs/4.3/getting-started/introduction/">getting started
-					guide</a>.
-			</p>
-		</div>
-	</footer>
+	
 	<script src="statics/js/jquery-3.4.1.min.js"></script>
 	<script src="statics/js/jquery-confirm.js"></script>
 	<script src="statics/js/popper.min.js"></script>
 
 	<script>
+	
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
+	
+	
     if (client_cart_obj.length == 0) {
     	alert("購物車沒有任何商品！");
     	calcSummaryInformation();
     	setButtonState("check", false);
     }
-    else
+    	else
     	getCartProduct();
-
+    
+    
+   
     $("#check").click(function () {
+    	var total_price=ReturnTotalPrice();
     	var data = {
-    			"first_name": $("#first_name").val(),
-    			"last_name": $("#last_name").val(),
-    			"email": $("#email").val(),
-    			"phone": $("#phone").val(),
-    			"address": $("#address").val(),
+    			"memberID":1,
+    			"buyer_name": $("#buyer_name").val(),
+    			"ship_address": $("#address").val(),
+    			"cellphone": $("#cellphone").val(),
+    			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
+    			"payment": $("input[name='Payment']:checked").val(),
+    			"order_status":1,
     			"item": client_cart_obj,
-    			"quantity": client_cart_amount
+    			"quantity": client_cart_amount,
+    			"total_price": total_price
+    			//total_price
     	}
-
+    	
     	// 驗證輸入的資料
     	pass_vaild = vaildData(data);
     	if (pass_vaild) {
@@ -253,11 +247,11 @@
 
     function vaildData(data) {
     	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-    	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
+    	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
 
-    	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "")  alert("必填寫欄位不得有空值！");
-    	else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
-    	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
+    	if (data["first_name"] == "" || data["last_name"] == "" || data['cellphone'] == "" || data['address'] == "" || data['_product_delivery'] == "")  alert("必填寫欄位不得有空值！");
+    	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
+    	else if (!phone_rule.test(data['cellphone'])) alert("手機格式不符（應為09XXXXXXXX）！");
     	else return true;
 
     	return false;
@@ -367,14 +361,16 @@
     	table_html = '';
     	$("#cart_table > tbody").empty();
         $.each(data, function(index, value) {
-        	table_html += '<tr id="row_' + value.id + '">';
-        	table_html += '<td class="align-middle text-center">' + value.id + '</td>';
-        	table_html += '<td class="align-middle"><p class="text-break">' + value.name + '</p></td>';
-        	table_html += '<td class="align-middle text-center"><span id="price_' + value.id + '">' + value.price + '</td>';
-        	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.id + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
-        	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.id + '"><strong></td>';
-        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.id + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+        	table_html += '<tr id="row_' + value.idtbl_product + '">';
+        	table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
+        	table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
+        	table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
+        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+        	///	table_html += '<td class="align-middle text-center"><span id="quantity_' + value.id + '">' + value.amount + '</td>';
+        	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
+        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
         	table_html += '</tr>';
+        
         })
 
       $("#cart_table > tbody").append(table_html);
@@ -401,7 +397,7 @@
 
     function calcSummaryInformation() {
     	var total_item = client_cart_obj.length;
-    	var total_price = 0.00;
+    	var total_price = 0.0;
     	var total_quantity = 0;
 
     	for(var i=0 ; i < total_item ; i++) {
@@ -409,7 +405,7 @@
     		var price = $('#price_' + id).html();
     		var quantity = $('#quantity_' + id).val()
     		calc = parseFloat(price) * parseInt(quantity);
-    		total_price += isNaN(calc) ? 0.0 : calc;
+    		total_price += isNaN(calc) ? 0 : calc;
     		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
     	}
 
@@ -421,6 +417,7 @@
     	$("#total_item").html(total_item);
     	$("#total_quantity").html(total_quantity);
     	$("#summary").html(total_price.toFixed(2));
+    	    	   	
     }
 
     function setButtonState(id, action) {
@@ -430,14 +427,30 @@
           $('#' + id).html('請先新增商品');
       }
       else {
-    	  $('#' + id).prop('disabled', false);
+    	$('#' + id).prop('disabled', false);
         $('#' + id).removeClass('disabled');
         $('#' + id).html('結帳');
       }
+    }
+    function ReturnTotalPrice(){
+    	var total_item = client_cart_obj.length;
+    	var total_price = 0.0;
+    	var total_quantity = 0;
+
+    	for(var i=0 ; i < total_item ; i++) {
+    		var id = client_cart_obj[i];
+    		var price = $('#price_' + id).html();
+    		var quantity = $('#quantity_' + id).val()
+    		calc = parseFloat(price) * parseInt(quantity);
+    		total_price += isNaN(calc) ? 0 : calc;
+    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+    	}
+    	return total_price.toFixed(2);
     }
   </script>
 
 
 </body>
+
 
 </html>

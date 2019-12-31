@@ -26,22 +26,32 @@ public class ProductController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String id_list = jsr.getParameter("id_list");
-
+        String shopID = jsr.getParameter("shopID");
+        
         JSONObject resp = new JSONObject();
         /** 判斷該字串是否存在，若存在代表要取回購物車內產品之資料，否則代表要取回全部資料庫內產品之資料 */
+        if(id_list.isEmpty()&&shopID.isEmpty()){
+            JSONObject query = ph.getAll();
+            System.out.println("getALL");
+            resp.put("status", "200");
+            resp.put("message", "所有商品資料取得成功");
+            resp.put("response", query);
+          }
         if (!id_list.isEmpty()) {
           JSONObject query = ph.getByIdList(id_list);
+          System.out.println("getbyID");
           resp.put("status", "200");
           resp.put("message", "所有購物車之商品資料取得成功");
           resp.put("response", query);
         }
-        else {
-          JSONObject query = ph.getAll();
-
-          resp.put("status", "200");
-          resp.put("message", "所有商品資料取得成功");
-          resp.put("response", query);
-        }
+        if(!shopID.isEmpty()){
+            JSONObject query = ph.getByShopID(shopID);
+            System.out.println("getshopID");
+            resp.put("status", "200");
+            resp.put("message", "所有商品資料取得成功");
+            resp.put("response", query);
+          }
+        
 
         jsr.response(resp, response);
 	}

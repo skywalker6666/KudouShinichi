@@ -88,16 +88,13 @@ input:checked+.slider:before {
 				width="100px"></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
 	</ul>
 
-	<div class="box" style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員註冊</font>
-		<div class="box2" style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;管理員註冊</font>
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 			<font face="DFKai-sb">
 
 				<form id="form" accept-charset="utf-8">
@@ -105,79 +102,60 @@ input:checked+.slider:before {
 						<input type="hidden" name="_method" value="POST">
 					</div>
 					<div class="input text required">
-						<label for="member_name">會員帳號:</label> <input class="field"
-							name="name" type="text" id="member_name" required="required">
+						<label for="manager_name">管理員姓名:</label> <input class="field"
+							name="name" type="text" id="manager_name" required="required">
 					</div>
 					<div class="input password required">
-						<label for="member_password">登入密碼:</label> <input class="field"
-							name="password" type="password" id="member_password"
+						<label for="manager_password">登入密碼:</label> <input class="field"
+							name="password" type="password" id="manager_password"
 							required="required">
 					</div>
 					<div class="input confirmpassword required">
-						<label for="member_confirmpassword">確認密碼:</label> <input
+						<label for="manager_confirmpassword">確認密碼:</label> <input
 							class="field" name="confirmpassword" type="password"
-							id="member_confirmpassword" required="required">
+							id="manager_confirmpassword" required="required">
 					</div>
-					<div class="input email required">
-						<label for="member_email">電子郵件:</label> <input class="field"
-							name="email" type="email" id="member_email" required="required">
-					</div>
-					<div class="input birth required">
-						<label for="member_birth">西元生日:</label> <input
-							class="field_birthY " name="birth1" type="birth" id="birth1">年
-						<input class="field_birthMandD" name="birth2" type="birth"
-							id="birth2">月 <input class="field_birthMandD"
-							name="birth3" type="birth" id="birth3">日
-					</div>
-					
-						<div class="input headSticker">
-						<label for="member_email">會員頭貼:</label> <input class="field"
-							name="headSticker" id="member_headSticker" placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg">
-					</div>
-					
-					<input type="button" class="button" value="註冊為買家帳號" id="submit_buyer">
-					<input type="button" class="button" value="註冊為賣家帳號" id="submit_seller">
-					
+					<input type="button" class="button" value="I'm pretty Highsure. "
+						id="submit_Highmanager"> <input type="button"
+						class="button" value="I'm pretty Lowsure. " id="submit_Lowmanager">
+
 				</form>
-		
-				<script type="text/javascript">
-		$(document).ready(
+
+			</font>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
 						function() {
 							// 處理表單點擊事件
-							var $form = $('#submit_buyer');
+							var $form = $('#submit_Highmanager');
 							$form.click(function() {
-								submit_buyer();
+								submit_Highmanager();
 							});
-							var $form = $('#submit_seller');
+							var $form = $('#submit_Lowmanager');
 							$form.click(function() {
-								submit_seller();
+								submit_Lowmanager();
 							});
-							
-							function submit_buyer() {
-								var name = $('#member_name').val();
-								var email = $('#member_email').val();
-								var password = $('#member_password').val();
-								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
-								var headSticker = $('#member_headSticker').val();
-								var isSeller = 0;
 
+							function submit_Lowmanager() {
+								var name = $('#manager_name').val();
+								//var email = $('#manager_email').val();
+								var password = $('#manager_password').val();
+								var isLeader = 0;
 
-								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-								if (!email_rule.test(email)) {
-									alert("Email格式不符！");
-								} else if (!password_rule.test(password)) {
+								if (!password_rule.test(password)) {
 									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
 								} else {
 									// 將資料組成JSON格式
 									var data_object = {
 										"name" : name,
-										"email" : email,
 										"password" : password,
-										"birthday" : birthday,
-										"headSticker" : headSticker,
-										"isSeller" : isSeller
+										"isLeader" : 0,
+										"isDeleted" : 0
 									};
 
 									// 將JSON格式轉換成字串
@@ -185,9 +163,10 @@ input:checked+.slider:before {
 											.stringify(data_object);
 
 									// 發出POST的AJAX請求
-									$.ajax({
+									$
+											.ajax({
 												type : "POST",
-												url : "api/member.do",
+												url : "api/manager.do",
 												data : data_string,
 												crossDomain : true,
 												cache : false,
@@ -200,10 +179,9 @@ input:checked+.slider:before {
 													if (response.status == 200) {
 														updateSQLTable(response.response);
 														alert("註冊成功！");
-														document.location.href = "member_change.html"; 
+														document.location.href = "manager_center.html";
 													}
-													
-													
+
 												},
 												error : function() {
 													alert("無法連線到伺服器！");
@@ -211,58 +189,50 @@ input:checked+.slider:before {
 											});
 								}
 							}
-							
-							function submit_seller() {
-								var name = $('#member_name').val();
-								var email = $('#member_email').val();
-								var password = $('#member_password').val();
-								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
-								var headSticker = $('#member_headSticker').val();
-								var isSeller = 1;
 
+							function submit_Highmanager() {
+								var name = $('#manager_name').val();
+								//	var email = $('#manager_email').val();
+								var password = $('#manager_password').val();
+								//		var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
+								//		var headSticker = $('#manager_headSticker').val();
+								var isLeader = 1;
 
-								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+								//		var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-								if (!email_rule.test(email)) {
-									alert("Email格式不符！");
-								} else if (!password_rule.test(password)) {
+								if (!password_rule.test(password)) {
 									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
 								} else {
 									// 將資料組成JSON格式
+									alert("WCNMB");
 									var data_object = {
 										"name" : name,
-										"email" : email,
 										"password" : password,
-										"birthday" : birthday,
-										"headSticker" : headSticker,
-										"isSeller" : isSeller
+										"isLeader" : 1,
+										"isDeleted" : 0
 									};
 
 									// 將JSON格式轉換成字串
-									var data_string = JSON
-											.stringify(data_object);
+									var data_string = JSON.stringify(data_object);
 
 									// 發出POST的AJAX請求
 									$.ajax({
 												type : "POST",
-												url : "api/member.do",
+												url : "api/manager.do",
 												data : data_string,
 												crossDomain : true,
 												cache : false,
 												dataType : 'json',
 												timeout : 5000,
 												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
+													$('#flashMessage').html(response.message);
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														updateSQLTable(response.response);
 														alert("註冊成功！");
-														document.location.href = "member_change.html"; 
+														document.location.href = "manager_center.html";
 													}
-													
-													
 												},
 												error : function() {
 													alert("無法連線到伺服器！");
@@ -296,7 +266,6 @@ input:checked+.slider:before {
 							}
 						});
 	</script>
-	
 </body>
 
 </html>
