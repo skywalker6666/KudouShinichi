@@ -75,6 +75,16 @@ public class Product {
 		this.image = image;
 		this.product_info=product_info;
 	}
+	
+	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, String image, String product_info) {
+		this.idtbl_product = idtbl_product;
+		this.product_name = product_name;
+		this.price = price;
+		this.inventory=inventory;
+		this.shopID=shopID;
+		this.image = image;
+		this.product_info=product_info;
+	}
 
     /**
      * 取得產品編號
@@ -164,9 +174,7 @@ public class Product {
         jso.put("is_deleted", getIsDeleted());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
-        jso.put("inventory", getInventory());
-        jso.put("shopID", getShopID());
-        jso.put("is_deleted", getIsDeleted());
+
         return jso;
     }
 }

@@ -147,6 +147,7 @@
         <table bgcolor="#FBEE98" style="width:100%" id="table">
             <thead>
                 <tr>
+                	<th>訂單狀態</th>
                     <th>訂單編號</th>
                     <th>商品總金額</th>
                     <th>運送方式</th>                                      
@@ -189,7 +190,8 @@
             	   $.each(value['product_info'],function(index,value){
             		   cost+=value['subtotal'];
             		})
-                   table_html += '<tr><td scope="row" align="center">' + value['order_info']['idtbl_order'] + '</td>';
+            	   table_html += '<tr><td scope="row" align="center"><button id="order_'+ value['order_info']['idtbl_order']+'">查看訂單狀態</button></td>';
+                   table_html += '<td align="center">' + value['order_info']['idtbl_order'] + '</td>';
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
                    table_html += '<td align="center">' + value['order_info']['create'] + '</td>';

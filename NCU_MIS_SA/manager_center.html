@@ -62,16 +62,19 @@ div.absolute {
 
 <body bgcolor="#BCE2FF">
 	<ul class="navbar">
-		<li class="navbar"><img src="statics/img/navbar/icon.png"
-			style="float: left" height="100px" width="100px"></img></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">商品總覽</a></li>
-
+		<div class="pull-left">
+			<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
+			<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+			<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		</div>
+		
+		
 		<!-- 這裡是頁面右上方的小box -->
-				<li class="navbar"><a class="navbarItem" href="manager_register.html">新增管理員</a></li>
-				<li class="navbar"><a class="navbarItem" href="index.html">登出</a></li>
-				<li class="navbar"><a class="navbarItem" href="manager_edit.html">編輯帳密</a></li>
-
-
+		<div class="pull-right">
+				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
+				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
+				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+		</div>
 	</ul>
 
 	<div class="box">
@@ -331,7 +334,7 @@ div.absolute {
 				table_html += '<td>' + value['birthday'] + '</td>';
 				table_html += '<td>' + value['isSeller'] + '</td>';
 				table_html += '<td>';
-				table_html += '<a href="javascript: deleteMember('
+				table_html += '<a class="btn btn-danger" href="javascript: deleteMember('
 						+ value['idtbl_member'] + ');">刪除</a></td></tr>';
 			})
 
@@ -353,7 +356,7 @@ div.absolute {
 				//    table_html += '<td>' + value['birthday'] + '</td>';
 				table_html += '<td>' + value['isLeader'] + '</td>';
 				table_html += '<td>';
-				table_html += '<a href="javascript: deleteMember('
+				table_html += '<a class="btn btn-danger" href="javascript: deleteMember('
 						+ value['idtbl_manager'] + ');">刪除</a></td></tr>';
 			})
 

@@ -28,6 +28,8 @@ public class ProductController extends HttpServlet {
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String id_list = jsr.getParameter("id_list");
         String shopID = jsr.getParameter("shopID");
+        String productID=jsr.getParameter("productID");
+        
         
         JSONObject resp = new JSONObject();
         /** 判斷該字串是否存在，若存在代表要取回購物車內產品之資料，否則代表要取回全部資料庫內產品之資料 */
@@ -39,7 +41,14 @@ public class ProductController extends HttpServlet {
             resp.put("response", query);
           }
         if (!id_list.isEmpty()) {
-          JSONObject query = ph.getByIdList(id_list);
+            JSONObject query = ph.getByIdList(id_list);
+            System.out.println("getbyID");
+            resp.put("status", "200");
+            resp.put("message", "所有購物車之商品資料取得成功");
+            resp.put("response", query);
+          }
+        if (!productID.isEmpty()) {
+          JSONObject query = ph.getByIdList(productID);
           System.out.println("getbyID");
           resp.put("status", "200");
           resp.put("message", "所有購物車之商品資料取得成功");
@@ -52,6 +61,7 @@ public class ProductController extends HttpServlet {
             resp.put("message", "所有商品資料取得成功");
             resp.put("response", query);
           }
+       
         
 
         jsr.response(resp, response);
@@ -88,8 +98,7 @@ public class ProductController extends HttpServlet {
 	        else {
 	            /** 透過MemberHelper物件的create()方法新建一個會員至資料庫 */
 	            JSONObject data = ph.createProduct(p);
-	            System.out.println("post");
-
+	            
 	            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
 	            JSONObject resp = new JSONObject();
 	            resp.put("status", "200");
@@ -101,6 +110,60 @@ public class ProductController extends HttpServlet {
 	        }
 	        
 	    }
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+		        throws ServletException, IOException {
+		        /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
+		        JsonReader jsr = new JsonReader(request);
+		        JSONObject jso = jsr.getObject();
+		        
+		        /** 取出經解析到JSONObject之Request參數 */
+		        String product_name = jso.getString("product_name");
+		        int price = jso.getInt("price");
+		        int inventory = jso.getInt("inventory");
+		        int shopID = jso.getInt("shopID");	        
+		        String image = jso.getString("image");
+		        String product_info = jso.getString("productinfo");
+		        int productID = jso.getInt("productID");	  
+
+
+
+		        /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
+		        Product p = new Product( productID, product_name, price, inventory, shopID, image,  product_info);
+		        
+		        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
+		        JSONObject data = ph.updateProduct(p);
+		        
+		        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+		        JSONObject resp = new JSONObject();
+		        resp.put("status", "200");
+		        resp.put("message", "成功! 更新會員資料...");
+		        resp.put("response", data);
+		        
+		        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+		        jsr.response(resp, response);
+		    }
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
+            JsonReader jsr = new JsonReader(request);
+            JSONObject jso = jsr.getObject();
+            
+            /** 取出經解析到JSONObject之Request參數 */
+            int id = jso.getInt("id");
+            
+            /** 透過MemberHelper物件的deleteByID()方法至資料庫刪除該名會員，回傳之資料為JSONObject物件 */
+            JSONObject query = ph.deleteByID(id);
+            
+            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+            JSONObject resp = new JSONObject();
+            resp.put("status", "200");
+            resp.put("message", "會員移除成功！");
+            resp.put("response", query);
+
+            /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+            jsr.response(resp, response);
+        }
 
 
 }

@@ -30,6 +30,7 @@ public class DBMgr {
     static final String PASS = "";
 
 
+
     /** 靜態指定所要使用之Class名稱 **/
     static {
         try {

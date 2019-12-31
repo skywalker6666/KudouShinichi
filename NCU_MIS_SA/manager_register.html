@@ -7,6 +7,14 @@
 	content="width=device-width, initial-scale=1">
 
 <title>Register</title>
+
+<!-- Bootstrap core CSS -->
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
+
 <style>
 .switch {
 	position: relative;
@@ -84,43 +92,55 @@ input:checked+.slider:before {
 <body bgcolor="#BCE2FF">
 
 	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		<div class="pull-left">
+			<li class="navbar"><a href="index.html"><img
+					src="statics/img/navbar/icon.png" style="float: left"
+					height="100px" width="100px"></img></a></li>
+			<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+			<li class="navbar"><a class="navbarItem"
+				href="productIndex.html">商品總覽</a></li>
+		</div>
+
+
+		<!-- 這裡是頁面右上方的小box -->
+		<div class="pull-right">
+			<li class="navbar"><a class="btn btn-outline-success"
+				href="manager_register.html">新增管理員</a></li>
+			<li class="navbar"><a class="btn btn-outline-primary"
+				href="manager_edit.html">編輯帳密</a></li>
+			<li class="navbar"><a class="btn btn-outline-secondary"
+				href="index.html">登出</a></li>
+		</div>
 	</ul>
 
 	<div class="box"
 		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;管理員註冊</font>
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增管理員</font>
 		<div class="box2"
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+			
 			<font face="DFKai-sb">
-
 				<form id="form" accept-charset="utf-8">
-					<div style="display: none;">
-						<input type="hidden" name="_method" value="POST">
+					<div class="form-group">
+						<label for="manager_name">管理員姓名</label> <input type="text"
+							name="name" class="form-control" id="manager_name"
+							aria-describedby="emailHelp" placeholder="管理員姓名">
 					</div>
-					<div class="input text required">
-						<label for="manager_name">管理員姓名:</label> <input class="field"
-							name="name" type="text" id="manager_name" required="required">
+					<div class="form-group">
+						<label for="manager_password">登入密碼</label> <input type="password"
+							name="password" class="form-control" id="manager_password" placeholder="長度至少8，且至少包含一個數字和英文字母！">
 					</div>
-					<div class="input password required">
-						<label for="manager_password">登入密碼:</label> <input class="field"
-							name="password" type="password" id="manager_password"
-							required="required">
+					<div class="form-group">
+						<label for="manager_confirmpassword">確認密碼</label> <input
+							type="password" name="confirmpassword" class="form-control" id="manager_confirmpassword"
+							placeholder="長度至少8，且至少包含一個數字和英文字母！">
 					</div>
-					<div class="input confirmpassword required">
-						<label for="manager_confirmpassword">確認密碼:</label> <input
-							class="field" name="confirmpassword" type="password"
-							id="manager_confirmpassword" required="required">
-					</div>
-					<input type="button" class="button" value="I'm pretty Highsure. "
-						id="submit_Highmanager"> <input type="button"
-						class="button" value="I'm pretty Lowsure. " id="submit_Lowmanager">
 
+					<input type="button" class="btn btn-primary" value="註冊為高階管理員"
+						id="submit_Highmanager"> <input type="button"
+						class="btn btn-primary" value="註冊為低階管理員" id="submit_Lowmanager">
 				</form>
+
 
 			</font>
 		</div>
@@ -160,12 +180,10 @@ input:checked+.slider:before {
 									};
 
 									// 將JSON格式轉換成字串
-									var data_string = JSON
-											.stringify(data_object);
+									var data_string = JSON.stringify(data_object);
 
 									// 發出POST的AJAX請求
-									$
-											.ajax({
+									$.ajax({
 												type : "POST",
 												url : "api/manager.do",
 												data : data_string,
@@ -206,7 +224,6 @@ input:checked+.slider:before {
 									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
 								} else {
 									// 將資料組成JSON格式
-									alert("WCNMB");
 									var data_object = {
 										"name" : name,
 										"password" : password,
@@ -227,7 +244,8 @@ input:checked+.slider:before {
 												dataType : 'json',
 												timeout : 5000,
 												success : function(response) {
-													$('#flashMessage').html(response.message);
+													$('#flashMessage').html(
+															response.message);
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														updateSQLTable(response.response);

@@ -6,6 +6,14 @@
 	content="width=device-width, initial-scale=1">
 
 <title>ManagerEdit</title>
+
+<!-- Bootstrap core CSS -->
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
+	
 <style>
 .switch {
 	position: relative;
@@ -83,11 +91,19 @@ input:checked+.slider:before {
 <body bgcolor="#BCE2FF">
 
 	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		<div class="pull-left">
+			<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
+			<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+			<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+		</div>
+		
+		
+		<!-- 這裡是頁面右上方的小box -->
+		<div class="pull-right">
+			<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
+			<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
+			<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+		</div>
 	</ul>
 
 	<div class="box"
@@ -97,27 +113,27 @@ input:checked+.slider:before {
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 			<font face="DFKai-sb">
 
-				<form id="form" accept-charset="utf-8">
-					<div style="display: none;">
-						<input type="hidden" name="_method" value="POST">
+<form id="form" accept-charset="utf-8">
+					<div class="form-group">
+						<label for="manager_name">修改管理員姓名</label> <input type="text"
+							name="name" class="form-control" id="manager_name"
+							aria-describedby="emailHelp" placeholder="管理員姓名" required="required">
 					</div>
-					<div class="input text required">
-						<label for="manager_name">修改管理員姓名:</label> <input class="field"
-							name="name" type="text" id="manager_name" required="required">
+					<div class="form-group">
+						<label for="manager_password">修改密碼</label> <input type="password"
+							name="password" class="form-control" id="manager_password" placeholder="長度至少8，且至少包含一個數字和英文字母！" required="required">
 					</div>
-					<div class="input password required">
-						<label for="manager_password">修改密碼:</label> <input class="field"
-							name="password" type="password" id="manager_password"
-							required="required">
+					<div class="form-group">
+						<label for="manager_confirmpassword">確認密碼</label> <input
+							type="password" name="confirmpassword" class="form-control" id="manager_confirmpassword"
+							placeholder="長度至少8，且至少包含一個數字和英文字母！" required="required">
 					</div>
-					<div class="input confirmpassword required">
-						<label for="manager_confirmpassword">確認密碼:</label> <input
-							class="field" name="confirmpassword" type="password"
-							id="manager_confirmpassword" required="required">
-					</div>
-					<input type="button" class="button" value="更新"
-						id="submit" > 
+
+					<input type="button" class="btn btn-primary" value="更新"
+						id="submit">
 				</form>
+				
+			
 
 			</font>
 		</div>
@@ -127,7 +143,7 @@ input:checked+.slider:before {
 	 var url_string = window.location.href;
      var url = new URL(url_string);
      var idtbl_manager = url.searchParams.get("manager_id");
-     idtbl_manager =2;//先假設為id=1
+     idtbl_manager =1;//先假設為id=1
      var sql_num = 0;
 
      function updatemanager(idtbl_manager) {
