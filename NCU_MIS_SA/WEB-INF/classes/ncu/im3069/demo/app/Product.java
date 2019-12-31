@@ -52,6 +52,7 @@ public class Product {
 		this.inventory=inventory;
 		this.shopID=shopID;		
 		this.image = image;
+		this.product_info=product_info;
 	}
 
     /**
@@ -71,6 +72,16 @@ public class Product {
 		this.inventory=inventory;
 		this.shopID=shopID;
 		this.is_deleted=is_deleted;
+		this.image = image;
+		this.product_info=product_info;
+	}
+	
+	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, String image, String product_info) {
+		this.idtbl_product = idtbl_product;
+		this.product_name = product_name;
+		this.price = price;
+		this.inventory=inventory;
+		this.shopID=shopID;
 		this.image = image;
 		this.product_info=product_info;
 	}
