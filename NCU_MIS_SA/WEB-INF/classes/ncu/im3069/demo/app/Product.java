@@ -46,13 +46,13 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String product_name, int price, int inventory, int shopID, int is_deleted, String image) {
+	public Product(String product_name, int price, int inventory, int shopID,  String image,String product_info) {
 		this.product_name = product_name;
 		this.price = price;
 		this.inventory=inventory;
-		this.shopID=shopID;
-		this.is_deleted=is_deleted;
+		this.shopID=shopID;		
 		this.image = image;
+		this.product_info=product_info;
 	}
 
     /**
@@ -72,6 +72,16 @@ public class Product {
 		this.inventory=inventory;
 		this.shopID=shopID;
 		this.is_deleted=is_deleted;
+		this.image = image;
+		this.product_info=product_info;
+	}
+	
+	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, String image, String product_info) {
+		this.idtbl_product = idtbl_product;
+		this.product_name = product_name;
+		this.price = price;
+		this.inventory=inventory;
+		this.shopID=shopID;
 		this.image = image;
 		this.product_info=product_info;
 	}
@@ -164,9 +174,7 @@ public class Product {
         jso.put("is_deleted", getIsDeleted());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
-        jso.put("inventory", getInventory());
-        jso.put("shopID", getShopID());
-        jso.put("is_deleted", getIsDeleted());
+
         return jso;
     }
 }
