@@ -26,7 +26,7 @@ public class OrderHelper {
     public JSONObject create(Order order) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
-        long idtbl_order = -1;
+        int idtbl_order = -1;
         JSONArray opa = new JSONArray();
         
         try {
@@ -69,7 +69,7 @@ public class OrderHelper {
             ResultSet rs = pres.getGeneratedKeys();
 
             if (rs.next()) {
-                idtbl_order = rs.getLong(1);
+                idtbl_order = rs.getInt(1);
                 ArrayList<OrderProduct> opd = order.getOrderProduct();
                 opa = oph.createByList(idtbl_order, opd);
             }

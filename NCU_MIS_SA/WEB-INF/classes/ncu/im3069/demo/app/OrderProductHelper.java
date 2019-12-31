@@ -30,7 +30,7 @@ public class OrderProductHelper {
         return oph;
     } 
     
-    public JSONArray createByList(long orderID, List<OrderProduct> orderproduct) {
+    public JSONArray createByList(int orderID, List<OrderProduct> orderproduct) {
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -48,7 +48,7 @@ public class OrderProductHelper {
                 /** 取得資料庫之連線 */
                 conn = DBMgr.getConnection();
                 /** SQL指令 */
-                String sql = "INSERT INTO `missa`.`order_product`(`orderID`, `productID`, `unit_price`, `product_quantities`, `subtotal`)"
+                String sql = "INSERT INTO `missa`.`tbl_orderproduct`(`orderID`, `productID`, `unit_price`, `product_quantities`, `subtotal`)"
                         + " VALUES(?, ?, ?, ?, ?)";
                 
                 /** 將參數回填至SQL指令當中 */

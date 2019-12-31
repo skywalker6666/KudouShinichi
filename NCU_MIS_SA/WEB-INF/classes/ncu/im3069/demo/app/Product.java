@@ -73,7 +73,7 @@ public class Product {
 		this.shopID=shopID;
 		this.is_deleted=is_deleted;
 		this.image = image;
-		this.product_info = product_info;
+		this.product_info=product_info;
 	}
 
     /**
@@ -159,6 +159,9 @@ public class Product {
         jso.put("idtbl_product", getID());
         jso.put("product_name", getName());
         jso.put("price", getPrice());
+        jso.put("inventory", getInventory());
+        jso.put("shopID", getShopID());
+        jso.put("is_deleted", getIsDeleted());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
         jso.put("inventory", getInventory());

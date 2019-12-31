@@ -15,20 +15,16 @@
 	border-style: dashed;
 	width: 100%;
 }
-
 #customers td, #customers th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
-
 #customers tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
-
 #customers tr:hover {
 	background-color: #ddd;
 }
-
 #customers th {
 	position: sticky;
 	padding-top: 12px;
@@ -37,7 +33,6 @@
 	background-color: #4CAF50;
 	color: white;
 }
-
 div.absolute {
 	position: absolute;
 	align: center;
@@ -58,15 +53,34 @@ div.absolute {
       <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
     <!--導覽列 -->
     <nav>
-      <ul class="navbar">
-		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
+     <ul class="navbar">
+		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
 		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="myMarket.html">我的賣場</a></li>
-		</ul>
+		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+		
+		<div id="member_center1" class="mediumbox" style="float: right">
+			<li style="float: left"><a class="navbarFloating"
+				href="member_change.html">會員中心</a></li>
+			<li style="float: left"><a id="remove" class="navbarFloating"
+				href="index.html">&nbsp;登出 </a></li>
+			<li style="float: left">
+	
+		</div>
+		<div id="member_center2" class="smallbox" style="float: right"> 
+			<li><img src="statics/img/navbar/shoppingcart.png"
+				style="float: left" height="20px" width="20px"></img></li>
+			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+		</div>
+		<div id="member_center3" class="smallbox" style="float: right">
+			<li><img src="statics/img/navbar/user.png" style="float: left"
+				height="20px" width="20px"></img></li>
+			<li id="user_name"class="navbarFloating">user</li>
+		</div>
+	</ul>
     </nav>
   </div>
 </div>
@@ -102,7 +116,6 @@ div.absolute {
 </body>
 <script>
 var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
 if (client_cart_obj.length == 0) {
 	alert("購物車沒有任何商品！");
 	calcSummaryInformation();
@@ -110,26 +123,19 @@ if (client_cart_obj.length == 0) {
 }
 else
 	getCartProduct();
-
-
-
 $("#clean").click(function () {
 	console.log("[@Action]清空購物車");
 	cleanAllData();
 });
-
 function vaildData(data) {
 	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
-
 	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "")  alert("必填寫欄位不得有空值！");
 	else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
 	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
 	else return true;
-
 	return false;
 }
-
 function cleanAllData() {
 	client_cart_obj = [];
   client_cart_amount = [];
@@ -140,7 +146,6 @@ function cleanAllData() {
   $("#summary").html('0');
   setButtonState("check", false);
 }
-
 function getCartProduct() {
   $.ajax({
     type: "GET",
@@ -163,7 +168,6 @@ function getCartProduct() {
     }
   });
 }
-
 function updateAllQuantitySubtotal() {
 	for (var i=0 ; i < client_cart_obj.length ; i++) {
 		var id = client_cart_obj[i];
@@ -174,14 +178,12 @@ function updateAllQuantitySubtotal() {
 		$('#subtotal_' + id).html(subtotal);
 	}
 }
-
 function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
 }
-
 function keyEventListen() {
 	$('input[name="quantity[]"').on(
       'keypress',
@@ -189,7 +191,6 @@ function keyEventListen() {
     	  return isNumberKey(e);
       }
   );
-
 	$('input[name="quantity[]"').on(
 	        'keyup',
 	        function (e) {
@@ -204,32 +205,25 @@ function keyEventListen() {
 	          calcSummaryInformation();
 	        }
 	    );
-
 	$('button[name="remove[]"').click(function () {
 		var id = (this.id).split('_')[1];
 		var i = client_cart_obj.indexOf(id);
-
 		if (i > -1) {
     		client_cart_obj.splice(i, 1);
     		client_cart_amount.splice(i, 1);
 		}
-
 		updateCartDataToClent();
 		$('#row_' + id).remove();
 		if (client_cart_obj.length == 0)
 		      alert("請先選擇欲購買商品！");
 		calcSummaryInformation();
 	});
-
-
 }
-
 function calcSubTotal(price, quantity) {
 	var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
 	result = isNaN(result) ? 0.00 : result;
 	return result;
 }
-
 function updateCartTable(data) {
 	table_html = '';
 	$("#cart_table > tbody").empty();
@@ -244,10 +238,8 @@ function updateCartTable(data) {
     	table_html += '</tr>';
     	//id.amount=$('#quantity_'+value.id).serialize();
     })
-
   $("#cart_table > tbody").append(table_html);
 }
-
 function getCartDataFromClient() {
 	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
 	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
@@ -255,23 +247,19 @@ function getCartDataFromClient() {
 	amount = !amount ? new Array() : amount;
 	return [cart, amount];
 }
-
 function updateCartDataToClent() {
 	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
 	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 }
-
 function updateClentCartData(id, quantity) {
 	var i = client_cart_obj.indexOf(id);
 	client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
 	updateCartDataToClent();
 }
-
 function calcSummaryInformation() {
 	var total_item = client_cart_obj.length;
 	var total_price = 0.00;
 	var total_quantity = 0;
-
 	for(var i=0 ; i < total_item ; i++) {
 		var id = client_cart_obj[i];
 		var price = $('#price_' + id).html();
@@ -280,17 +268,14 @@ function calcSummaryInformation() {
 		total_price += isNaN(calc) ? 0.0 : calc;
 		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
 	}
-
 	// Client端日期
 	var date = new Date();
 	var iso_date = date.toISOString();
-
 	$("#date").html(iso_date.substring(0, 10));
 	$("#total_item").html(total_item);
 	$("#total_quantity").html(total_quantity);
 	$("#summary").html(total_price.toFixed(2));
 }
-
 function setButtonState(id, action) {
   if (!action) {
       $('#' + id).prop('disabled', false);
@@ -304,5 +289,54 @@ function setButtonState(id, action) {
     $('#' + id).html('結帳');
   }
 }
+
+/*------------登入登出實作member cookie-----------*/
+
+var [client_id, client_name]  = getMemberDataFromClient();
+
+function getMemberDataFromClient() {
+	let id = JSON.parse(localStorage.getItem("client_id"));
+	let name = JSON.parse(localStorage.getItem("client_name"));
+	id = !id ? new Array() : id;
+	name = !name ? new Array() : name;
+	return [id, name];
+}
+
+function updateMemberDataToClent() {
+	localStorage.setItem("client_id", JSON.stringify(client_id));
+	localStorage.setItem("client_name", JSON.stringify(client_name));
+}
+
+function loguot() {
+ client_id = [];
+ client_name = [];
+ updateMemberDataToClent();
+ $("#member_center1").hide();
+ $("#member_center2").hide();
+ $("#member_center3").hide();
+ $("#signup_in").show();
+ $("#user_name").empty();
+}
+
+$("#remove").click(function () {
+	console.log("[@Action]登出");
+	loguot();
+});
+
+$(document).ready(function(){
+	 if(client_id.length == 0){ //登出
+		 $("#member_center1").hide();
+	     $("#member_center2").hide();
+	     $("#member_center3").hide();  
+	 }else{//登入
+		 $("#user_name").html(client_name);
+  	 	 $("#member_center1").show();
+  	 	 $("#member_center2").show();
+  	     $("#member_center3").show();
+  		 $("#signup_in").hide();
+	 }
+});
+
+/*----------------------------------------*/
 </script>
 </html>

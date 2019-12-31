@@ -321,6 +321,7 @@ div.absolute {
              table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
          })
 
+
          $("#table > tbody").append(table_html);
      }
   // 更新SQL指令歷史表格
@@ -329,6 +330,7 @@ div.absolute {
          var table_html = "";
          
          sql_num += 1
+
 
          table_html += '<tr>';
          table_html += '<td>' + sql_num + '</td>';
