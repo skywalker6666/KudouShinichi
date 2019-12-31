@@ -46,13 +46,13 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String product_name, int price, int inventory, int shopID, int is_deleted, String image) {
+	public Product(String product_name, int price, int inventory, int shopID,  String image,String product_info) {
 		this.product_name = product_name;
 		this.price = price;
 		this.inventory=inventory;
-		this.shopID=shopID;
-		this.is_deleted=is_deleted;
+		this.shopID=shopID;		
 		this.image = image;
+		this.product_info=product_info;
 	}
 
     /**
