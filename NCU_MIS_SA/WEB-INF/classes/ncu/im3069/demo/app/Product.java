@@ -164,7 +164,9 @@ public class Product {
         jso.put("is_deleted", getIsDeleted());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
-
+        jso.put("inventory", getInventory());
+        jso.put("shopID", getShopID());
+        jso.put("is_deleted", getIsDeleted());
         return jso;
     }
 }

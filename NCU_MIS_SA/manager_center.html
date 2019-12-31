@@ -19,16 +19,20 @@
 	border-style: dashed;
 	width: 100%;
 }
+
 #customers td, #customers th {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
+
 #customers tr:nth-child(even) {
 	background-color: #f2f2f2;
 }
+
 #customers tr:hover {
 	background-color: #ddd;
 }
+
 #customers th {
 	position: sticky;
 	padding-top: 12px;
@@ -37,6 +41,7 @@
 	background-color: #4CAF50;
 	color: white;
 }
+
 div.absolute {
 	position: absolute;
 	align: center;
@@ -143,6 +148,7 @@ div.absolute {
 							+ '<input class="button" type="button" value="取消" onclick="display_managers()">'
 							+ '</div>' + '</div>').appendTo('#display_member')
 		}
+
 		function display_sellers() {
 			$('#display_member').html("");
 			$(
@@ -170,6 +176,7 @@ div.absolute {
 							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
 							+ '</div>').appendTo('#display_member')
 		}
+
 		function display_buyers() {
 			$('#display_member').html("");
 			$(
@@ -196,6 +203,7 @@ div.absolute {
 							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
 							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
 							+ '</div>').appendTo('#display_member')
+
 		}
 	</script>
 	<script type="text/javascript">
@@ -312,6 +320,8 @@ div.absolute {
              table_html += '<td>';
              table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
          })
+
+
          $("#table > tbody").append(table_html);
      }
   // 更新SQL指令歷史表格
@@ -320,6 +330,8 @@ div.absolute {
          var table_html = "";
          
          sql_num += 1
+
+
          table_html += '<tr>';
          table_html += '<td>' + sql_num + '</td>';
          table_html += '<td>' + data.sql + '</td>';

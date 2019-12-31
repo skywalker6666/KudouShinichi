@@ -261,4 +261,5 @@ public class Member {
         /** 檢查該名會員是否已經在資料庫，若有則透過MemberHelper物件，更新目前之組別狀態 */
         if(this.id != 0) mh.updateStatus(this, curr_status);
     }
+
 }
