@@ -166,10 +166,11 @@
                        crossDomain: true,
                        cache: false,
                        dataType: 'json',
-                       timeout: 5000,
+                       timeout: 50000,
                        success: function (response) {
                            if(response.status == 200){
                                updateTable(response.response.data);
+                               showOrderStatus(response.response.data);
                              
                            }
                            console.log(response);
@@ -178,9 +179,49 @@
                            alert("無法連線到伺服器！");
                        }
                });
+               
            }
-           
-           // 更新會員列表表格
+       	   function showOrderStatus(data){
+       		   
+       		$.each(data,function(index,val){
+       			var id=val['order_info']['idtbl_order'];
+         	   $("#order_"+id).click(function(){
+         		   	if(val['order_info']['order_status']==1)
+         		   		for(var i=1;i<=4;i++){
+         	           	   	if(i==1){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	}
+         			else if(val['order_info']['order_status']==2)
+         				for(i=1;i<=4;i++){
+         	           	   	if(i==2){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         		   	else if(val['order_info']['order_status']==3)
+         		   		for(i=1;i<=4;i++){
+         	           	   	if(i==3){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         		   	else if(val['order_info']['order_status']==4)
+         		   		for(i=1;i<=4;i++){
+         	           	   	if(i==4){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         	   })
+         	   
+            })
+       	   }
            function updateTable(data) {
                $("#table > tbody").empty();
                var table_html = '';
@@ -195,6 +236,7 @@
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
                    table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
+                   
                   
                })
 
@@ -203,7 +245,7 @@
            
            
            $(document).ready(function() {
-               getAllOrder();
+               getAllOrder();              
            });
            $("#sent").click(function(){
         	   
