@@ -88,7 +88,8 @@ public class ProductController extends HttpServlet {
 	        else {
 	            /** 透過MemberHelper物件的create()方法新建一個會員至資料庫 */
 	            JSONObject data = ph.createProduct(p);
-	            
+	            System.out.println("post");
+
 	            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
 	            JSONObject resp = new JSONObject();
 	            resp.put("status", "200");

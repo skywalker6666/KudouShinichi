@@ -52,6 +52,7 @@ public class Product {
 		this.inventory=inventory;
 		this.shopID=shopID;		
 		this.image = image;
+		this.product_info=product_info;
 	}
 
     /**

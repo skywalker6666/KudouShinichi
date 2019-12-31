@@ -16,7 +16,8 @@
 <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 <link href="statics/css/font-awesome.min.css" rel="stylesheet">
 <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
 
 
 <style>
@@ -34,6 +35,7 @@
 		font-size: 3.5rem;
 	}
 }
+
 .box {
 	width: 800px;
 	height: 500px;
@@ -53,38 +55,47 @@
 	margin-top: -200px;
 	margin-left: -300px;
 }
-input{
-    outline-style: none ;
-    border: 1px solid #ccc; 
-    border-radius: 3px;
-    padding: 9px 9px;
-    width: 225px;
-    font-size: 14px;
-    font-weight: 700;
-    font-family: "Microsoft soft";
+
+input {
+	outline-style: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 9px 9px;
+	width: 225px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Microsoft soft";
 }
-input:focus{
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+
+input:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6)
 }
-textarea{
- outline-style: none ;
-    border: 1px solid #ccc; 
-    border-radius: 3px;
-    padding: 9px 9px;
-    width: 225px;
-    font-size: 14px;
-    font-weight: 700;
-    font-family: "Microsoft soft";
+
+textarea {
+	outline-style: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 9px 9px;
+	width: 225px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Microsoft soft";
 }
-textarea:focus{
- border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+
+textarea:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6)
 }
+
 .button {
 	background-color: #FF8787;
 	border: none;
@@ -110,147 +121,136 @@ textarea:focus{
 <link href="statics/css/product.css" rel="stylesheet">
 <link href="statics/css/jquery-confirm.css" rel="stylesheet">
 
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-confirm.js"></script>
+<script src="statics/js/popper.min.js"></script>
+
 </head>
 
 <body>
-<div id="header">
-  <!--容器分為左圖右導覽連結 -->
-  <div class="navbar">
-      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
-    <!--導覽列 -->
-    <nav>
-      <ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		</ul>
-    </nav>
-  </div>
-</div>
-	<div class="box" style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+	<div id="header">
+		<!--容器分為左圖右導覽連結 -->
+		<div class="navbar">
+			<a href="index.html"><img src="statics/img/navbar/icon.png"
+				width="70" alt="logo" /></a>
+			<!--導覽列 -->
+			<nav>
+				<ul class="navbar">
+					<li class="navbar"><a href="index.html"><img
+							src="statics/img/navbar/icon.png" style="float: left"
+							height="100px" width="100px"></img></a></li>
+					<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+					<li class="navbar"><a class="navbarItem"
+						href="productIndex.html">商品總覽</a></li>
+					<li class="navbar"><a class="navbarItem"
+						href="order_tracking.html">訂單追蹤</a></li>
+					<li class="navbar"><a class="navbarItem"
+						href="shoppingcart.html">購物車</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
 		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
-		<div class="box2" style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-					
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 
+
+			<div>
+				<font face="DFKai-sb">
 					<div>
-						<font face="DFKai-sb">
-						
-						<div >
-							<label for="lastName">商品名稱</label> <input type="text"
-								 id="product_name" maxlength="45" value=""
-								required>
-						</div>
-						
-						
-
-						<div >
-							<label for="firstName">商品售價</label> <input type="text"
-								 id="product_price" maxlength="11"
-								placeholder="" value="" required>
-						</div>
-						
-
-
-						<div >
-							<label for="phonenum">商品庫存</label> <input
-								type="text" id="product_inventory"  maxlength="11"
-								required>
-						</div>
-						
-						
-
-						<div >
-							<label for="address" style="vertical-align:top;">商品簡介</label> <textarea cols="50" rows="5" id="productinfo" maxlength="100" 
-								 required >
-						</textarea>
-						</div>
-						
-						
-							<label for="lastName">商品圖片</label> <input type="text"
-								 id="image_name" maxlength="45" value=""
-								placeholder="請輸入完整路徑" required>
-						</div>
-						
-						<div >
-							<input type="button" class="button" value="完成" id="finish">
-						</div>
-						
-						</font>
-
+						<label for="lastName">商品名稱</label> <input type="text"
+							id="product_name" maxlength="45" value="" required>
 					</div>
-				</div>
+					<div>
+						<label for="firstName">商品售價</label> <input type="text"
+							id="product_price" maxlength="11" placeholder="" value=""
+							required>
+					</div>
+					<div>
+						<label for="phonenum">商品庫存</label> <input type="text"
+							id="product_inventory" maxlength="11" required>
+					</div>
+					<div>
+						<label for="address" style="vertical-align: top;">商品簡介</label>
+						<textarea cols="50" rows="5" id="productinfo" maxlength="100"
+							required>
+						</textarea>
+					</div>
+					<div>
+						<label for="lastName">商品圖片</label> <input type="text"
+							id="image_name" maxlength="45" value="" placeholder="請輸入完整路徑"
+							required>
+					</div>
 			</div>
 
-	
-	<script src="statics/js/jquery-3.4.1.min.js"></script>
-	<script src="statics/js/jquery-confirm.js"></script>
-	<script src="statics/js/popper.min.js"></script>
+			<div>
+				<input type="button" class="button" value="完成" id="finish">
+			</div>
+
+			</font>
+
+
+		</div>
+	</div>
+
+
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-							// 處理表單點擊事件
-							$('#finish').click(function(){
-								submit();
-							});
-							
-							function submit(){
-								var name = $('#product_name').val();
-								var price = $('#product_price').val();
-								var inventory = $('#product_inventory').val();
-								var shopID = 2;
-								var image = $('#image_name').val();
-								var productinfo = $('#productinfo').val();
-								
+			// 處理表單點擊事件
+			$('#finish').click(function() {
+				submit();
+			});
 
-								
-									// 將資料組成JSON格式
-									var data_object = {
-										"product_name" : name,
-										"price" : price,
-										"inventory" : inventory,
-										"shopID" : shopID,
-										"image" : image,
-										"product_info" : productinfo
-									};
+			function submit() {
+				var name = $('#product_name').val();
+				var price = $('#product_price').val();
+				var inventory = $('#product_inventory').val();
+				var shopID = 2;
+				var image = $('#image_name').val();
+				var productinfo = $('#productinfo').val();;
 
-									// 將JSON格式轉換成字串
-									var data_string = JSON.stringify(data_object);
+				// 將資料組成JSON格式
+				var data_object = {
+					"product_name" : name,
+					"price" : price,
+					"inventory" : inventory,
+					"shopID" : shopID,
+					"image" : image,
+					"product_info" : productinfo
+				};
 
-									// 發出POST的AJAX請求
-									$.ajax({
-												type : "POST",
-												url : "api/product.do",
-												data : data_string,
-												crossDomain : true,
-												cache : false,
-												dataType : 'json',
-												timeout : 5000,
-												success : function(response) {
-													$('#flashMessage').html(response.message);
-													$('#flashMessage').show();
-													if (response.status == 200) {
-														alert("產品新增成功！");
-														document.location.href = "my_market.html"; 
-													}
-													
-													
-												},
-												error : function() {
-													alert("無法連線到伺服器！");
-												}
-											});
-								
-							}
-                        }
-        )
-							
+				// 將JSON格式轉換成字串
+				var data_string = JSON.stringify(data_object);
 
-						
+				// 發出POST的AJAX請求
+				$.ajax({
+					type : "POST",
+					url : "api/product.do",
+					data : data_string,
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						$('#flashMessage').html(response.message);
+						$('#flashMessage').show();
+						if (response.status == 200) {
+							alert("產品新增成功！");
+							document.location.href = "my_market.html";
+						}
+
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+
+			}
+		})
 	</script>
 
 

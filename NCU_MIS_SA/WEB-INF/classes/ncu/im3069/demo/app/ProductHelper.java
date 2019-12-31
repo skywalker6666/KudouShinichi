@@ -328,28 +328,28 @@ public class ProductHelper {
             conn = DBMgr.getConnection();
             /** SQL指令 */
             String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `shopID`, `is_deleted`, `image`, `product_info`)"
-                    + " VALUES(?, ?, ?, ?, 0, ? ,? )";
+                    + " VALUES(?, ?, ?, ?, 0, ?, ?)";
             
             /** 取得所需之參數 */
             String name = p.getName();
             int price = p.getPrice();
             int inventory = p.getInventory();
             int ShopID = p.getShopID();
-            int is_deleted = p.getIsDeleted();
             String image = p.getImage();
             String product_info = p.getProductInfo();
+           
+            System.out.println(product_info);
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, name);
             pres.setInt(2, price);
             pres.setInt(3, inventory);
-            pres.setInt(4, ShopID); //
-            pres.setInt(5, is_deleted); //
-            pres.setString(6, image);
-            pres.setString(7, product_info); //
+            pres.setInt(4, ShopID); //  
+            pres.setString(5, image);
+            pres.setString(6, product_info); //
        
-            
+
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
             
