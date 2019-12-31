@@ -67,6 +67,16 @@ public class Manager {
        // this.isSeller=isSeller;
         update();
     }
+    public Manager(int managerid,String managerName,String password) {
+         this.managerId = managerid;
+         this.password = password;
+         this.managerName = managerName;
+
+      //   this.headSticker=headSticker;
+       //  this.birthday=birthday;
+        // this.isSeller=isSeller;
+         update();
+     }
   
 
     /**

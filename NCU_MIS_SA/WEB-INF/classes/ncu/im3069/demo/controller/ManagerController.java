@@ -46,6 +46,7 @@ public class ManagerController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
+     
         String password = jso.getString("password");
         String managerName = jso.getString("name");
         int isLeader=jso.getInt("isLeader");
@@ -97,7 +98,7 @@ public class ManagerController extends HttpServlet {
         /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
-        String id = jsr.getParameter("idtbl_Manager");
+        String id = jsr.getParameter("idtbl_manager");
       //  String isLeader =jsr.getParameter("isLeader");
     
 
@@ -131,7 +132,7 @@ public class ManagerController extends HttpServlet {
         if(!id.isEmpty()){
             /** 透過ManagerHelper物件的getByID()方法自資料庫取回該名管理員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mgh.getByID(id);
-            
+            System.out.println("wd");
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
             JSONObject resp = new JSONObject();
             resp.put("status", "200");
@@ -188,18 +189,15 @@ public class ManagerController extends HttpServlet {
         JSONObject jso = jsr.getObject();
         
         /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("idtbl_Manager");
-      //  String email = jso.getString("email");
+        int managerId = jso.getInt("managerId");
         String password = jso.getString("managerPassword");
         String name = jso.getString("managerName");
-      //  String headSticker = jso.getString("headSticker");
-      //  String birthday = jso.getString("birthday");
-        int isLeader = jso.getInt("isLeader");
-        int isDeleted = jso.getInt("isDeleted");
 
 
         /** 透過傳入之參數，新建一個以這些參數之管理員Manager物件 */
-        Manager mg = new Manager(id, password, name, isLeader, isDeleted);
+    //    Manager mg = new Manager(managerId, password, name, isLeader, isDeleted);
+        Manager mg = new Manager(managerId, name, password );
+        
         
         /** 透過Manager物件的update()方法至資料庫更新該名管理員資料，回傳之資料為JSONObject物件 */
         JSONObject data = mgh.update(mg);
@@ -209,6 +207,7 @@ public class ManagerController extends HttpServlet {
         resp.put("status", "200");
         resp.put("message", "成功! 更新管理員資料...");
         resp.put("response", data);
+  //      System.out.println("hi");
         
         /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
         jsr.response(resp, response);

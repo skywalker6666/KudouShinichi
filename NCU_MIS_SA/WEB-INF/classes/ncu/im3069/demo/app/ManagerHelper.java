@@ -236,7 +236,7 @@ public class ManagerHelper {
                 
                 /** 將 ResultSet 之資料取出 */
                 int manager_id = rs.getInt("idtbl_manager");
-                String managerName = rs.getString("mangerName");
+                String managerName = rs.getString("managerName");
           //      String email = rs.getString("email");
                 String managerPassword = rs.getString("managerPassword");
           //      String headSticker = rs.getString("headSticker");
@@ -547,27 +547,19 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `missa`.`tbl_manager` SET `name` = ? ,`email` = ? , `password` = ? ,`birthday` = ? ,`headSticker` = ? ,`isSeller` = ? , `modified` = ? WHERE `idtbl_manager` = ?";
+            String sql = "Update `missa`.`tbl_manager` SET `managerName` = ? ,`managerPassword` = ?  WHERE `idtbl_manager` = ?";
             /** 取得所需之參數 */
             int idtbl_manager = mg.getID();
             String managerName = mg.getmanagerName();
-        //    String email = m.getEmail();
             String password = mg.getPassword();
-       //     String birthday = m.getBirthday();
-        //    String headSticker = m.getheadSticker();
             int isLeader = mg.getIsLeader();
             int isDeleted= mg.getisDeleted();
+            
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, managerName);
-      //      pres.setString(2, email);
             pres.setString(2, password);
-       //     pres.setString(4, birthday);
-       //     pres.setString(5, headSticker);
-            pres.setInt(3, isLeader);
-            pres.setInt(4, isDeleted);
-            pres.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setInt(6, idtbl_manager);
+            pres.setInt(3, idtbl_manager);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 

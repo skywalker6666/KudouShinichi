@@ -1,1 +1,248 @@
 
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
+
+<title>ManagerEdit</title>
+<style>
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+input:checked+.slider {
+	background-color: #2196F3;
+}
+
+input:focus+.slider {
+	box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+}
+/* Rounded sliders */
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
+
+.box {
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	margin-top: -250px;
+	margin-left: -400px;
+}
+
+.box2 {
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
+}
+
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.button:hover {
+	background-color: #f44336;
+	color: white;
+}
+</style>
+
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/register&login.css">
+
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+</head>
+<body bgcolor="#BCE2FF">
+
+	<ul class="navbar">
+		<li class="navbar"><a href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="100px"
+				width="100px"></img></a></li>
+		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+	</ul>
+
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;編輯帳密</font>
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+			<font face="DFKai-sb">
+
+				<form id="form" accept-charset="utf-8">
+					<div style="display: none;">
+						<input type="hidden" name="_method" value="POST">
+					</div>
+					<div class="input text required">
+						<label for="manager_name">修改管理員姓名:</label> <input class="field"
+							name="name" type="text" id="manager_name" required="required">
+					</div>
+					<div class="input password required">
+						<label for="manager_password">修改密碼:</label> <input class="field"
+							name="password" type="password" id="manager_password"
+							required="required">
+					</div>
+					<div class="input confirmpassword required">
+						<label for="manager_confirmpassword">確認密碼:</label> <input
+							class="field" name="confirmpassword" type="password"
+							id="manager_confirmpassword" required="required">
+					</div>
+					<input type="button" class="button" value="更新"
+						id="submit" > 
+				</form>
+
+			</font>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	 var url_string = window.location.href;
+     var url = new URL(url_string);
+     var idtbl_manager = url.searchParams.get("manager_id");
+     idtbl_manager =2;//先假設為id=1
+     var sql_num = 0;
+
+     function updatemanager(idtbl_manager) {
+         var name = $('#manager_name').val();
+        
+   //      var email = $('#manager_email').val();
+         var password = $('#manager_password').val();
+   //      var birthday = $('#manager_birthday').val();//
+   //      var headSticker = $('#manager_headSticker').val();//
+  //       var isLeader = $('#manager_isLeader').val();//
+
+
+         var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+         if(!password_rule.test(password)) {
+             alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+         }
+         else {
+             // 將資料組成JSON格式
+             var data_object = {
+                 "managerId": idtbl_manager,
+                 "managerName": name,
+                 "managerPassword": password,
+             };
+
+             // 將JSON格式轉換成字串
+             var data_string = JSON.stringify(data_object);
+
+             // 發出POST的PUT請求
+             $.ajax({
+                     type: "PUT",
+                     url: "api/manager.do",
+                     data: data_string,
+                     crossDomain: true,
+                     cache: false,
+                     dataType: 'json',
+                     timeout: 5000,
+                     success: function (response) {
+                         $('#flashMessage').html(response.message);
+                         $('#flashMessage').show();
+                         if(response.status == 200){
+                             updateSQLTable(response.response);
+                             getmanager();
+                             alert("更新成功!!")
+                             document.location.href = "manager_center.html";
+                         }
+                     },
+                     error: function () {
+                         alert("無法連線到伺服器！");
+                     }
+             });
+         }
+     }
+
+     // 更新SQL指令歷史表格
+     function updateSQLTable(data) {
+         var time = (data.time / 1000000).toFixed(2);
+         var table_html = "";
+         
+         sql_num += 1
+
+         table_html += '<tr>';
+         table_html += '<td>' + sql_num + '</td>';
+         table_html += '<td>' + data.sql + '</td>';
+         table_html += '<td style="text-align: right">' + '0' + '</td>';
+         table_html += '<td style="text-align: right">' + data.row + '</td>';
+         table_html += '<td style="text-align: right">' + data.row + '</td>';
+         table_html += '<td style="text-align: right">' + time + '</td>';
+         table_html += '</tr>';
+         $("#sql_log > tbody").append(table_html);
+         $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+     }
+
+     function getmanager() {
+         $.ajax({
+             type: "GET",
+             url: "api/manager.do",
+             crossDomain: true,
+             data: "idtbl_manager=" + idtbl_manager,
+             cache: false,
+             dataType: 'json',
+             timeout: 5000,
+             success: function (response) {
+                 if(response.status == 200){
+                 	updateSQLTable(response.response);
+                 	document.getElementById('manager_name').value = response['response']['data'][0]['name'];
+    //             	document.getElementById('manager_email').value = response['response']['data'][0]['email'];
+                 	document.getElementById('manager_password').value = response['response']['data'][0]['password'];
+                 	
+     //            	document.getElementById('manager_birthday').value = response['response']['data'][0]['birthday'];
+      //           	document.getElementById('manager_headSticker').value = response['response']['data'][0]['headSticker'];
+      //           	document.getElementById('manager_isLeader').value = response['response']['data'][0]['isLeader'];
+
+          //       	document.getElementById('manager_login_times').value = response['response']['data'][0]['login_times'];
+       //          	document.getElementById('manager_isDeleted').value = response['response']['data'][0]['isDeleted'];
+                 }
+                 console.log(response);
+             },
+             error: function () {
+                 alert("無法連線到伺服器！");
+             }
+         });
+     }
+
+     $('#submit').click(function() {
+         updatemanager(idtbl_manager)
+     });
+     
+     $(document).ready(function() {
+     	// 發出GET的AJAX請求取得原本該會員的資料
+      	$("#sql_log > tbody").empty();
+         getmanager();
+     });
+	</script>
+</body>
+
+</html>
