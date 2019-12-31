@@ -315,4 +315,70 @@ public class ProductHelper {
 
         return p;
     }
+    public JSONObject createProduct(Product p) {
+        /** 記錄實際執行之SQL指令 */
+        String exexcute_sql = "";
+        /** 紀錄程式開始執行時間 */
+        long start_time = System.nanoTime();
+        /** 紀錄SQL總行數 */
+        int row = 0;
+        
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `shopID`, `is_deleted`, `image`, `product_info`)"
+                    + " VALUES(?, ?, ?, ?, 0, ? ,? )";
+            
+            /** 取得所需之參數 */
+            String name = p.getName();
+            int price = p.getPrice();
+            int inventory = p.getInventory();
+            int ShopID = p.getShopID();
+            int is_deleted = p.getIsDeleted();
+            String image = p.getImage();
+            String product_info = p.getProductInfo();
+            
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+            pres.setString(1, name);
+            pres.setInt(2, price);
+            pres.setInt(3, inventory);
+            pres.setInt(4, ShopID); //
+            pres.setInt(5, is_deleted); //
+            pres.setString(6, image);
+            pres.setString(7, product_info); //
+       
+            
+            /** 執行新增之SQL指令並記錄影響之行數 */
+            row = pres.executeUpdate();
+            
+            /** 紀錄真實執行的SQL指令，並印出 **/
+            exexcute_sql = pres.toString();
+            System.out.println(exexcute_sql);
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(pres, conn);
+        }
+
+        /** 紀錄程式結束執行時間 */
+        long end_time = System.nanoTime();
+        /** 紀錄程式執行時間 */
+        long duration = (end_time - start_time);
+
+        /** 將SQL指令、花費時間與影響行數，封裝成JSONObject回傳 */
+        JSONObject response = new JSONObject();
+        response.put("sql", exexcute_sql);
+        response.put("time", duration);
+        response.put("row", row);
+
+        return response;
+    }
 }

@@ -88,7 +88,7 @@ public class ProductController extends HttpServlet {
 	        /** 透過MemberHelper物件的checkDuplicate()檢查該會員電子郵件信箱是否有重複 */
 	        else {
 	            /** 透過MemberHelper物件的create()方法新建一個會員至資料庫 */
-	            JSONObject data = ph.(p);
+	            JSONObject data = ph.createProduct(p);
 	            
 	            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
 	            JSONObject resp = new JSONObject();
