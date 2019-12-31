@@ -44,7 +44,7 @@ public class OrderHelper {
             String product_delivery= order.getProductDelivery();
             String payment= order.getPayment();
             int order_status= order.getOrderStatus();
-            int total_price = order.getTotalPrice();
+            double total_price = order.getTotalPrice();
             Timestamp create = order.getCreateTime();
             
             /** 將參數回填至SQL指令當中 */
@@ -56,7 +56,7 @@ public class OrderHelper {
             pres.setString(5, product_delivery);
             pres.setString(6, payment);
             pres.setInt(7, order_status);
-            pres.setInt(8, total_price);
+            pres.setDouble(8, total_price);
             pres.setTimestamp(9, create);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
@@ -133,7 +133,7 @@ public class OrderHelper {
                 String product_delivery = rs.getString("product_delivery");
                 String payment = rs.getString("payment");
                 int order_status=rs.getInt("order_status");
-                int total_price=rs.getInt("total_price");
+                double total_price=rs.getDouble("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
@@ -210,7 +210,7 @@ public class OrderHelper {
                 String product_delivery =rs.getString("product_delivery");
                 String payment =rs.getString("payment");
                 int order_status =rs.getInt("order_status");
-                int total_price = rs.getInt("total_price");
+                double total_price = rs.getDouble("total_price");
                 Timestamp create = rs.getTimestamp("create");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */

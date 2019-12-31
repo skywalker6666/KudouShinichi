@@ -61,7 +61,7 @@
 		<li class="navbar"><a class="navbarItem"
 			href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="myMarket.html">我的賣場</a></li>
+		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
 		</ul>
     </nav>
   </div>
@@ -169,7 +169,7 @@
 	<script>
 	
     var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-
+	
 	
     if (client_cart_obj.length == 0) {
     	alert("購物車沒有任何商品！");
@@ -182,6 +182,7 @@
     
    
     $("#check").click(function () {
+    	var total_price=ReturnTotalPrice();
     	var data = {
     			"memberID":1,
     			"buyer_name": $("#buyer_name").val(),
@@ -192,10 +193,10 @@
     			"order_status":1,
     			"item": client_cart_obj,
     			"quantity": client_cart_amount,
-    			"total_price":100
+    			"total_price": total_price
     			//total_price
     	}
-
+    	
     	// 驗證輸入的資料
     	pass_vaild = vaildData(data);
     	if (pass_vaild) {
@@ -396,7 +397,7 @@
 
     function calcSummaryInformation() {
     	var total_item = client_cart_obj.length;
-    	var total_price = 0.00;
+    	var total_price = 0.0;
     	var total_quantity = 0;
 
     	for(var i=0 ; i < total_item ; i++) {
@@ -404,7 +405,7 @@
     		var price = $('#price_' + id).html();
     		var quantity = $('#quantity_' + id).val()
     		calc = parseFloat(price) * parseInt(quantity);
-    		total_price += isNaN(calc) ? 0.0 : calc;
+    		total_price += isNaN(calc) ? 0 : calc;
     		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
     	}
 
@@ -416,6 +417,7 @@
     	$("#total_item").html(total_item);
     	$("#total_quantity").html(total_quantity);
     	$("#summary").html(total_price.toFixed(2));
+    	    	   	
     }
 
     function setButtonState(id, action) {
@@ -430,7 +432,21 @@
         $('#' + id).html('結帳');
       }
     }
-    
+    function ReturnTotalPrice(){
+    	var total_item = client_cart_obj.length;
+    	var total_price = 0.0;
+    	var total_quantity = 0;
+
+    	for(var i=0 ; i < total_item ; i++) {
+    		var id = client_cart_obj[i];
+    		var price = $('#price_' + id).html();
+    		var quantity = $('#quantity_' + id).val()
+    		calc = parseFloat(price) * parseInt(quantity);
+    		total_price += isNaN(calc) ? 0 : calc;
+    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+    	}
+    	return total_price.toFixed(2);
+    }
   </script>
 
 
@@ -438,4 +454,3 @@
 
 
 </html>
-

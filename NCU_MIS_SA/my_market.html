@@ -88,28 +88,22 @@
 
 
 
-        /**
-         * 取得所有商品
-         * @call：addProduct()：畫出一筆商品
-         * @call：setButtonFunction()：按鈕設置
-         * @call：checkIfExistInCart()：
-         */
-        function getAllProduct() {
+    $(document).ready(function() {
+    	getMyShopProduct();    	
+    });
+        function getMyShopProduct() {
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
                 crossDomain: true,
+                data: "shopID=" +2,
                 cache: false,
                 dataType: 'json',
                 timeout: 5000,
                 success: function (response) {
                     if (response.status == 200) {
                         var product_panel = '';
-
-                        $.each(response.response.data, function () {
-                            product_panel += addProduct(this);
-                        })
-
+                        product_panel += addProduct(response.response.data);                      
                         $("#product_panel").append(product_panel);
 
                     }
@@ -120,29 +114,30 @@
             });
         }
 
-        getAllProduct();
+      
 
         /**
          * 畫出一筆商品
          */
         function addProduct(data) {
             let inner_html = '';
+            $.each(data, function (index,val) {
             inner_html += '<div class="col-md-4" style="float:left;">';
             inner_html += '<div class="card-header">';
-            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + val['product_name'] + '</h4>';
             inner_html += '</div>';
             inner_html += '<div class="card mb-4 shadow-sm">';
-            inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+            inner_html += '<img src="' + val['image'] + '" width="200px" height="200px" hspace="50px">';
             inner_html += '<div class="card-body">';
-            inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
-            inner_html += '<p class="card-text">' + data.describe + '</p>';
+            inner_html += '<h1 class="card-title pricing-card-title">$' + val['price'] + ' <small class="text-muted">/ USD</small></h1>';
+            inner_html += '<p class="card-text">' + val['product_info'] + '</p>';
             inner_html += '<div class="d-flex justify-content-between align-items-center">';
             inner_html += '<div class="btn-group">';
-            inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">修改商品</button>';
-            inner_html += '<button id="add_cart_' + data.id + '" name="delete_cart" type="button" class="productcard">刪除商品</button>';
-            inner_html += '</div><small class="text-muted">id:' + data.id + '</small>';
+            inner_html += '<button id="add_cart_' + val['idtbl_product'] + '" name="add_cart" type="button" class="productcard">修改商品</button>';
+            inner_html += '<button id="add_cart_' + val['idtbl_product'] + '" name="delete_cart" type="button" class="productcard">刪除商品</button>';
+            inner_html += '</div><small class="text-muted">id:' + val['idtbl_product'] + '</small>';
             inner_html += '</div></div></div></div>';
-
+            })
             return inner_html;
         }
 

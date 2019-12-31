@@ -33,7 +33,7 @@ public class Order {
     private int order_status; 
     
     /** _total_price，訂單總金額 */
-    private int total_price;
+    private double total_price;
     
     /** create，訂單創建時間 */
     private Timestamp create;
@@ -60,7 +60,7 @@ public class Order {
      * @param total_price 總金額
      */
 
-    public Order(int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, int total_price) {
+    public Order(int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, double total_price) {
         this.memberID = memberID;
         this.buyer_name = buyer_name;
         this.ship_address = ship_address;
@@ -88,7 +88,7 @@ public class Order {
      * @param create 訂單創建時間
      */
 
-    public Order(int idtbl_order, int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, int total_price, Timestamp create) {
+    public Order(int idtbl_order, int memberID, String buyer_name, String ship_address, String cellphone, String product_delivery, String payment, int order_status, double total_price, Timestamp create) {
         this.idtbl_order = idtbl_order;
         this.memberID = memberID;
         this.buyer_name = buyer_name;
@@ -203,7 +203,7 @@ public class Order {
      *
      * @return String 回傳總金額
      */
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return this.total_price;
     }       
     /**

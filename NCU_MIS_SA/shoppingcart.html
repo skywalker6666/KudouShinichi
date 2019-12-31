@@ -214,8 +214,11 @@ function keyEventListen() {
 		}
 		updateCartDataToClent();
 		$('#row_' + id).remove();
-		if (client_cart_obj.length == 0)
-		      alert("請先選擇欲購買商品！");
+		if (client_cart_obj.length == 0){
+			alert("請先選擇欲購買商品！");
+			(location.href='productIndex.html');
+		}
+		      
 		calcSummaryInformation();
 	});
 }
