@@ -106,20 +106,29 @@
 
 
     <script>
-
+    
+    var [client_id]  = getIDFromClient();
 
 
 
 
         $(document).ready(function () {
+        	
             getMyShopProduct();
         });
+        function getIDFromClient() {
+        	let id = JSON.parse(localStorage.getItem("client_id"));
+        	
+        	id = !id ? new Array() : id;
+        	
+        	return [id];
+        }
         function getMyShopProduct() {
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
                 crossDomain: true,
-                data: "shopID=" + 2,
+                data: "sellerID=" + client_id,
                 cache: false,
                 dataType: 'json',
                 timeout: 5000,

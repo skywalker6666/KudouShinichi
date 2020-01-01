@@ -213,17 +213,20 @@ textarea:focus {
 
 
 	<script type="text/javascript">
+	var [client_id]  = getIDFromClient();
+	
 		$(document).ready(function() {
 			// 處理表單點擊事件
 			$('#finish').click(function() {
 				submit();
 			});
+			
 
 			function submit() {
 				var name = $('#product_name').val();
 				var price = $('#product_price').val();
 				var inventory = $('#product_inventory').val();
-				var sellerID = 17;
+				var sellerID = parseInt(client_id.toString());
 				var image = $('#image_name').val();
 				var productinfo = $('#productinfo').val();;
 
@@ -265,6 +268,14 @@ textarea:focus {
 
 			}
 		})
+		
+		function getIDFromClient() {
+        	let id = JSON.parse(localStorage.getItem("client_id"));
+        	
+        	id = !id ? new Array() : id;
+        	
+        	return [id];
+        }
 		
 		 /*------------登入登出實作member cookie-----------*/
    

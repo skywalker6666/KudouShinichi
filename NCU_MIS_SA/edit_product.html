@@ -195,6 +195,7 @@
         var url_string = window.location.href;
         var url = new URL(url_string);
         var productID = url.searchParams.get("id");
+        var [client_id]  = getIDFromClient();
 
         $(document).ready(
             function () {
@@ -206,7 +207,7 @@
 
                 function getEditProduct() {
 
-                    var sellerID = 17;
+                    var sellerID = parseInt(client_id.toString());
                     var data_object = {
                         "productID": productID,
                         "sellerID": sellerID
@@ -241,9 +242,9 @@
 
                 function addProductattr(data) {
                     $.each(data, function (index, val) {
-                        $("#product_name").attr("placeholder", val['product_name']);
-                        $("#product_price").attr("placeholder", val['price']);
-                        $("#product_inventory").attr("placeholder", val['inventory']);
+                        $("#product_name").val(val['product_name']);
+                        $("#product_price").val(val['price']);
+                        $("#product_inventory").val(val['inventory']);
                         $("#productinfo").val(val['product_info']);
                         $("#image_name").val(val['image']);
 
@@ -310,6 +311,13 @@
                 }
             }
         )
+        function getIDFromClient() {
+        	let id = JSON.parse(localStorage.getItem("client_id"));
+        	
+        	id = !id ? new Array() : id;
+        	
+        	return [id];
+        }
 
 
 
