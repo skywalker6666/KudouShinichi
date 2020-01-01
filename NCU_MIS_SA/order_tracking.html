@@ -29,15 +29,7 @@
         .slider.round:before {
             border-radius: 50%;
         }
-        .box {
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            left: 50%;
-            top: 60%;
-            margin-top: -250px;
-            margin-left: -400px;
-        }
+        
         .box2 {
             width: 600px;
             height: 400px;
@@ -62,6 +54,41 @@
             background-color: #f44336;
             color: white;
         }
+     .orderstatus{
+        	width: 800px;
+            height: 300px;
+            position: fixed;
+            left: 50%;
+            top: 60%;
+            margin-top: -250px;
+            margin-left: -400px;
+			border: 0px solid #000;			
+			background: #FBEE98;
+			border-radius: 20px;
+			z-index: 1;
+		}
+	 .ordertrackingtable{
+			width: 800px;            
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            margin-top: -20px;
+            margin-left: -400px;			
+			border-radius: 20px;
+	}   
+	.fixTableDiv {
+			
+			width: 800px;            
+            position: fixed;
+            left: 50%;
+            top: 80%;
+            margin-top: -20px;
+            margin-left: -400px;			
+			border-radius: 20px;
+	}
+    
+   
+    
     </style>
     <link rel="stylesheet" href="statics/css/navbar.css">
     <link rel="stylesheet" href="statics/css/themebox.css">
@@ -98,12 +125,13 @@
 			<li id="user_name"class="navbarFloating">user</li>
 		</div>
 	</ul>
-    <div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
+    <div class="orderstatus" >
         <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;訂單追蹤</font>
         <br>
         <button id="sent">已到店寄件</button>
         <button id="reached">已送達目標門市</button>
-        <div style="font-family:DFKai-sb">
+        
+        <p>訂單編號 </p>
             <ul class="__inline" id="menu" style="list-style-type:none;">
                 <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
                         width="100px"></img>
@@ -122,10 +150,9 @@
                     <p><Br>完成取貨</p>
                 </li>
             </ul>
-        </div>
-        <div style="font-family:DFKai-sb">
+        
             <ul class="point" id="" style="list-style-type:none; ">
-                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 1.png" style="float: left"
+                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
 
@@ -144,34 +171,43 @@
                 </li>
             </ul>
         </div>
-        <table bgcolor="#FBEE98" style="width:100%" id="table">
-            <thead>
-                <tr>
-                	<th>訂單狀態</th>
-                    <th>訂單編號</th>
-                    <th>商品總金額</th>
-                    <th>運送方式</th>                                      
-                    <th>訂單建立時間</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        
+	        <div class="ordertrackingtable">
+		        <table  style="width:100%" id="table">
+		            <thead>
+		                <tr>
+		                	<th>訂單詳細內容</th>
+		                    <th>訂單編號</th>
+		                    <th>商品總金額</th>
+		                    <th>運送方式</th>                                      
+		                    <th>訂單建立時間</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            </tbody>
+		        </table>
+	        </div>
+	 
  <script type="text/javascript">
-           function getAllOrder() {
+		 $(document).ready(function() {
+		     getMyOrder();              
+		 });
+           function getMyOrder() {
+        	   
                // 發出GET請求取得所有訂單列表
                $.ajax({
                        type: "GET",
                        url: "api/order.do",
                        crossDomain: true,
                        cache: false,
+                       data: "order_info.memberID="+13,
                        dataType: 'json',
                        timeout: 50000,
                        success: function (response) {
                            if(response.status == 200){
                                updateTable(response.response.data);
                                showOrderStatus(response.response.data);
-                             
+                               updateAndReturnOrderStatus(response.response.data);
                            }
                            console.log(response);
                        },
@@ -185,7 +221,7 @@
        		   
        		$.each(data,function(index,val){
        			var id=val['order_info']['idtbl_order'];
-         	   $("#order_"+id).click(function(){
+         	   $("#order"+id).click(function(){
          		   	if(val['order_info']['order_status']==1)
          		   		for(var i=1;i<=4;i++){
          	           	   	if(i==1){
@@ -231,7 +267,7 @@
             	   $.each(value['product_info'],function(index,value){
             		   cost+=value['subtotal'];
             		})
-            	   table_html += '<tr><td scope="row" align="center"><button id="order_'+ value['order_info']['idtbl_order']+'">查看訂單狀態</button></td>';
+            	   table_html += '<tr id="order'+value['order_info']['idtbl_order']+'"><td scope="row" align="center"><button id="order_'+ value['order_info']['idtbl_order']+'">查看訂單詳細內容</button></td>';
                    table_html += '<td align="center">' + value['order_info']['idtbl_order'] + '</td>';
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
@@ -243,10 +279,29 @@
                $("#table > tbody").append(table_html);
            }
            
-           
-           $(document).ready(function() {
-               getAllOrder();              
+           function updateAndReturnOrderStatus(){
+        	   $.ajax({
+                   type: "PUT",
+                   url: "api/order.do",
+                   crossDomain: true,
+                   cache: false,
+                   dataType: 'json',
+                   timeout: 50000,
+                   success: function (response) {
+                       if(response.status == 200){
+                           updateTable(response.response.data);
+                           showOrderStatus(response.response.data);
+                         
+                       }
+                       console.log(response);
+                   },
+                   error: function () {
+                       ///alert("無法連線到伺服器！");
+                   }
            });
+           }
+           
+         
            $("#sent").click(function(){
         	   
         	   for(var i=1;i<=4;i++){
@@ -323,7 +378,7 @@
          
           /*----------------------------------------*/
        </script>
-    </div>
+    
 
 
 

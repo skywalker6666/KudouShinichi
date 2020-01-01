@@ -48,7 +48,7 @@ public class OrderProduct {
      * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int price, int product_quantities, double subtotal) {
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities, double subtotal) {
         this.idtbl_ordeproduct = idtbl_ordeproduct;
         this.product_quantities = product_quantities;
         this.price = price;
@@ -125,6 +125,7 @@ public class OrderProduct {
         JSONObject data = new JSONObject();
         data.put("idtbl_orderproduct", getId());
         data.put("productID", getProduct().getData());
+        data.put("sellerID", getProduct().getData());
         data.put("price", getPrice());
         data.put("product_quantities", getQuantity());
         data.put("subtotal", getSubTotal());

@@ -16,8 +16,8 @@ public class Product {
     /** inventory，產品庫存 */
     private int inventory;
     
-    /** shopID，賣場編號 */
-    private int shopID;
+    /** sellerID，賣場編號 */
+    private int sellerID;
 
     /** is_deleted，是否被刪除 */
     private int is_deleted;
@@ -46,11 +46,11 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String product_name, int price, int inventory, int shopID,  String image,String product_info) {
+	public Product(String product_name, int price, int inventory, int sellerID,  String image,String product_info) {
 		this.product_name = product_name;
 		this.price = price;
 		this.inventory=inventory;
-		this.shopID=shopID;		
+		this.sellerID=sellerID;		
 		this.image = image;
 		this.product_info=product_info;
 	}
@@ -65,23 +65,23 @@ public class Product {
      * @param image 產品圖片
      * @param product_info 產品敘述
      */
-	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, int is_deleted, String image, String product_info) {
+	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, int is_deleted, String image, String product_info) {
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
 		this.inventory=inventory;
-		this.shopID=shopID;
+		this.sellerID=sellerID;
 		this.is_deleted=is_deleted;
 		this.image = image;
 		this.product_info=product_info;
 	}
 	
-	public Product(int idtbl_product, String product_name, int price, int inventory, int shopID, String image, String product_info) {
+	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, String image, String product_info) {
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
 		this.inventory=inventory;
-		this.shopID=shopID;
+		this.sellerID=sellerID;
 		this.image = image;
 		this.product_info=product_info;
 	}
@@ -127,8 +127,8 @@ public class Product {
      *
      * @return int 回傳賣場ID
      */
-	public int getShopID() {
-		return this.shopID;
+	public int getSellerID() {
+		return this.sellerID;
 	}
 	
 	/**
@@ -170,7 +170,7 @@ public class Product {
         jso.put("product_name", getName());
         jso.put("price", getPrice());
         jso.put("inventory", getInventory());
-        jso.put("shopID", getShopID());
+        jso.put("sellerID", getSellerID());
         jso.put("is_deleted", getIsDeleted());
         jso.put("image", getImage());
         jso.put("product_info", getProductInfo());
