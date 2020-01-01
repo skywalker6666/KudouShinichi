@@ -296,12 +296,16 @@ textarea:focus {
      	localStorage.setItem("client_id", JSON.stringify(client_id));
      	localStorage.setItem("client_name", JSON.stringify(client_name));
      	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
      }
     
     function loguot() {
       client_id = [];
       client_name = [];
+      client_cart_obj = [];
+      client_cart_amount = [];
       updateMemberDataToClent();
       client_isSeller = [];
       updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent

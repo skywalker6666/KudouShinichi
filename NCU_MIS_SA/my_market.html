@@ -68,8 +68,8 @@
 		<div id="member_center1" class="mediumbox" style="float: right">
 			<li style="float: left"><a class="navbarFloating"
 				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating"
-				href="index.html">&nbsp;登出 </a></li>
+			<li style="float: left"><a id="remove" class="navbarFloating" href="index.html"
+				>&nbsp;登出 </a></li>
 			<li style="float: left">
 	
 		</div>
@@ -108,6 +108,7 @@
     <script>
     
     var [client_id]  = getIDFromClient();
+    var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
 
 
 
@@ -122,6 +123,13 @@
         	id = !id ? new Array() : id;
         	
         	return [id];
+        }
+        function getCartDataFromClient() {
+            let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+            let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+            cart = !cart ? new Array() : cart;
+            amount = !amount ? new Array() : amount;
+            return [cart, amount];
         }
         function getMyShopProduct() {
             $.ajax({
@@ -223,24 +231,28 @@
        	return [id, name, isSeller];
        }
    	
-        function updateMemberDataToClent() {
-        	localStorage.setItem("client_id", JSON.stringify(client_id));
-        	localStorage.setItem("client_name", JSON.stringify(client_name));
-        	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+       function updateMemberDataToClent() {
+           localStorage.setItem("client_id", JSON.stringify(client_id));
+           localStorage.setItem("client_name", JSON.stringify(client_name));
+           localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+           localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+           localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
-        }
+       }
        
        function loguot() {
-         client_id = [];
-         client_name = [];
-         updateMemberDataToClent();
-         client_isSeller = [];
-         updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
-         $("#member_center1").hide();
-         $("#member_center2").hide();
-         $("#member_center3").hide();
-         $("#signup_in").show();
-         $("#user_name").empty();
+    	   client_id = [];
+           client_name = [];
+           updateMemberDataToClent();
+           client_isSeller = [];
+           client_cart_obj = [];
+           client_cart_amount = [];
+           updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+           $("#member_center1").hide();
+           $("#member_center2").hide();
+           $("#member_center3").hide();
+           $("#signup_in").show();
+           $("#user_name").empty();
        }
        
        $("#remove").click(function () {

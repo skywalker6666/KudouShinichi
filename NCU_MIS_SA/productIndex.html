@@ -125,8 +125,15 @@
                         })
 
                         $("#product_panel").append(product_panel);
+                        
+                       
+                        
                         setButtonFunction();
                         checkIfExistInCart();
+                        if(client_isSeller.length==0){
+                         	console.log("Hi")
+                         	$('.productcard').attr('disabled', true);
+                         }
                     }
                     console.log(response);
                 },
@@ -137,6 +144,12 @@
         }
 
         getAllProduct();
+        
+ $(document).ready(function () {
+        	
+	
+        });
+        
 
         /**
          * 畫出一筆商品
@@ -265,6 +278,8 @@
             localStorage.setItem("client_id", JSON.stringify(client_id));
             localStorage.setItem("client_name", JSON.stringify(client_name));
             localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
         }
 
@@ -273,6 +288,8 @@
             client_name = [];
             updateMemberDataToClent();
             client_isSeller = [];
+            client_cart_obj = [];
+            client_cart_amount = [];
             updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
             $("#member_center1").hide();
             $("#member_center2").hide();

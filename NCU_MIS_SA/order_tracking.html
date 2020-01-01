@@ -195,9 +195,18 @@
 
         //判斷是否是賣家我的賣場
         var [client_isSeller] = getisSellerFromClient();
+        var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+        
         $("#myMarket").hide();
         if (parseInt(client_isSeller.toString()) == 1) {
             $("#myMarket").show();
+        }
+        function getCartDataFromClient() {
+            let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+            let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+            cart = !cart ? new Array() : cart;
+            amount = !amount ? new Array() : amount;
+            return [cart, amount];
         }
 
         function getisSellerFromClient() {
@@ -359,6 +368,8 @@
             localStorage.setItem("client_id", JSON.stringify(client_id));
             localStorage.setItem("client_name", JSON.stringify(client_name));
             localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
         }
 
@@ -367,7 +378,12 @@
             client_name = [];
             updateMemberDataToClent();
             client_isSeller = [];
+            updateMemberDataToClent();
+            client_cart_obj = [];
+            updateMemberDataToClent();
+            client_cart_amount = [];
             updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            
             $("#member_center1").hide();
             $("#member_center2").hide();
             $("#member_center3").hide();
