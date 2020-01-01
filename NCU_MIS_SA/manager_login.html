@@ -8,6 +8,8 @@
 	</style>
  	<link rel="stylesheet" href="statics/css/register&login.css">
  	<link rel="stylesheet" href="statics/css/navbar.css">
+ 	<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+ 	
 </head>
 <body bgcolor="#BCE2FF">	
 
@@ -32,7 +34,7 @@
 					<label for="password">管理員密碼</label>
 					<input class="field" name="password" type="password" id="manager_password" required="required" >				   
 				</div>
-				<div type="submit"><button class="button" id="login" >登入</button></div>
+				<button type="button" class="button" id="login" >登入</button>
 			</form>
 		</div>
 	</div>
@@ -46,18 +48,24 @@
 	    	let id = JSON.parse(localStorage.getItem("manager_id"));
 	    	let name = JSON.parse(localStorage.getItem("manager_name"));
 	    	let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
+	    	
 	    	id = !id ? new Array() : id;
 	    	name = !name ? new Array() : name;
 	    	isLeader = !isLeader ? new Array() : isLeader;
+	    	
+
 	    	return [id, name, isLeader];
 	    }
 		
 		
 		function addDataToManager(id, name, isLeader) {
 	    	if (!(manager_id.includes(id))) {
+	    		manager_id=[];
+	    		manager_name=[];
+	    		manager_isLeader=[];
 	    		manager_id.push(id);
 	    		manager_name.push(name);
-	    		manager_isLeader.push(isLeader)
+	    		manager_isLeader.push(isLeader);
 	    		updateManagerDataToClent();
 	    	}
 	    }
@@ -72,8 +80,8 @@
 	     function getThisManager() {
 	    	 var name = $('#manager_name').val();
 	    	 var data = {
-	    			"name": $("#manager_name").val(),
-	     			"password": $("#manager_password").val()
+	    			"managerName": $("#manager_name").val(),
+	     			"managerPassword": $("#manager_password").val()
 	     	}
 	     	// 驗證輸入的資料
 	     	pass_vaild = vaildData(data);
@@ -89,12 +97,17 @@
 					success : function(response) {
 						
 						if (response.status == 200) {
-							alert("WCNMB");
 							var id = response.response.data["0"].idtbl_manager;
 							var name = response.response.data["0"].name;
 							var isLeader = response.response.data["0"].isLeader;
-							addDataToManager(id,name,isLeader); 
- 							document.location.href = "index.html"; 
+							var Deleted = response.response.data["0"].isDeleted;
+							if(Deleted != 1){
+								addDataToManager(id,name,isLeader); 
+								document.location.href = "manager_center.html";
+							}
+							else{
+								alert("你的帳號已被刪除");
+							}
  
 						}
 						alert(response.message);
@@ -125,9 +138,9 @@
 	  
 	     function vaildData(data) {
 	    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-	     	if (data["name"] == "" || data["password"] == ""){
+	     	if (data["managerName"] == "" || data["managerPassword"] == ""){
 	     		alert("必填寫欄位不得有空值！");
-	     	}else if(data['password'] != "" && !password_rule.test(data['password'])) {
+	     	}else if(data['managerPassword'] != "" && !password_rule.test(data['managerPassword'])) {
                 alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
             }
 	     	else{//都正確

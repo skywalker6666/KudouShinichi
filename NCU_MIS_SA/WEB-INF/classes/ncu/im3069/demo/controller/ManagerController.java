@@ -99,14 +99,22 @@ public class ManagerController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String id = jsr.getParameter("idtbl_manager");
-      //  String isLeader =jsr.getParameter("isLeader");
-    
+        String name =jsr.getParameter("managerName");
+        String isLeader =jsr.getParameter("isLeader");
+        String password = jsr.getParameter("managerPassword");
+        String isDeleted= jsr.getParameter("isDeleted");
+        
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(isLeader);
+        System.out.println(password);
+        System.out.println(isDeleted);
 
         /** 判斷該字串是否存在，若存在代表要取回個別管理員之資料，否則代表要取回全部資料庫內管理員之資料 */
-        if (id.isEmpty()) {
+        if (id.isEmpty()&&(isDeleted.isEmpty()&&isLeader.isEmpty()&&password.isEmpty())) {
             /** 透過ManagerHelper物件之getAll()方法取回所有管理員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mgh.getAll();
-            System.out.println("hsadfasdfi");
+            System.out.println("hssdfi");
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
             JSONObject resp = new JSONObject();
             resp.put("status", "200");
@@ -116,6 +124,42 @@ public class ManagerController extends HttpServlet {
             /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
             jsr.response(resp, response);
         }
+        if(!name.isEmpty()&&!password.isEmpty())
+        {
+        	Manager mg=new Manager(name,password);
+
+        	if (mgh.checkIfHasThisAccount(mg)) {
+       		 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
+               JSONObject query = mgh.getByNamePassword(name,password);
+               System.out.println("ksdfaasdf11111");
+               /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+               JSONObject resp = new JSONObject();
+               resp.put("status", "200");
+               resp.put("message", "登入成功");
+               resp.put("response", query);
+       
+               /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+               jsr.response(resp, response);
+           }
+           else {
+               /** 以字串組出JSON格式之資料 */
+               String resp = "{\"status\": \'400\', \"message\": \'登入失敗，姓名或密碼錯誤！\', \'response\': \'\'}";
+               /** 透過JsonReader物件回傳到前端（以字串方式） */
+               jsr.response(resp, response);
+           }
+//            JSONObject query = mgh.getByNamePassword(name,password);
+//            System.out.println("WTF 我終於進來了");
+//            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+//            JSONObject resp = new JSONObject();
+//            resp.put("status", "200");
+//            resp.put("message", "所有管理員資料取得成功");
+//            resp.put("response", query);
+//    
+//            /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+//            jsr.response(resp, response);
+        }
+
+ 
 //        if(!isLeader.isEmpty()){
 //          /** 透過ManagerHelper物件的getByID()方法自資料庫取回該名管理員之資料，回傳之資料為JSONObject物件 */
 //            JSONObject query = mgh.getByIsLeader(isLeader);

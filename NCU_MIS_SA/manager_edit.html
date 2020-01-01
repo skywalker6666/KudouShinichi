@@ -143,7 +143,7 @@ input:checked+.slider:before {
 	<script type="text/javascript">
 	 var url_string = window.location.href;
      var url = new URL(url_string);
-     var idtbl_manager = url.searchParams.get("manager_id");
+     //var idtbl_manager = url.searchParams.get("manager_id");
      idtbl_manager =1;//先假設為id=1
      var sql_num = 0;
 
@@ -219,6 +219,8 @@ input:checked+.slider:before {
      }
 
      function getmanager() {
+         let idtbl_manager =JSON.parse(localStorage.getItem("manager_id")); 
+
          $.ajax({
              type: "GET",
              url: "api/manager.do",
