@@ -71,11 +71,12 @@ public class MemberHelper {
             conn = DBMgr.getConnection();
             
             /** SQL指令 */
-            String sql = "DELETE FROM `missa`.`tbl_member` WHERE `idtbl_member` = ? LIMIT 1";
+            String sql = "Update `missa`.`tbl_member` SET `isDeleted` = ? WHERE`idtbl_member` = ? ";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setInt(1, 1);
+            pres.setInt(2, id);
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -131,7 +132,7 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_member`";
+            String sql = "SELECT * FROM `missa`.`tbl_member` WHERE `isDeleted` <> 1";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);

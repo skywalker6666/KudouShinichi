@@ -181,7 +181,7 @@ public class Manager {
     }
     
     public int getisDeleted() {
-    	return this.isDeleted;
+     return this.isDeleted;
     }
     
     /**

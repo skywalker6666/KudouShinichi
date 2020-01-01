@@ -106,7 +106,7 @@ public class ManagerController extends HttpServlet {
         if (id.isEmpty()) {
             /** 透過ManagerHelper物件之getAll()方法取回所有管理員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mgh.getAll();
-            
+            System.out.println("hsadfasdfi");
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
             JSONObject resp = new JSONObject();
             resp.put("status", "200");
@@ -117,7 +117,7 @@ public class ManagerController extends HttpServlet {
             jsr.response(resp, response);
         }
 //        if(!isLeader.isEmpty()){
-//        	 /** 透過ManagerHelper物件的getByID()方法自資料庫取回該名管理員之資料，回傳之資料為JSONObject物件 */
+//          /** 透過ManagerHelper物件的getByID()方法自資料庫取回該名管理員之資料，回傳之資料為JSONObject物件 */
 //            JSONObject query = mgh.getByIsLeader(isLeader);
 //            
 //            /** 新建一個JSONObject用於將回傳之資料進行封裝 */

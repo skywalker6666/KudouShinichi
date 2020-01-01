@@ -1,4 +1,3 @@
-
 package ncu.im3069.demo.app;
 
 import java.sql.*;
@@ -72,11 +71,13 @@ public class ManagerHelper {
             conn = DBMgr.getConnection();
             
             /** SQL指令 */
-            String sql = "DELETE FROM `missa`.`tbl_manager` WHERE `idtbl_manager` = ? LIMIT 1";
+            String sql = "Update `missa`.`tbl_manager` SET `isDeleted` = ?   WHERE `idtbl_manager` = ?";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setInt(1, 1);
+            pres.setInt(2, id);
+            
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -116,7 +117,7 @@ public class ManagerHelper {
      */
     public JSONObject getAll() {
         /** 新建一個 manager 物件之 m 變數，用於紀錄每一位查詢回之管理員資料 */
-    	Manager m = null;
+     Manager m = null;
         /** 用於儲存所有檢索回之管理員，以JSONArray方式儲存 */
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
@@ -132,7 +133,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_manager`";
+            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE `isDeleted` <> 1";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -216,7 +217,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE `idtbl_manager` = ? LIMIT 1";
+            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE idtbl_manager = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -301,7 +302,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE `isSeller` = ?";
+            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE isSeller = ?";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -378,7 +379,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE `idtbl_manager` = ? LIMIT 1";
+            String sql = "SELECT * FROM `missa`.`tbl_manager` WHERE idtbl_manager = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -427,7 +428,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `missa`.`tbl_manager` WHERE `managerName` = ?";
+            String sql = "SELECT count(*) FROM `missa`.`tbl_manager` WHERE managerName = ?";
 
             /** 取得所需之參數 */
             String managerName = mg.getmanagerName();
@@ -527,12 +528,6 @@ public class ManagerHelper {
         return response;
     }
     
-    /**
-     * 更新一名管理員之管理員資料
-     *
-     * @param m 一名管理員之manager物件
-     * @return the JSONObject 回傳SQL指令執行結果與執行之資料
-     */
     public JSONObject update(Manager mg) {
         /** 紀錄回傳之資料 */
         JSONArray jsa = new JSONArray();
@@ -547,7 +542,7 @@ public class ManagerHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `missa`.`tbl_manager` SET `managerName` = ? ,`managerPassword` = ?  WHERE `idtbl_manager` = ?";
+            String sql = "Update `missa`.`tbl_manager` SET managerName = ? ,`managerPassword` = ?  WHERE idtbl_manager = ?";
             /** 取得所需之參數 */
             int idtbl_manager = mg.getID();
             String managerName = mg.getmanagerName();
@@ -609,7 +604,7 @@ public class ManagerHelper {
 ////            /** 取得資料庫之連線 */
 //            conn = DBMgr.getConnection();
 //            /** SQL指令 */
-//            String sql = "Update `missa`.`tbl_manager` SET `login_times` = ? WHERE `idtbl_manager` = ?";
+//            String sql = "Update `missa`.`tbl_manager` SET login_times = ? WHERE idtbl_manager = ?";
 ////            /** 取得管理員編號 */
 //            int id = m.getID();
 ////            
@@ -650,7 +645,7 @@ public class ManagerHelper {
 //            /** 取得資料庫之連線 */
 //            conn = DBMgr.getConnection();
 //            /** SQL指令 */
-//            String sql = "Update `missa`.`tbl_manager` SET `status` = ? WHERE `idtbl_manager` = ?";
+//            String sql = "Update `missa`.`tbl_manager` SET status = ? WHERE idtbl_manager = ?";
 //            /** 取得管理員編號 */
 //            int id = m.getID();
 //            
