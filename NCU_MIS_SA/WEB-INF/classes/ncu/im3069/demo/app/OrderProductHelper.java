@@ -40,6 +40,7 @@ public class OrderProductHelper {
             
             /** 取得所需之參數 */
             int productID = op.getProduct().getID();
+            int sellerID = op.getProduct().getSellerID();
             int unit_price = op.getPrice();
             int product_quantities = op.getQuantity();
             double subtotal = op.getSubTotal();
@@ -49,13 +50,13 @@ public class OrderProductHelper {
                 conn = DBMgr.getConnection();
                 /** SQL指令 */
                 String sql = "INSERT INTO `missa`.`tbl_orderproduct`(`orderID`, `productID`, `sellerID`, `unit_price`, `product_quantities`, `subtotal`)"
-                        + " VALUES(?, ?, ?, ?, ?)";
+                        + " VALUES(?, ?, ?, ?, ?,?)";
                 
                 /** 將參數回填至SQL指令當中 */
                 pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pres.setLong(1, orderID);
                 pres.setInt(2, productID);
-                pres.setInt(3, productID);
+                pres.setInt(3, sellerID);
                 pres.setInt(4, unit_price);
                 pres.setInt(5, product_quantities);
                 pres.setDouble(6, subtotal);

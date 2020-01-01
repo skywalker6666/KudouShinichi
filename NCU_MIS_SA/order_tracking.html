@@ -193,21 +193,22 @@
 		     getMyOrder();              
 		 });
            function getMyOrder() {
-        	   
+        	   var [member_id,member_name]=getMemberDataFromClient();
                // 發出GET請求取得所有訂單列表
+               alert(member_id);
                $.ajax({
                        type: "GET",
                        url: "api/order.do",
                        crossDomain: true,
                        cache: false,
-                       data: "order_info.memberID="+13,
+                       data: "memberID="+member_id,
                        dataType: 'json',
                        timeout: 50000,
                        success: function (response) {
                            if(response.status == 200){
                                updateTable(response.response.data);
                                showOrderStatus(response.response.data);
-                               updateAndReturnOrderStatus(response.response.data);
+                               //updateAndReturnOrderStatus(response.response.data);
                            }
                            console.log(response);
                        },
@@ -220,9 +221,9 @@
        	   function showOrderStatus(data){
        		   
        		$.each(data,function(index,val){
-       			var id=val['order_info']['idtbl_order'];
+       			var id=data.order_info.idtbl_order;
          	   $("#order"+id).click(function(){
-         		   	if(val['order_info']['order_status']==1)
+         		   	if(data.order_info.order_status==1)
          		   		for(var i=1;i<=4;i++){
          	           	   	if(i==1){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -230,7 +231,7 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	}
-         			else if(val['order_info']['order_status']==2)
+         			else if(data.order_info.order_status==2)
          				for(i=1;i<=4;i++){
          	           	   	if(i==2){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -238,7 +239,7 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(val['order_info']['order_status']==3)
+         		   	else if(data.order_info.order_status==3)
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==3){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -246,7 +247,7 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(val['order_info']['order_status']==4)
+         		   	else if(data.order_info.order_status==4)
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==4){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -264,14 +265,15 @@
                
                $.each(data, function(index, value) {
             	   var cost=0;
-            	   $.each(value['product_info'],function(index,value){
-            		   cost+=value['subtotal'];
+            	   $.each(data.product_info,function(index,value){
+            		   cost+=data.product_info[index].subtotal;
             		})
-            	   table_html += '<tr id="order'+value['order_info']['idtbl_order']+'"><td scope="row" align="center"><button id="order_'+ value['order_info']['idtbl_order']+'">查看訂單詳細內容</button></td>';
-                   table_html += '<td align="center">' + value['order_info']['idtbl_order'] + '</td>';
+            		//alert(value['order_info']['idtbl_order']);
+            	   table_html += '<tr id="order'+data.order_info.idtbl_order+'"><td scope="row" align="center"><button id="order_'+ data.order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+                   table_html += '<td align="center">' + data.order_info.idtbl_order + '</td>';
                    table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
-                   table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
-                   table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
+                   table_html += '<td align="center">' + data.order_info.product_delivery + '</td>';
+                   table_html += '<td align="center">' + data.order_info.create+ '</td>';
                    
                   
                })
