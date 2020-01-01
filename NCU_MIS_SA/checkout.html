@@ -2,528 +2,533 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author"
-	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Jekyll v3.8.5">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
 
-<title>CheckOut</title>
+    <title>CheckOut</title>
 
-<!-- Bootstrap core CSS -->
-<link href="statics/css/bootstrap.min.css" rel="stylesheet">
-<link href="statics/css/font-awesome.min.css" rel="stylesheet">
-<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <!-- Bootstrap core CSS -->
+    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
+    <link href="statics/css/font-awesome.min.css" rel="stylesheet">
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
 
-<style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-</style>
+        @media (min-width : 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
-<link rel="stylesheet" href="statics/css/card.css">
-<link href="statics/css/product.css" rel="stylesheet">
-<link href="statics/css/jquery-confirm.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="statics/css/navbar.css">
+    <link rel="stylesheet" href="statics/css/themebox.css">
+    <link rel="stylesheet" href="statics/css/card.css">
+    <link href="statics/css/product.css" rel="stylesheet">
+    <link href="statics/css/jquery-confirm.css" rel="stylesheet">
 
 </head>
 
 <body>
-<div id="header">
-  <!--容器分為左圖右導覽連結 -->
-  <div class="navbar">
-      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
-    <!--導覽列 -->
-    <nav>
-     <ul class="navbar">
-		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
-		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
-		
-		<div id="member_center1" class="mediumbox" style="float: right">
-			<li style="float: left"><a class="navbarFloating"
-				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating"
-				href="index.html">&nbsp;登出 </a></li>
-			<li style="float: left">
-	
-		</div>
-		<div id="member_center2" class="smallbox" style="float: right"> 
-			<li><img src="statics/img/navbar/shoppingcart.png"
-				style="float: left" height="20px" width="20px"></img></li>
-			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-		</div>
-		<div id="member_center3" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/user.png" style="float: left"
-				height="20px" width="20px"></img></li>
-			<li id="user_name"class="navbarFloating">user</li>
-		</div>
-	</ul>
-    </nav>
-  </div>
-</div>
-	<div class="frame">
-		<div class="container">
-			<div class="py-5">
-				<div class='row'>
-					<div class="col-md-4 order-md-2 mb-4">
-						<h4 class="d-flex justify-content-between align-items-center mb-3">
-							<span class="text-muted">總計</span> <span id="date"
-								class="badge badge-secondary badge-pill">YYYY/MM/DD</span>
-						</h4>
-						<ul class="list-group mb-3">
-							<li
-								class="list-group-item d-flex justify-content-between lh-condensed">
-								<div>
-									<h6 class="my-0">品項數量</h6>
-									<small class="text-muted">Items</small>
-								</div> <span id="total_item" class="text-muted">0</span>
-							</li>
-							<li
-								class="list-group-item d-flex justify-content-between bg-light">
-								<div class="text-success">
-									<h6 class="my-0">產品總量</h6>
-									<small>Quantities</small>
-								</div> <span id="total_quantity" class="text-success">0</span>
-							</li>
-							<li class="list-group-item d-flex justify-content-between"><span>Total
-									(USD)</span> <strong>$ <span id="summary">0.00</span></strong></li>
-						</ul>
-						<button id="check" class="btn btn-primary btn-lg btn-block"
-							type="button">結帳</button>
-						<button id="clean" class="btn btn-dark btn-lg btn-block"
-							type="button">清空購物車</button>
-					</div>
+    <div id="header">
+        <!--容器分為左圖右導覽連結 -->
+        <div class="navbar">
+            <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo" /></a>
+            <!--導覽列 -->
+            <nav>
+                <ul class="navbar">
+                    <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
+                                height="100px" width="100px"></img></a></li>
+                    <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+                    <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+                    <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+                    <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+                    <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
+                    <li id="signup_in" style="float: right"><a class="navbarItemSide"
+                            href="login_selected.html">會員註冊/登入</a></li>
 
-					<div class="col-md-8 order-md-1">
+                    <div id="member_center1" class="mediumbox" style="float: right">
+                        <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+                        <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a>
+                        </li>
+                        <li style="float: left">
 
-						<h4 class="mb-3">商品資訊確認</h4>
-						<hr class="mb-4">
-						<div class="row">
-							<div class="table-responsive">
-								<table id="cart_table" class="table table-striped table-sm">
-									<thead>
-										<tr>
-											<th class="text-center" style="width: 10%">商品編號</th>
-											<th class="text-center" style="width: 30%">品名</th>
-											<th class="text-center" style="width: 15%">單價</th>
-											<th class="text-center" style="width: 10%">數量</th>
-											<th class="text-center" style="width: 15%">小計</th>
-											<th class="text-center" style="width: 10%">刪除</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div>
-						</div>
+                    </div>
+                    <div id="member_center2" class="smallbox" style="float: right">
+                        <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px"
+                                width="20px"></img></li>
+                        <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+                    </div>
+                    <div id="member_center3" class="smallbox" style="float: right">
+                        <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img>
+                        </li>
+                        <li id="user_name" class="navbarFloating">user</li>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="frame">
+        <div class="container">
+            <div class="py-5">
+                <div class='row'>
+                    <div class="col-md-4 order-md-2 mb-4">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-muted">總計</span> <span id="date"
+                                class="badge badge-secondary badge-pill">YYYY/MM/DD</span>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                <div>
+                                    <h6 class="my-0">品項數量</h6>
+                                    <small class="text-muted">Items</small>
+                                </div> <span id="total_item" class="text-muted">0</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between bg-light">
+                                <div class="text-success">
+                                    <h6 class="my-0">產品總量</h6>
+                                    <small>Quantities</small>
+                                </div> <span id="total_quantity" class="text-success">0</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between"><span>Total
+                                    (USD)</span> <strong>$ <span id="summary">0.00</span></strong></li>
+                        </ul>
+                        <button id="check" class="btn btn-primary btn-lg btn-block" type="button">結帳</button>
+                        <button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
+                    </div>
 
-						<h4 class="mb-3">個人資訊</h4>
-						<hr class="mb-4">
-						<div class="row">
-							<div class="col-md-6 mb-4">
-								<label for="firstName">姓名</label> <input type="text"
-									class="form-control" id="buyer_name" maxlength="10"
-									placeholder="" value="" required>
-							</div>
-						</div>
+                    <div class="col-md-8 order-md-1">
+
+                        <h4 class="mb-3">商品資訊確認</h4>
+                        <hr class="mb-4">
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table id="cart_table" class="table table-striped table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 10%">商品編號</th>
+                                            <th class="text-center" style="width: 30%">品名</th>
+                                            <th class="text-center" style="width: 15%">單價</th>
+                                            <th class="text-center" style="width: 10%">數量</th>
+                                            <th class="text-center" style="width: 15%">小計</th>
+                                            <th class="text-center" style="width: 10%">刪除</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h4 class="mb-3">個人資訊</h4>
+                        <hr class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="firstName">姓名</label> <input type="text" class="form-control"
+                                    id="buyer_name" maxlength="10" placeholder="" value="" required>
+                            </div>
+                        </div>
 
 
-						<div class="mb-3">
-							<label for="phonenum">手機號碼:</label><br /> <input id="cellphone"
-								type="tel" class="form-control" maxlength="12"
-								placeholder="09xx-xxx-xxx" required>
-						</div>
+                        <div class="mb-3">
+                            <label for="phonenum">手機號碼:</label><br /> <input id="cellphone" type="tel"
+                                class="form-control" maxlength="12" placeholder="09xx-xxx-xxx" required>
+                        </div>
 
-						<div class="mb-3">
-							<label for="address">住址</label> <input type="text"
-								class="form-control" id="address" maxlength="255"
-								placeholder="請輸入有效之地址！" required>
-						</div>
-					
-						<div>運送方式:<br>						
-								<input id="PD1" type="radio" name="ProductDelivery"  value="超商取貨" /> 超商取貨 <br>
-								<input id="PD2" type="radio" name="ProductDelivery"  value="宅配到府" /> 宅配到府
-						</div>
-						<div id="delivery_fee">運費</div>
-						<div>付款方式:<br>						
-								<input  type="radio" name="Payment"  value="貨到付款"/> 貨到付款 <br>
-								<input  type="radio" name="Payment"  value="信用卡付款"/>信用卡付款 
-						</div>
-					
+                        <div class="mb-3">
+                            <label for="address">住址</label> <input type="text" class="form-control" id="address"
+                                maxlength="255" placeholder="請輸入有效之地址！" required>
+                        </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<script src="statics/js/jquery-3.4.1.min.js"></script>
-	<script src="statics/js/jquery-confirm.js"></script>
-	<script src="statics/js/popper.min.js"></script>
+                        <div>運送方式:<br>
+                            <input id="PD1" type="radio" name="ProductDelivery" value="超商取貨" /> 超商取貨 <br>
+                            <input id="PD2" type="radio" name="ProductDelivery" value="宅配到府" /> 宅配到府
+                        </div>
+                        <div id="delivery_fee">運費</div>
+                        <div>付款方式:<br>
+                            <input type="radio" name="Payment" value="貨到付款" /> 貨到付款 <br>
+                            <input type="radio" name="Payment" value="信用卡付款" />信用卡付款
+                        </div>
 
-	<script>
-	
-    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-    
-	
-    if (client_cart_obj.length == 0) {
-    	alert("購物車沒有任何商品！");
-    	calcSummaryInformation();
-    	setButtonState("check", false);
-    }
-    	else
-    	getCartProduct();
-    
-    
-   
-    $("#check").click(function () {
-    	var total_price=ReturnTotalPrice();
-    	var [memberID,memberName]=getMemberDataFromClient();
-    	var data = {
-    			"memberID": parseInt(memberID),
-    			"buyer_name": $("#buyer_name").val(),
-    			"ship_address": $("#address").val(),
-    			"cellphone": $("#cellphone").val(),
-    			"product_delivery": $("input[name='ProductDelivery']:checked").val(),
-    			"payment": $("input[name='Payment']:checked").val(),
-    			"order_status": 1,
-    			"item": client_cart_obj ,
-    			"quantity": client_cart_amount,
-    			"total_price": total_price
-    	}
-    
-    	var confirm_content = "<br>恭喜您成功新增訂單！" ;
-    
-    	// 驗證輸入的資料
-    	pass_vaild = vaildData(data);
-    	if (pass_vaild) {
-    		var data_string = JSON.stringify(data);
 
-    		// 發出POST的AJAX請求
-	        $.ajax({
-	          type: "POST",
-	          url: "api/order.do",
-	          data: data_string,
-	          crossDomain: true,
-	          cache: false,
-	          dataType: 'json',
-	          timeout: 5000,
-	          success: function (response) {
-	              if(response.status == 200){
-	              	$.confirm({
-	                    theme: 'modern',
-	                    icon: 'fa fa-check-circle-o',
-	                    type: 'green',
-	                    animation: 'scale',
-	                    title: '結帳成功',
-	                    content: memberName+confirm_content,
-	                    buttons: {
-	               		確定: {
-	                            text: '確定',
-	                            btnClass: 'btn-blue',
-	                            action: function () {
-	                          	  cleanAllData();
-	                              document.location.href = "order_tracking.html";
-	                            }
-	                       }
-	                    }
-	                });
-	              }
-	          },
-	          error: function () {
-	              alert("無法連線到伺服器！");
-	          }
-	        });
-    	}
-    });
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    $("#clean").click(function () {
-    	console.log("[@Action]清空購物車");
-    	cleanAllData();
-    });
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-confirm.js"></script>
+    <script src="statics/js/popper.min.js"></script>
 
-    function vaildData(data) {
-    	
-    	var phone_rule = /^09\d{2}\d{3}\d{3}$/;
+    <script>
 
-    	if (data["buyer_name"] == "" ||  data['cellphone'] == "" || data['ship_address'] == "")  alert("必填寫欄位不得有空值！");
-    	//else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
-    	else if (!phone_rule.test(data['cellphone'])) alert("手機格式不符（應為09XXXXXXXX）！");
-    	else if ($("input[name='ProductDelivery']:checked").val()==null) alert("請選取運送方式!");
-    	else if ($("input[name='Payment']:checked").val()==null) alert("請選取付款方式!");
-    	else return true;
-
-    	return false;
-    }
-
-    function cleanAllData() {
-    	client_cart_obj = [];
-      client_cart_amount = [];
-      updateCartDataToClent();
-      $("#cart_table > tbody").empty();
-      $("#total_item").html('0');
-      $("#total_quantity").html('0');
-      $("#summary").html('0');
-      setButtonState("check", false);
-    }
-
-    function getCartProduct() {
-      $.ajax({
-        type: "GET",
-        url: "api/product.do",
-        crossDomain: true,
-        cache: false,
-        data: "id_list=" + client_cart_obj.toString(),
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-          if (response.status == 200) {
-        	  updateCartTable(response.response.data);
-        	  updateAllQuantitySubtotal();
-        	  keyEventListen();
-        	  calcSummaryInformation();
-          }
-        },
-        error: function () {
-          alert("無法連線到伺服器！");
+        var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+        //判斷是否是賣家我的賣場
+        var [client_isSeller] = getisSellerFromClient();
+        $("#myMarket").hide();
+        if (parseInt(client_isSeller.toString()) == 1) {
+            $("#myMarket").show();
         }
-      });
-    }
 
-    function updateAllQuantitySubtotal() {
-    	for (var i=0 ; i < client_cart_obj.length ; i++) {
-    		var id = client_cart_obj[i];
-    		var amount = client_cart_amount[i];
-    		var price = $('#price_' + id).html();
-    		$('#quantity_' + id).val(amount);
-    		var subtotal = calcSubTotal(price, amount);
-    		$('#subtotal_' + id).html(subtotal);
-    	}
-    }
-
-    function isNumberKey(evt){
-	    var charCode = (evt.which) ? evt.which : evt.keyCode
-	    if (charCode > 31 && (charCode < 48 || charCode > 57))
-	        return false;
-	    return true;
-    }
-
-    function keyEventListen() {
-    	$('input[name="quantity[]"').on(
-          'keypress',
-          function (e) {
-        	  return isNumberKey(e);
-          }
-      );
-
-    	$('input[name="quantity[]"').on(
- 	        'keyup',
- 	        function (e) {
- 	        	var select = $(this).prop('id');
- 	        	var action = select.split('_')[0];
- 	        	var id = select.split('_')[1];
- 	          var price = $('#price_' + id).html();
- 	          var quantity =  $(this).val();
- 	          var subtotal = calcSubTotal(price, quantity);
- 	          $('#subtotal_' + id).html(subtotal);
- 	          updateClentCartData(id, quantity);
- 	          calcSummaryInformation();
- 	        }
- 	    );
-
-    	$('button[name="remove[]"').click(function () {
-    		var id = (this.id).split('_')[1];
-    		var i = client_cart_obj.indexOf(id);
-
-    		if (i > -1) {
-	    		client_cart_obj.splice(i, 1);
-	    		client_cart_amount.splice(i, 1);
-    		}
-
-    		updateCartDataToClent();
-    		$('#row_' + id).remove();
-    		if (client_cart_obj.length == 0)
-  		      alert("購物車沒有任何商品！");
-    		calcSummaryInformation();
-    	});
+        if (client_cart_obj.length == 0) {
+            alert("購物車沒有任何商品！");
+            calcSummaryInformation();
+            setButtonState("check", false);
+        }
+        else
+            getCartProduct();
 
 
-    }
 
-    function calcSubTotal(price, quantity) {
-    	var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
-    	result = isNaN(result) ? 0.00 : result;
-    	return result;
-    }
+        $("#check").click(function () {
+            var total_price = ReturnTotalPrice();
+            var [memberID, memberName] = getMemberDataFromClient();
+            var data = {
+                "memberID": parseInt(memberID),
+                "buyer_name": $("#buyer_name").val(),
+                "ship_address": $("#address").val(),
+                "cellphone": $("#cellphone").val(),
+                "product_delivery": $("input[name='ProductDelivery']:checked").val(),
+                "payment": $("input[name='Payment']:checked").val(),
+                "order_status": 1,
+                "item": client_cart_obj,
+                "quantity": client_cart_amount,
+                "total_price": total_price
+            }
 
-    function updateCartTable(data) {
-    	var table_html = '';
-    	$("#cart_table > tbody").empty();
-        $.each(data, function(index, value) {
-        	table_html += '<tr id="row_' + value.idtbl_product + '">';
-        	table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
-        	table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
-        	table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
-        	table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
-           	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
-        	table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
-        	table_html += '</tr>';
-        
-        })
+            var confirm_content = "<br>恭喜您成功新增訂單！";
 
-      $("#cart_table > tbody").append(table_html);
-    }
+            // 驗證輸入的資料
+            pass_vaild = vaildData(data);
+            if (pass_vaild) {
+                var data_string = JSON.stringify(data);
 
-    function getCartDataFromClient() {
-    	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
-    	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
-    	cart = !cart ? new Array() : cart;
-    	amount = !amount ? new Array() : amount;
-    	return [cart, amount];
-    }
+                // 發出POST的AJAX請求
+                $.ajax({
+                    type: "POST",
+                    url: "api/order.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        if (response.status == 200) {
+                            $.confirm({
+                                theme: 'modern',
+                                icon: 'fa fa-check-circle-o',
+                                type: 'green',
+                                animation: 'scale',
+                                title: '結帳成功',
+                                content: memberName + confirm_content,
+                                buttons: {
+                                    確定: {
+                                        text: '確定',
+                                        btnClass: 'btn-blue',
+                                        action: function () {
+                                            cleanAllData();
+                                            document.location.href = "order_tracking.html";
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+            }
+        });
 
-    function updateCartDataToClent() {
-    	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-    	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
-    }
+        $("#clean").click(function () {
+            console.log("[@Action]清空購物車");
+            cleanAllData();
+        });
 
-    function updateClentCartData(id, quantity) {
-    	var i = client_cart_obj.indexOf(id);
-    	client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
-    	updateCartDataToClent();
-    }
+        function getisSellerFromClient() {
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-    function calcSummaryInformation() {
-    	var total_item = client_cart_obj.length;
-    	var total_price = 0.00;
-    	var total_quantity = 0;
+            isSeller = !isSeller ? new Array() : isSeller;
 
-    	for(var i=0 ; i < total_item ; i++) {
-    		var id = client_cart_obj[i];
-    		var price = $('#price_' + id).html();
-    		var quantity = $('#quantity_' + id).val()
-    		calc = parseFloat(price) * parseInt(quantity);
-    		total_price += isNaN(calc) ? 0.0 : calc;
-    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
-    	}
+            return [isSeller];
+        }
 
-    	// Client端日期
-    	var date = new Date();
-    	var iso_date = date.toISOString();
+        function vaildData(data) {
 
-    	$("#date").html(iso_date.substring(0, 10));
-    	$("#total_item").html(total_item);
-    	$("#total_quantity").html(total_quantity);
-    	$("#summary").html(total_price.toFixed(2));
-    }
+            var phone_rule = /^09\d{2}\d{3}\d{3}$/;
 
-    function setButtonState(id, action) {
-      if (!action) {
-          $('#' + id).prop('disabled', true);
-          $('#' + id).addClass('disabled');
-          $('#' + id).html('請先新增商品');
-      }
-      else {
-    	$('#' + id).prop('disabled', false);
-        $('#' + id).removeClass('disabled');
-        $('#' + id).html('結帳');
-      }
-    }
-    function ReturnTotalPrice(){
-    	var total_item = client_cart_obj.length;
-    	var total_price = 0.0;
-    	var total_quantity = 0;
+            if (data["buyer_name"] == "" || data['cellphone'] == "" || data['ship_address'] == "") alert("必填寫欄位不得有空值！");
+            //else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
+            else if (!phone_rule.test(data['cellphone'])) alert("手機格式不符（應為09XXXXXXXX）！");
+            else if ($("input[name='ProductDelivery']:checked").val() == null) alert("請選取運送方式!");
+            else if ($("input[name='Payment']:checked").val() == null) alert("請選取付款方式!");
+            else return true;
 
-    	for(var i=0 ; i < total_item ; i++) {
-    		var id = client_cart_obj[i];
-    		var price = $('#price_' + id).html();
-    		var quantity = $('#quantity_' + id).val()
-    		calc = parseFloat(price) * parseInt(quantity);
-    		total_price += isNaN(calc) ? 0 : calc;
-    		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
-    	}
-    	return total_price.toFixed(2);
-    }
-    
-    
-    /*------------登入登出實作member cookie-----------*/
-    
-    var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+            return false;
+        }
 
-   function getMemberDataFromClient() {
-   	let id = JSON.parse(localStorage.getItem("client_id"));
-   	let name = JSON.parse(localStorage.getItem("client_name"));
-   	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+        function cleanAllData() {
+            client_cart_obj = [];
+            client_cart_amount = [];
+            updateCartDataToClent();
+            $("#cart_table > tbody").empty();
+            $("#total_item").html('0');
+            $("#total_quantity").html('0');
+            $("#summary").html('0');
+            setButtonState("check", false);
+        }
 
-   	id = !id ? new Array() : id;
-   	name = !name ? new Array() : name;
-   	isSeller = !isSeller ? new Array() : isSeller;
-   	return [id, name, isSeller];
-   }
-	
-    function updateMemberDataToClient() {
-    	localStorage.setItem("client_id", JSON.stringify(client_id));
-    	localStorage.setItem("client_name", JSON.stringify(client_name));
-    	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+        function getCartProduct() {
+            $.ajax({
+                type: "GET",
+                url: "api/product.do",
+                crossDomain: true,
+                cache: false,
+                data: "id_list=" + client_cart_obj.toString(),
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if (response.status == 200) {
+                        updateCartTable(response.response.data);
+                        updateAllQuantitySubtotal();
+                        keyEventListen();
+                        calcSummaryInformation();
+                    }
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
 
-    }
-   
-   function loguot() {
-     client_id = [];
-     client_name = [];
-     client_isSeller = [];
-     updateMemberDataToClient();
-     updateMemberDataToClient();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClient
-     $("#member_center1").hide();
-     $("#member_center2").hide();
-     $("#member_center3").hide();
-     $("#signup_in").show();
-     $("#user_name").empty();
-   }
-   
-   $("#remove").click(function () {
-    	console.log("[@Action]登出");
-    	loguot();
-    });
-   
-   $(document).ready(function(){
-   	 if(client_id.length == 0){ //已登出
-   		 $("#member_center1").hide();
-   	     $("#member_center2").hide();
-   	     $("#member_center3").hide();  
-   	 }else{//已登入
-   		 $("#user_name").html(client_name);
-      	 	 $("#member_center1").show();
-      	 	 $("#member_center2").show();
-      	     $("#member_center3").show();
-      		 $("#signup_in").hide();
-   	 }
-   });
-  
-   /*----------------------------------------*/
-  </script>
+        function updateAllQuantitySubtotal() {
+            for (var i = 0; i < client_cart_obj.length; i++) {
+                var id = client_cart_obj[i];
+                var amount = client_cart_amount[i];
+                var price = $('#price_' + id).html();
+                $('#quantity_' + id).val(amount);
+                var subtotal = calcSubTotal(price, amount);
+                $('#subtotal_' + id).html(subtotal);
+            }
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+
+        function keyEventListen() {
+            $('input[name="quantity[]"').on(
+                'keypress',
+                function (e) {
+                    return isNumberKey(e);
+                }
+            );
+
+            $('input[name="quantity[]"').on(
+                'keyup',
+                function (e) {
+                    var select = $(this).prop('id');
+                    var action = select.split('_')[0];
+                    var id = select.split('_')[1];
+                    var price = $('#price_' + id).html();
+                    var quantity = $(this).val();
+                    var subtotal = calcSubTotal(price, quantity);
+                    $('#subtotal_' + id).html(subtotal);
+                    updateClentCartData(id, quantity);
+                    calcSummaryInformation();
+                }
+            );
+
+            $('button[name="remove[]"').click(function () {
+                var id = (this.id).split('_')[1];
+                var i = client_cart_obj.indexOf(id);
+
+                if (i > -1) {
+                    client_cart_obj.splice(i, 1);
+                    client_cart_amount.splice(i, 1);
+                }
+
+                updateCartDataToClent();
+                $('#row_' + id).remove();
+                if (client_cart_obj.length == 0)
+                    alert("購物車沒有任何商品！");
+                calcSummaryInformation();
+            });
+
+
+        }
+
+        function calcSubTotal(price, quantity) {
+            var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
+            result = isNaN(result) ? 0.00 : result;
+            return result;
+        }
+
+        function updateCartTable(data) {
+            var table_html = '';
+            $("#cart_table > tbody").empty();
+            $.each(data, function (index, value) {
+                table_html += '<tr id="row_' + value.idtbl_product + '">';
+                table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
+                table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
+                table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
+                table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+                table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
+                table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+                table_html += '</tr>';
+
+            })
+
+            $("#cart_table > tbody").append(table_html);
+        }
+
+        function getCartDataFromClient() {
+            let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+            let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+            cart = !cart ? new Array() : cart;
+            amount = !amount ? new Array() : amount;
+            return [cart, amount];
+        }
+
+        function updateCartDataToClent() {
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+        }
+
+        function updateClentCartData(id, quantity) {
+            var i = client_cart_obj.indexOf(id);
+            client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
+            updateCartDataToClent();
+        }
+
+        function calcSummaryInformation() {
+            var total_item = client_cart_obj.length;
+            var total_price = 0.00;
+            var total_quantity = 0;
+
+            for (var i = 0; i < total_item; i++) {
+                var id = client_cart_obj[i];
+                var price = $('#price_' + id).html();
+                var quantity = $('#quantity_' + id).val()
+                calc = parseFloat(price) * parseInt(quantity);
+                total_price += isNaN(calc) ? 0.0 : calc;
+                total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+            }
+
+            // Client端日期
+            var date = new Date();
+            var iso_date = date.toISOString();
+
+            $("#date").html(iso_date.substring(0, 10));
+            $("#total_item").html(total_item);
+            $("#total_quantity").html(total_quantity);
+            $("#summary").html(total_price.toFixed(2));
+        }
+
+        function setButtonState(id, action) {
+            if (!action) {
+                $('#' + id).prop('disabled', true);
+                $('#' + id).addClass('disabled');
+                $('#' + id).html('請先新增商品');
+            }
+            else {
+                $('#' + id).prop('disabled', false);
+                $('#' + id).removeClass('disabled');
+                $('#' + id).html('結帳');
+            }
+        }
+        function ReturnTotalPrice() {
+            var total_item = client_cart_obj.length;
+            var total_price = 0.0;
+            var total_quantity = 0;
+
+            for (var i = 0; i < total_item; i++) {
+                var id = client_cart_obj[i];
+                var price = $('#price_' + id).html();
+                var quantity = $('#quantity_' + id).val()
+                calc = parseFloat(price) * parseInt(quantity);
+                total_price += isNaN(calc) ? 0 : calc;
+                total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+            }
+            return total_price.toFixed(2);
+        }
+
+
+        /*------------登入登出實作member cookie-----------*/
+
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+            return [id, name, isSeller];
+        }
+
+        function updateMemberDataToClient() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+        }
+
+        function loguot() {
+            client_id = [];
+            client_name = [];
+            client_isSeller = [];
+            updateMemberDataToClient();
+            updateMemberDataToClient();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClient
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+            $("#signup_in").show();
+            $("#user_name").empty();
+        }
+
+        $("#remove").click(function () {
+            console.log("[@Action]登出");
+            loguot();
+        });
+
+        $(document).ready(function () {
+            if (client_id.length == 0) { //已登出
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+            } else {//已登入
+                $("#user_name").html(client_name);
+                $("#member_center1").show();
+                $("#member_center2").show();
+                $("#member_center3").show();
+                $("#signup_in").hide();
+            }
+        });
+
+        /*----------------------------------------*/
+    </script>
 
 
 </body>

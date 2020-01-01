@@ -20,7 +20,7 @@
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
 		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+		<li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
 		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 		
 		<div id="member_center1" class="mediumbox" style="float: right">
@@ -139,6 +139,21 @@
  	 /*------------登入登出實作member cookie-----------*/
     
     var [client_id, client_name]  = getMemberDataFromClient();
+ 	
+ 	//判斷是否是賣家我的賣場
+	 var [client_isSeller]  = getisSellerFromClient();
+   $("#myMarket").hide();
+	if(parseInt(client_isSeller.toString())==1){
+		$("#myMarket").show();
+	}
+	
+	function getisSellerFromClient() {
+    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+    	
+    	isSeller = !isSeller ? new Array() : isSeller;
+    	
+    	return [isSeller];
+    }
 
    function getMemberDataFromClient() {
    	let id = JSON.parse(localStorage.getItem("client_id"));
