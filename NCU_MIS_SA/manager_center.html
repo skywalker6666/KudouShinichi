@@ -71,10 +71,11 @@ div.absolute {
 		
 		<!-- 這裡是頁面右上方的小box -->
 		<div class="pull-right">	
+				<li class="navbar"><a class="btn btn-outline-secondary" id ="user_name" href="manager_login.html"></a></li>
 				<li class="navbar"><a class="btn btn-outline-primary" href="manager_center.html">管理員中心</a></li>
 				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
 				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
-				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+				<li class="navbar"><a class="btn btn-outline-secondary" id ="removed" href="manager_login.html">登出</a></li>
 		</div>
 	</ul>
 
@@ -107,93 +108,7 @@ div.absolute {
 			</table>
 		</div>
 	</div>
-	<script>
-		function display_members() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ //還沒設定
-							'<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>管理員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="manager"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_managers()">'
-							+ '</div>' + '</div>').appendTo('#display_member')
-		}
 
-		function display_sellers() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute" style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ '<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>賣家會員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
-							+ '</div>').appendTo('#display_member')
-		}
-
-		function display_buyers() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ '<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>買家會員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
-							+ '</div>').appendTo('#display_member')
-
-		}
-	</script>
 	<script type="text/javascript">
 		var sql_num = 0;
 
@@ -419,9 +334,28 @@ div.absolute {
 				console.log("You pressed Cancel!");
 			}
 		}
-
+		var [manager_id, manager_name, manager_isLeader]=getManagerDataFromClient();
+		
+		function loguot() {
+		      manager_id = [];
+		      manager_name = [];
+		      updateManagerDataToClient();
+		      manager_isLeader = [];
+		      updateManagerDataToClient();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateManagerDataToClient
+		//      $("#member_center1").hide();
+		//      $("#member_center2").hide();
+		 //     $("#member_center3").hide();
+		 //     $("#signup_in").show();
+		//      $("#user_name").empty();
+		    }
+		$('#removed').click(function() {
+			console.log("[@Action]登出");
+			logout();
+		});
+		
 		$(document).ready(function() {
 			getAllMember();
+			
 			$('#member').click(function() {
 				getAllMember();
 			});
@@ -435,6 +369,6 @@ div.absolute {
 				getAllManager();
 			});
 		});
-	</script>
+
 </body>
 </html>

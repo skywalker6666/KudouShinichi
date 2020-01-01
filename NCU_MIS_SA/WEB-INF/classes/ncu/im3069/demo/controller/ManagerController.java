@@ -1,4 +1,3 @@
-
 package ncu.im3069.demo.controller;
 
 import java.io.*;
@@ -8,6 +7,7 @@ import javax.servlet.http.*;
 import org.json.*;
 import ncu.im3069.demo.app.Manager;
 import ncu.im3069.demo.app.ManagerHelper;
+import ncu.im3069.demo.app.Member;
 import ncu.im3069.tools.JsonReader;
 
 // TODO: Auto-generated Javadoc
@@ -99,9 +99,12 @@ public class ManagerController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String id = jsr.getParameter("idtbl_manager");
+        String isLeader =jsr.getParameter("isLeader");
+        String name = jsr.getParameter("managerName");
+        String password = jsr.getParameter("managerPassword");
       //  String isLeader =jsr.getParameter("isLeader");
     
-
+        System.out.println("已進入doGet");
         /** 判斷該字串是否存在，若存在代表要取回個別管理員之資料，否則代表要取回全部資料庫內管理員之資料 */
         if (id.isEmpty()) {
             /** 透過ManagerHelper物件之getAll()方法取回所有管理員之資料，回傳之資料為JSONObject物件 */
@@ -141,6 +144,35 @@ public class ManagerController extends HttpServlet {
     
             /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
             jsr.response(resp, response);
+        }
+        if(!name.isEmpty()&&!password.isEmpty()){
+        	System.out.println("讀取name,password進入");
+        	/** 建立一個新的會員物件 */
+            Manager mg = new Manager( name, password, 0, 0);
+            
+        	
+        	if (mgh.checkIfHasThisAccount(mg)) {
+        		System.out.println("有到一此筆資料");
+        		 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
+                JSONObject query = mgh.getByNamePassword(name,password);
+
+                /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+                JSONObject resp = new JSONObject();
+                resp.put("status", "200");
+                resp.put("message", "登入成功");
+                resp.put("response", query);
+        
+                /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+                jsr.response(resp, response);
+            }
+            else {
+                /** 以字串組出JSON格式之資料 */
+                String resp = "{\"status\": \'400\', \"message\": \'登入失敗，姓名或密碼錯誤！\', \'response\': \'\'}";
+                /** 透過JsonReader物件回傳到前端（以字串方式） */
+                jsr.response(resp, response);
+            }
+        	
+           
         }
     }
 
