@@ -10,20 +10,8 @@
 
 
 <style>
-   .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
+   
+    
 </style>
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="statics/css/navbar.css">
@@ -40,15 +28,34 @@
 		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+		
+		<div id="member_center1" class="mediumbox" style="float: right">
+			<li style="float: left"><a class="navbarFloating"
+				href="member_change.html">會員中心</a></li>
+			<li style="float: left"><a id="remove" class="navbarFloating"
+				href="index.html">&nbsp;登出 </a></li>
+			<li style="float: left">
+	
+		</div>
+		<div id="member_center2" class="smallbox" style="float: right"> 
+			<li><img src="statics/img/navbar/shoppingcart.png"
+				style="float: left" height="20px" width="20px"></img></li>
+			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+		</div>
+		<div id="member_center3" class="smallbox" style="float: right">
+			<li><img src="statics/img/navbar/user.png" style="float: left"
+				height="20px" width="20px"></img></li>
+			<li id="user_name"class="navbarFloating">user</li>
+		</div>
 	</ul>
-
 	<div class="frame">
 		
 		<div class="generalbox">
+		<p id="here"></p>
 		<p>商品目錄</p>
 				
 		</div>
@@ -57,8 +64,8 @@
 
 
 
-	<script>   
-    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
+	<script type="text/javascript">   
+    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient(); 
     
     function getAllProduct() {
       $.ajax({
@@ -70,6 +77,7 @@
         timeout: 5000,
         success: function (response) {
           if (response.status == 200) {
+        	  
         	var product_panel = '';
         	
         	$.each(response.response.data, function (){
@@ -168,6 +176,70 @@
     	    $('#' + id).html('加入購物車');
     	}
     }
+    
+    
+    
+    
+    
+    /*------------登入登出實作member cookie-----------*/
+   
+     var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+
+    function getMemberDataFromClient() {
+    	let id = JSON.parse(localStorage.getItem("client_id"));
+    	let name = JSON.parse(localStorage.getItem("client_name"));
+    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+    	id = !id ? new Array() : id;
+    	name = !name ? new Array() : name;
+    	isSeller = !isSeller ? new Array() : isSeller;
+    	return [id, name, isSeller];
+    }
+	
+     function updateMemberDataToClent() {
+     	localStorage.setItem("client_id", JSON.stringify(client_id));
+     	localStorage.setItem("client_name", JSON.stringify(client_name));
+     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+     }
+    
+    function loguot() {
+      client_id = [];
+      client_name = [];
+      updateMemberDataToClent();
+      client_isSeller = [];
+      updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+      $("#member_center1").hide();
+      $("#member_center2").hide();
+      $("#member_center3").hide();
+      $("#signup_in").show();
+      $("#user_name").empty();
+    }
+    
+    $("#remove").click(function () {
+     	console.log("[@Action]登出");
+     	loguot();
+     });
+    
+    $(document).ready(function(){
+    	 if(client_id.length == 0){ //登出
+    		 $("#member_center1").hide();
+    	     $("#member_center2").hide();
+    	     $("#member_center3").hide();  
+    	 }else{//登入
+    		 $("#user_name").html(client_name);
+       	 	 $("#member_center1").show();
+       	 	 $("#member_center2").show();
+       	     $("#member_center3").show();
+       		 $("#signup_in").hide();
+    	 }
+    });
+   
+    /*----------------------------------------*/
+
+    		
+   
+    
   </script>
 
 	<footer class="text-muted">

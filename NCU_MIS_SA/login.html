@@ -8,17 +8,21 @@
 </style>
 <link rel="stylesheet" href="statics/css/register&login.css">
 <link rel="stylesheet" href="statics/css/navbar.css">
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 </head>
 <body bgcolor="#BCE2FF">
 
 	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
+		<li class="navbar"><a href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="100px"
+				width="100px"></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
 		<li class="navbar"><a class="navbarItem"
 			href="order_tracking.html">訂單追蹤</a></li>
 		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+		<li style="float: right"><a class="navbarItemSide"
+			href="login_selected.html">會員註冊/登入</a></li>
 	</ul>
 
 	<div class="box"
@@ -28,24 +32,143 @@
 		</font>
 		<div class="box2"
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-			<font face="DFKai-sb">
-				<form id="form" accept-charset="utf-8"
-					style="line-height: 50px; margin-top: 100px">
 
-					<div class="input text required">
-						<label for="member_name">會員帳號</label> <input class="field"
-							name="name" type="text" id="member_name" required="required">
-					</div>
-					<div class="input password required">
-						<label for="password">會員密碼</label> <input class="field"
-							name="password" type="password" id="member_password"
-							required="required">
-					</div>
-					<div type="submit">
-						<button class="button" id="login">登入</button>
-					</div>
-				</form>
+			<form id="form" accept-charset="utf-8"
+				style="line-height: 50px; margin-top: 100px">
+
+				<div class="input text required">
+					<label for="member_name">會員帳號</label> <input class="field"
+						name="name" type="text" id="member_name" required="required">
+				</div>
+				<div class="input password required">
+					<label for="password">會員密碼</label> <input class="field"
+						name="password" type="password" id="member_password"
+						required="required">
+				</div>
+
+				<button id="login" type="button" class="button">登入</button>
+			</form>
+			
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		
+		var password = $('#member_password').val();
+		
+		var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+		
+		function getMemberDataFromClient() {
+	    	let id = JSON.parse(localStorage.getItem("client_id"));
+	    	let name = JSON.parse(localStorage.getItem("client_name"));
+	    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+	    	id = !id ? new Array() : id;
+	    	name = !name ? new Array() : name;
+	    	isSeller = !isSeller ? new Array() : isSeller;
+
+	    	return [id, name, isSeller];
+	    }
+		
+		
+		function addDataToMember(id, name, isSeller) {
+	    	if (!(client_id.includes(id))) {
+	    		client_id.push(id);
+	    		client_name.push(name);
+	    		client_isSeller.push(isSeller)
+	    		updateMemberDataToClent();
+	    	}
+	    }
+		
+	    
+	     function updateMemberDataToClent() {
+	     	localStorage.setItem("client_id", JSON.stringify(client_id));
+	     	localStorage.setItem("client_name", JSON.stringify(client_name));
+	     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+	     }
+	     
+	     function getThisMember() {
+	    	 var name = $('#member_name').val();
+	    	 var data = {
+	    			"name": $("#member_name").val(),
+	     			"password": $("#member_password").val()
+	     	}
+	     	// 驗證輸入的資料
+	     	pass_vaild = vaildData(data);
+	    	 if (pass_vaild) {
+				$.ajax({
+					type : "GET",
+					url : "api/member.do",
+					crossDomain : true,
+					data : data,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						
+						if (response.status == 200) {
+							var id = response.response.data["0"].idtbl_member;
+							var name = response.response.data["0"].name;
+							var isSeller = response.response.data["0"].isSeller;
+
+							addDataToMember(id,name,isSeller); 
+ 							document.location.href = "index.html"; 
+ 
+						}
+						alert(response.message);
+						console.log(response);
+
+
+
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	     }
+			}
+	     
+	  // 更新會員列表表格
+	     function updateTable(data) {
+	         $("#table > tbody").empty();
+	         var table_html = '';
+	         $.each(data, function(index, value) {
+	             table_html += '<tr><td scope="row">' + value['idtbl_member'] + '</td>';
+	             table_html += '<td>' + value['name'] + '</td>';
+	             table_html += '<td>' + value['email'] + '</td>';
+	             table_html += '<td>' + value['birthday'] + '</td>';
+	             table_html += '<td>' + value['isSeller'] + '</td>';
+	             table_html += '<td>';
+	             table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
+	         })
+
+
+	         $("#table > tbody").append(table_html);
+	     }	
+	  
+	     function vaildData(data) {
+	    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+	     	if (data["name"] == "" || data["password"] == ""){
+	     		alert("必填寫欄位不得有空值！");
+	     	}else if(data['password'] != "" && !password_rule.test(data['password'])) {
+                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+            }
+	     	else{//都正確
+	     		return true;
+	     	}
+
+	     	return false;
+	     }
+	     
+		$(document).ready(function() {
+			$("#login").click(function() {
+				getThisMember();
+			});
+		});
+	</script>
+
 </body>
+
 </html>

@@ -42,15 +42,15 @@ public class OrderController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
 
         /** 取出經解析到 JsonReader 之 Request 參數 */
-        String id = jsr.getParameter("id");
+        String idtbl_order = jsr.getParameter("idtbl_order");
 
         /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
 
         /** 判斷該字串是否存在，若存在代表要取回個別訂單之資料，否則代表要取回全部資料庫內訂單之資料 */
-        if (!id.isEmpty()) {
+        if (!idtbl_order.isEmpty()) {
           /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
-          JSONObject query = oh.getById(id);
+          JSONObject query = oh.getById(idtbl_order);
           resp.put("status", "200");
           resp.put("message", "單筆訂單資料取得成功");
           resp.put("response", query);
@@ -81,16 +81,20 @@ public class OrderController extends HttpServlet {
         JSONObject jso = jsr.getObject();
 
         /** 取出經解析到 JSONObject 之 Request 參數 */
-        String first_name = jso.getString("first_name");
-        String last_name = jso.getString("last_name");
-        String email = jso.getString("email");
-        String address = jso.getString("address");
-        String phone = jso.getString("phone");
+        int memberID = jso.getInt("memberID");
+        String buyer_name = jso.getString("buyer_name");
+        String ship_address = jso.getString("ship_address");
+        String cellphone = jso.getString("cellphone");
+        String product_delivery=jso.getString("product_delivery");
+        String payment=jso.getString("payment");
+        int order_status=jso.getInt("order_status");
+        double total_price=jso.getDouble("total_price");
+        
         JSONArray item = jso.getJSONArray("item");
         JSONArray quantity = jso.getJSONArray("quantity");
 
         /** 建立一個新的訂單物件 */
-        Order od = new Order(first_name, last_name, email, address, phone);
+        Order od = new Order (memberID, buyer_name, ship_address, cellphone, product_delivery, payment, order_status, total_price);
 
         /** 將每一筆訂單細項取得出來 */
         for(int i=0 ; i < item.length() ; i++) {

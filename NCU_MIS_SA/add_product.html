@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author"
+	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Jekyll v3.8.5">
+
+<title>AddProduct</title>
+
+
+
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.box {
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	left: 50%;
+	top: 60%;
+	margin-top: -250px;
+	margin-left: -400px;
+}
+
+.box2 {
+	width: 600px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -200px;
+	margin-left: -300px;
+}
+
+input {
+	outline-style: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 9px 9px;
+	width: 225px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Microsoft soft";
+}
+
+input:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6)
+}
+
+textarea {
+	outline-style: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 9px 9px;
+	width: 225px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Microsoft soft";
+}
+
+textarea:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6)
+}
+
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.button:hover {
+	background-color: #f44336;
+	color: white;
+}
+</style>
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="statics/css/navbar.css">
+<link rel="stylesheet" href="statics/css/themebox.css">
+<link rel="stylesheet" href="statics/css/card.css">
+<link href="statics/css/product.css" rel="stylesheet">
+<link href="statics/css/jquery-confirm.css" rel="stylesheet">
+
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-confirm.js"></script>
+<script src="statics/js/popper.min.js"></script>
+
+</head>
+
+<body>
+	<div id="header">
+		<!--容器分為左圖右導覽連結 -->
+		<div class="navbar">
+			<a href="index.html"><img src="statics/img/navbar/icon.png"
+				width="70" alt="logo" /></a>
+			<!--導覽列 -->
+			<ul class="navbar">
+				<li class="navbar"><a href="index.html"><img
+						src="statics/img/navbar/icon.png" style="float: left"
+						height="100px" width="100px"></img></a></li>
+				<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+				<li class="navbar"><a class="navbarItem"
+					href="productIndex.html">商品總覽</a></li>
+				<li class="navbar"><a class="navbarItem"
+					href="order_tracking.html">訂單追蹤</a></li>
+				<li class="navbar"><a class="navbarItem"
+					href="shoppingcart.html">購物車</a></li>
+				<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+				<li id="signup_in" style="float: right"><a
+					class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+
+				<div id="member_center1" class="mediumbox" style="float: right">
+					<li style="float: left"><a class="navbarFloating"
+						href="member_change.html">會員中心</a></li>
+					<li style="float: left"><a id="remove" class="navbarFloating"
+						href="index.html">&nbsp;登出 </a></li>
+					<li style="float: left">
+				</div>
+				<div id="member_center2" class="smallbox" style="float: right">
+					<li><img src="statics/img/navbar/shoppingcart.png"
+						style="float: left" height="20px" width="20px"></img></li>
+					<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+				</div>
+				<div id="member_center3" class="smallbox" style="float: right">
+					<li><img src="statics/img/navbar/user.png" style="float: left"
+						height="20px" width="20px"></img></li>
+					<li id="user_name" class="navbarFloating">user</li>
+				</div>
+			</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="box"
+		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
+		<div class="box2"
+			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+
+
+			<div>
+				<font face="DFKai-sb">
+					<div>
+						<label for="lastName">商品名稱</label> <input type="text"
+							id="product_name" maxlength="45" value="" required>
+					</div>
+					<div>
+						<label for="firstName">商品售價</label> <input type="text"
+							id="product_price" maxlength="11" placeholder="" value=""
+							required>
+					</div>
+					<div>
+						<label for="phonenum">商品庫存</label> <input type="text"
+							id="product_inventory" maxlength="11" required>
+					</div>
+					<div>
+						<label for="address" style="vertical-align: top;">商品簡介</label>
+						<textarea cols="50" rows="5" id="productinfo" maxlength="100"
+							required>
+						</textarea>
+					</div>
+					<div>
+						<label for="lastName">商品圖片</label> <input type="text"
+							id="image_name" maxlength="45" value="" placeholder="請輸入完整路徑"
+							required>
+					</div>
+			</div>
+
+			<div>
+				<input type="button" class="button" value="完成" id="finish">
+			</div>
+
+			</font>
+
+
+		</div>
+	</div>
+
+
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// 處理表單點擊事件
+			$('#finish').click(function() {
+				submit();
+			});
+
+			function submit() {
+				var name = $('#product_name').val();
+				var price = $('#product_price').val();
+				var inventory = $('#product_inventory').val();
+				var shopID = 2;
+				var image = $('#image_name').val();
+				var productinfo = $('#productinfo').val();;
+
+				// 將資料組成JSON格式
+				var data_object = {
+					"product_name" : name,
+					"price" : price,
+					"inventory" : inventory,
+					"shopID" : shopID,
+					"image" : image,
+					"product_info" : productinfo
+				};
+
+				// 將JSON格式轉換成字串
+				var data_string = JSON.stringify(data_object);
+
+				// 發出POST的AJAX請求
+				$.ajax({
+					type : "POST",
+					url : "api/product.do",
+					data : data_string,
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						$('#flashMessage').html(response.message);
+						$('#flashMessage').show();
+						if (response.status == 200) {
+							alert("產品新增成功！");
+							document.location.href = "my_market.html";
+						}
+
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+
+			}
+		})
+		
+		 /*------------登入登出實作member cookie-----------*/
+   
+     var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+
+    function getMemberDataFromClient() {
+    	let id = JSON.parse(localStorage.getItem("client_id"));
+    	let name = JSON.parse(localStorage.getItem("client_name"));
+    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+    	id = !id ? new Array() : id;
+    	name = !name ? new Array() : name;
+    	isSeller = !isSeller ? new Array() : isSeller;
+    	return [id, name, isSeller];
+    }
+	
+     function updateMemberDataToClent() {
+     	localStorage.setItem("client_id", JSON.stringify(client_id));
+     	localStorage.setItem("client_name", JSON.stringify(client_name));
+     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+     }
+    
+    function loguot() {
+      client_id = [];
+      client_name = [];
+      updateMemberDataToClent();
+      client_isSeller = [];
+      updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+      $("#member_center1").hide();
+      $("#member_center2").hide();
+      $("#member_center3").hide();
+      $("#signup_in").show();
+      $("#user_name").empty();
+    }
+    
+    $("#remove").click(function () {
+     	console.log("[@Action]登出");
+     	loguot();
+     });
+    
+    $(document).ready(function(){
+    	 if(client_id.length == 0){ //登出
+    		 $("#member_center1").hide();
+    	     $("#member_center2").hide();
+    	     $("#member_center3").hide();  
+    	 }else{//登入
+    		 $("#user_name").html(client_name);
+       	 	 $("#member_center1").show();
+       	 	 $("#member_center2").show();
+       	     $("#member_center3").show();
+       		 $("#signup_in").hide();
+    	 }
+    });
+   
+    /*----------------------------------------*/
+	</script>
+
+
+</body>
+
+
+</html>
