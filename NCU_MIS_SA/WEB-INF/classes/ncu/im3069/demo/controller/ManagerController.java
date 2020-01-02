@@ -58,6 +58,7 @@ public class ManagerController extends HttpServlet {
         
         /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
         if( password.isEmpty() || managerName.isEmpty()) {
+        	System.out.println("有空值");
             /** 以字串組出JSON格式之資料 */
             String resp = "{\"status\": \'400\', \"message\": \'欄位不能有空值\', \'response\': \'\'}";
             /** 透過JsonReader物件回傳到前端（以字串方式） */
@@ -65,6 +66,7 @@ public class ManagerController extends HttpServlet {
         }
         /** 透過ManagerHelper物件的checkDuplicate()檢查該管理員電子郵件信箱是否有重複 */
         else if (!mgh.checkDuplicate(mg)) {
+        	System.out.println("沒有重複帳號");
             /** 透過ManagerHelper物件的create()方法新建一個管理員至資料庫 */
             JSONObject data = mgh.create(mg);
             
@@ -78,8 +80,10 @@ public class ManagerController extends HttpServlet {
             jsr.response(resp, response);
         }
         else {
+        	System.out.println("重複帳號");
             /** 以字串組出JSON格式之資料 */
-            String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
+       //	 JSONObject resp = new JSONObject();
+           String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
             /** 透過JsonReader物件回傳到前端（以字串方式） */
             jsr.response(resp, response);
         }
