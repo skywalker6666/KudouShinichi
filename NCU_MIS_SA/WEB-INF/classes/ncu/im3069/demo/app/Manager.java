@@ -56,6 +56,12 @@ public class Manager {
      * @param password 會員密碼
      * @param name 會員姓名
      */
+    public Manager(String managerName, String password)
+    {
+    	this.managerName=managerName;
+    	this.managerPassword=password;
+    //	update();
+    }
     public Manager(String managerName,String password,int isLeader,int isDeleted) {
        // this.email = email;
         this.managerPassword = password;
@@ -232,14 +238,11 @@ public class Manager {
         /** 透過JSONObject將該名會員所需之資料全部進行封裝*/ 
         JSONObject jso = new JSONObject();
         jso.put("idtbl_manager", getID());
-        jso.put("managerName", getmanagerName());
- //       jso.put("email", getEmail());
-        jso.put("managerPassword", getPassword());
- //       jso.put("birthday", getBirthday());
-  //      jso.put("headSticker", getheadSticker());
+
+        jso.put("name", getmanagerName());
+        jso.put("password", getPassword());
         jso.put("isLeader", getIsLeader());
-  //      jso.put("login_times", getLoginTimes());
-        jso.put("isDeleted", 0);
+        jso.put("isDeleted", getisDeleted());
         
         return jso;
     }

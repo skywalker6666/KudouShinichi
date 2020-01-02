@@ -300,7 +300,7 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_member` WHERE `isSeller` = ?";
+            String sql = "SELECT * FROM `missa`.`tbl_member` WHERE `isSeller` = ? AND `isDeleted` <> 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
