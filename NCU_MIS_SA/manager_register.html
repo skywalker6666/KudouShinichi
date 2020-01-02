@@ -103,12 +103,17 @@ input:checked+.slider:before {
 
 
 		<!-- 這裡是頁面右上方的小box -->
-		<div class="pull-right">	
-				<li class="navbar"><a class="btn btn-outline-primary" id ="accountname">歡迎您，</a></li>
-				<li class="navbar"><a class="btn btn-outline-primary" href="manager_center.html">管理員中心</a></li>
-				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
-				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
-				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+		<div class="pull-right">
+			<li class="navbar"><a class="btn btn-outline-primary"
+				id="accountname">歡迎您，</a></li>
+			<li class="navbar"><a class="btn btn-outline-primary"
+				href="manager_center.html">管理員中心</a></li>
+			<li class="navbar"><a class="btn btn-outline-success"
+				href="manager_register.html">新增管理員</a></li>
+			<li class="navbar"><a class="btn btn-outline-primary"
+				href="manager_edit.html">編輯帳密</a></li>
+			<li class="navbar"><a class="btn btn-outline-secondary"
+				href="index.html">登出</a></li>
 		</div>
 	</ul>
 
@@ -117,7 +122,7 @@ input:checked+.slider:before {
 		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增管理員</font>
 		<div class="box2"
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-			
+
 			<font face="DFKai-sb">
 				<form id="form" accept-charset="utf-8">
 					<div class="form-group">
@@ -127,12 +132,13 @@ input:checked+.slider:before {
 					</div>
 					<div class="form-group">
 						<label for="manager_password">登入密碼</label> <input type="password"
-							name="password" class="form-control" id="manager_password" placeholder="長度至少8，且至少包含一個數字和英文字母！">
+							name="password" class="form-control" id="manager_password"
+							placeholder="長度至少8，且至少包含一個數字和英文字母！">
 					</div>
 					<div class="form-group">
 						<label for="manager_confirmpassword">確認密碼</label> <input
-							type="password" name="confirmpassword" class="form-control" id="manager_confirmpassword"
-							placeholder="長度至少8，且至少包含一個數字和英文字母！">
+							type="password" name="confirmpassword" class="form-control"
+							id="manager_confirmpassword" placeholder="長度至少8，且至少包含一個數字和英文字母！">
 					</div>
 
 					<input type="button" class="btn btn-primary" value="註冊為高階管理員"
@@ -145,7 +151,8 @@ input:checked+.slider:before {
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(
+		$(document)
+				.ready(
 						function() {
 							// 處理表單點擊事件
 							var $form = $('#submit_Highmanager');
@@ -159,15 +166,15 @@ input:checked+.slider:before {
 
 							function submit_Lowmanager() {
 								var name = $('#manager_name').val();
-								//var email = $('#manager_email').val();
+								//	var email = $('#manager_email').val();
 								var password = $('#manager_password').val();
+								//		var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
+								//		var headSticker = $('#manager_headSticker').val();
 								var isLeader = 0;
 
-								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+								//		var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
-								if (!password_rule.test(password)) {
-									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-								} else {
+								
 									// 將資料組成JSON格式
 									var data_object = {
 										"name" : name,
@@ -178,32 +185,43 @@ input:checked+.slider:before {
 
 									// 將JSON格式轉換成字串
 									var data_string = JSON.stringify(data_object);
-
-									// 發出POST的AJAX請求
-									$.ajax({
-												type : "POST",
-												url : "api/manager.do",
-												data : data_string,
-												crossDomain : true,
-												cache : false,
-												dataType : 'json',
-												timeout : 5000,
-												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
-													$('#flashMessage').show();
-													if (response.status == 200) {
-														updateSQLTable(response.response);
-														alert("註冊成功！");
-														document.location.href = "manager_center.html";
+									var data = {
+										"name" : $("#manager_name").val(),
+										"password" : $("#manager_password").val()
+									}
+									pass_vaild = vaildData(data);
+									if (pass_vaild) {
+										
+										// 發出POST的AJAX請求
+										$.ajax({
+													type : "POST",
+													url : "api/manager.do",
+													data : data_string,
+													crossDomain : true,
+													cache : false,
+													dataType : 'json',
+													timeout : 5000,
+													success : function(response) {
+														$('#flashMessage')
+																.html(
+																		response.message);
+														$('#flashMessage')
+																.show();
+														if (response.status == 200) {
+															updateSQLTable(response.response);
+															alert("註冊成功！");
+															document.location.href = "manager_center.html";
+														}
+														if (response.status == 400) {
+															alert("註冊重複!");
+														}
+													},
+													error : function() {
+														alert("無法連線到伺服器！");
 													}
-
-												},
-												error : function() {
-													alert("無法連線到伺服器！");
-												}
-											});
-								}
+												});
+									}
+								
 							}
 
 							function submit_Highmanager() {
@@ -215,11 +233,8 @@ input:checked+.slider:before {
 								var isLeader = 1;
 
 								//		var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-								if (!password_rule.test(password)) {
-									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-								} else {
+								
 									// 將資料組成JSON格式
 									var data_object = {
 										"name" : name,
@@ -230,31 +245,57 @@ input:checked+.slider:before {
 
 									// 將JSON格式轉換成字串
 									var data_string = JSON.stringify(data_object);
-
-									// 發出POST的AJAX請求
-									$.ajax({
-												type : "POST",
-												url : "api/manager.do",
-												data : data_string,
-												crossDomain : true,
-												cache : false,
-												dataType : 'json',
-												timeout : 5000,
-												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
-													$('#flashMessage').show();
-													if (response.status == 200) {
-														updateSQLTable(response.response);
-														alert("註冊成功！");
-														document.location.href = "manager_center.html";
+									var data = {
+										"name" : $("#manager_name").val(),
+										"password" : $("#manager_password").val()
+									}
+									pass_vaild = vaildData(data);
+									if (pass_vaild) {
+										// 發出POST的AJAX請求
+										$.ajax({
+													type : "POST",
+													url : "api/manager.do",
+													data : data_string,
+													crossDomain : true,
+													cache : false,
+													dataType : 'json',
+													timeout : 5000,
+													success : function(response) {
+														$('#flashMessage')
+																.html(
+																		response.message);
+														$('#flashMessage')
+																.show();
+														if (response.status == 200) {
+															updateSQLTable(response.response);
+															alert("註冊成功！");
+															document.location.href = "manager_center.html";
+														}
+														if (response.status == 400) {
+															alert("註冊重複!");
+														}
+													},
+													error : function() {
+														alert("無法連線到伺服器！");
 													}
-												},
-												error : function() {
-													alert("無法連線到伺服器！");
-												}
-											});
+												});
+									}
 								}
+							
+							function vaildData(data) {
+								let confpassword=$("#manager_confirmpassword").val();
+								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+								if (data["name"] == ""|| data["password"] == "") {
+									alert("必填寫欄位不得有空值！");
+								} else if (data['password'] != ""&& !password_rule.test(data['password'])) {
+									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+								} else if(confpassword != data["password"]){
+									alert("確認密碼不一致");
+								}
+								else {//都正確
+									return true;
+								}
+								return false;
 							}
 
 							function updateSQLTable(data) {
@@ -280,7 +321,8 @@ input:checked+.slider:before {
 												+ " queries took " + time
 												+ " ms");
 							}
-							let accountname = JSON.parse(localStorage.getItem("manager_name"));
+							let accountname = JSON.parse(localStorage
+									.getItem("manager_name"));
 							$('#accountname').append(accountname);
 						});
 	</script>
