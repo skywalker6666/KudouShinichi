@@ -110,6 +110,16 @@ public class Member {
         this.login_times = login_times;
         this.status = status;
     }
+    public Member(int id, String email, String password, String name, String birthday, int isSeller) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.birthday=birthday;//
+        this.isSeller=isSeller;//
+    }
+    
+    
     
     /**
      * 取得會員之編號
