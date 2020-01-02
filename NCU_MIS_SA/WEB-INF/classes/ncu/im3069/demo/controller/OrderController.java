@@ -56,6 +56,7 @@ public class OrderController extends HttpServlet {
           resp.put("response", query);
         }
         else if(!memberID.isEmpty()){
+        	System.out.println("進入getByMemberId");
         	JSONObject query = oh.getByMemberId(memberID);
             resp.put("status", "200");
             resp.put("message", "單筆訂單資料取得成功");
@@ -63,6 +64,7 @@ public class OrderController extends HttpServlet {
         }
         else {
           /** 透過 orderHelper 物件之 getAll() 方法取回所有訂單之資料，回傳之資料為 JSONObject 物件 */
+        	System.out.println("進入getAll");
           JSONObject query = oh.getAll();
           resp.put("status", "200");
           resp.put("message", "所有訂單資料取得成功");

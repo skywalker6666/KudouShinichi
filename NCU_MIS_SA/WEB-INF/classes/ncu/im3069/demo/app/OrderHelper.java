@@ -169,7 +169,7 @@ public class OrderHelper {
     }
     
     public JSONObject getByMemberId(String memberID) {
-        JSONObject data = new JSONObject();
+    	JSONArray jsa = new JSONArray();
         Order o = null;
         /** 記錄實際執行之SQL指令 */
         String execute_sql = "";
@@ -184,11 +184,11 @@ public class OrderHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_order` WHERE `memberID` = ?";
+            String sql = "SELECT * FROM `missa`.`tbl_order` WHERE `memberID`=?" ;
            
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
-            pres.setString(1,memberID);
+            pres.setString(1, memberID);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
@@ -215,7 +215,7 @@ public class OrderHelper {
                 /** 將每一筆商品資料產生一名新Product物件 */
                 o = new Order(idtbl_order, member_id, buyer_name, ship_address, cellphone, product_delivery, payment, order_status, total_price, create);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
-                data=o.getOrderAllInfo();
+                jsa.put(o.getOrderAllInfo());
             }
 
         } catch (SQLException e) {
@@ -239,7 +239,7 @@ public class OrderHelper {
         response.put("sql", execute_sql);
         response.put("row", row);
         response.put("time", duration);
-        response.put("data", data);
+        response.put("data", jsa);
 
         return response;
     }
@@ -291,7 +291,8 @@ public JSONObject getByOrderId(String order_id) {
             /** 將每一筆商品資料產生一名新Product物件 */
             o = new Order(idtbl_order, memberID, buyer_name, ship_address, cellphone, product_delivery, payment, order_status, total_price, create);
             /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
-            data = o.getOrderAllInfo();
+            
+ data= o.getOrderAllInfo();
         }
 
     } catch (SQLException e) {

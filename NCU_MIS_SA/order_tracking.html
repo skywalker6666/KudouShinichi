@@ -131,7 +131,7 @@
         <button id="sent">已到店寄件</button>
         <button id="reached">已送達目標門市</button>
         
-        <p>訂單編號 </p>
+        <p id="orderNO">訂單編號 </p>
             <ul class="__inline" id="menu" style="list-style-type:none;">
                 <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
                         width="100px"></img>
@@ -195,7 +195,7 @@
            function getMyOrder() {
         	   var [member_id,member_name]=getMemberDataFromClient();
                // 發出GET請求取得所有訂單列表
-               alert(member_id);
+              
                $.ajax({
                        type: "GET",
                        url: "api/order.do",
@@ -205,12 +205,13 @@
                        dataType: 'json',
                        timeout: 50000,
                        success: function (response) {
+                    	   console.log(response);
                            if(response.status == 200){
                                updateTable(response.response.data);
                                showOrderStatus(response.response.data);
                                //updateAndReturnOrderStatus(response.response.data);
                            }
-                           console.log(response);
+                           
                        },
                        error: function () {
                            alert("無法連線到伺服器！");
@@ -221,9 +222,12 @@
        	   function showOrderStatus(data){
        		   
        		$.each(data,function(index,val){
-       			var id=data.order_info.idtbl_order;
+       			var id=data[index].order_info.idtbl_order;
+       			var status=data[index].order_info.order_status;
          	   $("#order"+id).click(function(){
-         		   	if(data.order_info.order_status==1)
+         		  $("#orderNO").empty();
+         		   $("#orderNO").append("訂單編號:"+id);
+         		   	if(status==1)
          		   		for(var i=1;i<=4;i++){
          	           	   	if(i==1){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -231,7 +235,7 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	}
-         			else if(data.order_info.order_status==2)
+         			else if(status==2)
          				for(i=1;i<=4;i++){
          	           	   	if(i==2){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -239,7 +243,7 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(data.order_info.order_status==3)
+         		   	else if(status==3)
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==3){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -247,7 +251,7 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(data.order_info.order_status==4)
+         		   	else if(status==4)
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==4){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -261,21 +265,16 @@
        	   }
            function updateTable(data) {
                $("#table > tbody").empty();
-               var table_html = '';
-               
+                 //data是一個陣列，每一筆value包含了兩個物件---order_info和product_info
+                 var table_html="";
                $.each(data, function(index, value) {
-            	   var cost=0;
-            	   $.each(data.product_info,function(index,value){
-            		   cost+=data.product_info[index].subtotal;
-            		})
-            		//alert(value['order_info']['idtbl_order']);
-            	   table_html += '<tr id="order'+data.order_info.idtbl_order+'"><td scope="row" align="center"><button id="order_'+ data.order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
-                   table_html += '<td align="center">' + data.order_info.idtbl_order + '</td>';
-                   table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
-                   table_html += '<td align="center">' + data.order_info.product_delivery + '</td>';
-                   table_html += '<td align="center">' + data.order_info.create+ '</td>';
+            	  
+            	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="order_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
+                   table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
+                   table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
+                   table_html += '<td align="center">' + data[index].order_info.create+ '</td>';
                    
-                  
                })
 
                $("#table > tbody").append(table_html);
