@@ -27,13 +27,13 @@ public class ProductController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
         String id_list = jsr.getParameter("id_list");
-        String shopID = jsr.getParameter("shopID");
+        String sellerID = jsr.getParameter("sellerID");
         String productID=jsr.getParameter("productID");
         
         
         JSONObject resp = new JSONObject();
         /** 判斷該字串是否存在，若存在代表要取回購物車內產品之資料，否則代表要取回全部資料庫內產品之資料 */
-        if(id_list.isEmpty()&&shopID.isEmpty()){
+        if(id_list.isEmpty()&&sellerID.isEmpty()){
             JSONObject query = ph.getAll();
             System.out.println("getALL");
             resp.put("status", "200");
@@ -54,9 +54,9 @@ public class ProductController extends HttpServlet {
           resp.put("message", "所有購物車之商品資料取得成功");
           resp.put("response", query);
         }
-        if(!shopID.isEmpty()){
-            JSONObject query = ph.getByShopID(shopID);
-            System.out.println("getshopID");
+        if(!sellerID.isEmpty()){
+            JSONObject query = ph.getBySellerID(sellerID);
+            System.out.println("getsellerID");
             resp.put("status", "200");
             resp.put("message", "所有商品資料取得成功");
             resp.put("response", query);
@@ -78,14 +78,16 @@ public class ProductController extends HttpServlet {
 	        String product_name = jso.getString("product_name");
 	        int price = jso.getInt("price");
 	        int inventory = jso.getInt("inventory");
-	        int shopID = jso.getInt("shopID");	        
+	        int sellerID = jso.getInt("sellerID");	        
 	        String image = jso.getString("image");
 	        String product_info = jso.getString("product_info");
+	        String type = jso.getString("type");
+	        String category = jso.getString("category");
 	 
 
 	        
 	        /** 建立一個新的商品物件 */
-	        Product p = new Product(product_name, price, inventory, shopID, image,  product_info);
+	        Product p = new Product(product_name, price, inventory, sellerID, image,  product_info, type, category);
 	        
 	        /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
 	        if(image.isEmpty() || product_info.isEmpty() || product_name.isEmpty()) {
@@ -120,15 +122,17 @@ public class ProductController extends HttpServlet {
 		        String product_name = jso.getString("product_name");
 		        int price = jso.getInt("price");
 		        int inventory = jso.getInt("inventory");
-		        int shopID = jso.getInt("shopID");	        
+		        int sellerID = jso.getInt("sellerID");	        
 		        String image = jso.getString("image");
 		        String product_info = jso.getString("productinfo");
 		        int productID = jso.getInt("productID");	  
+		        String type = jso.getString("type");
+		        String category = jso.getString("category");
 
 
 
 		        /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-		        Product p = new Product( productID, product_name, price, inventory, shopID, image,  product_info);
+		        Product p = new Product( productID, product_name, price, inventory, sellerID, image,  product_info, type, category);
 		        
 		        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
 		        JSONObject data = ph.updateProduct(p);

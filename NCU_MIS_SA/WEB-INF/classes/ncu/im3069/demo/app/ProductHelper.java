@@ -62,13 +62,15 @@ public class ProductHelper {
                 String product_name = rs.getString("product_name");
                 int price = rs.getInt("price");
                 int inventory = rs.getInt("inventory");
-                int shopID = rs.getInt("shopID");
+                int sellerID = rs.getInt("sellerID");
                 int is_deleted = rs.getInt("is_deleted");
                 String image = rs.getString("image");
                 String product_info = rs.getString("product_info");
+                String type = rs.getString("type");
+                String category = rs.getString("category");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(idtbl_product, product_name, price, inventory, shopID, is_deleted, image, product_info);
+                p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }
@@ -146,13 +148,15 @@ public class ProductHelper {
               String product_name = rs.getString("product_name");
               int price = rs.getInt("price");
               int inventory = rs.getInt("inventory");
-              int shopID = rs.getInt("shopID");
+              int sellerID = rs.getInt("sellerID");
               int is_deleted = rs.getInt("is_deleted");
               String image = rs.getString("image");
               String product_info = rs.getString("product_info");
+              String type = rs.getString("type");
+              String category = rs.getString("category");
               
               /** 將每一筆商品資料產生一名新Product物件 */
-              p = new Product(idtbl_product, product_name, price, inventory, shopID, is_deleted, image, product_info);
+              p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info, type, category);
               /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
               jsa.put(p.getData());
           }
@@ -183,7 +187,7 @@ public class ProductHelper {
       return response;
   }
     
-    public JSONObject getByShopID(String shopID) {
+    public JSONObject getBySellerID(String sellerID) {
         /** 新建一個 Member 物件之 m 變數，用於紀錄每一位查詢回之會員資料 */
       
         /** 新建一個 Product 物件之 m 變數，用於紀錄每一位查詢回之商品資料 */
@@ -202,11 +206,11 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_product` WHERE `shopID` = ? ";
+            String sql = "SELECT * FROM `missa`.`tbl_product` WHERE `sellerID` = ? ";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, shopID);
+            pres.setString(1, sellerID);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
@@ -225,13 +229,15 @@ public class ProductHelper {
                 String product_name = rs.getString("product_name");
                 int price = rs.getInt("price");
                 int inventory = rs.getInt("inventory");
-                int shop_ID = rs.getInt("shopID");
+                int shop_ID = rs.getInt("sellerID");
                 int is_deleted = rs.getInt("is_deleted");
                 String image = rs.getString("image");
                 String product_info = rs.getString("product_info");
+                String type = rs.getString("type");
+                String category = rs.getString("category");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                p = new Product(idtbl_product, product_name, price, inventory, shop_ID, is_deleted, image, product_info);
+                p = new Product(idtbl_product, product_name, price, inventory, shop_ID, is_deleted, image, product_info,type,category);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }
@@ -293,13 +299,13 @@ public class ProductHelper {
                 String product_name = rs.getString("product_name");
                 int price = rs.getInt("price");
                 int inventory = rs.getInt("inventory");
-                int shopID = rs.getInt("shopID");
+                int sellerID = rs.getInt("sellerID");
                 int is_deleted = rs.getInt("is_deleted");
                 String image = rs.getString("image");
                 String product_info = rs.getString("product_info");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(id, product_name, price, inventory, shopID, is_deleted,  image, product_info);
+                p = new Product(id, product_name, price, inventory, sellerID, is_deleted,  image, product_info);
             }
 
         } catch (SQLException e) {
@@ -327,25 +333,29 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `shopID`, `is_deleted`, `image`, `product_info`)"
-                    + " VALUES(?, ?, ?, ?, 0, ? ,? )";
+            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `sellerID`, `is_deleted`, `image`, `product_info`, `type`, `category`)"
+                    + " VALUES(?, ?, ?, ?, 0, ? , ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = p.getName();
             int price = p.getPrice();
             int inventory = p.getInventory();
-            int ShopID = p.getShopID();
+            int sellerID = p.getSellerID();
             String image = p.getImage();
             String product_info = p.getProductInfo();
+            String type = p.getType();
+            String category = p.getCategory();
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, name);
             pres.setInt(2, price);
             pres.setInt(3, inventory);
-            pres.setInt(4, ShopID); //
+            pres.setInt(4, sellerID); //
             pres.setString(5, image);
             pres.setString(6, product_info); //
+            pres.setString(7, type);
+            pres.setString(8, category);
        
             
             /** 執行新增之SQL指令並記錄影響之行數 */
@@ -393,14 +403,16 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `missa`.`tbl_product` SET `product_name` = ? ,`price` = ? , `inventory` = ? ,`shopID` = ? ,`image` = ? ,`product_info` = ?  WHERE `idtbl_product` = ?";
+            String sql = "Update `missa`.`tbl_product` SET `product_name` = ? ,`price` = ? , `inventory` = ? ,`sellerID` = ? ,`image` = ? ,`product_info` = ? ,`type` = ? ,`category` = ?  WHERE `idtbl_product` = ?";
             /** 取得所需之參數 */
             String name = p.getName();
             int price = p.getPrice();
             int inventory = p.getInventory();
-            int ShopID = p.getShopID();
+            int sellerID = p.getSellerID();
             String image = p.getImage();
             String product_info = p.getProductInfo();
+            String type = p.getType();
+            String category = p.getCategory();
             int productID = p.getID();
             
             /** 將參數回填至SQL指令當中 */
@@ -408,10 +420,12 @@ public class ProductHelper {
             pres.setString(1, name);
             pres.setInt(2, price);
             pres.setInt(3, inventory);
-            pres.setInt(4, ShopID); //
+            pres.setInt(4, sellerID); //
             pres.setString(5, image);
             pres.setString(6, product_info); //
-            pres.setInt(7, productID);
+            pres.setString(7, type);
+            pres.setString(8, category);
+            pres.setInt(9, productID);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 

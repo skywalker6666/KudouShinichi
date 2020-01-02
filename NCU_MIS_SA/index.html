@@ -1,19 +1,18 @@
- <!Doctype html>
+<!Doctype html>
 <html>
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
 
-<title>Home</title>
+    <title>Home</title>
 
-<!-- Bootstrap core CSS -->
-
-
-<style>
-</style>
+    <!-- Bootstrap core CSS -->
 
 
-<link
+    <style>
+    </style>
+    
+    <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet"></link>
 <link
@@ -26,53 +25,49 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/jquery.smartmenus.min.js'></script>
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js'></script>
+    
+    
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="statics/css/navbar.css">
+    <link rel="stylesheet" href="statics/css/themebox.css">
+    <link rel="stylesheet" href="statics/css/card.css">
+    <link rel="stylesheet" href="statics/css/product.css">
 
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
-<link rel="stylesheet" href="statics/css/card.css">
-<link rel="stylesheet" href="statics/css/product.css">
-
-<script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
 
-	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
-		<li id="signup_in" style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
+    <ul class="navbar">
+        <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
+                    height="100px" width="100px"></img></a></li>
+        <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+        <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+        <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
+        <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 
-		<div id="member_center1" class="mediumbox" style="float: right">
-			<li style="float: left"><a class="navbarFloating"
-				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating"
-				href="index.html">&nbsp;登出 </a></li>
-			<li style="float: left">
-		</div>
-		<div id="member_center2" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/shoppingcart.png"
-				style="float: left" height="20px" width="20px"></img></li>
-			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-		</div>
-		<div id="member_center3" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/user.png" style="float: left"
-				height="20px" width="20px"></img></li>
-			<li id="user_name" class="navbarFloating">user</li>
-		</div>
-	</ul>
+        <div id="member_center1" class="mediumbox" style="float: right">
+            <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+            <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
+            <li style="float: left">
 
-	<div class="frame">
-		<div class="generalbox">
-			<!--下拉選單-->
+        </div>
+        <div id="member_center2" class="smallbox" style="float: right">
+            <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
+            </li>
+            <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+        </div>
+        <div id="member_center3" class="smallbox" style="float: right">
+            <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
+            <li id="user_name" class="navbarFloating">user</li>
+        </div>
+    </ul>
+    <div class="frame">
+
+        <div class="generalbox">
+            <!--下拉選單-->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#">篩選項目<span class="caret"></span></a>
@@ -117,199 +112,219 @@
 				</ul>
 			</div>
 			<!--下拉選單-->
-			<p>商品目錄</p>
+            <p>商品目錄</p>
 
-		</div>
+        </div>
 
-	</div>
+    </div>
 
 
 
-	<script type="text/javascript">   
-    var [client_cart_obj, client_cart_amount]  = getCartDataFromClient(); 
-    
-    function getAllProduct() {
-      $.ajax({
-        type: "GET",
-        url: "api/product.do",
-        crossDomain: true,
-        cache: false,
-        dataType: 'json',
-        timeout: 5000,
-        success: function (response) {
-          if (response.status == 200) {
-        	  
-        	var product_panel = '';
-        	
-        	$.each(response.response.data, function (){
-        		product_panel += addProduct(this);
-        	})
-        	
-        	$("#product_panel").append(product_panel);
-        	setButtonFunction();
-        	checkIfExistInCart();
-          }
-        },
-        error: function () {
-          alert("無法連線到伺服器！");
+    <script type="text/javascript">
+        var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+
+
+        function getisSellerFromClient() {
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            isSeller = !isSeller ? new Array() : isSeller;
+
+            return [isSeller];
         }
-      });
-    }
 
-    getAllProduct();
-    
-    function addProduct(data) {
-    	let inner_html = '';
-    	inner_html += '<div class="col-md-4" style="float:left;">';
-   		inner_html += '<div class="card-header">';
-   		inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
- 		inner_html += '</div>';
- 		inner_html += '<div class="card mb-4 shadow-sm">';
- 		inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
-		inner_html += '<div class="card-body">';
-		inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
-		inner_html += '<p class="card-text">' + data.describe + '</p>';
-		inner_html += '<div class="d-flex justify-content-between align-items-center">';
-		inner_html += '<div class="btn-group">';
-		inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
-		inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
-		inner_html += '</div></div></div></div>';
-    	
-		return inner_html;
-    }
-    
-    function setButtonFunction() {
-    	$('button[name="add_cart"]').click(function () {
-    		var action = (this.id).split('_')[0];
-    		var destination = (this.id).split('_')[1];
-    		var id = (this.id).split('_')[2];
-    		addProductToCart(id, 1);
+        function getAllProduct() {
+            $.ajax({
+                type: "GET",
+                url: "api/product.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if (response.status == 200) {
+
+                        var product_panel = '';
+
+                        $.each(response.response.data, function () {
+                            product_panel += addProduct(this);
+                        })
+
+                        $("#product_panel").append(product_panel);
+                        setButtonFunction();
+                        checkIfExistInCart();
+                    }
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+        //判斷是否是賣家我的賣場
+        var [client_isSeller] = getisSellerFromClient();
+        $("#myMarket").hide();
+        if (parseInt(client_isSeller.toString()) == 1) {
+            $("#myMarket").show();
+        }
+
+        getAllProduct();
+
+        function addProduct(data) {
+            let inner_html = '';
+            inner_html += '<div class="col-md-4" style="float:left;">';
+            inner_html += '<div class="card-header">';
+            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+            inner_html += '</div>';
+            inner_html += '<div class="card mb-4 shadow-sm">';
+            inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+            inner_html += '<div class="card-body">';
+            inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
+            inner_html += '<p class="card-text">' + data.describe + '</p>';
+            inner_html += '<div class="d-flex justify-content-between align-items-center">';
+            inner_html += '<div class="btn-group">';
+            inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
+            inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+            inner_html += '</div></div></div></div>';
+
+            return inner_html;
+        }
+
+        function setButtonFunction() {
+            $('button[name="add_cart"]').click(function () {
+                var action = (this.id).split('_')[0];
+                var destination = (this.id).split('_')[1];
+                var id = (this.id).split('_')[2];
+                addProductToCart(id, 1);
+            });
+        }
+
+        function getCartDataFromClient() {
+            let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+            let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+            cart = !cart ? new Array() : cart;
+            amount = !amount ? new Array() : amount;
+            return [cart, amount];
+        }
+
+        function addProductToCart(id, amount) {
+            if (!(client_cart_obj.includes(id))) {
+                client_cart_obj.push(id);
+                client_cart_amount.push(amount);
+                updateCartDataToClent();
+            }
+
+            checkIfExistInCart();
+        }
+
+        function updateCartDataToClent() {
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+        }
+
+        function checkIfExistInCart() {
+            $('button[name="add_cart"]').each(function () {
+                var action = (this.id).split('_')[0];
+                var destination = (this.id).split('_')[1];
+                var id = (this.id).split('_')[2];
+                if (client_cart_obj.includes(id)) {
+                    setButtonState(this.id, false);
+                }
+                else {
+                    setButtonState(this.id, true);
+                }
+
+            });
+        }
+
+        function setButtonState(id, action) {
+            if (!action) {
+                $('#' + id).prop('disabled', true);
+                $('#' + id).addClass('disabled');
+                $('#' + id).html('已加入');
+            }
+            else {
+                $('#' + id).prop('disabled', false);
+                $('#' + id).removeClass('disabled');
+                $('#' + id).html('加入購物車');
+            }
+        }
+
+
+
+
+
+        /*------------登入登出實作member cookie-----------*/
+
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+            return [id, name, isSeller];
+        }
+
+        function updateMemberDataToClent() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+
+        }
+
+        function loguot() {
+            client_id = [];
+            client_name = [];
+            client_cart_obj = [];
+            client_cart_amount = [];
+            updateMemberDataToClent();
+            client_isSeller = [];
+            
+            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+            $("#signup_in").show();
+            $("#user_name").empty();
+        }
+
+        $("#remove").click(function () {
+            console.log("[@Action]登出");
+            loguot();
         });
-    }
-    
-    function getCartDataFromClient() {
-    	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
-    	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
-    	cart = !cart ? new Array() : cart;
-    	amount = !amount ? new Array() : amount;
-    	return [cart, amount];
-    }
-    
-    function addProductToCart(id, amount) {
-    	if (!(client_cart_obj.includes(id))) {
-    		client_cart_obj.push(id);
-    		client_cart_amount.push(amount);
-    		updateCartDataToClent();
-    	}
-    	
-    	checkIfExistInCart();
-    }
-    
-    function updateCartDataToClent() {
-    	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-    	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
-    }
-    
-    function checkIfExistInCart() {
-    	$('button[name="add_cart"]').each(function (){
-    		var action = (this.id).split('_')[0];
-    		var destination = (this.id).split('_')[1];
-    		var id = (this.id).split('_')[2];
-    		if (client_cart_obj.includes(id)) {
-    			setButtonState(this.id, false);
-    		}
-    		else {
-    			setButtonState(this.id, true);
-    		}
-    		
+
+        $(document).ready(function () {
+            if (client_id.length == 0) { //登出
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+            } else {//登入
+                $("#user_name").html(client_name);
+                $("#member_center1").show();
+                $("#member_center2").show();
+                $("#member_center3").show();
+                $("#signup_in").hide();
+            }
         });
-    }
-    
-    function setButtonState(id, action) {
-    	if (!action) {
-    	    $('#' + id).prop('disabled', true);
-    	    $('#' + id).addClass('disabled');
-    	    $('#' + id).html('已加入');
-    	}
-    	else {
-    		$('#' + id).prop('disabled', false);
-    	    $('#' + id).removeClass('disabled');
-    	    $('#' + id).html('加入購物車');
-    	}
-    }
-    
-    
-    
-    
-    
-    /*------------登入登出實作member cookie-----------*/
-   
-     var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
 
-    function getMemberDataFromClient() {
-    	let id = JSON.parse(localStorage.getItem("client_id"));
-    	let name = JSON.parse(localStorage.getItem("client_name"));
-    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+        /*----------------------------------------*/
 
-    	id = !id ? new Array() : id;
-    	name = !name ? new Array() : name;
-    	isSeller = !isSeller ? new Array() : isSeller;
-    	return [id, name, isSeller];
-    }
-	
-     function updateMemberDataToClent() {
-     	localStorage.setItem("client_id", JSON.stringify(client_id));
-     	localStorage.setItem("client_name", JSON.stringify(client_name));
-     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
 
-     }
-    
-    function loguot() {
-      client_id = [];
-      client_name = [];
-      updateMemberDataToClent();
-      client_isSeller = [];
-      updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
-      $("#member_center1").hide();
-      $("#member_center2").hide();
-      $("#member_center3").hide();
-      $("#signup_in").show();
-      $("#user_name").empty();
-    }
-    
-    $("#remove").click(function () {
-     	console.log("[@Action]登出");
-     	loguot();
-     });
-    
-    $(document).ready(function(){
-    	 if(client_id.length == 0){ //登出
-    		 $("#member_center1").hide();
-    	     $("#member_center2").hide();
-    	     $("#member_center3").hide();  
-    	 }else{//登入
-    		 $("#user_name").html(client_name);
-       	 	 $("#member_center1").show();
-       	 	 $("#member_center2").show();
-       	     $("#member_center3").show();
-       		 $("#signup_in").hide();
-    	 }
-    });
-   
-    /*----------------------------------------*/
 
-    		
-   
-    
-  </script>
 
-	<footer class="text-muted">
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-		</div>
-	</footer>
+    </script>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+        </div>
+    </footer>
 
 
 </body>
