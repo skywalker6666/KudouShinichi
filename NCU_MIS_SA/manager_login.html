@@ -3,6 +3,7 @@
 <head>
   <meta charset="Big5">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manager_login</title>
 	<style>
 	</style>
  	<link rel="stylesheet" href="statics/css/register&login.css">
@@ -43,12 +44,12 @@
 		
 		var password = $('#manager_password').val();
 		
-		var [client_id, client_name, client_isLeader]  = getManagerDataFromClient();
+		var [manager_id, manager_name, manager_isLeader]  = getManagerDataFromClient();
 		
 		function getManagerDataFromClient() {
-	    	let id = JSON.parse(localStorage.getItem("client_id"));
-	    	let name = JSON.parse(localStorage.getItem("client_name"));
-	    	let isLeader = JSON.parse(localStorage.getItem("client_isLeader"));
+	    	let id = JSON.parse(localStorage.getItem("manager_id"));
+	    	let name = JSON.parse(localStorage.getItem("manager_name"));
+	    	let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
 
 	    	id = !id ? new Array() : id;
 	    	name = !name ? new Array() : name;
@@ -59,23 +60,23 @@
 		
 		
 		function addDataToManager(id, name, isLeader) {
-	    	if (!(client_id.includes(id))) {
-	    		client_id.push(id);
-	    		client_name.push(name);
-	    		client_isLeader.push(isLeader)
-	    		updateMemberDataToClent();
+	    	if (!(manager_id.includes(id))) {
+	    		manager_id.push(id);
+	    		manager_name.push(name);
+	    		manager_isLeader.push(isLeader)
+	    		updateManagerDataToClient();
 	    	}
 	    }
 		
 	    
-	     function updateMemberDataToClent() {
-	     	localStorage.setItem("client_id", JSON.stringify(client_id));
-	     	localStorage.setItem("client_name", JSON.stringify(client_name));
-	     	localStorage.setItem("client_isLeader", JSON.stringify(client_isLeader));
+	     function updateManagerDataToClient() {
+	     	localStorage.setItem("manager_id", JSON.stringify(manager_id));
+	     	localStorage.setItem("manager_name", JSON.stringify(manager_name));
+	     	localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
 
 	     }
 	     
-	     function getThisMember() {
+	     function getThisManager() {
 	    	 var name = $('#manager_name').val();
 	    	 var data = {
 	    			"managerName": $("#manager_name").val(),
@@ -99,8 +100,8 @@
 							var name = response.response.data["0"].managerName;
 							var isLeader = response.response.data["0"].isLeader;
 
-							//addDataToManager(id,name,isLeader); 
- 							//document.location.href = "manager_center.html"; 
+							addDataToManager(id,name,isLeader); 
+ 							document.location.href = "manager_center.html"; 
  
 						}
 						alert(response.message);
@@ -125,7 +126,7 @@
 	             table_html += '<td>' + value['managerName'] + '</td>';
 	             table_html += '<td>' + value['isLeader'] + '</td>';
 	             table_html += '<td>';
-	             table_html += '<a href="javascript: deleteMember(' + value['idtbl_manager'] + ');">刪除</a></td></tr>';
+	             table_html += '<a href="javascript: deleteManager(' + value['idtbl_manager'] + ');">刪除</a></td></tr>';
 	         })
 
 
@@ -149,7 +150,7 @@
 	     
 		$(document).ready(function() {
 			$("#login").click(function() {
-				getThisMember();
+				getThisManager();
 			});
 		});
 	</script>

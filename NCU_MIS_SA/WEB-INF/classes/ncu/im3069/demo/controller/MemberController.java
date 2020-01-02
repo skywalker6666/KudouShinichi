@@ -175,9 +175,6 @@ public class MemberController extends HttpServlet {
                 jsr.response(resp, response);
             }
         	
-        	
-        	
-        	
            
         }
     }

@@ -102,7 +102,6 @@ public class ManagerController extends HttpServlet {
         String isLeader =jsr.getParameter("isLeader");
         String name = jsr.getParameter("managerName");
         String password = jsr.getParameter("managerPassword");
-      //  String isLeader =jsr.getParameter("isLeader");
     
         System.out.println("已進入doGet");
         /** 判斷該字串是否存在，若存在代表要取回個別管理員之資料，否則代表要取回全部資料庫內管理員之資料 */

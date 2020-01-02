@@ -27,7 +27,7 @@ public class Manager {
     private int isLeader;
     
     /** password，會員密碼 */
-    private String password;
+    private String managerPassword;
     
     private int isDeleted;
     
@@ -58,7 +58,7 @@ public class Manager {
      */
     public Manager(String managerName,String password,int isLeader,int isDeleted) {
        // this.email = email;
-        this.password = password;
+        this.managerPassword = password;
         this.managerName = managerName;
         this.isLeader= isLeader;
         this.isDeleted= isDeleted;
@@ -69,7 +69,7 @@ public class Manager {
     }
     public Manager(int managerid,String managerName,String password) {
          this.managerId = managerid;
-         this.password = password;
+         this.managerPassword = password;
          this.managerName = managerName;
 
       //   this.headSticker=headSticker;
@@ -91,7 +91,7 @@ public class Manager {
    public Manager(int managerId,String managerName, String password,int isLeader, int isDeleted) {
         this.managerId = managerId;
 //        this.email = email;
-        this.password = password;
+        this.managerPassword = password;
         this.managerName = managerName;
  //       this.headSticker=headSticker;
   //      this.birthday=birthday;//
@@ -177,7 +177,7 @@ public class Manager {
      * @return the password 回傳會員密碼
      */
     public String getPassword() {
-        return this.password;
+        return this.managerPassword;
     }
     
     public int getisDeleted() {
@@ -232,9 +232,9 @@ public class Manager {
         /** 透過JSONObject將該名會員所需之資料全部進行封裝*/ 
         JSONObject jso = new JSONObject();
         jso.put("idtbl_manager", getID());
-        jso.put("name", getmanagerName());
+        jso.put("managerName", getmanagerName());
  //       jso.put("email", getEmail());
-        jso.put("password", getPassword());
+        jso.put("managerPassword", getPassword());
  //       jso.put("birthday", getBirthday());
   //      jso.put("headSticker", getheadSticker());
         jso.put("isLeader", getIsLeader());
