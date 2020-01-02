@@ -156,11 +156,11 @@ public class MemberHelper {
                 String headSticker = rs.getString("headSticker");
                 String birthday = rs.getString("birthday");
                 int isSeller = rs.getInt("isSeller");
-                int login_times = rs.getInt("login_times");
-                String status = rs.getString("status");
+               // int login_times = rs.getInt("login_times");
+              //  String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, headSticker, birthday, isSeller,login_times, status);
+                m = new Member(member_id, email, password, name, headSticker, birthday, isSeller);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -241,11 +241,11 @@ public class MemberHelper {
                 String headSticker = rs.getString("headSticker");
                 String birthday = rs.getString("birthday");
                 int isSeller = rs.getInt("isSeller");
-                int login_times = rs.getInt("login_times");
-                String status = rs.getString("status");
+              //  int login_times = rs.getInt("login_times");
+               // String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, headSticker, birthday, isSeller, login_times, status);
+                m = new Member(member_id, email, password, name, headSticker, birthday, isSeller);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -326,11 +326,11 @@ public class MemberHelper {
                 String headSticker = rs.getString("headSticker");
                 String birthday = rs.getString("birthday");
                 int is_Seller = rs.getInt("isSeller");
-                int login_times = rs.getInt("login_times");
-                String status = rs.getString("status");
+                //int login_times = rs.getInt("login_times");
+               // String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, password, name, headSticker, birthday, is_Seller, login_times, status);
+                m = new Member(member_id, email, password, name, headSticker, birthday, is_Seller);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -411,11 +411,11 @@ public class MemberHelper {
                 String headSticker = rs.getString("headSticker");
                 String birthday = rs.getString("birthday");
                 int is_Seller = rs.getInt("isSeller");
-                int login_times = rs.getInt("login_times");
-                String status = rs.getString("status");
+               // int login_times = rs.getInt("login_times");
+               // String status = rs.getString("status");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
-                m = new Member(member_id, email, _password, _name, headSticker, birthday, is_Seller, login_times, status);
+                m = new Member(member_id, email, _password, _name, headSticker, birthday, is_Seller);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(m.getData());
             }
@@ -501,7 +501,57 @@ public class MemberHelper {
      * @param m 一名會員之Member物件
      * @return boolean 若重複註冊回傳False，若該信箱不存在則回傳True
      */
-    public boolean checkDuplicate(Member m){
+    public boolean checkNameDuplicate(Member m){
+        /** 紀錄SQL總行數，若為「-1」代表資料庫檢索尚未完成 */
+        int row = -1;
+        /** 儲存JDBC檢索資料庫後回傳之結果，以 pointer 方式移動到下一筆資料 */
+        ResultSet rs = null;
+        
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "SELECT count(*) FROM `missa`.`tbl_member` WHERE `name` = ?";
+            
+            /** 取得所需之參數 */
+            String name = m.getName();
+            
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+            pres.setString(1, name);
+            /** 執行查詢之SQL指令並記錄其回傳之資料 */
+            rs = pres.executeQuery();
+
+            /** 讓指標移往最後一列，取得目前有幾行在資料庫內 */
+            rs.next();
+            row = rs.getInt("count(*)");
+            System.out.println("資料庫內有"+row+"筆重複name");
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(rs, pres, conn);
+        }
+        
+        /** 
+         * 判斷是否已經有一筆該電子郵件信箱之資料
+         * 若無一筆則回傳False，否則回傳True 
+         */
+        return (row == 0) ? false : true;
+    }
+    
+    /**
+     * 檢查該名會員之電子郵件信箱是否重複註冊
+     *
+     * @param m 一名會員之Member物件
+     * @return boolean 若重複註冊回傳False，若該信箱不存在則回傳True
+     */
+    public boolean checkEmailDuplicate(Member m){
         /** 紀錄SQL總行數，若為「-1」代表資料庫檢索尚未完成 */
         int row = -1;
         /** 儲存JDBC檢索資料庫後回傳之結果，以 pointer 方式移動到下一筆資料 */
@@ -525,7 +575,7 @@ public class MemberHelper {
             /** 讓指標移往最後一列，取得目前有幾行在資料庫內 */
             rs.next();
             row = rs.getInt("count(*)");
-            System.out.print(row);
+            System.out.println("資料庫內有"+row+"筆重複email");
 
         } catch (SQLException e) {
             /** 印出JDBC SQL指令錯誤 **/
@@ -561,7 +611,7 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `missa`.`tbl_member` WHERE `name` = ?  AND `password` = ? LIMIT 1";
+            String sql = "SELECT count(*) FROM `missa`.`tbl_member` WHERE `name` = ?  AND `password` = ? AND `isDeleted` <> 1 LIMIT 1";
             
             /** 取得所需之參數 */
             String name = m.getName();
@@ -617,8 +667,8 @@ public class MemberHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`tbl_member`(`name`, `email`, `password`, `birthday`, `headSticker`, `isSeller`, `modified`, `created`, `login_times`, `status`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`tbl_member`(`name`, `email`, `password`, `birthday`, `headSticker`, `isSeller`, `modified`, `created`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = m.getName();
@@ -627,8 +677,8 @@ public class MemberHelper {
             String birthday = m.getBirthday();
             String headSticker = m.getheadSticker();
             int isSeller = m.getIsSeller();
-            int login_times = m.getLoginTimes();
-            String status = m.getStatus();
+           // int login_times = m.getLoginTimes();
+           // String status = m.getStatus();
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -640,8 +690,8 @@ public class MemberHelper {
             pres.setInt(6, isSeller); //
             pres.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
             pres.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setInt(9, login_times);
-            pres.setString(10, status);
+            //pres.setInt(9, login_times);
+           // pres.setString(9, status);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
@@ -753,43 +803,43 @@ public class MemberHelper {
      *
      * @param m 一名會員之Member物件
      */
-    public void updateLoginTimes(Member m) {
-        /** 更新時間之分鐘數 */
-        int new_times = m.getLoginTimes();
-        
-        /** 記錄實際執行之SQL指令 */
-        String exexcute_sql = "";
-        
-        try {
-            /** 取得資料庫之連線 */
-            conn = DBMgr.getConnection();
-            /** SQL指令 */
-            String sql = "Update `missa`.`tbl_member` SET `login_times` = ? WHERE `idtbl_member` = ?";
-            /** 取得會員編號 */
-            int id = m.getID();
-            
-            /** 將參數回填至SQL指令當中 */
-            pres = conn.prepareStatement(sql);
-            pres.setInt(1, new_times);
-            pres.setInt(2, id);
-            /** 執行更新之SQL指令 */
-            pres.executeUpdate();
-
-            /** 紀錄真實執行的SQL指令，並印出 **/
-            exexcute_sql = pres.toString();
-            System.out.println(exexcute_sql);
-
-        } catch (SQLException e) {
-            /** 印出JDBC SQL指令錯誤 **/
-            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
-        } catch (Exception e) {
-            /** 若錯誤則印出錯誤訊息 */
-            e.printStackTrace();
-        } finally {
-            /** 關閉連線並釋放所有資料庫相關之資源 **/
-            DBMgr.close(pres, conn);
-        }
-    }
+//    public void updateLoginTimes(Member m) {
+//        /** 更新時間之分鐘數 */
+//        int new_times = m.getLoginTimes();
+//        
+//        /** 記錄實際執行之SQL指令 */
+//        String exexcute_sql = "";
+//        
+//        try {
+//            /** 取得資料庫之連線 */
+//            conn = DBMgr.getConnection();
+//            /** SQL指令 */
+//            String sql = "Update `missa`.`tbl_member` SET `login_times` = ? WHERE `idtbl_member` = ?";
+//            /** 取得會員編號 */
+//            int id = m.getID();
+//            
+//            /** 將參數回填至SQL指令當中 */
+//            pres = conn.prepareStatement(sql);
+//            pres.setInt(1, new_times);
+//            pres.setInt(2, id);
+//            /** 執行更新之SQL指令 */
+//            pres.executeUpdate();
+//
+//            /** 紀錄真實執行的SQL指令，並印出 **/
+//            exexcute_sql = pres.toString();
+//            System.out.println(exexcute_sql);
+//
+//        } catch (SQLException e) {
+//            /** 印出JDBC SQL指令錯誤 **/
+//            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+//        } catch (Exception e) {
+//            /** 若錯誤則印出錯誤訊息 */
+//            e.printStackTrace();
+//        } finally {
+//            /** 關閉連線並釋放所有資料庫相關之資源 **/
+//            DBMgr.close(pres, conn);
+//        }
+//    }
     
     /**
      * 更新會員之會員組別

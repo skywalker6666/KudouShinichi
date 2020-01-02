@@ -60,15 +60,27 @@ public class MemberController extends HttpServlet {
         Member m = new Member(email, password, name, headSticker, birthday, isSeller);
         
         /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
-        if(email.isEmpty() || password.isEmpty() || name.isEmpty()) {
+        if(email.isEmpty() || password.isEmpty() || name.isEmpty() || birthday.isEmpty()) {
             /** 以字串組出JSON格式之資料 */
             String resp = "{\"status\": \'400\', \"message\": \'欄位不能有空值\', \'response\': \'\'}";
             /** 透過JsonReader物件回傳到前端（以字串方式） */
             jsr.response(resp, response);
+            
+        }else if(mh.checkNameDuplicate(m)){
+        	 /** 以字串組出JSON格式之資料 */
+            String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此Name帳號重複！\', \'response\': \'\'}";
+            /** 透過JsonReader物件回傳到前端（以字串方式） */
+            jsr.response(resp, response);
         }
         /** 透過MemberHelper物件的checkDuplicate()檢查該會員電子郵件信箱是否有重複 */
-        else if (!mh.checkDuplicate(m)) {
-            /** 透過MemberHelper物件的create()方法新建一個會員至資料庫 */
+        else if (mh.checkEmailDuplicate(m)) {
+        	 /** 以字串組出JSON格式之資料 */
+            String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
+            /** 透過JsonReader物件回傳到前端（以字串方式） */
+            jsr.response(resp, response);
+        }
+        else {
+        	/** 透過MemberHelper物件的create()方法新建一個會員至資料庫 */
             JSONObject data = mh.create(m);
             
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
@@ -78,12 +90,6 @@ public class MemberController extends HttpServlet {
             resp.put("response", data);
             
             /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
-            jsr.response(resp, response);
-        }
-        else {
-            /** 以字串組出JSON格式之資料 */
-            String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
-            /** 透過JsonReader物件回傳到前端（以字串方式） */
             jsr.response(resp, response);
         }
         
@@ -111,7 +117,7 @@ public class MemberController extends HttpServlet {
         /** 判斷該字串是否存在，若存在代表要取回個別會員之資料，否則代表要取回全部資料庫內會員之資料 */
         if (id.isEmpty()&&(isSeller.isEmpty()&&name.isEmpty()&&password.isEmpty())) {
             /** 透過MemberHelper物件之getAll()方法取回所有會員之資料，回傳之資料為JSONObject物件 */
-        	System.out.println("wdwad");
+        	System.out.println("進入getAll");
             JSONObject query = mh.getAll();
 
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
@@ -124,6 +130,7 @@ public class MemberController extends HttpServlet {
             jsr.response(resp, response);
         }
         if(!isSeller.isEmpty()){
+        	System.out.println("進入getByIsSeller");
         	 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getByIsSeller(isSeller);
             
@@ -137,6 +144,7 @@ public class MemberController extends HttpServlet {
             jsr.response(resp, response);
         }
         if(!id.isEmpty()){
+        	System.out.println("進入getByID");
             /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getByID(id);
             
@@ -150,11 +158,10 @@ public class MemberController extends HttpServlet {
             jsr.response(resp, response);
         }
         if(!name.isEmpty()&&!password.isEmpty()){
-        	
+        	System.out.println("進入getByNamePassword");
         	/** 建立一個新的會員物件 */
             Member m = new Member("email", password, name, "headSticker", "birthday", 0);
             
-        	
         	if (mh.checkIfHasThisAccount(m)) {
         		 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
                 JSONObject query = mh.getByNamePassword(name,password);

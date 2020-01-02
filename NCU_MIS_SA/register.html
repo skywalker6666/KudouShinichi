@@ -123,11 +123,12 @@ input:checked+.slider:before {
 							name="email" type="email" id="member_email" required="required">
 					</div>
 					<div class="input birth required">
-						<label for="member_birth">西元生日:</label> <input
-							class="field_birthY " name="birth1" type="birth" id="birth1">年
-						<input class="field_birthMandD" name="birth2" type="birth"
+						<label for="member_birth">西元生日:</label> 
+						<input type="date" id="birth" name="birth" min="" max="">
+							
+						<!-- <input class="field_birthMandD" name="birth2" type="birth"
 							id="birth2">月 <input class="field_birthMandD"
-							name="birth3" type="birth" id="birth3">日
+							name="birth3" type="birth" id="birth3">日 -->
 					</div>
 					
 						<div class="input headSticker">
@@ -157,7 +158,7 @@ input:checked+.slider:before {
 								var name = $('#member_name').val();
 								var email = $('#member_email').val();
 								var password = $('#member_password').val();
-								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
+								var birthday = $('#birth').val();
 								var headSticker = $('#member_headSticker').val();
 								var isSeller = 0;
 
@@ -199,10 +200,11 @@ input:checked+.slider:before {
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														updateSQLTable(response.response);
-														alert("註冊成功！");
+														alert(response.message);
 														document.location.href = "member_change.html"; 
+													}else{
+														alert(response.message);
 													}
-													
 													
 												},
 												error : function() {
@@ -216,7 +218,7 @@ input:checked+.slider:before {
 								var name = $('#member_name').val();
 								var email = $('#member_email').val();
 								var password = $('#member_password').val();
-								var birthday = $('#birth1').val()+"-"+$('#birth2').val()+"-"+$('#birth3').val();
+								var birthday = $('#birth').val();
 								var headSticker = $('#member_headSticker').val();
 								var isSeller = 1;
 
@@ -258,8 +260,10 @@ input:checked+.slider:before {
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														updateSQLTable(response.response);
-														alert("註冊成功！");
+														alert(response.message);
 														document.location.href = "member_change.html"; 
+													}else{
+														alert(response.message);
 													}
 													
 													
