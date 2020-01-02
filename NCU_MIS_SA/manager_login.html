@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,8 @@
 	</style>
  	<link rel="stylesheet" href="statics/css/register&login.css">
  	<link rel="stylesheet" href="statics/css/navbar.css">
+ 	<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+ 	
 </head>
 <body bgcolor="#BCE2FF">	
 
@@ -24,16 +27,134 @@
 		<div class="box2" >		
 			<form class="form" id="form" accept-charset="utf-8" style="margin-top:100px">				
 				<div class="input text required">
-					<label for="member_name" >管理員帳號</label>
-					<input class="field" name="name" type="text" id="member_name" required="required">
+					<label for="manager_name" >管理員帳號</label>
+					<input class="field" name="name" type="text" id="manager_name" required="required">
 				</div>
 				<div class="input password required" >
 					<label for="password">管理員密碼</label>
-					<input class="field" name="password" type="password" id="member_password" required="required" >				   
+					<input class="field" name="password" type="password" id="manager_password" required="required" >				   
 				</div>
-				<div type="submit"><button class="button" id="login" >登入</button></div>
+				<button type="button" class="button" id="login" >登入</button>
 			</form>
 		</div>
 	</div>
+		<script type="text/javascript">
+		
+		var password = $('#manager_password').val();
+		
+		var [manager_id, manager_name, manager_isLeader]  = getManagerDataFromClient();
+		
+		function getManagerDataFromClient() {
+	    	let id = JSON.parse(localStorage.getItem("manager_id"));
+	    	let name = JSON.parse(localStorage.getItem("manager_name"));
+	    	let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
+	    	
+	    	id = !id ? new Array() : id;
+	    	name = !name ? new Array() : name;
+	    	isLeader = !isLeader ? new Array() : isLeader;
+	    	
+
+	    	return [id, name, isLeader];
+	    }
+		
+		
+		function addDataToManager(id, name, isLeader) {
+	    	if (!(manager_id.includes(id))) {
+	    		manager_id=[];
+	    		manager_name=[];
+	    		manager_isLeader=[];
+	    		manager_id.push(id);
+	    		manager_name.push(name);
+	    		manager_isLeader.push(isLeader);
+	    		updateManagerDataToClent();
+	    	}
+	    }
+		
+	    
+	     function updateManagerDataToClent() {
+	     	localStorage.setItem("manager_id", JSON.stringify(manager_id));
+	     	localStorage.setItem("manager_name", JSON.stringify(manager_name));
+	     	localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
+	     }
+	     
+	     function getThisManager() {
+	    	 var name = $('#manager_name').val();
+	    	 var data = {
+	    			"managerName": $("#manager_name").val(),
+	     			"managerPassword": $("#manager_password").val()
+	     	}
+	     	// 驗證輸入的資料
+	     	pass_vaild = vaildData(data);
+	    	 if (pass_vaild) {
+				$.ajax({
+					type : "GET",
+					url : "api/manager.do",
+					crossDomain : true,
+					data : data,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						
+						if (response.status == 200) {
+							var id = response.response.data["0"].idtbl_manager;
+							var name = response.response.data["0"].name;
+							var isLeader = response.response.data["0"].isLeader;
+							var Deleted = response.response.data["0"].isDeleted;
+							if(Deleted != 1){
+								addDataToManager(id,name,isLeader); 
+								document.location.href = "manager_center.html";
+							}
+							else{
+								alert("你的帳號已被刪除");
+							}
+ 
+						}
+						alert(response.message);
+						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	     }
+			}
+	     
+	  // 更新會員列表表格
+	     function updateTable(data) {
+	         $("#table > tbody").empty();
+	         var table_html = '';
+	         $.each(data, function(index, value) {
+	             table_html += '<tr><td scope="row">' + value['idtbl_manager'] + '</td>';
+	             table_html += '<td>' + value['name'] + '</td>';
+	    //         table_html += '<td>' + value['email'] + '</td>';
+	      //       table_html += '<td>' + value['birthday'] + '</td>';
+	             table_html += '<td>' + value['isLeader'] + '</td>';
+	             table_html += '<td>';
+	             table_html += '<a href="javascript: deleteManager(' + value['idtbl_manager'] + ');">刪除</a></td></tr>';
+	         })
+	         $("#table > tbody").append(table_html);
+	     }	
+	  
+	     function vaildData(data) {
+	    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	     	if (data["managerName"] == "" || data["managerPassword"] == ""){
+	     		alert("必填寫欄位不得有空值！");
+	     	}else if(data['managerPassword'] != "" && !password_rule.test(data['managerPassword'])) {
+                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+            }
+	     	else{//都正確
+	     		return true;
+	     	}
+	     	return false;
+	     }
+	     
+		$(document).ready(function() {
+			$("#login").click(function() {
+				getThisManager();
+			});
+		});
+	</script>
+	
 </body>
 </html>

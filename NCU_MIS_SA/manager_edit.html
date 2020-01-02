@@ -99,10 +99,12 @@ input:checked+.slider:before {
 		
 		
 		<!-- 這裡是頁面右上方的小box -->
-		<div class="pull-right">
-			<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
-			<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
-			<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+		<div class="pull-right">	
+				<li class="navbar"><a class="btn btn-outline-primary" id ="accountname">歡迎您，</a></li>
+				<li class="navbar"><a class="btn btn-outline-primary" href="manager_center.html">管理員中心</a></li>
+				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html" id="addmanager">新增管理員</a></li>
+				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
+				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
 		</div>
 	</ul>
 
@@ -142,7 +144,7 @@ input:checked+.slider:before {
 	<script type="text/javascript">
 	 var url_string = window.location.href;
      var url = new URL(url_string);
-     var idtbl_manager = url.searchParams.get("manager_id");
+     //var idtbl_manager = url.searchParams.get("manager_id");
      idtbl_manager =1;//先假設為id=1
      var sql_num = 0;
 
@@ -218,6 +220,8 @@ input:checked+.slider:before {
      }
 
      function getmanager() {
+         let idtbl_manager =JSON.parse(localStorage.getItem("manager_id")); 
+
          $.ajax({
              type: "GET",
              url: "api/manager.do",
@@ -255,7 +259,13 @@ input:checked+.slider:before {
      $(document).ready(function() {
      	// 發出GET的AJAX請求取得原本該會員的資料
       	$("#sql_log > tbody").empty();
-         getmanager();
+        getmanager();
+		let accountname = JSON.parse(localStorage.getItem("manager_name"));
+		$('#accountname').append(accountname);
+		let is_leader =JSON.parse(localStorage.getItem("manager_isLeader"));
+		if(is_leader==0){
+			$("#addmanager").hide();
+		}
      });
 	</script>
 </body>

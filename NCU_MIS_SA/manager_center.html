@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,9 +70,11 @@ div.absolute {
 		
 		<!-- 這裡是頁面右上方的小box -->
 		<div class="pull-right">
-				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
+				<li class="navbar"><a class="btn btn-outline-primary" id ="accountname">歡迎您，</a></li>	
+				<li class="navbar"><a class="btn btn-outline-primary" href="manager_center.html">管理員中心</a></li>
+				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html" id="addmanager">新增管理員</a></li>
 				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
-				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html">登出</a></li>
+				<li class="navbar"><a class="btn btn-outline-secondary" href="index.html" id="logout">登出</a></li>
 		</div>
 	</ul>
 
@@ -255,14 +256,11 @@ div.absolute {
 				type : "GET",
 				url : "api/manager.do",
 				crossDomain : true,
-				data : "isLeader=" + 0 || "isLeader=" + 1,
 				cache : false,
 				dataType : 'json',
 				timeout : 5000,
 				success : function(response) {
-					//	 alert("WCNM");
 					if (response.status == 200) {
-						//    	 alert("getouttheway");
 						updateManagerTable(response.response.data);
 						updateSQLTable(response.response);
 
@@ -341,7 +339,6 @@ div.absolute {
 			$("#table > tbody").append(table_html);
 		}
 		function updateManagerTable(data) {
-			//	 alert("Hi");
 
 			$("#table > tbody").empty();
 			$("#table > thead").empty();
@@ -349,15 +346,20 @@ div.absolute {
 			$("#table >thead").append(changetable);
 			var table_html = '';
 			$.each(data, function(index, value) {
-				table_html += '<tr><td scope="row">' + value['idtbl_manager']
+				if(value['isDeleted']==0){
+					table_html += '<tr><td scope="row">' + value['idtbl_manager']
 						+ '</td>';
-				table_html += '<td>' + value['name'] + '</td>';
-				//    table_html += '<td>' + value['email'] + '</td>';
-				//    table_html += '<td>' + value['birthday'] + '</td>';
-				table_html += '<td>' + value['isLeader'] + '</td>';
-				table_html += '<td>';
-				table_html += '<a class="btn btn-danger" href="javascript: deleteMember('
-						+ value['idtbl_manager'] + ');">刪除</a></td></tr>';
+					table_html += '<td>' + value['name'] + '</td>';
+					table_html += '<td>' + value['isLeader'] + '</td>';
+					table_html += '<td>';
+					if(value['isLeader']!=1){
+				    	let leader = JSON.parse(localStorage.getItem("manager_isLeader"));
+				    	if( leader ==1 ){
+							table_html += '<a class="btn btn-danger" href="javascript: deleteManager('
+							+ value['idtbl_manager'] + ');">刪除</a></td></tr>';
+				    	}
+					}
+				}
 			})
 
 			$("#table > tbody").append(table_html);
@@ -381,8 +383,44 @@ div.absolute {
 			$("#sql_summary").html(
 					"(default) " + data.row + " queries took " + time + " ms");
 		}
+		function deleteManager(id) {
+			var check = window.confirm("確認刪除管理員？");
+			if (check == true) {
+				console.log("You pressed OK!");
+				var request = {
+					'idtbl_Manager' : id
+				};
+				var idtbl_Manager = JSON.stringify(request);
+				$.ajax({
+					type : "DELETE",
+					url : "api/manager.do",
+					crossDomain : true,
+					data : idtbl_Manager,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						if (response.status == 200) {
+							$("#flashMessage").html("成功! 已經成功刪除管理員...");
+							$("#flashMessage").show();
+							getAllManager();
+						}
+						console.log(response);
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+			} else {
+				console.log("You pressed Cancel!");
+			}
+		}
 
 		$(document).ready(function() {
+			let is_leader =JSON.parse(localStorage.getItem("manager_isLeader"));
+			if(is_leader==0){
+					$("#addmanager").hide();
+				}
 			getAllMember();
 			$('#member').click(function() {
 				getAllMember();
@@ -396,6 +434,19 @@ div.absolute {
 			$('#manager').click(function() {
 				getAllManager();
 			});
+	    	let accountname = JSON.parse(localStorage.getItem("manager_name"));
+
+			$('#accountname').append(accountname);
+			$('#logout').click(function(){
+	    		manager_id=[];
+	    		manager_name=[];
+	    		manager_isLeader=[];
+				localStorage.setItem("manager_id", JSON.stringify(manager_id));
+		     	localStorage.setItem("manager_name", JSON.stringify(manager_name));
+		     	localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
+		     	
+
+			})
 		});
 	</script>
 </body>
