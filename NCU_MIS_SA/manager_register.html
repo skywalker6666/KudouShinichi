@@ -104,6 +104,7 @@ input:checked+.slider:before {
 
 		<!-- 這裡是頁面右上方的小box -->
 		<div class="pull-right">	
+				<li class="navbar"><a class="btn btn-outline-primary" id ="accountname">歡迎您，</a></li>
 				<li class="navbar"><a class="btn btn-outline-primary" href="manager_center.html">管理員中心</a></li>
 				<li class="navbar"><a class="btn btn-outline-success" href="manager_register.html">新增管理員</a></li>
 				<li class="navbar"><a class="btn btn-outline-primary" href="manager_edit.html">編輯帳密</a></li>
@@ -145,8 +146,7 @@ input:checked+.slider:before {
 	</div>
 
 	<script type="text/javascript">
-		$(document)
-				.ready(
+		$(document).ready(
 						function() {
 							// 處理表單點擊事件
 							var $form = $('#submit_Highmanager');
@@ -281,6 +281,8 @@ input:checked+.slider:before {
 												+ " queries took " + time
 												+ " ms");
 							}
+							let accountname = JSON.parse(localStorage.getItem("manager_name"));
+							$('#accountname').append(accountname);
 						});
 	</script>
 </body>
