@@ -84,9 +84,11 @@
             top: 80%;
             margin-top: -20px;
             margin-left: -400px;			
-			border-radius: 20px;
+			border-radius: 20px;		
 	}
-    
+    tr:hover {
+    		background:#FBEE98;
+    }
    
     
     </style>
@@ -102,8 +104,8 @@
 		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		<li class="navbar"><a id="orderTracking" class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a id="shoppingcart" class="navbarItem" href="shoppingcart.html">購物車</a></li>
 		<li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
 		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 		<div id="member_center1" class="mediumbox" style="float: right">
@@ -427,6 +429,9 @@
           	     $("#member_center2").hide();
           	     $("#member_center3").hide();
           	     $("#myMarket").hide();
+          	     $("#orderTracking").hide();
+          	     $("#shoppingcart").hide();
+          	     $("#table").empty();
           	       
           	 }else{//登入
           		 $("#user_name").html(client_name);
