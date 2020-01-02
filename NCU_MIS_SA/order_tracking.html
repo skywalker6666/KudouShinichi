@@ -60,7 +60,7 @@
             position: fixed;
             left: 50%;
             top: 60%;
-            margin-top: -250px;
+            margin-top: -230px;
             margin-left: -400px;
 			border: 0px solid #000;			
 			background: #FBEE98;
@@ -177,6 +177,7 @@
 		            <thead>
 		                <tr>
 		                	<th>訂單詳細內容</th>
+		                	<th>買進/賣出</th>
 		                    <th>訂單編號</th>
 		                    <th>商品總金額</th>
 		                    <th>運送方式</th>                                      
@@ -190,9 +191,10 @@
 	 
  <script type="text/javascript">
 		 $(document).ready(function() {
-		     getMyOrder();              
+		     getMyBuyingOrder();              
 		 });
-           function getMyOrder() {
+		 
+           function getMyBuyingOrder() {
         	   var [member_id,member_name]=getMemberDataFromClient();
                // 發出GET請求取得所有訂單列表
               
@@ -216,14 +218,39 @@
                        error: function () {
                            alert("無法連線到伺服器！");
                        }
-               });
-               
+               });               
+           }
+           function getMySellingOrder() {
+        	   var [seller_id,member_name]=getMemberDataFromClient();
+               // 發出GET請求取得所有訂單列表
+              
+               $.ajax({
+                       type: "GET",
+                       url: "api/order.do",
+                       crossDomain: true,
+                       cache: false,
+                       data: "sellrID="+seller_id,
+                       dataType: 'json',
+                       timeout: 50000,
+                       success: function (response) {
+                    	   console.log(response);
+                           if(response.status == 200){
+                               updateTable(response.response.data);
+                               showOrderStatus(response.response.data);
+                               //updateAndReturnOrderStatus(response.response.data);
+                           }
+                           
+                       },
+                       error: function () {
+                           alert("無法連線到伺服器！");
+                       }
+               });               
            }
        	   function showOrderStatus(data){
        		   
        		$.each(data,function(index,val){
        			var id=data[index].order_info.idtbl_order;
-       			var status=data[index].order_info.order_status;
+       			var status=data[index].order_info.order_status;       			
          	   $("#order"+id).click(function(){
          		  $("#orderNO").empty();
          		   $("#orderNO").append("訂單編號:"+id);
@@ -270,6 +297,7 @@
                $.each(data, function(index, value) {
             	  
             	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="order_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
                    table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
                    table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
                    table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
