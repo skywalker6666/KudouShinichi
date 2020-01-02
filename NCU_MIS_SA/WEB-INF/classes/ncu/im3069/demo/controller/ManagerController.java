@@ -77,8 +77,10 @@ public class ManagerController extends HttpServlet {
             jsr.response(resp, response);
         }
         else {
+        	System.out.println("重複帳號");
             /** 以字串組出JSON格式之資料 */
-            String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
+       //	 JSONObject resp = new JSONObject();
+           String resp = "{\"status\": \'400\', \"message\": \'新增帳號失敗，此E-Mail帳號重複！\', \'response\': \'\'}";
             /** 透過JsonReader物件回傳到前端（以字串方式） */
             jsr.response(resp, response);
         }
