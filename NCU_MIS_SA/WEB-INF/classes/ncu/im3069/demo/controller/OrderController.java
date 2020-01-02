@@ -43,26 +43,34 @@ public class OrderController extends HttpServlet {
 
         /** 取出經解析到 JsonReader 之 Request 參數 */
         String idtbl_order = jsr.getParameter("idtbl_order");
-
+        String memberID = jsr.getParameter("memberID");
         /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
 
         /** 判斷該字串是否存在，若存在代表要取回個別訂單之資料，否則代表要取回全部資料庫內訂單之資料 */
         if (!idtbl_order.isEmpty()) {
           /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
-          JSONObject query = oh.getById(idtbl_order);
+          JSONObject query = oh.getByOrderId(idtbl_order);
           resp.put("status", "200");
           resp.put("message", "單筆訂單資料取得成功");
           resp.put("response", query);
         }
+        else if(!memberID.isEmpty()){
+        	System.out.println("進入getByMemberId");
+        	JSONObject query = oh.getByMemberId(memberID);
+            resp.put("status", "200");
+            resp.put("message", "單筆訂單資料取得成功");
+            resp.put("response", query);
+        }
         else {
           /** 透過 orderHelper 物件之 getAll() 方法取回所有訂單之資料，回傳之資料為 JSONObject 物件 */
+        	System.out.println("進入getAll");
           JSONObject query = oh.getAll();
           resp.put("status", "200");
           resp.put("message", "所有訂單資料取得成功");
           resp.put("response", query);
         }
-
+        
         /** 透過 JsonReader 物件回傳到前端（以 JSONObject 方式） */
         jsr.response(resp, response);
 	}

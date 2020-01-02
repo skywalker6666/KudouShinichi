@@ -29,15 +29,7 @@
         .slider.round:before {
             border-radius: 50%;
         }
-        .box {
-            width: 800px;
-            height: 500px;
-            position: absolute;
-            left: 50%;
-            top: 60%;
-            margin-top: -250px;
-            margin-left: -400px;
-        }
+        
         .box2 {
             width: 600px;
             height: 400px;
@@ -62,6 +54,43 @@
             background-color: #f44336;
             color: white;
         }
+     .orderstatus{
+        	width: 800px;
+            height: 300px;
+            position: fixed;
+            left: 50%;
+            top: 60%;
+            margin-top: -230px;
+            margin-left: -400px;
+			border: 0px solid #000;			
+			background: #FBEE98;
+			border-radius: 20px;
+			z-index: 1;
+		}
+	 .ordertrackingtable{
+			width: 800px;            
+            position: absolute;
+            left: 50%;
+            top: 80%;
+            margin-top: -20px;
+            margin-left: -400px;			
+			border-radius: 20px;
+	}   
+	.fixTableDiv {
+			
+			width: 800px;            
+            position: fixed;
+            left: 50%;
+            top: 80%;
+            margin-top: -20px;
+            margin-left: -400px;			
+			border-radius: 20px;		
+	}
+    tr:hover {
+    		background:#FBEE98;
+    }
+   
+    
     </style>
     <link rel="stylesheet" href="statics/css/navbar.css">
     <link rel="stylesheet" href="statics/css/themebox.css">
@@ -75,9 +104,9 @@
 		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
 		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
 		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+		<li class="navbar"><a id="orderTracking" class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+		<li class="navbar"><a id="shoppingcart" class="navbarItem" href="shoppingcart.html">購物車</a></li>
+		<li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
 		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 		<div id="member_center1" class="mediumbox" style="float: right">
 			<li style="float: left"><a class="navbarFloating"
@@ -98,12 +127,13 @@
 			<li id="user_name"class="navbarFloating">user</li>
 		</div>
 	</ul>
-    <div class="box" style="border:0px #FBEE98 solid;border-radius:50px;background-color:#FBEE98;">
+    <div class="orderstatus" >
         <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;訂單追蹤</font>
         <br>
         <button id="sent">已到店寄件</button>
         <button id="reached">已送達目標門市</button>
-        <div style="font-family:DFKai-sb">
+        
+        <p id="orderNO">訂單編號 </p>
             <ul class="__inline" id="menu" style="list-style-type:none;">
                 <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
                         width="100px"></img>
@@ -122,10 +152,9 @@
                     <p><Br>完成取貨</p>
                 </li>
             </ul>
-        </div>
-        <div style="font-family:DFKai-sb">
+        
             <ul class="point" id="" style="list-style-type:none; ">
-                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 1.png" style="float: left"
+                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
                         height="50px" width="50px"></img>
                     <p>------------</p>
 
@@ -144,67 +173,191 @@
                 </li>
             </ul>
         </div>
-        <table bgcolor="#FBEE98" style="width:100%" id="table">
-            <thead>
-                <tr>
-                	<th>訂單狀態</th>
-                    <th>訂單編號</th>
-                    <th>商品總金額</th>
-                    <th>運送方式</th>                                      
-                    <th>訂單建立時間</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        
+	        <div class="ordertrackingtable">
+		        <table  style="width:100%" id="table">
+		            <thead>
+		                <tr>
+		                	<th>訂單詳細內容</th>
+		                	<th>買進/賣出</th>
+		                    <th>訂單編號</th>
+		                    <th>商品總金額</th>
+		                    <th>運送方式</th>                                      
+		                    <th>訂單建立時間</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+		            </tbody>
+		        </table>
+	        </div>
+	 
  <script type="text/javascript">
-           function getAllOrder() {
+ 
+ 		var [client_isSeller] = getisSellerFromClient();
+        var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+		 
+		 
+		 $(document).ready(function() {
+		     getMyBuyingOrder(); 
+		     $("#myMarket").hide();
+        		if (parseInt(client_isSeller.toString()) == 1) {
+            		$("#myMarket").show();
+        		}             
+		 });
+		 
+		 function getCartDataFromClient() {
+            let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+            let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+            cart = !cart ? new Array() : cart;
+            amount = !amount ? new Array() : amount;
+            return [cart, amount];
+        }
+
+        function getisSellerFromClient() {
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            isSeller = !isSeller ? new Array() : isSeller;
+
+            return [isSeller];
+        }
+		 
+           function getMyBuyingOrder() {
+        	   var [member_id,member_name]=getMemberDataFromClient();
                // 發出GET請求取得所有訂單列表
+              
                $.ajax({
                        type: "GET",
                        url: "api/order.do",
                        crossDomain: true,
                        cache: false,
+                       data: "memberID="+member_id,
                        dataType: 'json',
-                       timeout: 5000,
+                       timeout: 50000,
                        success: function (response) {
+                    	   console.log(response);
                            if(response.status == 200){
                                updateTable(response.response.data);
-                             
+                               showOrderStatus(response.response.data);
+                               //updateAndReturnOrderStatus(response.response.data);
                            }
-                           console.log(response);
+                           
                        },
                        error: function () {
                            alert("無法連線到伺服器！");
                        }
-               });
+               });               
            }
-           
-           // 更新會員列表表格
+           function getMySellingOrder() {
+        	   var [seller_id,member_name]=getSellerDataFromClient();
+               // 發出GET請求取得所有訂單列表
+              
+               $.ajax({
+                       type: "GET",
+                       url: "api/order.do",
+                       crossDomain: true,
+                       cache: false,
+                       data: "sellerID="+seller_id,
+                       dataType: 'json',
+                       timeout: 50000,
+                       success: function (response) {
+                    	   console.log(response);
+                           if(response.status == 200){
+                               updateTable(response.response.data);
+                               showOrderStatus(response.response.data);
+                               //updateAndReturnOrderStatus(response.response.data);
+                           }
+                           
+                       },
+                       error: function () {
+                           alert("無法連線到伺服器！");
+                       }
+               });               
+           }
+       	   function showOrderStatus(data){
+       		   
+       		$.each(data,function(index,val){
+       			var id=data[index].order_info.idtbl_order;
+       			var status=data[index].order_info.order_status;       			
+         	   $("#order"+id).click(function(){
+         		  $("#orderNO").empty();
+         		   $("#orderNO").append("訂單編號:"+id);
+         		   	if(status==1)
+         		   		for(var i=1;i<=4;i++){
+         	           	   	if(i==1){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	}
+         			else if(status==2)
+         				for(i=1;i<=4;i++){
+         	           	   	if(i==2){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         		   	else if(status==3)
+         		   		for(i=1;i<=4;i++){
+         	           	   	if(i==3){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         		   	else if(status==4)
+         		   		for(i=1;i<=4;i++){
+         	           	   	if(i==4){
+         	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+         	           		   }
+         	           	   else
+         	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+         	           	   }
+         	   })
+         	   
+            })
+       	   }
            function updateTable(data) {
                $("#table > tbody").empty();
-               var table_html = '';
-               
+                 //data是一個陣列，每一筆value包含了兩個物件---order_info和product_info
+                 var table_html="";
                $.each(data, function(index, value) {
-            	   var cost=0;
-            	   $.each(value['product_info'],function(index,value){
-            		   cost+=value['subtotal'];
-            		})
-            	   table_html += '<tr><td scope="row" align="center"><button id="order_'+ value['order_info']['idtbl_order']+'">查看訂單狀態</button></td>';
-                   table_html += '<td align="center">' + value['order_info']['idtbl_order'] + '</td>';
-                   table_html += '<td align="center">' + Math.round(cost * 100) / 100 + '</td>';
-                   table_html += '<td align="center">' + value['order_info']['product_delivery'] + '</td>';
-                   table_html += '<td align="center">' + value['order_info']['create'] + '</td>';
-                  
+            	  
+            	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="order_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
+                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
+                   table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
+                   table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
+                   table_html += '<td align="center">' + data[index].order_info.create+ '</td>';
+                   
                })
 
                $("#table > tbody").append(table_html);
            }
            
-           
-           $(document).ready(function() {
-               getAllOrder();
+           function updateAndReturnOrderStatus(){
+        	   $.ajax({
+                   type: "PUT",
+                   url: "api/order.do",
+                   crossDomain: true,
+                   cache: false,
+                   dataType: 'json',
+                   timeout: 50000,
+                   success: function (response) {
+                       if(response.status == 200){
+                           updateTable(response.response.data);
+                           showOrderStatus(response.response.data);
+                         
+                       }
+                       console.log(response);
+                   },
+                   error: function () {
+                       ///alert("無法連線到伺服器！");
+                   }
            });
+           }
+           
+         
            $("#sent").click(function(){
         	   
         	   for(var i=1;i<=4;i++){
@@ -244,7 +397,8 @@
            	localStorage.setItem("client_id", JSON.stringify(client_id));
            	localStorage.setItem("client_name", JSON.stringify(client_name));
            	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-
+			localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
            }
           
           function loguot() {
@@ -252,6 +406,10 @@
             client_name = [];
             updateMemberDataToClent();
             client_isSeller = [];
+            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            client_cart_obj = [];
+            updateMemberDataToClent();
+            client_cart_amount = [];
             updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
             $("#member_center1").hide();
             $("#member_center2").hide();
@@ -269,7 +427,12 @@
           	 if(client_id.length == 0){ //登出
           		 $("#member_center1").hide();
           	     $("#member_center2").hide();
-          	     $("#member_center3").hide();  
+          	     $("#member_center3").hide();
+          	     $("#myMarket").hide();
+          	     $("#orderTracking").hide();
+          	     $("#shoppingcart").hide();
+          	     $("#table").empty();
+          	       
           	 }else{//登入
           		 $("#user_name").html(client_name);
              	 	 $("#member_center1").show();
@@ -281,7 +444,7 @@
          
           /*----------------------------------------*/
        </script>
-    </div>
+    
 
 
 

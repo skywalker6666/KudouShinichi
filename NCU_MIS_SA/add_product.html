@@ -90,6 +90,26 @@ textarea:focus {
 		rgba(102, 175, 233, .6)
 }
 
+select {
+	outline-style: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding: 9px 9px;
+	width: 245px;
+	font-size: 14px;
+	font-weight: 700;
+	font-family: "Microsoft soft";
+}
+
+select:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, .6)
+}
+
 .button {
 	background-color: #FF8787;
 	border: none;
@@ -194,8 +214,29 @@ textarea:focus {
 					</div>
 					<div>
 						<label for="lastName">商品圖片</label> <input type="text"
-							id="image_name" maxlength="45" value="" placeholder="請輸入完整路徑"
+							id="image_name" maxlength="2000" value="" placeholder="請輸入完整路徑"
 							required>
+					</div>
+					<div>
+						<label for="lastName">商品類別</label> 
+						<select name="YourLocation" id="type">
+						　<option value="男人館">男人館</option>
+						　<option value="女人館">女人館</option>
+						　<option value="兒童館">兒童館</option>
+						</select>
+					</div>
+					<div>
+						<label for="lastName">商品種類</label> 
+						<select name="YourLocation" id="category">
+						　<option value="秋冬季衣著">秋冬季衣著</option>
+						　<option value="春夏季衣著">春夏季衣著</option>
+						　<option value="運動休閒類型">運動休閒類型</option>
+						　<option value="西裝/套裝">西裝/套裝</option>
+						　<option value="童裝">童裝</option>
+						　<option value="襪子">襪子</option>
+						　<option value="鞋子">鞋子</option>
+						　<option value="配件">配件</option>
+						</select>
 					</div>
 			</div>
 
@@ -213,28 +254,36 @@ textarea:focus {
 
 
 	<script type="text/javascript">
+	var [client_id]  = getIDFromClient();
+	
 		$(document).ready(function() {
 			// 處理表單點擊事件
 			$('#finish').click(function() {
 				submit();
 			});
+			
 
 			function submit() {
 				var name = $('#product_name').val();
 				var price = $('#product_price').val();
 				var inventory = $('#product_inventory').val();
-				var shopID = 2;
+				var sellerID = parseInt(client_id.toString());
 				var image = $('#image_name').val();
-				var productinfo = $('#productinfo').val();;
+				var productinfo = $('#productinfo').val();
+				var type = $('#type').val();
+				var category = $('#category').val();
+
 
 				// 將資料組成JSON格式
 				var data_object = {
 					"product_name" : name,
 					"price" : price,
 					"inventory" : inventory,
-					"shopID" : shopID,
+					"sellerID" : sellerID,
 					"image" : image,
-					"product_info" : productinfo
+					"product_info" : productinfo,
+					"type" : type,
+					"category" : category
 				};
 
 				// 將JSON格式轉換成字串
@@ -266,6 +315,14 @@ textarea:focus {
 			}
 		})
 		
+		function getIDFromClient() {
+        	let id = JSON.parse(localStorage.getItem("client_id"));
+        	
+        	id = !id ? new Array() : id;
+        	
+        	return [id];
+        }
+		
 		 /*------------登入登出實作member cookie-----------*/
    
      var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
@@ -285,12 +342,16 @@ textarea:focus {
      	localStorage.setItem("client_id", JSON.stringify(client_id));
      	localStorage.setItem("client_name", JSON.stringify(client_name));
      	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
      }
     
     function loguot() {
       client_id = [];
       client_name = [];
+      client_cart_obj = [];
+      client_cart_amount = [];
       updateMemberDataToClent();
       client_isSeller = [];
       updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent

@@ -133,7 +133,7 @@ public class MemberController extends HttpServlet {
         	System.out.println("進入getByIsSeller");
         	 /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getByIsSeller(isSeller);
-            
+            System.out.println("有進來此處00000");
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
             JSONObject resp = new JSONObject();
             resp.put("status", "200");
@@ -147,7 +147,6 @@ public class MemberController extends HttpServlet {
         	System.out.println("進入getByID");
             /** 透過MemberHelper物件的getByID()方法自資料庫取回該名會員之資料，回傳之資料為JSONObject物件 */
             JSONObject query = mh.getByID(id);
-            
             /** 新建一個JSONObject用於將回傳之資料進行封裝 */
             JSONObject resp = new JSONObject();
             resp.put("status", "200");
@@ -223,7 +222,8 @@ public class MemberController extends HttpServlet {
      * 處理Http Method請求PUT方法（更新）
      *
      * @param request Servlet請求之HttpServletRequest之Request物件（前端到後端）
-     * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
+     * @param response Servlet回傳之HttpServletResponse之Respo
+     * nse物件（後端到前端）
      * @throws ServletException the servlet exception
      * @throws IOException Signals that an I/O exception has occurred.
      */
@@ -233,31 +233,35 @@ public class MemberController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
         JSONObject jso = jsr.getObject();
         
-        /** 取出經解析到JSONObject之Request參數 */
-        int id = jso.getInt("idtbl_member");
-        String email = jso.getString("email");
-        String password = jso.getString("password");
-        String name = jso.getString("name");
-        String headSticker = jso.getString("headSticker");
+        
+        int id =jso.getInt("idtbl_member");
         String birthday = jso.getString("birthday");
+        String email = jso.getString("email");      
+        String name = jso.getString("name");
+        String password = jso.getString("password");
+        String headSticker = jso.getString("headSticker");
         int isSeller = jso.getInt("isSeller");
-
-
-
-        /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-        Member m = new Member(id, email, password, name, headSticker, birthday, isSeller);
         
-        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
-        JSONObject data = m.update();
-        
-        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
-        JSONObject resp = new JSONObject();
-        resp.put("status", "200");
-        resp.put("message", "成功! 更新會員資料...");
-        resp.put("response", data);
-        
-        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
-        jsr.response(resp, response);
+        if (!email.isEmpty()&&!birthday.isEmpty()&&!password.isEmpty()&&!name.isEmpty()&&!headSticker.isEmpty()) {
+            /** 透過MemberHelper物件之getAll()方法取回所有會員之資料，回傳之資料為JSONObject物件 */
+        	System.out.println("修改會員資料");
+        	Member m = new Member(id, email, password, name, headSticker, birthday, isSeller);
+        	
+        	
+            JSONObject query = mh.updateData(m);
+            
+
+            /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+            JSONObject resp = new JSONObject();
+            resp.put("status", "200");
+            resp.put("message", "所有會員資料取得成功");
+            resp.put("response", query);
+    
+            /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+            jsr.response(resp, response);
+        }
+               
     }
-
+    
+    
 }
