@@ -81,11 +81,13 @@ public class ProductController extends HttpServlet {
 	        int sellerID = jso.getInt("sellerID");	        
 	        String image = jso.getString("image");
 	        String product_info = jso.getString("product_info");
+	        String type = jso.getString("type");
+	        String category = jso.getString("category");
 	 
 
 	        
 	        /** 建立一個新的商品物件 */
-	        Product p = new Product(product_name, price, inventory, sellerID, image,  product_info);
+	        Product p = new Product(product_name, price, inventory, sellerID, image,  product_info, type, category);
 	        
 	        /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
 	        if(image.isEmpty() || product_info.isEmpty() || product_name.isEmpty()) {
@@ -124,11 +126,13 @@ public class ProductController extends HttpServlet {
 		        String image = jso.getString("image");
 		        String product_info = jso.getString("productinfo");
 		        int productID = jso.getInt("productID");	  
+		        String type = jso.getString("type");
+		        String category = jso.getString("category");
 
 
 
 		        /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-		        Product p = new Product( productID, product_name, price, inventory, sellerID, image,  product_info);
+		        Product p = new Product( productID, product_name, price, inventory, sellerID, image,  product_info, type, category);
 		        
 		        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
 		        JSONObject data = ph.updateProduct(p);

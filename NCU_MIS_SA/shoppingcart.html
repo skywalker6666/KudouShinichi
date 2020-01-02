@@ -1,351 +1,381 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="BIG5">
-<title>ShoppingCart</title>
+    <meta charset="BIG5">
+    <title>ShoppingCart</title>
 
-<!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
 
 
-<style>
-#customers {
-	align: center;
-	font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
-	border: 3px;
-	border-style: dashed;
-	width: 100%;
-}
-#customers td, #customers th {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-#customers tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-#customers tr:hover {
-	background-color: #ddd;
-}
-#customers th {
-	position: sticky;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #4CAF50;
-	color: white;
-}
-div.absolute {
-	position: absolute;
-	align: center;
-	top: 100px;
-}
-</style>
+    <style>
+        #customers {
+            align: center;
+            font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
+            border: 3px;
+            border-style: dashed;
+            width: 100%;
+        }
 
-<link href="statics/css/jquery-confirm.css" rel="stylesheet">
-<script src="statics/js/jquery-3.4.1.min.js"></script>
-<script src="statics/js/jquery-confirm.js"></script>
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            position: sticky;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        div.absolute {
+            position: absolute;
+            align: center;
+            top: 100px;
+        }
+    </style>
+
+    <link href="statics/css/jquery-confirm.css" rel="stylesheet">
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-confirm.js"></script>
+    <link rel="stylesheet" href="statics/css/navbar.css">
+    <link rel="stylesheet" href="statics/css/themebox.css">
 </head>
-<body >
-<div id="header">
-  <!--容器分為左圖右導覽連結 -->
-  <div class="navbar">
-      <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo"/></a>
-    <!--導覽列 -->
-    <nav>
-     <ul class="navbar">
-		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
-		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
-		
-		<div id="member_center1" class="mediumbox" style="float: right">
-			<li style="float: left"><a class="navbarFloating"
-				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating"
-				href="index.html">&nbsp;登出 </a></li>
-			<li style="float: left">
-	
-		</div>
-		<div id="member_center2" class="smallbox" style="float: right"> 
-			<li><img src="statics/img/navbar/shoppingcart.png"
-				style="float: left" height="20px" width="20px"></img></li>
-			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-		</div>
-		<div id="member_center3" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/user.png" style="float: left"
-				height="20px" width="20px"></img></li>
-			<li id="user_name"class="navbarFloating">user</li>
-		</div>
-	</ul>
-    </nav>
-  </div>
-</div>
-<!-- 內文 -->
-<div class="content">
-  	<div class="absolute" style="overflow-x: auto;">
 
-		<div class="row">
-			<div class="table-responsive">
-				<table id="cart_table" class="table table-striped table-sm">
-					<thead>
-						<tr>
-							<th class="text-center" style="width: 10%">商品編號</th>
-							<th class="text-center" style="width: 30%">品名</th>
-							<th class="text-center" style="width: 15%">單價</th>
-							<th class="text-center" style="width: 10%">數量</th>
-							<th class="text-center" style="width: 15%">小計</th>
-							<th class="text-center" style="width: 10%">刪除</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
-		<button id="check" onclick="location.href='checkout.html'" ><strong>結帳</strong>	</button> 
-	</div>
-</div>
-	
-			<!-- 這裡是頁面右上方的小box -->
-			
+<body>
+    <div id="header">
+        <!--容器分為左圖右導覽連結 -->
+        <div class="navbar">
+            <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo" /></a>
+            <!--導覽列 -->
+            <nav>
+                <ul class="navbar">
+                    <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
+                                height="100px" width="100px"></img></a></li>
+                    <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
+                    <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
+                    <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
+                    <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
+                    <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
+                    <li id="signup_in" style="float: right"><a class="navbarItemSide"
+                            href="login_selected.html">會員註冊/登入</a></li>
+
+                    <div id="member_center1" class="mediumbox" style="float: right">
+                        <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+                        <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a>
+                        </li>
+                        <li style="float: left">
+
+                    </div>
+                    <div id="member_center2" class="smallbox" style="float: right">
+                        <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px"
+                                width="20px"></img></li>
+                        <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+                    </div>
+                    <div id="member_center3" class="smallbox" style="float: right">
+                        <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img>
+                        </li>
+                        <li id="user_name" class="navbarFloating">user</li>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- 內文 -->
+    <div class="content">
+        <div class="absolute" style="overflow-x: auto;">
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table id="cart_table" class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 10%">商品編號</th>
+                                <th class="text-center" style="width: 30%">品名</th>
+                                <th class="text-center" style="width: 15%">單價</th>
+                                <th class="text-center" style="width: 10%">數量</th>
+                                <th class="text-center" style="width: 15%">小計</th>
+                                <th class="text-center" style="width: 10%">刪除</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button id="clean" class="btn btn-dark btn-lg btn-block" type="button">清空購物車</button>
+            <button id="check" onclick="location.href='checkout.html'"><strong>結帳</strong> </button>
+        </div>
+    </div>
+
+    <!-- 這裡是頁面右上方的小box -->
+
 </body>
 <script>
-var [client_cart_obj, client_cart_amount]  = getCartDataFromClient();
-if (client_cart_obj.length == 0) {
-	alert("購物車沒有任何商品！");
-	calcSummaryInformation();
-	setButtonState("check", false);
-}
-else
-	getCartProduct();
-$("#clean").click(function () {
-	console.log("[@Action]清空購物車");
-	cleanAllData();
-});
-function vaildData(data) {
-	var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-	var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
-	if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "")  alert("必填寫欄位不得有空值！");
-	else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
-	else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
-	else return true;
-	return false;
-}
-function cleanAllData() {
-	client_cart_obj = [];
-  client_cart_amount = [];
-  updateCartDataToClent();
-  $("#cart_table > tbody").empty();
-  $("#total_item").html('0');
-  $("#total_quantity").html('0');
-  $("#summary").html('0');
-  setButtonState("check", false);
-}
-function getCartProduct() {
-  $.ajax({
-    type: "GET",
-    url: "api/product.do",
-    crossDomain: true,
-    cache: false,
-    data: "id_list=" + client_cart_obj.toString(),
-    dataType: 'json',
-    timeout: 5000,
-    success: function (response) {
-      if (response.status == 200) {
-    	  updateCartTable(response.response.data);
-    	  updateAllQuantitySubtotal();
-    	  keyEventListen();
-    	  calcSummaryInformation();
-      }
-    },
-    error: function () {
-      alert("無法連線到伺服器！");
+    var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+
+    //判斷是否是賣家我的賣場
+    var [client_isSeller] = getisSellerFromClient();
+    $("#myMarket").hide();
+    if (parseInt(client_isSeller.toString()) == 1) {
+        $("#myMarket").show();
     }
-  });
-}
-function updateAllQuantitySubtotal() {
-	for (var i=0 ; i < client_cart_obj.length ; i++) {
-		var id = client_cart_obj[i];
-		var amount = client_cart_amount[i];
-		var price = $('#price_' + id).html();
-		$('#quantity_' + id).val(amount);
-		var subtotal = calcSubTotal(price, amount);
-		$('#subtotal_' + id).html(subtotal);
-	}
-}
-function isNumberKey(evt){
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+    if (client_cart_obj.length == 0) {
+        alert("購物車沒有任何商品！");
+        calcSummaryInformation();
+        setButtonState("check", false);
+    }
+    else
+        getCartProduct();
+    $("#clean").click(function () {
+        console.log("[@Action]清空購物車");
+        cleanAllData();
+    });
+
+    function getisSellerFromClient() {
+        let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+        isSeller = !isSeller ? new Array() : isSeller;
+
+        return [isSeller];
+    }
+    function vaildData(data) {
+        var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+        var phone_rule = /^09\d{2}-\d{3}-\d{3}$/;
+        if (data["first_name"] == "" || data["last_name"] == "" || data['phone'] == "" || data['address'] == "") alert("必填寫欄位不得有空值！");
+        else if (data['email'] != "" && !email_rule.test(data['email'])) alert("Email格式不符！");
+        else if (!phone_rule.test(data['phone'])) alert("手機格式不符（應為09XX-XXX-XXX）！");
+        else return true;
         return false;
-    return true;
-}
-function keyEventListen() {
-	$('input[name="quantity[]"').on(
-      'keypress',
-      function (e) {
-    	  return isNumberKey(e);
-      }
-  );
-	$('input[name="quantity[]"').on(
-	        'keyup',
-	        function (e) {
-	        	var select = $(this).prop('id');
-	        	var action = select.split('_')[0];
-	        	var id = select.split('_')[1];
-	          var price = $('#price_' + id).html();
-	          var quantity =  $(this).val();
-	          var subtotal = calcSubTotal(price, quantity);
-	          $('#subtotal_' + id).html(subtotal);
-	          updateClentCartData(id, quantity);
-	          calcSummaryInformation();
-	        }
-	    );
-	$('button[name="remove[]"').click(function () {
-		var id = (this.id).split('_')[1];
-		var i = client_cart_obj.indexOf(id);
-		if (i > -1) {
-    		client_cart_obj.splice(i, 1);
-    		client_cart_amount.splice(i, 1);
-		}
-		updateCartDataToClent();
-		$('#row_' + id).remove();
-		if (client_cart_obj.length == 0){
-			 alert("請先選擇欲購買商品！");
-				(location.href='productIndex.html');
-		}
-		calcSummaryInformation();
-	});
-}
-function calcSubTotal(price, quantity) {
-	var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
-	result = isNaN(result) ? 0.00 : result;
-	return result;
-}
-function updateCartTable(data) {
-	table_html = '';
-	$("#cart_table > tbody").empty();
-    $.each(data, function(index, value) {
-    	table_html += '<tr id="row_' + value.idtbl_product + '">';
-    	table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
-    	table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
-    	table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
-    	table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1"></td>';
-    	table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
-    	table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class=" btn-danger">移除</button></td>';
-    	table_html += '</tr>';
-    	//id.amount=$('#quantity_'+value.id).serialize();
-    })
-  $("#cart_table > tbody").append(table_html);
-}
-function getCartDataFromClient() {
-	let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
-	let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
-	cart = !cart ? new Array() : cart;
-	amount = !amount ? new Array() : amount;
-	return [cart, amount];
-}
-function updateCartDataToClent() {
-	localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-	localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
-}
-function updateClentCartData(id, quantity) {
-	var i = client_cart_obj.indexOf(id);
-	client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
-	updateCartDataToClent();
-}
-function calcSummaryInformation() {
-	var total_item = client_cart_obj.length;
-	var total_price = 0.00;
-	var total_quantity = 0;
-	for(var i=0 ; i < total_item ; i++) {
-		var id = client_cart_obj[i];
-		var price = $('#price_' + id).html();
-		var quantity = $('#quantity_' + id).val()
-		calc = parseFloat(price) * parseInt(quantity);
-		total_price += isNaN(calc) ? 0.0 : calc;
-		total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
-	}
-	// Client端日期
-	var date = new Date();
-	var iso_date = date.toISOString();
-	$("#date").html(iso_date.substring(0, 10));
-	$("#total_item").html(total_item);
-	$("#total_quantity").html(total_quantity);
-	$("#summary").html(total_price.toFixed(2));
-}
-function setButtonState(id, action) {
-  if (!action) {
-      $('#' + id).prop('disabled', false);
-      $('#' + id).addClass('disabled');
-      $('#' + id).prop('onclick',location.href='productIndex.html');
-      $('#' + id).html('請先新增商品');
-  }
-  else {
-	$('#' + id).prop('disabled', false);
-    $('#' + id).removeClass('disabled');
-    $('#' + id).html('結帳');
-  }
-}
+    }
+    function cleanAllData() {
+        client_cart_obj = [];
+        client_cart_amount = [];
+        updateCartDataToClent();
+        $("#cart_table > tbody").empty();
+        $("#total_item").html('0');
+        $("#total_quantity").html('0');
+        $("#summary").html('0');
+        setButtonState("check", false);
+    }
+    function getCartProduct() {
+        $.ajax({
+            type: "GET",
+            url: "api/product.do",
+            crossDomain: true,
+            cache: false,
+            data: "id_list=" + client_cart_obj.toString(),
+            dataType: 'json',
+            timeout: 5000,
+            success: function (response) {
+                if (response.status == 200) {
+                    updateCartTable(response.response.data);
+                    updateAllQuantitySubtotal();
+                    keyEventListen();
+                    calcSummaryInformation();
+                }
+            },
+            error: function () {
+                alert("無法連線到伺服器！");
+            }
+        });
+    }
+    function updateAllQuantitySubtotal() {
+        for (var i = 0; i < client_cart_obj.length; i++) {
+            var id = client_cart_obj[i];
+            var amount = client_cart_amount[i];
+            var price = $('#price_' + id).html();
+            $('#quantity_' + id).val(amount);
+            var subtotal = calcSubTotal(price, amount);
+            $('#subtotal_' + id).html(subtotal);
+        }
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+    function keyEventListen() {
+        $('input[name="quantity[]"').on(
+            'keypress',
+            function (e) {
+                return isNumberKey(e);
+            }
+        );
+        $('input[name="quantity[]"').on(
+            'keyup',
+            function (e) {
+                var select = $(this).prop('id');
+                var action = select.split('_')[0];
+                var id = select.split('_')[1];
+                var price = $('#price_' + id).html();
+                var quantity = $(this).val();
+                var subtotal = calcSubTotal(price, quantity);
+                $('#subtotal_' + id).html(subtotal);
+                updateClentCartData(id, quantity);
+                calcSummaryInformation();
+            }
+        );
+        $('button[name="remove[]"').click(function () {
+            var id = (this.id).split('_')[1];
+            var i = client_cart_obj.indexOf(id);
+            if (i > -1) {
+                client_cart_obj.splice(i, 1);
+                client_cart_amount.splice(i, 1);
+            }
+            updateCartDataToClent();
+            $('#row_' + id).remove();
+            if (client_cart_obj.length == 0) {
+                alert("請先選擇欲購買商品！");
+                (location.href = 'productIndex.html');
+            }
+            calcSummaryInformation();
+        });
+    }
+    function calcSubTotal(price, quantity) {
+        var result = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
+        result = isNaN(result) ? 0.00 : result;
+        return result;
+    }
+    function updateCartTable(data) {
+        table_html = '';
+        $("#cart_table > tbody").empty();
+        $.each(data, function (index, value) {
+            table_html += '<tr id="row_' + value.idtbl_product + '">';
+            table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
+            table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
+            table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
+            table_html += '<td class="align-middle text-center"><input type="input" name="quantity[]" class="input-sm form-control text-center" id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1"></td>';
+            table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
+            table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class=" btn-danger">移除</button></td>';
+            table_html += '</tr>';
+            //id.amount=$('#quantity_'+value.id).serialize();
+        })
+        $("#cart_table > tbody").append(table_html);
+    }
+    function getCartDataFromClient() {
+        let cart = JSON.parse(localStorage.getItem("client_cart_obj"));
+        let amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+        cart = !cart ? new Array() : cart;
+        amount = !amount ? new Array() : amount;
+        return [cart, amount];
+    }
+    function updateCartDataToClent() {
+        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+    }
+    function updateClentCartData(id, quantity) {
+        var i = client_cart_obj.indexOf(id);
+        client_cart_amount[i] = (quantity === "") ? 0 : parseInt(quantity);
+        updateCartDataToClent();
+    }
+    function calcSummaryInformation() {
+        var total_item = client_cart_obj.length;
+        var total_price = 0.00;
+        var total_quantity = 0;
+        for (var i = 0; i < total_item; i++) {
+            var id = client_cart_obj[i];
+            var price = $('#price_' + id).html();
+            var quantity = $('#quantity_' + id).val()
+            calc = parseFloat(price) * parseInt(quantity);
+            total_price += isNaN(calc) ? 0.0 : calc;
+            total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
+        }
+        // Client端日期
+        var date = new Date();
+        var iso_date = date.toISOString();
+        $("#date").html(iso_date.substring(0, 10));
+        $("#total_item").html(total_item);
+        $("#total_quantity").html(total_quantity);
+        $("#summary").html(total_price.toFixed(2));
+    }
+    function setButtonState(id, action) {
+        if (!action) {
+            $('#' + id).prop('disabled', false);
+            $('#' + id).addClass('disabled');
+            $('#' + id).prop('onclick', location.href = 'productIndex.html');
+            $('#' + id).html('請先新增商品');
+        }
+        else {
+            $('#' + id).prop('disabled', false);
+            $('#' + id).removeClass('disabled');
+            $('#' + id).html('結帳');
+        }
+    }
 
-/*------------登入登出實作member cookie-----------*/
+    /*------------登入登出實作member cookie-----------*/
 
-var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+    var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
 
-function getMemberDataFromClient() {
-	let id = JSON.parse(localStorage.getItem("client_id"));
-	let name = JSON.parse(localStorage.getItem("client_name"));
-	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+    function getMemberDataFromClient() {
+        let id = JSON.parse(localStorage.getItem("client_id"));
+        let name = JSON.parse(localStorage.getItem("client_name"));
+        let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-	id = !id ? new Array() : id;
-	name = !name ? new Array() : name;
-	isSeller = !isSeller ? new Array() : isSeller;
-	return [id, name, isSeller];
-}
+        id = !id ? new Array() : id;
+        name = !name ? new Array() : name;
+        isSeller = !isSeller ? new Array() : isSeller;
+        return [id, name, isSeller];
+    }
 
-function updateMemberDataToClent() {
-	localStorage.setItem("client_id", JSON.stringify(client_id));
-	localStorage.setItem("client_name", JSON.stringify(client_name));
-	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+    function updateMemberDataToClent() {
+        localStorage.setItem("client_id", JSON.stringify(client_id));
+        localStorage.setItem("client_name", JSON.stringify(client_name));
+        localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
-}
+    }
 
-function loguot() {
- client_id = [];
- client_name = [];
- updateMemberDataToClent();
- client_isSeller = [];
- updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
- $("#member_center1").hide();
- $("#member_center2").hide();
- $("#member_center3").hide();
- $("#signup_in").show();
- $("#user_name").empty();
-}
+    function loguot() {
+        client_id = [];
+        client_name = [];
+        updateMemberDataToClent();
+        client_isSeller = [];
+        client_cart_obj = [];
+        client_cart_amount = [];
+        updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        $("#member_center1").hide();
+        $("#member_center2").hide();
+        $("#member_center3").hide();
+        $("#signup_in").show();
+        $("#user_name").empty();
+    }
 
-$("#remove").click(function () {
-	console.log("[@Action]登出");
-	loguot();
-});
+    $("#remove").click(function () {
+        console.log("[@Action]登出");
+        loguot();
+    });
 
-$(document).ready(function(){
-	 if(client_id.length == 0){ //登出
-		 $("#member_center1").hide();
-	     $("#member_center2").hide();
-	     $("#member_center3").hide();  
-	 }else{//登入
-		 $("#user_name").html(client_name);
-  	 	 $("#member_center1").show();
-  	 	 $("#member_center2").show();
-  	     $("#member_center3").show();
-  		 $("#signup_in").hide();
-	 }
-});
+    $(document).ready(function () {
+        if (client_id.length == 0) { //登出
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+        } else {//登入
+            $("#user_name").html(client_name);
+            $("#member_center1").show();
+            $("#member_center2").show();
+            $("#member_center3").show();
+            $("#signup_in").hide();
+        }
+    });
 
-/*----------------------------------------*/
+    /*----------------------------------------*/
 </script>
+
 </html>
