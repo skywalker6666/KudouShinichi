@@ -109,6 +109,7 @@ public class Member {
 //        this.isSeller=isSeller;//
 //        this.status = status;
 //    }
+
     
     /**
      * 取得會員之編號

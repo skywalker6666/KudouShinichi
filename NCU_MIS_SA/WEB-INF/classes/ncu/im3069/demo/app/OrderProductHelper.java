@@ -49,7 +49,7 @@ public class OrderProductHelper {
                 conn = DBMgr.getConnection();
                 /** SQL指令 */
                 String sql = "INSERT INTO `missa`.`tbl_orderproduct`(`orderID`, `productID`, `sellerID`, `unit_price`, `product_quantities`, `subtotal`)"
-                        + " VALUES(?, ?, ?, ?, ?)";
+                        + " VALUES(?, ?, ?, ?, ?, ?)";
                 
                 /** 將參數回填至SQL指令當中 */
                 pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
