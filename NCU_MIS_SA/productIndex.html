@@ -30,11 +30,14 @@
     <link rel="stylesheet" href="statics/css/themebox.css">
     <link rel="stylesheet" href="statics/css/card.css">
     <link rel="stylesheet" href="statics/css/product.css">
-
+	
     <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" />
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
     <ul class="navbar">
         <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
@@ -56,6 +59,7 @@
             <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
             </li>
             <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+
         </div>
         <div id="member_center3" class="smallbox" style="float: right">
             <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
@@ -71,6 +75,7 @@
                 <div class="container">
                     <div id="product_panel" class="row">
                     </div>
+                   
                 </div>
             </div>
         </div>
@@ -156,6 +161,8 @@
          */
         function addProduct(data) {
             let inner_html = '';
+            
+            
             inner_html += '<div class="col-md-4" style="float:left;">';
             inner_html += '<div class="card-header">';
             inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
@@ -163,6 +170,26 @@
             inner_html += '<div class="card mb-4 shadow-sm">';
             inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
             inner_html += '<div class="card-body">';
+			
+            	productidname="anly"+data.idtbl_product;
+				inner_html += "<div title='"+data.product_name+"' id='"+productidname+"' style='width:300px;height=10000px; padding: 0.5em;  display: none;'>"
+				
+				
+				
+				//詳細資料
+				inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
+				inner_html += '<div>產品簡介:<br>'+data.product_info+'</div>';
+	            inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
+//	            inner_html += '<p class="card-text">' + data.product_info + '</p>';
+	            inner_html += '<div class="d-flex justify-content-between align-items-center">';
+	            inner_html += '<div class="btn-group">';
+//	            inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard">加入購物車</button>'
+          		inner_html +='</div></div></div>';
+	            
+	            inner_html += "<a href='javascript: setProductDetail("+data.idtbl_product+");'"+">產品詳細</a>";
+
+            
+            
             inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
             inner_html += '<p class="card-text">' + data.product_info + '</p>';
             inner_html += '<div class="d-flex justify-content-between align-items-center">';
@@ -179,6 +206,14 @@
          * 當按下任意一個「加入購物車」的按鈕後：呼叫addProductToCart()，把此商品加入購物車。
          * @call：addProductToCart()：
          */
+         function setProductDetail( id){
+
+        	var str="#anly"+id
+
+        	$(str).dialog({autoOpen: true, show:{effect:'drop', direction:'right', duration: 1500}, width: '640', height: 'auto', resizable: false});
+        }
+         
+         
         function setButtonFunction() {
             $('button[name="add_cart"]').click(function () {
                 var action = (this.id).split('_')[0];
@@ -304,6 +339,7 @@
         });
 
         $(document).ready(function () {
+        	setButtonFunction();
             if (client_id.length == 0) { //登出
                 $("#member_center1").hide();
                 $("#member_center2").hide();
