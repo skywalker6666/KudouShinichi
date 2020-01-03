@@ -176,8 +176,8 @@
     <script src="statics/js/popper.min.js"></script>
 
     <script>
-
         var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+        var productData = [client_cart_obj, client_cart_amount];
         //判斷是否是賣家我的賣場
         var [client_isSeller] = getisSellerFromClient();
         $("#myMarket").hide();
@@ -189,8 +189,7 @@
             alert("購物車沒有任何商品！");
             calcSummaryInformation();
             setButtonState("check", false);
-        }
-        else
+        } else
             getCartProduct();
 
 
@@ -229,6 +228,7 @@
                     timeout: 5000,
                     success: function (response) {
                         if (response.status == 200) {
+
                             $.confirm({
                                 theme: 'modern',
                                 icon: 'fa fa-check-circle-o',
@@ -242,7 +242,10 @@
                                         btnClass: 'btn-blue',
                                         action: function () {
                                             cleanAllData();
-                                            document.location.href = "order_tracking.html";
+                                            updateProductInventory();
+
+                                            document.location.href =
+                                                "order_tracking.html";
                                         }
                                     }
                                 }
@@ -309,6 +312,7 @@
                         updateAllQuantitySubtotal();
                         keyEventListen();
                         calcSummaryInformation();
+
                     }
                 },
                 error: function () {
@@ -343,20 +347,18 @@
                 }
             );
 
-            $('input[name="quantity[]"').on(
-                'keyup',
-                function (e) {
-                    var select = $(this).prop('id');
-                    var action = select.split('_')[0];
-                    var id = select.split('_')[1];
-                    var price = $('#price_' + id).html();
-                    var quantity = $(this).val();
-                    var subtotal = calcSubTotal(price, quantity);
-                    $('#subtotal_' + id).html(subtotal);
-                    updateClentCartData(id, quantity);
-                    calcSummaryInformation();
-                }
-            );
+            $('input[name="quantity[]"').on('keyup', function (e) {
+                var select = $(this).prop('id');
+                var action = select.split('_')[0];
+                var id = select.split('_')[1];
+                var price = $('#price_' + id).html();
+                var quantity = $(this).val();
+                var inventory = $(this).val();
+                var subtotal = calcSubTotal(price, quantity);
+                $('#subtotal_' + id).html(subtotal);
+                updateClentCartData(id, quantity);
+                calcSummaryInformation();
+            });
 
             $('button[name="remove[]"').click(function () {
                 var id = (this.id).split('_')[1];
@@ -389,11 +391,16 @@
             $.each(data, function (index, value) {
                 table_html += '<tr id="row_' + value.idtbl_product + '">';
                 table_html += '<td class="align-middle text-center">' + value.idtbl_product + '</td>';
-                table_html += '<td class="align-middle"><p class="text-break">' + value.product_name + '</p></td>';
-                table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product + '">' + value.price + '</td>';
-                table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value.idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
-                table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value.idtbl_product + '"><strong></td>';
-                table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product + '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
+                table_html += '<td class="align-middle"><p class="text-break">' + value.product_name +
+                    '</p></td>';
+                table_html += '<td class="align-middle text-center"><span id="price_' + value.idtbl_product +
+                    '">' + value.price + '</td>';
+                table_html += '<td class="align-middle text-center"><input  type="text"  id="quantity_' + value
+                    .idtbl_product + '" maxlength="5" min="0" step="1" disabled="disabled"></td>';
+                table_html += '<td class="align-middle text-center"><strong><span id="subtotal_' + value
+                    .idtbl_product + '"><strong></td>';
+                table_html += '<td class="align-middle text-center"><button id="remove_' + value.idtbl_product +
+                    '" name="remove[]" type="button" class="btn btn-danger">移除</button></td>';
                 table_html += '</tr>';
 
             })
@@ -449,13 +456,13 @@
                 $('#' + id).prop('disabled', true);
                 $('#' + id).addClass('disabled');
                 $('#' + id).html('請先新增商品');
-            }
-            else {
+            } else {
                 $('#' + id).prop('disabled', false);
                 $('#' + id).removeClass('disabled');
                 $('#' + id).html('結帳');
             }
         }
+
         function ReturnTotalPrice() {
             var total_item = client_cart_obj.length;
             var total_price = 0.0;
@@ -464,7 +471,8 @@
             for (var i = 0; i < total_item; i++) {
                 var id = client_cart_obj[i];
                 var price = $('#price_' + id).html();
-                var quantity = $('#quantity_' + id).val()
+                var quantity = $('#quantity_' + id).val();
+                var inventory = $('#inventory_' + id).val()
                 calc = parseFloat(price) * parseInt(quantity);
                 total_price += isNaN(calc) ? 0 : calc;
                 total_quantity += (isNaN(quantity) || (quantity == "")) ? 0 : parseInt(quantity);
@@ -472,67 +480,147 @@
             return total_price.toFixed(2);
         }
 
+        function updateProductInventory() {
+            $.ajax({
+                    type: "GET",
+                    url: "api/product.do",
+                    crossDomain: true,
+                    cache: false,
+                    data: "id_list=" + client_cart_obj.toString(),
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        if (response.status == 200) {
+                            innerPut(response.response.data);
+                        	}
+                        },
+                        error: function () {
+                            alert("無法連線到伺服器！");
+                        }
+                    });
 
-        /*------------登入登出實作member cookie-----------*/
+                function innerPut(data) {
+                    var IdInventory;
+                    var IdBought;
+                    var IdArray;
+                    $.each(data, function (index, value) {
+                        IdInventory[index] = value.inventory; //{4,250},{5,70},{10,60}
+                        IdArray[index] = value.idtbl_product;
+                    })
+                    $.each(productData, function (ind, val) {
+                        IdBought[ind] = productData[1][
+                            ind
+                        ]; //   {4,50}-IdBought[0,0],{5,10}-IdBought[0,1],{10,25}-IdBought[0,2]      
 
-        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+                    })
 
-        function getMemberDataFromClient() {
-            let id = JSON.parse(localStorage.getItem("client_id"));
-            let name = JSON.parse(localStorage.getItem("client_name"));
-            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+                    $.each(InventoryResult, function (ind, val) {
+                        var InventoryResult;
+                        InventoryResult[ind] = IdInventory[ind] - IdBought[ind];
 
-            id = !id ? new Array() : id;
-            name = !name ? new Array() : name;
-            isSeller = !isSeller ? new Array() : isSeller;
-            return [id, name, isSeller];
-        }
 
-        function updateMemberDataToClient() {
-            localStorage.setItem("client_id", JSON.stringify(client_id));
-            localStorage.setItem("client_name", JSON.stringify(client_name));
-            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
-        }
+                        var data_object = {
+                            "productID": IdArray[ind],
+                            "Sinventory": InventoryResult[ind].toString();
+                        };
+                        var data_string = JSON.stringify(data_object);
+                        $.ajax({
+                            type: "PUT",
+                            url: "api/product.do",
+                            data: data_string,
+                            crossDomain: true,
+                            cache: false,
+                            dataType: 'json',
+                            timeout: 5000,
+                            success: function (response) {
+                                $('#flashMessage').html(
+                                    response.message);
+                                $('#flashMessage').show();
+                                if (response.status == 200) {
+                                    alert("產品修改成功！");
+                                }
 
-        function loguot() {
-            client_id = [];
-            client_name = [];
-            client_isSeller = [];
-          
-            updateMemberDataToClient();
-            client_cart_obj = [];
-            client_cart_amount = [];
-            updateMemberDataToClient();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClient
-            $("#member_center1").hide();
-            $("#member_center2").hide();
-            $("#member_center3").hide();
-            $("#signup_in").show();
-            $("#user_name").empty();
-        }
 
-        $("#remove").click(function () {
-            console.log("[@Action]登出");
-            loguot();
-        });
+                            },
+                            error: function () {
+                                alert("無法連線到伺服器！");
 
-        $(document).ready(function () {
-            if (client_id.length == 0) { //已登出
+                            }
+                        })
+
+
+                    })
+                }
+            }
+
+
+
+
+
+
+
+
+            /*------------登入登出實作member cookie-----------*/
+
+            var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+
+            function getMemberDataFromClient() {
+                let id = JSON.parse(localStorage.getItem("client_id"));
+                let name = JSON.parse(localStorage.getItem("client_name"));
+                let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+                id = !id ? new Array() : id;
+                name = !name ? new Array() : name;
+                isSeller = !isSeller ? new Array() : isSeller;
+                return [id, name, isSeller];
+            }
+
+            function updateMemberDataToClient() {
+                localStorage.setItem("client_id", JSON.stringify(client_id));
+                localStorage.setItem("client_name", JSON.stringify(client_name));
+                localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+                localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+                localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+
+            }
+
+            function loguot() {
+                client_id = [];
+                client_name = [];
+                client_isSeller = [];
+
+                updateMemberDataToClient();
+                client_cart_obj = [];
+                client_cart_amount = [];
+                updateMemberDataToClient(); //有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClient
                 $("#member_center1").hide();
                 $("#member_center2").hide();
                 $("#member_center3").hide();
-            } else {//已登入
-                $("#user_name").html(client_name);
-                $("#member_center1").show();
-                $("#member_center2").show();
-                $("#member_center3").show();
-                $("#signup_in").hide();
+                $("#signup_in").show();
+                $("#user_name").empty();
             }
-        });
 
-        /*----------------------------------------*/
+            $("#remove").click(function () {
+                console.log("[@Action]登出");
+                loguot();
+            });
+
+            $(document).ready(function () {
+                if (client_id.length == 0) { //已登出
+                    $("#member_center1").hide();
+                    $("#member_center2").hide();
+                    $("#member_center3").hide();
+                } else { //已登入
+                    $("#user_name").html(client_name);
+                    $("#member_center1").show();
+                    $("#member_center2").show();
+                    $("#member_center3").show();
+                    $("#signup_in").hide();
+                }
+            });
+
+            /*----------------------------------------*/
     </script>
 
 
