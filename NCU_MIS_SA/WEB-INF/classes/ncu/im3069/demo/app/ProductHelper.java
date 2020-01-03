@@ -1,7 +1,10 @@
 package ncu.im3069.demo.app;
 
 import java.sql.*;
+import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import org.json.*;
 
@@ -357,7 +360,7 @@ public class ProductHelper {
             pres.setString(6, product_info); //
             pres.setString(7, type);
             pres.setString(8, category);
-            pres.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
+            pres.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now(Clock.system(ZoneId.of("+16")))));
        
             
             /** 執行新增之SQL指令並記錄影響之行數 */
