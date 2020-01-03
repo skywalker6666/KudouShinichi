@@ -142,18 +142,50 @@ input:checked+.slider:before {
 				</form>
 		
 				<script type="text/javascript">
+				var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+				
+				function getMemberDataFromClient() {
+			    	let id = JSON.parse(localStorage.getItem("client_id"));
+			    	let name = JSON.parse(localStorage.getItem("client_name"));
+			    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+			    	id = !id ? new Array() : id;
+			    	name = !name ? new Array() : name;
+			    	isSeller = !isSeller ? new Array() : isSeller;
+
+			    	return [id, name, isSeller];
+			    }
+				
+				
+				function addDataToMember(id, name, isSeller) {
+			    	if (!(client_id.includes(id))) {
+			    		client_id.push(id);
+			    		client_name.push(name);
+			    		client_isSeller.push(isSeller)
+			    		updateMemberDataToClent();
+			    	}
+			    }
+				
+			    
+			     function updateMemberDataToClent() {
+			     	localStorage.setItem("client_id", JSON.stringify(client_id));
+			     	localStorage.setItem("client_name", JSON.stringify(client_name));
+			     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+			     }
+			     
 		$(document).ready(
-						function() {
-							// 處理表單點擊事件
-							var $form = $('#submit_buyer');
-							$form.click(function() {
-								submit_buyer();
-							});
-							var $form = $('#submit_seller');
-							$form.click(function() {
-								submit_seller();
-							});
-							
+			function() {
+			// 處理表單點擊事件
+				var $form_submit_buyer = $('#submit_buyer');
+				$form_submit_buyer.click(function() {
+					submit_buyer();
+				});
+				var $form_submit_seller = $('#submit_seller');
+				$form_submit_seller.click(function() {
+					submit_seller();
+				});
+		});
 							function submit_buyer() {
 								var name = $('#member_name').val();
 								var email = $('#member_email').val();
@@ -161,16 +193,6 @@ input:checked+.slider:before {
 								var birthday = $('#birth').val();
 								var headSticker = $('#member_headSticker').val();
 								var isSeller = 0;
-
-
-								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-								if (!email_rule.test(email)) {
-									alert("Email格式不符！");
-								} else if (!password_rule.test(password)) {
-									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-								} else {
 									// 將資料組成JSON格式
 									var data_object = {
 										"name" : name,
@@ -180,11 +202,11 @@ input:checked+.slider:before {
 										"headSticker" : headSticker,
 										"isSeller" : isSeller
 									};
-
 									// 將JSON格式轉換成字串
-									var data_string = JSON
-											.stringify(data_object);
-
+									var data_string = JSON.stringify(data_object);
+									
+									pass_vaild = vaildData(data_object);
+									 if (pass_vaild) {
 									// 發出POST的AJAX請求
 									$.ajax({
 												type : "POST",
@@ -195,23 +217,26 @@ input:checked+.slider:before {
 												dataType : 'json',
 												timeout : 5000,
 												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
+													$('#flashMessage').html(response.message);
 													$('#flashMessage').show();
 													if (response.status == 200) {
 														updateSQLTable(response.response);
+														
+														//取回此筆資料localstorage
+														getThisMember();
+														
 														alert(response.message);
 														document.location.href = "member_change.html"; 
 													}else{
 														alert(response.message);
-													}
-													
+													}	
 												},
 												error : function() {
 													alert("無法連線到伺服器！");
 												}
 											});
-								}
+									 }
+								
 							}
 							
 							function submit_seller() {
@@ -221,16 +246,6 @@ input:checked+.slider:before {
 								var birthday = $('#birth').val();
 								var headSticker = $('#member_headSticker').val();
 								var isSeller = 1;
-
-
-								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-								var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-								if (!email_rule.test(email)) {
-									alert("Email格式不符！");
-								} else if (!password_rule.test(password)) {
-									alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-								} else {
 									// 將資料組成JSON格式
 									var data_object = {
 										"name" : name,
@@ -240,11 +255,11 @@ input:checked+.slider:before {
 										"headSticker" : headSticker,
 										"isSeller" : isSeller
 									};
-
 									// 將JSON格式轉換成字串
-									var data_string = JSON
-											.stringify(data_object);
-
+									var data_string = JSON.stringify(data_object);
+									
+									pass_vaild = vaildData(data_object);
+									 if (pass_vaild) {
 									// 發出POST的AJAX請求
 									$.ajax({
 												type : "POST",
@@ -255,11 +270,13 @@ input:checked+.slider:before {
 												dataType : 'json',
 												timeout : 5000,
 												success : function(response) {
-													$('#flashMessage').html(
-															response.message);
+													$('#flashMessage').html(response.message);
 													$('#flashMessage').show();
 													if (response.status == 200) {
+														console.log(response);
 														updateSQLTable(response.response);
+														//取回此筆資料localstorage
+														getThisMember();
 														alert(response.message);
 														document.location.href = "member_change.html"; 
 													}else{
@@ -272,9 +289,61 @@ input:checked+.slider:before {
 													alert("無法連線到伺服器！");
 												}
 											});
-								}
+									 }
+								
 							}
+							function vaildData(data) {
+						    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
+								var confirmpassword = $("#member_confirmpassword").val();
+								
+								if (!email_rule.test(data['email'])) {
+									alert("Email格式不符！");
+								}else if(data['password'] != "" && !password_rule.test(data['password'])) {
+					                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+					            }else if(confirmpassword != data['password']){
+					            	alert("確認密碼不一致");
+					            }
+						     	else{//都正確
+						     		return true;
+						     	}
+
+						     	return false;
+						     }
+							function getThisMember() {
+								 var data = {
+							    			"name": $("#member_name").val(),
+							     			"password": $("#member_password").val()
+							     	}
+						     	// 驗證輸入的資料
+						     	
+						    	 if (pass_vaild) {
+									$.ajax({
+										type : "GET",
+										url : "api/member.do",
+										crossDomain : true,
+										data : data,
+										cache : false,
+										dataType : 'json',
+										timeout : 5000,
+										success : function(response) {
+											
+											if (response.status == 200) {
+												var id = response.response.data["0"].idtbl_member;
+												var name = response.response.data["0"].name;
+												var isSeller = response.response.data["0"].isSeller;
+
+												addDataToMember(id,name,isSeller); 					 
+											}
+											console.log(response);
+										},
+										error : function() {
+											alert("無法連線到伺服器！");
+										}
+									});
+						     }
+						  }
 							function updateSQLTable(data) {
 								$("#sql_log > tbody").empty();
 								var time = (data.time / 1000000).toFixed(2);
@@ -298,7 +367,8 @@ input:checked+.slider:before {
 												+ " queries took " + time
 												+ " ms");
 							}
-						});
+						
+		
 	</script>
 	
 </body>

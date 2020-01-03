@@ -50,7 +50,7 @@
         <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 
         <div id="member_center1" class="mediumbox" style="float: right">
-            <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+            <li style="float: left"><a id="member_center" class="navbarFloating" href="member_change.html">會員中心</a></li>
             <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
             <li style="float: left">
 
@@ -276,16 +276,42 @@
             localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
         }
+        /*----------------------------------------*/
+        
+        /*------------登入登出實作manager cookie-----------*/
 
+        var [manager_id, manager_name, manager_isLeader] = getManagerDataFromClient();
+
+        function getManagerDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("manager_id"));
+            let name = JSON.parse(localStorage.getItem("manager_name"));
+            let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isLeader = !isLeader ? new Array() : isLeader;
+            return [id, name, isLeader];
+        }
+
+        function updateManagerDataToClent() {
+            localStorage.setItem("manager_id", JSON.stringify(manager_id));
+            localStorage.setItem("manager_name", JSON.stringify(manager_name));
+            localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
+        }
+        /*----------------------------------------*/
+        
         function loguot() {
             client_id = [];
             client_name = [];
+            client_isSeller = [];
+            updateMemberDataToClent();
             client_cart_obj = [];
             client_cart_amount = [];
-            updateMemberDataToClent();
-            client_isSeller = [];
-            
-            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        	updateCartDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        	manager_id=[];
+        	manager_name=[];
+        	manager_isLeader=[];
+        	updateManagerDataToClent();
             $("#member_center1").hide();
             $("#member_center2").hide();
             $("#member_center3").hide();
@@ -297,22 +323,30 @@
             console.log("[@Action]登出");
             loguot();
         });
-
+       
+        
         $(document).ready(function () {
-            if (client_id.length == 0) { //登出
-                $("#member_center1").hide();
-                $("#member_center2").hide();
-                $("#member_center3").hide();
-            } else {//登入
+        	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
                 $("#member_center2").show();
                 $("#member_center3").show();
                 $("#signup_in").hide();
-            }
+            }else if(manager_id.length != 0) {//登入管理員
+                $("#user_name").html(manager_name);
+                $("#member_center1").show();
+                $("#member_center").hide();//隱藏會員中心
+                $("#member_center2").hide();
+                $("#member_center3").show();
+                $("#signup_in").hide();
+            }else { //登出
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+            } 
         });
 
-        /*----------------------------------------*/
+       
 
 
 
