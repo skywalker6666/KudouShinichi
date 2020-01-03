@@ -12,18 +12,8 @@
 	    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     
     <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        input:checked+.slider {
-            background-color: #2196F3;
-        }
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
+       
+       
         input:checked+.slider:before {
             -webkit-transform: translateX(26px);
             -ms-transform: translateX(26px);
@@ -140,8 +130,11 @@
          <p style="font-size:20px; font-weight:300">&nbsp;&nbsp;訂單追蹤</p>
          
         
-        		<table  style="width:100%" >
-		            <thead style="text-align:left">
+        		<div class="progress">
+  						<div  id="status_progress" class="progress-bar" role="progressbar" style="width:0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+        		<table style="width:100%" >
+		            <thead style="text-align:center">
 		                <tr>
 		                		<th>訂單建立</th>			                	
 			                	<th>到店寄件</th>			                	
@@ -149,6 +142,7 @@
 			                    <th>完成取貨</th>			                    		                    
 		                </tr>
 		            </thead>
+		            
 		            <tbody style="align:center">
 		            	<tr>
 			            	<td><img src="statics/img/ordertrace/101952-200.png"  height="100px" width="100px"></img></td>
@@ -164,9 +158,9 @@
                         </tr>
                         <tr>
                         	<td><p id="orderNO" style="color:black; text-align:center">&nbsp;&nbsp;訂單編號 </p></td>
-                        	<td><button id="sent">已到店寄件</button></td>
-                        	<td><button id="reached">已送達目標門市</button></td>
-                        	<td><button id="finished">已收到商品</button></td>
+                        	<td><button class="btn btn-success" id="sent">已到店寄件</button></td>
+                        	<td><button class="btn btn-success" id="reached">已送達目標門市</button></td>
+                        	<td><button class="btn btn-success" id="finished">已收到商品</button></td>
                         </tr>
 		            </tbody>
 		        </table>
@@ -176,7 +170,7 @@
         </div>
         
 	        <div class="ordertrackingtable">
-		        <table  style="width:100%" id="table">
+		        <table  class="table table-hover" style="align:center;width:100%" id="table">
 		            <thead>
 		                <tr>
 		                	<th>訂單詳細內容</th>
@@ -281,8 +275,6 @@
            }
            
        	   function showOrderStatus(data){
-       		
-       		   
        		$.each(data,function(index,val){
        			var detail_buyer="";
        			detail_buyer+="收件人："+val.order_info.buyer_name+"<br><br>";
@@ -311,8 +303,7 @@
                         buttons: {
                           	  確定: {
                                 text: '確定',
-                                btnClass: 'btn-red',
-           
+                                btnClass: 'btn-red',           
                                 action: function () {                                    
                                     //document.location.href ="order_tracking.html";
                                 }
@@ -332,7 +323,8 @@
          			else
          				$("#finished").show();
          		  $("#orderNO").append("訂單編號:"+id);
-         		   	if(status==1)
+         		   	if(status==1){
+         		   	document.getElementById("status_progress").style.width = "25%";   
          		   		for(var i=1;i<=4;i++){
          	           	   	if(i==1){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -340,7 +332,9 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	}
-         			else if(status==2)
+         		   	}
+         			else if(status==2){         			
+         				document.getElementById("status_progress").style.width = "50%";   
          				for(i=1;i<=4;i++){
          	           	   	if(i==2){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -348,7 +342,9 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(status==3)
+       			}
+         		   	else if(status==3){
+         		   	document.getElementById("status_progress").style.width = "75%";   
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==3){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -356,7 +352,9 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(status==4)
+         		   	}
+         		   	else if(status==4){
+         		   	document.getElementById("status_progress").style.width = "100%";   
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==4){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -364,6 +362,7 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
+       			}
          	   })
          	   
        	   })
@@ -375,17 +374,17 @@
                $.each(data, function(index, value) {
             	  
             	 //訂單編號連結的詳細資訊button
-            	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="detail_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+            	   table_html += '<tr id="order'+value.order_info.idtbl_order +'"><td scope="row" align="center"><button class="btn btn-primary" id="detail_'+ value.order_info.idtbl_order+'">查看訂單</button></td>';
             	 //買進/賣出
             	   table_html += '<td align="center">買進</td>';
             	 //訂單編號
-            	   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
+            	   table_html += '<td align="center">' + value.order_info.idtbl_order + '</td>';
             	 //訂單總金額
-            	   table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
+            	   table_html += '<td align="center">' + Math.round(value.order_info.total_price * 100) / 100 + '</td>';
                  //運送方式
-            	   table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
+            	   table_html += '<td align="center">' + value.order_info.product_delivery + '</td>';
                  //訂單建立時間
-            	   table_html += '<td align="center">' + data[index].order_info.create+ '</td>';
+            	   table_html += '<td align="center">' + value.order_info.create+ '</td>';
                    
                })
                $("#table > tbody").append(table_html);
@@ -398,17 +397,17 @@
                  var table_html="";
                $.each(data, function(index, value) {
             	 //訂單編號連結的詳細資訊button
-            	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="detail_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
+            	   table_html += '<tr id="order'+value.order_info.idtbl_order +'"><td scope="row" align="center"><button id="detail_'+ value.order_info.idtbl_order+'">查看訂單</button></td>';
             	 //買進/賣出
             	   table_html += '<td align="center">賣出</td>';
             	 //訂單編號
-            	   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
+            	   table_html += '<td align="center">' + value.order_info.idtbl_order + '</td>';
             	 //訂單總金額(該賣家應收帳款)
-            	   table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
+            	   table_html += '<td align="center">' + Math.round(value.order_info.total_price * 100) / 100 + '</td>';
                  //運送方式
-            	   table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
+            	   table_html += '<td align="center">' + value.order_info.product_delivery + '</td>';
                  //訂單建立時間
-            	   table_html += '<td align="center">' + data[index].order_info.create+ '</td>';
+            	   table_html += '<td align="center">' + value.order_info.create+ '</td>';
                    
                })
 
@@ -442,7 +441,7 @@
            
          
            $("#sent").click(function(){
-        	   
+        	   document.getElementById("status_progress").style.width = "50%";   
         	   for(var i=1;i<=4;i++){
         	   	if(i==2){
         		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -452,6 +451,7 @@
         	   }
         	});
            $("#reached").click(function(){
+        	   document.getElementById("status_progress").style.width = "75%";   
         	   for(var i=1;i<=4;i++){
            	   	if(i==3){
            		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -461,6 +461,8 @@
            	   }
            });
            $("#finished").click(function(){
+        	 
+        	   document.getElementById("status_progress").style.width = "100%";        	   
         	   for(var i=1;i<=4;i++){
            	   	if(i==4){
            		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
