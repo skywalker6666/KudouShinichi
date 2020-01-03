@@ -16,7 +16,7 @@ public class OrderProductHelper {
     private static OrderProductHelper oph;
     private Connection conn = null;
     private PreparedStatement pres = null;
-    
+//    JSONArray jsa = new JSONArray();
     /**
      * 靜態方法<br>
      * 實作Singleton（單例模式），僅允許建立一個MemberHelper物件
@@ -143,5 +143,79 @@ public class OrderProductHelper {
         }
         
         return result;
+    }
+    public JSONObject getAllHotProduct() {
+    //    ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
+        JSONArray jsa = new JSONArray();
+        /** 記錄實際執行之SQL指令 */
+        String exexcute_sql = "";
+        ResultSet rs = null;
+        Product pt;
+        
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "Select idtbl_product,product_Name,price,is_deleted,image,product_info, count(*) as Total \n" + 
+            		"From `missa`.tbl_orderproduct \n" + 
+            		"JOIN  tbl_product ON idtbl_product=productID and tbl_product.sellerID=tbl_orderproduct.sellerID\n" + 
+            		"Group By productID \n" + 
+            		"Having Total>5;";
+            
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+      //      pres.setInt(1, orderID);
+            
+            /** 執行新增之SQL指令並記錄影響之行數 */
+            rs = pres.executeQuery();
+            
+            /** 紀錄真實執行的SQL指令，並印出 **/
+            exexcute_sql = pres.toString();
+      //      System.out.println(exexcute_sql);
+            
+            while(rs.next()) {
+                /** 每執行一次迴圈表示有一筆資料 */
+                
+                /** 將 ResultSet 之資料取出 */
+                int idtbl_product= rs.getInt("idtbl_product");
+                String product_Name = rs.getString("product_Name");
+                int price = rs.getInt("price");
+                int is_Deleted = rs.getInt("is_Deleted");
+                String image=rs.getString("image");
+                String product_info=rs.getString("product_info");
+                int Total = rs.getInt("Total");
+
+                System.out.println(idtbl_product);
+                System.out.println(product_Name);
+                System.out.println(price);
+                System.out.println(is_Deleted);
+                System.out.println(image);
+                System.out.println(product_info);
+                System.out.println(Total);
+                /** 將每一筆會員資料產生一名新orderproduct物件 */
+                pt = new Product(idtbl_product, product_Name, price,is_Deleted, image, product_info, Total);
+                /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
+                jsa.put(pt.getData());
+
+            }
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(pres, conn);
+        }
+        JSONObject response = new JSONObject();
+
+        
+        response.put("sql", exexcute_sql);
+
+        response.put("data", jsa);
+        return response;
+        
+
     }
 }

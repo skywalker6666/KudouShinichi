@@ -75,25 +75,25 @@
 						<ul class="dropdown-menu">
 							<li><a href="#">男人館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">秋冬季衣著</a></li>
-									<li><a href="#">春夏季衣著</a></li>
-									<li><a href="#">運動休閒類型</a></li>
-									<li><a href="#">西裝/套裝</a></li>
-									<li><a href="#">童裝</a></li>
-									<li><a href="#">襪子</a></li>
-									<li><a href="#">鞋子</a></li>
-									<li><a href="#">配件</a></li>
+									<li><a id="man_winter" href="#">秋冬季衣著</a></li>
+									<li><a id="man_summer"href="#">春夏季衣著</a></li>
+									<li><a id="man_exercise"href="#">運動休閒類型</a></li>
+									<li><a id="man_suit"href="#">西裝/套裝</a></li>
+									<li><a id="man_child"href="#">童裝</a></li>
+									<li><a id="man_socks"href="#">襪子</a></li>
+									<li><a id="man_shoes"href="#">鞋子</a></li>
+									<li><a id="man_accessories"href="#">配件</a></li>
 								</ul></li>
 							<li><a href="#">女人館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">秋冬季衣著</a></li>
-									<li><a href="#">春夏季衣著</a></li>
-									<li><a href="#">運動休閒類型</a></li>
-									<li><a href="#">西裝/套裝</a></li>
-									<li><a href="#">童裝</a></li>
-									<li><a href="#">襪子</a></li>
-									<li><a href="#">鞋子</a></li>
-									<li><a href="#">配件</a></li>
+									<li><a id="woman_winter" href="#">秋冬季衣著</a></li>
+									<li><a id="woman_summer" href="#">春夏季衣著</a></li>
+									<li><a id="woman_exercise" href="#">運動休閒類型</a></li>
+									<li><a id="woman_suit" href="#">西裝/套裝</a></li>
+									<li><a id="woman_child" href="#">童裝</a></li>
+									<li><a id="woman_socks" href="#">襪子</a></li>
+									<li><a id="woman_shoes" href="#">鞋子</a></li>
+									<li><a id="woman_accessories" href="#">配件</a></li>
 								</ul></li>
 							<li><a href="#">兒童館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
@@ -111,6 +111,12 @@
 			</div>
 			<!--下拉選單-->
             
+          	 	 <div class="album py-5 bg-light">
+					<p>篩選商品</p>
+                	<div class="container">
+                  		<div id="filter_product_panel" class="row"></div>
+                	</div>
+            	</div>
             	 <div class="album py-5 bg-light">
 					<p>熱賣商品</p>
                 	<div class="container">
@@ -175,11 +181,12 @@
                 timeout: 5000,
                 success: function (response) {
                     if (response.status == 200) {
-
                         var parity_product_panel = '';
                         var man_product_panel = '';
                         var woman_product_panel = '';
                         var child_product_panel = '';
+                        var new_product_panel = '';
+                      
                         
 
                         $.each(response.response.data, function () {
@@ -190,22 +197,37 @@
                         	if(this.type=="男人館")
                     		{
                         		man_product_panel += addProduct(this);
-                		}
+                			}
                         	if(this.type=="女人館")
                     		{
                         		woman_product_panel += addProduct(this);
-                		}
+                			}
                         	if(this.type=="兒童館")
                     		{
                         		child_product_panel += addProduct(this);
-                		}
-                            
+                			}
+                        	
+                        	var dateString = this.created;
+                     //   	alert(this.created);
+                        	var date = new Date(Date.parse(dateString.replace(/-/g,"/")));                       	
+                       // 	alert(date);
+                        	var d = new Date();                       	
+                        	var n = d.getUTCHours()+8;
+                     //   	alert(n);
+                     //   	alert(date.getHours());
+                        	if((n-date.getHours())<=3)
+                        	{
+                        //		alert("新");
+                        		new_product_panel += addProduct(this);
+                        	}
+                        	           
                         })
-
+						
                         $("#parity_product_panel").append(parity_product_panel);
                         $("#man_product_panel").append(man_product_panel);
                         $("#woman_product_panel").append(woman_product_panel);
                         $("#child_product_panel").append(child_product_panel);
+                        $("#new_product_panel").append(new_product_panel);
                         setButtonFunction();
                         checkIfExistInCart();
                     }
@@ -216,6 +238,45 @@
                 }
             });
         }
+        function getFilterProduct(type,category) {
+            $.ajax({
+                type: "GET",
+                url: "api/product.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if (response.status == 200) {
+                    	var filter_product_panel = '';
+                      
+                        $.each(response.response.data, function () {
+                        	
+                        	if(type==this.type && category==this.category)
+                        	{
+                				filter_product_panel += addProduct(this);
+                			}
+                            
+                        })
+                        if(filter_product_panel=="")
+                        	{
+                        		filter_product_panel+="<p>這個選項沒有資料!!</p>";
+                        		
+                        	}
+                        $('#filter_product_panel').empty()
+						$("#filter_product_panel").append(filter_product_panel);
+                      
+                        setButtonFunction();
+                        checkIfExistInCart();
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+        
         function getHotProduct() {
         	  $.ajax({
                   type: "GET",
@@ -226,49 +287,22 @@
                   timeout: 5000,
                   success: function (response) {
                       if (response.status == 200) {
-
+                    	  console.log(response);
                           var product_panel = '';
 
                           $.each(response.response.data, function () {
                               product_panel += addProduct(this);
                           })
 
-                          $("#product_panel").append(product_panel);
-                          setButtonFunction();
-                          checkIfExistInCart();
+                          $("#hot_product_panel").append(product_panel);
                       }
-                      console.log(response);
+                      
                   },
                   error: function () {
-                      alert("無法連線到伺服器！");
+                      alert("無法連線到伺服器！1111");
                   }
               });
-            $.ajax({
-                type: "GET",
-                url: "api/product.do",
-                crossDomain: true,
-                cache: false,
-                dataType: 'json',
-                timeout: 5000,
-                success: function (response) {
-                    if (response.status == 200) {
-
-                        var product_panel = '';
-
-                        $.each(response.response.data, function () {
-                            product_panel += addProduct(this);
-                        })
-
-                        $("#product_panel").append(product_panel);
-                        setButtonFunction();
-                        checkIfExistInCart();
-                    }
-                    console.log(response);
-                },
-                error: function () {
-                    alert("無法連線到伺服器！");
-                }
-            });
+           
         }
         
         /*----------------------------------------*/
@@ -440,8 +474,104 @@
         
         $(document).ready(function () {
         	getAllProduct();
-        	//getHotProduct();
-        
+        	getHotProduct();
+         $("#man_winter").click(function () {
+        	
+        	 var type = "男人館";
+        	 var category = "秋冬季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_summer").click(function () {
+         	
+        	 var type = "男人館";
+        	 var category = "春夏季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_exercise").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "運動休閒類型";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_suit").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "西裝/套裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_child").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "童裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_socks").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "襪子";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_shoes").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "鞋子";
+        	 getFilterProduct(type,category);
+        });
+         $("#man_accessories").click(function () {
+          	
+        	 var type = "男人館";
+        	 var category = "配件";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_winter").click(function () {
+           	
+        	 var type = "女人館";
+        	 var category = "秋冬季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_summer").click(function () {
+            	
+        	 var type = "女人館";
+        	 var category = "春夏季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_exercise").click(function () {
+         	
+        	 var type = "女人館";
+        	 var category = "運動休閒類型";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_suit").click(function () {
+          	
+        	 var type = "女人館";
+        	 var category = "西裝/套裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_child").click(function () {
+           	
+        	 var type = "女人館";
+        	 var category = "童裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_socks").click(function () {
+            	
+        	 var type = "女人館";
+        	 var category = "襪子";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_shoes").click(function () {
+            	
+        	 var type = "女人館";
+        	 var category = "鞋子";
+        	 getFilterProduct(type,category);
+        });
+         $("#woman_accessories").click(function () {
+            	
+        	 var type = "女人館";
+        	 var category = "配件";
+        	 getFilterProduct(type,category);
+        });
+         
         	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();

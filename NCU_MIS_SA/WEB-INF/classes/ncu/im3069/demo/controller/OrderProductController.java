@@ -9,6 +9,7 @@ import ncu.im3069.demo.app.Order;
 import ncu.im3069.demo.app.Product;
 import ncu.im3069.demo.app.ProductHelper;
 import ncu.im3069.demo.app.OrderHelper;
+import ncu.im3069.demo.app.OrderProductHelper;
 import ncu.im3069.tools.JsonReader;
 
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,8 @@ public class OrderProductController extends HttpServlet {
 
     /** oh，OrderHelper 之物件與 order 相關之資料庫方法（Sigleton） */
 	private OrderHelper oh =  OrderHelper.getHelper();
+	
+	private OrderProductHelper oph=OrderProductHelper.getHelper();
 
     public OrderProductController() {
         super();
@@ -43,34 +46,31 @@ public class OrderProductController extends HttpServlet {
         JsonReader jsr = new JsonReader(request);
 
         /** 取出經解析到 JsonReader 之 Request 參數 */
-        String idtbl_order = jsr.getParameter("idtbl_order");
-        String memberID = jsr.getParameter("memberID");
+      
+        
+        
+        String idtbl_product= jsr.getParameter("idtbl_product");
+        String product_Name=jsr.getParameter("product_Name");
+        String price=jsr.getParameter("price");
+        String is_Deleted=jsr.getParameter("is_Deleted");
+        String image=jsr.getParameter("image");
+        String product_info=jsr.getParameter("product_info");
+        String total=jsr.getParameter("Total");
+        
+        
+        
+        JSONObject query=oph.getAllHotProduct();
         /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
+        
+        resp.put("status", 200);
+        resp.put("message", "所有熱門商品取得成功");
+        resp.put("response", query);
 
         /** 判斷該字串是否存在，若存在代表要取回個別訂單之資料，否則代表要取回全部資料庫內訂單之資料 */
-        if (!idtbl_order.isEmpty()) {
-          /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
-          JSONObject query = oh.getByOrderId(idtbl_order);
-          resp.put("status", "200");
-          resp.put("message", "單筆訂單資料取得成功");
-          resp.put("response", query);
-        }
-        else if(!memberID.isEmpty()){
-        	System.out.println("進入getByMemberId");
-        	JSONObject query = oh.getByMemberId(memberID);
-            resp.put("status", "200");
-            resp.put("message", "單筆訂單資料取得成功");
-            resp.put("response", query);
-        }
-        else {
-          /** 透過 orderHelper 物件之 getAll() 方法取回所有訂單之資料，回傳之資料為 JSONObject 物件 */
-        	System.out.println("進入getAll");
-          JSONObject query = oh.getAll();
-          resp.put("status", "200");
-          resp.put("message", "所有訂單資料取得成功");
-          resp.put("response", query);
-        }
+       
+       System.out.println("進入Hotproduct");
+       
         
         /** 透過 JsonReader 物件回傳到前端（以 JSONObject 方式） */
         jsr.response(resp, response);
