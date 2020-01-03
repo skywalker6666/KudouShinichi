@@ -71,7 +71,7 @@ public class ProductHelper {
                 String category = rs.getString("category");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info);
+                p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info, type, category);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }

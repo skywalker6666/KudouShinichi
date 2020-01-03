@@ -120,7 +120,7 @@
             	<div class="album py-5 bg-light">
 					<p>新商品</p>
                 	<div class="container">
-                  		<div id="hot_product_panel" class="row"></div>
+                  		<div id="new_product_panel" class="row"></div>
                 	</div>
             	</div>
                 <div class="album py-5 bg-light">
@@ -176,13 +176,36 @@
                 success: function (response) {
                     if (response.status == 200) {
 
-                        var product_panel = '';
+                        var parity_product_panel = '';
+                        var man_product_panel = '';
+                        var woman_product_panel = '';
+                        var child_product_panel = '';
+                        
 
                         $.each(response.response.data, function () {
-                            product_panel += addProduct(this);
+                        	if(this.price<=500)
+                    		{
+                        		parity_product_panel += addProduct(this);
+                			}
+                        	if(this.type=="男人館")
+                    		{
+                        		man_product_panel += addProduct(this);
+                		}
+                        	if(this.type=="女人館")
+                    		{
+                        		woman_product_panel += addProduct(this);
+                		}
+                        	if(this.type=="兒童館")
+                    		{
+                        		child_product_panel += addProduct(this);
+                		}
+                            
                         })
 
-                        $("#product_panel").append(product_panel);
+                        $("#parity_product_panel").append(parity_product_panel);
+                        $("#man_product_panel").append(man_product_panel);
+                        $("#woman_product_panel").append(woman_product_panel);
+                        $("#child_product_panel").append(child_product_panel);
                         setButtonFunction();
                         checkIfExistInCart();
                     }
@@ -247,6 +270,7 @@
                 }
             });
         }
+        
         /*----------------------------------------*/
         //判斷是否是賣家我的賣場
         var [client_isSeller] = getisSellerFromClient();
@@ -416,7 +440,8 @@
         
         $(document).ready(function () {
         	getAllProduct();
-        	getHotProduct();
+        	//getHotProduct();
+        
         	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
