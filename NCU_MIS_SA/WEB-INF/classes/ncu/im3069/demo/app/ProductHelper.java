@@ -1,6 +1,10 @@
 package ncu.im3069.demo.app;
 
 import java.sql.*;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import org.json.*;
 
@@ -70,7 +74,7 @@ public class ProductHelper {
                 String category = rs.getString("category");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
-                p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info);
+                p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info, type, category);
                 /** 取出該項商品之資料並封裝至 JSONsonArray 內 */
                 jsa.put(p.getData());
             }
@@ -333,8 +337,8 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `sellerID`, `is_deleted`, `image`, `product_info`, `type`, `category`)"
-                    + " VALUES(?, ?, ?, ?, 0, ? , ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `sellerID`, `is_deleted`, `image`, `product_info`, `type`, `category`, `created`)"
+                    + " VALUES(?, ?, ?, ?, 0, ? , ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = p.getName();
@@ -356,6 +360,7 @@ public class ProductHelper {
             pres.setString(6, product_info); //
             pres.setString(7, type);
             pres.setString(8, category);
+            pres.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now(Clock.system(ZoneId.of("+16")))));
        
             
             /** 執行新增之SQL指令並記錄影響之行數 */

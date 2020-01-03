@@ -49,7 +49,7 @@
         <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 
         <div id="member_center1" class="mediumbox" style="float: right">
-            <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
+            <li style="float: left"><a id="member_center" class="navbarFloating" href="member_change.html">會員中心</a></li>
             <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
             <li style="float: left">
 
@@ -67,6 +67,7 @@
     <div class="frame">
 
         <div class="generalbox">
+        <p>商品目錄</p>
             <!--下拉選單-->
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -74,46 +75,78 @@
 						<ul class="dropdown-menu">
 							<li><a href="#">男人館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">外套</a></li>
-									<li><a href="#">上衣</a></li>
-									<li><a href="#">襯衫</a></li>
-									<li><a href="#">T恤</a></li>
-									<li><a href="#">褲裝</a></li>
-									<li><a href="#">內衣褲</a></li>
+									<li><a href="#">秋冬季衣著</a></li>
+									<li><a href="#">春夏季衣著</a></li>
+									<li><a href="#">運動休閒類型</a></li>
+									<li><a href="#">西裝/套裝</a></li>
+									<li><a href="#">童裝</a></li>
+									<li><a href="#">襪子</a></li>
+									<li><a href="#">鞋子</a></li>
+									<li><a href="#">配件</a></li>
 								</ul></li>
 							<li><a href="#">女人館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">外套</a></li>
-									<li><a href="#">上衣</a></li>
-									<li><a href="#">襯衫</a></li>
-									<li><a href="#">T恤</a></li>
-									<li><a href="#">褲裝</a></li>
-									<li><a href="#">內衣褲</a></li>
+									<li><a href="#">秋冬季衣著</a></li>
+									<li><a href="#">春夏季衣著</a></li>
+									<li><a href="#">運動休閒類型</a></li>
+									<li><a href="#">西裝/套裝</a></li>
+									<li><a href="#">童裝</a></li>
+									<li><a href="#">襪子</a></li>
+									<li><a href="#">鞋子</a></li>
+									<li><a href="#">配件</a></li>
 								</ul></li>
 							<li><a href="#">兒童館<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">外套</a></li>
-									<li><a href="#">上衣</a></li>
-									<li><a href="#">襯衫</a></li>
-									<li><a href="#">T恤</a></li>
-									<li><a href="#">褲裝</a></li>
-									<li><a href="#">內衣褲</a></li>
-								</ul></li>
-							<li><a href="#">嬰兒館<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#">外套</a></li>
-									<li><a href="#">上衣</a></li>
-									<li><a href="#">襯衫</a></li>
-									<li><a href="#">T恤</a></li>
-									<li><a href="#">褲裝</a></li>
-									<li><a href="#">內衣褲</a></li>
+									<li><a href="#">秋冬季衣著</a></li>
+									<li><a href="#">春夏季衣著</a></li>
+									<li><a href="#">運動休閒類型</a></li>
+									<li><a href="#">西裝/套裝</a></li>
+									<li><a href="#">童裝</a></li>
+									<li><a href="#">襪子</a></li>
+									<li><a href="#">鞋子</a></li>
+									<li><a href="#">配件</a></li>
 								</ul></li>
 						</ul></li>
 				</ul>
 			</div>
 			<!--下拉選單-->
-            <p>商品目錄</p>
-
+            
+            	 <div class="album py-5 bg-light">
+					<p>熱賣商品</p>
+                	<div class="container">
+                  		<div id="hot_product_panel" class="row"></div>
+                	</div>
+            	</div>
+            	<div class="album py-5 bg-light">
+					<p>新商品</p>
+                	<div class="container">
+                  		<div id="new_product_panel" class="row"></div>
+                	</div>
+            	</div>
+                <div class="album py-5 bg-light">
+					<p>平價商品</p>
+                	<div class="container">
+                  		<div id="parity_product_panel" class="row"></div>
+                	</div>
+            	</div>
+            	<div class="album py-5 bg-light">
+					<p>男人館</p>
+                	<div class="container">
+                  		<div id="man_product_panel" class="row"></div>
+                	</div>
+            	</div>
+            	<div class="album py-5 bg-light">
+					<p>女人館</p>
+                	<div class="container">
+                  		<div id="woman_product_panel" class="row"></div>
+                	</div>
+            	</div>
+            	<div class="album py-5 bg-light">
+					<p>兒童館</p>
+                	<div class="container">
+                  		<div id="child_product_panel" class="row"></div>
+                	</div>
+            	</div>
         </div>
 
     </div>
@@ -131,8 +164,85 @@
 
             return [isSeller];
         }
-
+        /*--------------GET各種類型的商品--------------*/
         function getAllProduct() {
+            $.ajax({
+                type: "GET",
+                url: "api/product.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if (response.status == 200) {
+
+                        var parity_product_panel = '';
+                        var man_product_panel = '';
+                        var woman_product_panel = '';
+                        var child_product_panel = '';
+                        
+
+                        $.each(response.response.data, function () {
+                        	if(this.price<=500)
+                    		{
+                        		parity_product_panel += addProduct(this);
+                			}
+                        	if(this.type=="男人館")
+                    		{
+                        		man_product_panel += addProduct(this);
+                		}
+                        	if(this.type=="女人館")
+                    		{
+                        		woman_product_panel += addProduct(this);
+                		}
+                        	if(this.type=="兒童館")
+                    		{
+                        		child_product_panel += addProduct(this);
+                		}
+                            
+                        })
+
+                        $("#parity_product_panel").append(parity_product_panel);
+                        $("#man_product_panel").append(man_product_panel);
+                        $("#woman_product_panel").append(woman_product_panel);
+                        $("#child_product_panel").append(child_product_panel);
+                        setButtonFunction();
+                        checkIfExistInCart();
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+        function getHotProduct() {
+        	  $.ajax({
+                  type: "GET",
+                  url: "api/orderProduct.do",
+                  crossDomain: true,
+                  cache: false,
+                  dataType: 'json',
+                  timeout: 5000,
+                  success: function (response) {
+                      if (response.status == 200) {
+
+                          var product_panel = '';
+
+                          $.each(response.response.data, function () {
+                              product_panel += addProduct(this);
+                          })
+
+                          $("#product_panel").append(product_panel);
+                          setButtonFunction();
+                          checkIfExistInCart();
+                      }
+                      console.log(response);
+                  },
+                  error: function () {
+                      alert("無法連線到伺服器！");
+                  }
+              });
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
@@ -153,12 +263,15 @@
                         setButtonFunction();
                         checkIfExistInCart();
                     }
+                    console.log(response);
                 },
                 error: function () {
                     alert("無法連線到伺服器！");
                 }
             });
         }
+        
+        /*----------------------------------------*/
         //判斷是否是賣家我的賣場
         var [client_isSeller] = getisSellerFromClient();
         $("#myMarket").hide();
@@ -166,23 +279,26 @@
             $("#myMarket").show();
         }
 
-        getAllProduct();
+        
 
+        /**
+         * 畫出一筆商品
+         */
         function addProduct(data) {
             let inner_html = '';
             inner_html += '<div class="col-md-4" style="float:left;">';
             inner_html += '<div class="card-header">';
-            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.name + '</h4>';
+            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
             inner_html += '</div>';
             inner_html += '<div class="card mb-4 shadow-sm">';
-            inner_html += '<img src="statics/img/product/' + data.image + '" width="100%">';
+            inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
             inner_html += '<div class="card-body">';
             inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
-            inner_html += '<p class="card-text">' + data.describe + '</p>';
+            inner_html += '<p class="card-text">' + data.product_info + '</p>';
             inner_html += '<div class="d-flex justify-content-between align-items-center">';
             inner_html += '<div class="btn-group">';
-            inner_html += '<button id="add_cart_' + data.id + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
-            inner_html += '</div><small class="text-muted">id: ' + data.id + '</small>';
+            inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
+            inner_html += '</div><small class="text-muted">id: ' + data.idtbl_product + '</small>';
             inner_html += '</div></div></div></div>';
 
             return inner_html;
@@ -249,9 +365,6 @@
         }
 
 
-
-
-
         /*------------登入登出實作member cookie-----------*/
 
         var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
@@ -275,16 +388,43 @@
             localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
         }
+        /*----------------------------------------*/
+        
+        
+        /*------------登入登出實作manager cookie-----------*/
 
+        var [manager_id, manager_name, manager_isLeader] = getManagerDataFromClient();
+
+        function getManagerDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("manager_id"));
+            let name = JSON.parse(localStorage.getItem("manager_name"));
+            let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isLeader = !isLeader ? new Array() : isLeader;
+            return [id, name, isLeader];
+        }
+
+        function updateManagerDataToClent() {
+            localStorage.setItem("manager_id", JSON.stringify(manager_id));
+            localStorage.setItem("manager_name", JSON.stringify(manager_name));
+            localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
+        }
+        /*----------------------------------------*/
+        
         function loguot() {
             client_id = [];
             client_name = [];
+            client_isSeller = [];
+            updateMemberDataToClent();
             client_cart_obj = [];
             client_cart_amount = [];
-            updateMemberDataToClent();
-            client_isSeller = [];
-            
-            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        	updateCartDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        	manager_id=[];
+        	manager_name=[];
+        	manager_isLeader=[];
+        	updateManagerDataToClent();
             $("#member_center1").hide();
             $("#member_center2").hide();
             $("#member_center3").hide();
@@ -296,25 +436,31 @@
             console.log("[@Action]登出");
             loguot();
         });
-
+       
+        
         $(document).ready(function () {
-            if (client_id.length == 0) { //登出
-                $("#member_center1").hide();
-                $("#member_center2").hide();
-                $("#member_center3").hide();
-            } else {//登入
+        	getAllProduct();
+        	//getHotProduct();
+        
+        	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
                 $("#member_center2").show();
                 $("#member_center3").show();
                 $("#signup_in").hide();
-            }
+            }else if(manager_id.length != 0) {//登入管理員
+                $("#user_name").html(manager_name);
+                $("#member_center1").show();
+                $("#member_center").hide();//隱藏會員中心
+                $("#member_center2").hide();
+                $("#member_center3").show();
+                $("#signup_in").hide();
+            }else { //登出
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+            } 
         });
-
-        /*----------------------------------------*/
-
-
-
 
     </script>
 
