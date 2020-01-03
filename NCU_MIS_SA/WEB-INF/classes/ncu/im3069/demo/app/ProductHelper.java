@@ -1,6 +1,7 @@
 package ncu.im3069.demo.app;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 import org.json.*;
 
@@ -333,8 +334,8 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `sellerID`, `is_deleted`, `image`, `product_info`, `type`, `category`)"
-                    + " VALUES(?, ?, ?, ?, 0, ? , ?, ?, ?)";
+            String sql = "INSERT INTO `missa`.`tbl_product`(`product_name`, `price`, `inventory`, `sellerID`, `is_deleted`, `image`, `product_info`, `type`, `category`, `created`)"
+                    + " VALUES(?, ?, ?, ?, 0, ? , ?, ?, ?, ?)";
             
             /** 取得所需之參數 */
             String name = p.getName();
@@ -356,6 +357,7 @@ public class ProductHelper {
             pres.setString(6, product_info); //
             pres.setString(7, type);
             pres.setString(8, category);
+            pres.setTimestamp(9, Timestamp.valueOf(LocalDateTime.now()));
        
             
             /** 執行新增之SQL指令並記錄影響之行數 */
