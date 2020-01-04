@@ -51,8 +51,8 @@
 	</ul>
 	<div class="box">
 		<label class="box_text">會員中心</label>
-		<div id="head_sticker" class="row"></div>
-		<div class="box2">
+		<div id="head_sticker" class="row" ></div>
+		<div class="box2" style= margin-top:-100px;height:450px >
 			<form class="form" id="form" accept-charset="utf-8">
 				<div class="input text required">
 					<label for="member_name">會員帳號：</label> <input name="name"
@@ -68,12 +68,11 @@
 				</div>
 				<div>
 					<label>西元生日：</label> <input type="date" id="datepicker" value="1999-01-01"
-						required="required">
+						required="required" style=width:156px>
 				</div>
-				<div class="input text required">
+				<div class="input headSticker">
 					<label for="member_headSticker">個性頭貼：</label> <input
-						name="headSticker" type="text" id="member_headSticker"
-						required="required">
+						name="headSticker" id="member_headSticker" >
 				</div>
 				<div class="input text required">
 					<label for="member_isSeller">買家賣家：</label> <input name="isSeller"
@@ -81,7 +80,7 @@
 				</div>
 			
 				
-				<a class="button"  id="submit">送出</a>
+				<a class="button"  id="submit" >送出</a>
 				<a class="button" href="member_change.html">取消</a>
 		</div>
 		</form>
@@ -261,7 +260,7 @@
                     	document.getElementById('member_headSticker').value = response['response']['data'][0]['headSticker'];
                     	document.getElementById('member_isSeller').value = response['response']['data'][0]['isSeller'];
                     	var headSticker = response['response']['data'][0]['headSticker'];
-                    	var inner_html = '<img src="' + headSticker + '" height="200px" width="200px" hspace="50px">';
+                    	var inner_html = '<img src="' + headSticker + '" height="200px" width="200px" hspace="300px" padding:50px>';
                     	$("#head_sticker").append(inner_html);
                     	
                     }

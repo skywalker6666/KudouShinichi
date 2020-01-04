@@ -1,54 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow:hidden">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
-<style>
-</style>
+
+
 <link rel="stylesheet" href="statics/css/register&login.css">
-<link rel="stylesheet" href="statics/css/navbar.css">
+
 <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<style>
+ 
+
+</style>
 </head>
-<body bgcolor="#BCE2FF">
 
-	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
-	</ul>
 
-	<div class="box"
-		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> <label
-			style="margin-left: 32px; line-height: 50px">會員登入</label>
-		</font>
-		<div class="box2"
-			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+	
+		
+		
+	
+	<div class="container-fluid " style="height:100%">
+		<div class="row " >
+			<div class="col-md-6">
+				<a class="navbar-brand" href="index.html" ><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px"></img></a>
+				<br><label style="font-size:30px;margin-top:120px;margin-left:250px">為什麼柯南不買新衣服?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因為其他人會說
+				<br><br>&nbsp;「你看！是新衣耶！」</label><br><br>
+				<label style="font-size:20px;margin-left:250px">歡迎註冊會員，加入新衣的行列！</label>
+			</div>
+			<div class="col-md-6" style="background-color:#fafafa">
+			<form id="form" accept-charset="utf-8"style="margin-top:30%;margin-bottom:50%;margin-left:30%">
 
-			<form id="form" accept-charset="utf-8"
-				style="line-height: 50px; margin-top: 100px">
-
-				<div class="input text required">
-					<label for="member_name">會員帳號</label> <input class="field"
-						name="name" type="text" id="member_name" required="required">
+				<div class="input text required" style="line-height: 50px">
+					<label for="member_name">會員帳號</label> <input class="form-control"
+						name="name" type="text" id="member_name" required="required" style="width:300px">
 				</div>
-				<div class="input password required">
-					<label for="password">會員密碼</label> <input class="field"
-						name="password" type="password" id="member_password"
-						required="required">
+				<div class="input password required" style="line-height: 50px">
+					<label for="password">會員密碼</label> <input class="form-control"
+						name="password" type="password" id="member_password" required="required" style="width:300px">
 				</div>
 
-				<button id="login" type="button" class="button">登入</button>
+				<br><button id="login" type="button" class="btn btn-outline-success" style="margin-left:45%">登入</button><br><br>
+				<a type="button" class="btn btn-outline-danger" style="margin-left:38%" href="register.html">還沒註冊?</a>
 			</form>
-			
+			</div>
 		</div>
 	</div>
 
