@@ -245,7 +245,7 @@ public class MemberController extends HttpServlet {
         String headSticker = jso.getString("headSticker");
         int isSeller = jso.getInt("isSeller");
         
-        if (!email.isEmpty()&&!birthday.isEmpty()&&!password.isEmpty()&&!name.isEmpty()&&!headSticker.isEmpty()) {
+        if (!email.isEmpty()&&!birthday.isEmpty()&&!password.isEmpty()&&!name.isEmpty()) {
             /** 透過MemberHelper物件之getAll()方法取回所有會員之資料，回傳之資料為JSONObject物件 */
         	System.out.println("修改會員資料");
         	Member m = new Member(id, email, password, name, headSticker, birthday, isSeller);
