@@ -150,17 +150,14 @@ public class OrderProductHelper {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         ResultSet rs = null;
-        Product pt;
+     //   pres=null;
+        Product pt=null;
         
         try {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Select idtbl_product,product_Name,price,is_deleted,image,product_info, count(*) as Total \n" + 
-            		"From `missa`.tbl_orderproduct \n" + 
-            		"JOIN  tbl_product ON idtbl_product=productID and tbl_product.sellerID=tbl_orderproduct.sellerID\n" + 
-            		"Group By productID \n" + 
-            		"Having Total>5;";
+            String sql = "Select idtbl_product,product_Name,price,is_deleted,image,product_info, count(*) as Total From `missa`.tbl_orderproduct JOIN  tbl_product ON idtbl_product=productID Group By productID Having Total>5;";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -178,7 +175,7 @@ public class OrderProductHelper {
                 
                 /** 將 ResultSet 之資料取出 */
                 int idtbl_product= rs.getInt("idtbl_product");
-                String product_Name = rs.getString("product_Name");
+                String product_name = rs.getString("product_Name");
                 int price = rs.getInt("price");
                 int is_Deleted = rs.getInt("is_Deleted");
                 String image=rs.getString("image");
@@ -186,14 +183,14 @@ public class OrderProductHelper {
                 int Total = rs.getInt("Total");
 
                 System.out.println(idtbl_product);
-                System.out.println(product_Name);
+                System.out.println(product_name);
                 System.out.println(price);
                 System.out.println(is_Deleted);
                 System.out.println(image);
                 System.out.println(product_info);
                 System.out.println(Total);
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                pt = new Product(idtbl_product, product_Name, price,is_Deleted, image, product_info, Total);
+                pt = new Product(idtbl_product, product_name, price,is_Deleted, image, product_info,Total);
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(pt.getData());
 

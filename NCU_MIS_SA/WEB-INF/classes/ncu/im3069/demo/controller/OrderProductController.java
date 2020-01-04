@@ -63,7 +63,7 @@ public class OrderProductController extends HttpServlet {
         /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
         
-        resp.put("status", 200);
+        resp.put("status", 20000);
         resp.put("message", "所有熱門商品取得成功");
         resp.put("response", query);
 

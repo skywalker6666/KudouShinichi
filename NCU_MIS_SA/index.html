@@ -208,14 +208,14 @@
                 			}
                         	
                         	var dateString = this.created;
-                     //   	alert(this.created);
+
                         	var date = new Date(Date.parse(dateString.replace(/-/g,"/")));                       	
-                       // 	alert(date);
+                      
                         	var d = new Date();                       	
                         	var n = d.getUTCHours()+8;
                      //   	alert(n);
                      //   	alert(date.getHours());
-                        	if((n-date.getHours())<=3)
+                        	if((n-date.getHours())<=8)
                         	{
                         //		alert("新");
                         		new_product_panel += addProduct(this);
@@ -286,7 +286,7 @@
                   dataType: 'json',
                   timeout: 5000,
                   success: function (response) {
-                      if (response.status == 200) {
+                      if (response.status == 20000) {
                     	  console.log(response);
                           var product_panel = '';
 
@@ -295,7 +295,11 @@
                           })
 
                           $("#hot_product_panel").append(product_panel);
+                          
                       }
+                      console.log(response);
+                      
+                      
                       
                   },
                   error: function () {

@@ -1,7 +1,5 @@
 package ncu.im3069.demo.app;
 
-import java.sql.Date;
-
 import org.json.*;
 
 public class Product {
@@ -37,9 +35,7 @@ public class Product {
 	private String category;
 	
 	private String created;
-	
 	private int total;
-
     /**
      * 實例化（Instantiates）一個新的（new）Product 物件<br>
      * 採用多載（overload）方法進行，此建構子用於新增產品時
@@ -58,6 +54,16 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
+	public Product (int idtbl_product, String product_name,int price,int is_Deleted,String image, String product_info,int Total){
+		this.product_name = product_name;
+		this.price = price;
+		this.idtbl_product=idtbl_product;
+		this.is_deleted=is_Deleted;
+		this.total=Total;
+		this.image = image;
+		this.product_info=product_info;
+
+	}
 	public Product(String product_name, int price, int inventory, int sellerID,  String image, String product_info, String type, String category) {
 		this.product_name = product_name;
 		this.price = price;
@@ -67,18 +73,10 @@ public class Product {
 		this.product_info=product_info;
 		this.type=type;
 		this.category=category;
+	//	this.created=created;
 	}
-	public Product(int idtbl_product,String product_Name,int price, int is_Deleted,String image,String product_info,int Total) {
-		this.price = price;
-		this.idtbl_product=idtbl_product;
-		this.is_deleted=is_Deleted;		
-		this.image = image;
-		this.product_info=product_info;
-		this.total=Total;
-
-	}
-	
-	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, int is_deleted,  String image,String product_info,String type,String category, String created) {
+	public Product(int idtbl_product,String product_name, int price,int inventory,int sellerID,int is_deleted,String image,String product_info,String type,String category,String created)
+	{
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
@@ -90,6 +88,18 @@ public class Product {
 		this.type=type;
 		this.category=category;
 		this.created=created;
+	}
+	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, int is_deleted, String image,String product_info,String type,String category) {
+		this.idtbl_product = idtbl_product;
+		this.product_name = product_name;
+		this.price = price;
+		this.inventory=inventory;
+		this.sellerID=sellerID;		
+		this.is_deleted=is_deleted;
+		this.image = image;
+		this.product_info=product_info;
+		this.type=type;
+		this.category=category;
 	}
 
     /**
@@ -150,9 +160,6 @@ public class Product {
      */
 	public int getPrice() {
 		return this.price;
-	}
-	public int getTotal() {
-		return total;
 	}
 
 	/**
@@ -217,11 +224,6 @@ public class Product {
 	public String getCategory() {
 		return this.category;
 	}
-	/**
-     * 取得產品種類
-     *
-     * @return String 回傳產品新增時間
-     */
 	public String getCreated() {
 		return this.created;
 	}
