@@ -2,275 +2,298 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author"
-	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Jekyll v3.8.5">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
 
-<title>AddProduct</title>
+    <title>AddProduct</title>
 
 
 
-<style>
+    <style>
+    .button {
+	
+            background-color: #FF8787;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px 10px;
+            font-family:DFKai-sb;
+        }
+	.button:hover {
+            background-color: #f44336;
+            color: white;
+        	  }
 
-</style>
+    </style>
 
-<!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
 
 
-<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 
-<script src="statics/js/jquery-3.4.1.min.js"></script>
-<script src="statics/js/jquery-confirm.js"></script>
-<script src="statics/js/popper.min.js"></script>
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-confirm.js"></script>
+    <script src="statics/js/popper.min.js"></script>
 
 </head>
 
 <body>
-	<div id="header">
-		<!--容器分為左圖右導覽連結 -->
-		<div >
-			<a href="index.html"><img src="statics/img/navbar/icon.png"
-				width="70" alt="logo" /></a>
-			<!--導覽列 -->
-			<ul >
-				<li ><a href="index.html"><img
-						src="statics/img/navbar/icon.png" style="float: left"
-						height="100px" width="100px"></img></a></li>
-				<li ><a  href="index.html">Home</a></li>
-				<li ><a 
-					href="productIndex.html">商品總覽</a></li>
-				<li ><a 
-					href="order_tracking.html">訂單追蹤</a></li>
-				<li ><a 
-					href="shoppingcart.html">購物車</a></li>
-				<li ><a  href="my_market.html">我的賣場</a></li>
-				<li id="signup_in" style="float: right"><a
-					class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+    <div id="header">
+        <!--容器分為左圖右導覽連結 -->
+        <div>
+            <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo" /></a>
+            <!--導覽列 -->
+            <ul>
+                <li><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
+                            width="100px"></img></a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="productIndex.html">商品總覽</a></li>
+                <li><a href="order_tracking.html">訂單追蹤</a></li>
+                <li><a href="shoppingcart.html">購物車</a></li>
+                <li><a href="my_market.html">我的賣場</a></li>
+                <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a>
+                </li>
 
-				<div id="member_center1"  style="float: right">
-					<li style="float: left"><a 
-						href="member_change.html">會員中心</a></li>
-					<li style="float: left"><a id="remove" 
-						href="index.html">&nbsp;登出 </a></li>
-					<li style="float: left">
-				</div>
-				<div id="member_center2"  style="float: right">
-					<li><img src="statics/img/navbar/shoppingcart.png"
-						style="float: left" height="20px" width="20px"></img></li>
-					<li><a  href="shoppingcart.html">購物車</a></li>
-				</div>
-				<div id="member_center3"  style="float: right">
-					<li><img src="statics/img/navbar/user.png" style="float: left"
-						height="20px" width="20px"></img></li>
-					<li id="user_name" >user</li>
-				</div>
-			</ul>
-			</nav>
-		</div>
-	</div>
-	<div 
-		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
-		<div 
-			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+                <div id="member_center1" style="float: right">
+                    <li style="float: left"><a href="member_change.html">會員中心</a></li>
+                    <li style="float: left"><a id="remove" href="index.html">&nbsp;登出 </a></li>
+                    <li style="float: left">
+                </div>
+                <div id="member_center2" style="float: right">
+                    <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px"
+                            width="20px"></img></li>
+                    <li><a href="shoppingcart.html">購物車</a></li>
+                </div>
+                <div id="member_center3" style="float: right">
+                    <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img>
+                    </li>
+                    <li id="user_name">user</li>
+                </div>
+            </ul>
+            </nav>
+        </div>
+    </div>
+    <div style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+        <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
+        <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 
 
-			<div>
-				<font face="DFKai-sb">
-					<div>
-						<label for="lastName">商品名稱</label> <input type="text"
-							id="product_name" maxlength="45" value="" required>
-					</div>
-					<div>
-						<label for="firstName">商品售價</label> <input type="text"
-							id="product_price" maxlength="11" placeholder="" value=""
-							required>
-					</div>
-					<div>
-						<label for="phonenum">商品庫存</label> <input type="text"
-							id="product_inventory" maxlength="11" required>
-					</div>
-					<div>
-						<label for="address" style="vertical-align: top;">商品簡介</label>
-						<textarea cols="50" rows="5" id="productinfo" maxlength="100"
-							required>
-						</textarea>
-					</div>
-					<div>
-						<label for="lastName">商品圖片</label> <input type="text"
-							id="image_name" maxlength="2000" value="" placeholder="請輸入完整路徑"
-							required>
-					</div>
-					<div>
-						<label for="lastName">商品類別</label> 
-						<select name="YourLocation" id="type">
-						　<option value="男人館">男人館</option>
-						　<option value="女人館">女人館</option>
-						　<option value="兒童館">兒童館</option>
-						</select>
-					</div>
-					<div>
-						<label for="lastName">商品種類</label> 
-						<select name="YourLocation" id="category">
-						　<option value="秋冬季衣著">秋冬季衣著</option>
-						　<option value="春夏季衣著">春夏季衣著</option>
-						　<option value="運動休閒類型">運動休閒類型</option>
-						　<option value="西裝/套裝">西裝/套裝</option>
-						　<option value="童裝">童裝</option>
-						　<option value="襪子">襪子</option>
-						　<option value="鞋子">鞋子</option>
-						　<option value="配件">配件</option>
-						</select>
-					</div>
-			</div>
+            <form class="needs-validatiion" novalidate>
+                <font face="DFKai-sb">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"><label for="lastName">商品名稱</label> <input
+                                class="form-control" type="text" id="product_name" maxlength="45" value="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2 "><label for="firstName">商品售價</label> <input
+                                class="form-control" type="text" id="product_price" maxlength="11" placeholder=""
+                                value="" required></div>
+                        <div class="col-md-2 col-md-offset-4"><label for="phonenum">商品庫存</label> <input
+                         class="form-control" type="text" id="product_inventory" maxlength="11" required></div>
+                    </div>
+                  
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"><label for="address"
+                                style="vertical-align: top;">商品簡介</label>
+                            <textarea class="form-control" cols="50" rows="5" id="productinfo" maxlength="100" required>
+                            </textarea>
+                        </div>
+                    </div>
 
-			<div>
-				<input type="button" class="button" value="完成" id="finish">
-			</div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品圖片</label> <input
+                                class="form-control" type="text" id="image_name" maxlength="2000" value=""
+                                placeholder="請輸入完整路徑" required>
+                        </div>
+                    </div>
 
-			</font>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品類別</label>
+                            <select class="form-control" name="YourLocation" id="type">
+			                                　<option value="男人館">男人館</option>
+			                                　<option value="女人館">女人館</option>
+			                                　<option value="兒童館">兒童館</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品種類</label>
+                            <select class="form-control" name="YourLocation" id="category">
+			                                　<option value="秋冬季衣著">秋冬季衣著</option>
+			                                　<option value="春夏季衣著">春夏季衣著</option>
+			                                　<option value="運動休閒類型">運動休閒類型</option>
+			                                　<option value="西裝/套裝">西裝/套裝</option>
+			                                　<option value="童裝">童裝</option>
+			                                　<option value="襪子">襪子</option>
+			                                　<option value="鞋子">鞋子</option>
+			                                　<option value="配件">配件</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
 
+                    </div>
+            </form>
 
-		</div>
-	</div>
+            <div>
+                <input type="button" class="button" value="完成" id="finish">
+            </div>
 
-
-
-
-	<script type="text/javascript">
-	var [client_id]  = getIDFromClient();
-	
-		$(document).ready(function() {
-			// 處理表單點擊事件
-			$('#finish').click(function() {
-				submit();
-			});
-			
-
-			function submit() {
-				var name = $('#product_name').val();
-				var price = $('#product_price').val();
-				var inventory = $('#product_inventory').val();
-				var sellerID = parseInt(client_id.toString());
-				var image = $('#image_name').val();
-				var productinfo = $('#productinfo').val();
-				var type = $('#type').val();
-				var category = $('#category').val();
+            </font>
 
 
-				// 將資料組成JSON格式
-				var data_object = {
-					"product_name" : name,
-					"price" : price,
-					"inventory" : inventory,
-					"sellerID" : sellerID,
-					"image" : image,
-					"product_info" : productinfo,
-					"type" : type,
-					"category" : category
-				};
+        </div>
+    </div>
 
-				// 將JSON格式轉換成字串
-				var data_string = JSON.stringify(data_object);
 
-				// 發出POST的AJAX請求
-				$.ajax({
-					type : "POST",
-					url : "api/product.do",
-					data : data_string,
-					crossDomain : true,
-					cache : false,
-					dataType : 'json',
-					timeout : 5000,
-					success : function(response) {
-						$('#flashMessage').html(response.message);
-						$('#flashMessage').show();
-						if (response.status == 200) {
-							alert("產品新增成功！");
-							document.location.href = "my_market.html";
-						}
 
-					},
-					error : function() {
-						alert("無法連線到伺服器！");
-					}
-				});
 
-			}
-		})
-		
-		function getIDFromClient() {
-        	let id = JSON.parse(localStorage.getItem("client_id"));
-        	
-        	id = !id ? new Array() : id;
-        	
-        	return [id];
+    <script type="text/javascript">
+        var [client_id] = getIDFromClient();
+
+        $(document).ready(function () {
+            // 處理表單點擊事件
+            $('#finish').click(function () {
+                submit();
+            });
+
+
+            function submit() {
+                var name = $('#product_name').val();
+                var price = $('#product_price').val();
+                var inventory = $('#product_inventory').val();
+                var sellerID = parseInt(client_id.toString());
+                var image = $('#image_name').val();
+                var productinfo = $('#productinfo').val();
+                var type = $('#type').val();
+                var category = $('#category').val();
+
+
+                // 將資料組成JSON格式
+                var data_object = {
+                    "product_name": name,
+                    "price": price,
+                    "inventory": inventory,
+                    "sellerID": sellerID,
+                    "image": image,
+                    "product_info": productinfo,
+                    "type": type,
+                    "category": category
+                };
+
+                // 將JSON格式轉換成字串
+                var data_string = JSON.stringify(data_object);
+
+                // 發出POST的AJAX請求
+                $.ajax({
+                    type: "POST",
+                    url: "api/product.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        $('#flashMessage').html(response.message);
+                        $('#flashMessage').show();
+                        if (response.status == 200) {
+                            alert("產品新增成功！");
+                            document.location.href = "my_market.html";
+                        }
+
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+
+            }
+        })
+
+        function getIDFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+
+            id = !id ? new Array() : id;
+
+            return [id];
         }
-		
-		 /*------------登入登出實作member cookie-----------*/
-   
-     var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
 
-    function getMemberDataFromClient() {
-    	let id = JSON.parse(localStorage.getItem("client_id"));
-    	let name = JSON.parse(localStorage.getItem("client_name"));
-    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+        /*------------登入登出實作member cookie-----------*/
 
-    	id = !id ? new Array() : id;
-    	name = !name ? new Array() : name;
-    	isSeller = !isSeller ? new Array() : isSeller;
-    	return [id, name, isSeller];
-    }
-	
-     function updateMemberDataToClent() {
-     	localStorage.setItem("client_id", JSON.stringify(client_id));
-     	localStorage.setItem("client_name", JSON.stringify(client_name));
-     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
 
-     }
-    
-    function loguot() {
-      client_id = [];
-      client_name = [];
-      client_cart_obj = [];
-      client_cart_amount = [];
-      updateMemberDataToClent();
-      client_isSeller = [];
-      updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
-      $("#member_center1").hide();
-      $("#member_center2").hide();
-      $("#member_center3").hide();
-      $("#signup_in").show();
-      $("#user_name").empty();
-    }
-    
-    $("#remove").click(function () {
-     	console.log("[@Action]登出");
-     	loguot();
-     });
-    
-    $(document).ready(function(){
-    	 if(client_id.length == 0){ //登出
-    		 $("#member_center1").hide();
-    	     $("#member_center2").hide();
-    	     $("#member_center3").hide();  
-    	 }else{//登入
-    		 $("#user_name").html(client_name);
-       	 	 $("#member_center1").show();
-       	 	 $("#member_center2").show();
-       	     $("#member_center3").show();
-       		 $("#signup_in").hide();
-    	 }
-    });
-   
-    /*----------------------------------------*/
-	</script>
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+            return [id, name, isSeller];
+        }
+
+        function updateMemberDataToClent() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+
+        }
+
+        function loguot() {
+            client_id = [];
+            client_name = [];
+            client_cart_obj = [];
+            client_cart_amount = [];
+            updateMemberDataToClent();
+            client_isSeller = [];
+            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+            $("#signup_in").show();
+            $("#user_name").empty();
+        }
+
+        $("#remove").click(function () {
+            console.log("[@Action]登出");
+            loguot();
+        });
+
+        $(document).ready(function () {
+            if (client_id.length == 0) { //登出
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+            } else {//登入
+                $("#user_name").html(client_name);
+                $("#member_center1").show();
+                $("#member_center2").show();
+                $("#member_center3").show();
+                $("#signup_in").hide();
+            }
+        });
+
+        /*----------------------------------------*/
+    </script>
 
 
 </body>

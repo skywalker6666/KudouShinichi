@@ -125,7 +125,7 @@ public class ProductController extends HttpServlet {
 		        int sellerID = jso.getInt("sellerID");	        
 		        String image = jso.getString("image");
 		        String product_info = jso.getString("productinfo");
-		        int idtbl_product = jso.getInt("idtbl_product");	  
+		        int idtbl_product = jso.getInt("productID");	  
 		        String type = jso.getString("type");
 		        String category = jso.getString("category");
 
