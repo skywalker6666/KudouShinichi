@@ -125,23 +125,39 @@ public class ProductController extends HttpServlet {
 		        int sellerID = jso.getInt("sellerID");	        
 		        String image = jso.getString("image");
 		        String product_info = jso.getString("productinfo");
-		        int productID = jso.getInt("productID");	  
+		        int idtbl_product = jso.getInt("idtbl_product");	  
 		        String type = jso.getString("type");
 		        String category = jso.getString("category");
 
-
-
-		        /** 透過傳入之參數，新建一個以這些參數之會員Member物件 */
-		        Product p = new Product( productID, product_name, price, inventory, sellerID, image,  product_info, type, category);
+		        /** 透過傳入之參數，新建一個以這些參數之商品Product物件 */
+		        
 		        
 		        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
-		        JSONObject data = ph.updateProduct(p);
-		        
+		        String productID = jsr.getParameter("productID");
+		        String Sinventory = jsr.getParameter("Sinventory");
+		        //String memberID = jsr.getParameter("memberID");
 		        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
 		        JSONObject resp = new JSONObject();
+		        Product p = new Product( idtbl_product, product_name, price, inventory, sellerID, image,  product_info, type, category);
+		        if(productID.isEmpty()){
+		        	
+		        	JSONObject query = ph.updateProduct(p);
+		            System.out.println("putByID");
+		            resp.put("status", "200");
+		            resp.put("message", "所有商品資料取得成功");
+		            resp.put("response", query);
+		          }
+		        else if (!productID.isEmpty()) {
+		        		        
+		            JSONObject data = ph.updateInventory(p);
+		            System.out.println("putbyID");
+		            resp.put("status", "200");
+		            resp.put("message", "所有結帳之商品資料更新成功");
+		            resp.put("response", data);
 		        resp.put("status", "200");
-		        resp.put("message", "成功! 更新會員資料...");
+		        resp.put("message", "成功! 更新商品");
 		        resp.put("response", data);
+		        }
 		        
 		        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
 		        jsr.response(resp, response);

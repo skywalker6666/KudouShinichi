@@ -2,21 +2,18 @@
 <html>
 
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-    <title>OrderTracking</title>
+	<title>OrderTracking</title>
+	  	<!-- Bootstrap core CSS -->
+	    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="statics/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="statics/css/jquery-confirm.css" rel="stylesheet">
+	    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+	    <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+	    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    
     <style>
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-        input:checked+.slider {
-            background-color: #2196F3;
-        }
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
+       
+       
         input:checked+.slider:before {
             -webkit-transform: translateX(26px);
             -ms-transform: translateX(26px);
@@ -60,7 +57,7 @@
             position: fixed;
             left: 50%;
             top: 60%;
-            margin-top: -230px;
+            margin-top: -260px;
             margin-left: -400px;
 			border: 0px solid #000;			
 			background: #FBEE98;
@@ -72,7 +69,7 @@
             position: absolute;
             left: 50%;
             top: 80%;
-            margin-top: -20px;
+            margin-top: -70px;
             margin-left: -400px;			
 			border-radius: 20px;
 	}   
@@ -86,17 +83,19 @@
             margin-left: -400px;			
 			border-radius: 20px;		
 	}
-    tr:hover {
+    table#table tr:hover {
     		background:#FBEE98;
     }
    
     
     </style>
+    
     <link rel="stylesheet" href="statics/css/navbar.css">
     <link rel="stylesheet" href="statics/css/themebox.css">
     <link rel="stylesheet" href="statics/css/order_tracking.css">
-    
+      
      <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+      <script src="statics/js/jquery-confirm.js"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
@@ -127,55 +126,51 @@
 			<li id="user_name"class="navbarFloating">user</li>
 		</div>
 	</ul>
-    <div class="orderstatus" >
-        <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;訂單追蹤</font>
-        <br>
-        <button id="sent">已到店寄件</button>
-        <button id="reached">已送達目標門市</button>
+    <div class="orderstatus" style=" font-family:DFKai-sb;  color:blue" >
+         <p style="font-size:20px; font-weight:300">&nbsp;&nbsp;訂單追蹤</p>
+         
         
-        <p id="orderNO">訂單編號 </p>
-            <ul class="__inline" id="menu" style="list-style-type:none;">
-                <li><img src="statics/img/ordertrace/101952-200.png" style="float: left" height="100px"
-                        width="100px"></img>
-                    <p><Br>訂單建立</p>
-                </li>
-                <li><img src="statics/img/ordertrace/371293-200.png" style="float: left" height="100px"
-                        width="100px"></img>
-                    <p><Br>到店寄件</p>
-                </li>
-                <li><img src="statics/img/ordertrace/e-commerce-29-512.png" style="float: left" height="100px"
-                        width="100px"></img>
-                    <p><Br>抵達取件門市</p>
-                </li>
-                <li><img src="statics/img/ordertrace/Success-Place-Order-Complete-Shopping-Tick-512.png"
-                        style="float: left" height="100px" width="100px"></img>
-                    <p><Br>完成取貨</p>
-                </li>
-            </ul>
-        
-            <ul class="point" id="" style="list-style-type:none; ">
-                <li style="width: 25%; float:left;"><img id="status1" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
-                        height="50px" width="50px"></img>
-                    <p>------------</p>
-
-                </li>
-                <li style="width: 25%; float:left;"><img id="status2" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
-                        height="50px" width="50px"></img>
-                    <p>------------</p>
-                </li>
-                <li style="width: 25%; float:left;"><img id="status3" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
-                        height="50px" width="50px"></img>
-                    <p>------------</p>
-                </li>
-                <li style="width: 25%; float:left;"><img id="status4" src="statics/img/ordertrace/Ellipse 2.png" style="float: left"
-                        height="50px" width="50px"></img>
-                    <p>------------</p>
-                </li>
-            </ul>
+        		<div class="progress">
+  						<div  id="status_progress" class="progress-bar" role="progressbar" style="width:0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+        		<table style="width:100%" >
+		            <thead style="text-align:center">
+		                <tr>
+		                		<th>訂單建立</th>			                	
+			                	<th>到店寄件</th>			                	
+			                    <th>抵達送件地點</th>  			                               
+			                    <th>完成取貨</th>			                    		                    
+		                </tr>
+		            </thead>
+		            
+		            <tbody style="align:center">
+		            	<tr>
+			            	<td><img src="statics/img/ordertrace/101952-200.png"  height="100px" width="100px"></img></td>
+	                        <td><img src="statics/img/ordertrace/371293-200.png"  height="100px"  width="100px"></img></td>
+	                        <td><img src="statics/img/ordertrace/e-commerce-29-512.png"  height="100px" width="100px"></img></td>
+			                <td><img src="statics/img/ordertrace/Success-Place-Order-Complete-Shopping-Tick-512.png" height="100px" width="100px"></img></td>
+                        </tr>
+                        <tr>
+                        	<td><img id="status1" src="statics/img/ordertrace/Ellipse 2.png"  height="40px" width="40px"></img></td>
+                        	<td><img id="status2" src="statics/img/ordertrace/Ellipse 2.png"  height="40px" width="40px"></img></td>
+                        	<td><img id="status3" src="statics/img/ordertrace/Ellipse 2.png"  height="40px" width="40px"></img></td>
+                        	<td><img id="status4" src="statics/img/ordertrace/Ellipse 2.png"  height="40px" width="40px"></img></td>
+                        </tr>
+                        <tr>
+                        	<td><p id="orderNO" style="color:black; text-align:center">&nbsp;&nbsp;訂單編號 </p></td>
+                        	<td><button class="btn btn-success" id="sent">已到店寄件</button></td>
+                        	<td><button class="btn btn-success" id="reached">已送達目標門市</button></td>
+                        	<td><button class="btn btn-success" id="finished">已收到商品</button></td>
+                        </tr>
+		            </tbody>
+		        </table>
+       
+           
+           
         </div>
         
 	        <div class="ordertrackingtable">
-		        <table  style="width:100%" id="table">
+		        <table  class="table table-hover" style="align:center;width:100%" id="table">
 		            <thead>
 		                <tr>
 		                	<th>訂單詳細內容</th>
@@ -198,11 +193,17 @@
 		 
 		 
 		 $(document).ready(function() {
-		     getMyBuyingOrder(); 
+		     
 		     $("#myMarket").hide();
+		     $("#sent").hide();
+		     $("#reached").hide();
+		     $("#finished").hide();
         		if (parseInt(client_isSeller.toString()) == 1) {
             		$("#myMarket").show();
+            		getMyBuyingOrder();
+            		getMySellingOrder(); 
         		}             
+        		else getMyBuyingOrder(); 
 		 });
 		 
 		 function getCartDataFromClient() {
@@ -236,7 +237,7 @@
                        success: function (response) {
                     	   console.log(response);
                            if(response.status == 200){
-                               updateTable(response.response.data);
+                               updateBuyingTable(response.response.data);
                                showOrderStatus(response.response.data);
                                //updateAndReturnOrderStatus(response.response.data);
                            }
@@ -248,7 +249,7 @@
                });               
            }
            function getMySellingOrder() {
-        	   var [seller_id,member_name]=getSellerDataFromClient();
+        	   var [seller_id,member_name]=getMemberDataFromClient();
                // 發出GET請求取得所有訂單列表
               
                $.ajax({
@@ -261,27 +262,69 @@
                        timeout: 50000,
                        success: function (response) {
                     	   console.log(response);
-                           if(response.status == 200){
-                               updateTable(response.response.data);
+                           if(response.status == 200){                               
+                               updateSellingTable(response.response.data);
                                showOrderStatus(response.response.data);
                                //updateAndReturnOrderStatus(response.response.data);
-                           }
-                           
+                           }                           
                        },
                        error: function () {
                            alert("無法連線到伺服器！");
                        }
                });               
            }
+           
        	   function showOrderStatus(data){
-       		   
        		$.each(data,function(index,val){
-       			var id=data[index].order_info.idtbl_order;
-       			var status=data[index].order_info.order_status;       			
-         	   $("#order"+id).click(function(){
-         		  $("#orderNO").empty();
-         		   $("#orderNO").append("訂單編號:"+id);
-         		   	if(status==1)
+       			var detail_buyer="";
+       			detail_buyer+="收件人："+val.order_info.buyer_name+"<br><br>";
+       			
+       			$.each(val.product_info,function(ind,v){
+            		
+            		detail_buyer+="商品名稱："+v.productID.product_name+"<br>";
+            		detail_buyer+="商品單價："+v.price+"<br>";
+            		detail_buyer+="商品數量："+v.product_quantities+"<br>";
+            		detail_buyer+="單項小計："+v.subtotal+"<br><br>";
+            		
+            	})
+       			detail_buyer+="寄送地址："+val.order_info.ship_address+"<br>";
+       			
+       			var id=data[index].order_info.idtbl_order;       			
+       			var status=data[index].order_info.order_status; 	      			
+       			$("#detail_"+id).click(function(){       
+       				
+             	   $.confirm({
+                        theme: 'modern',
+                        icon: 'fa fa-info-circle',
+                        type: 'red',
+                        animation: 'scale',
+                        title: '詳細資訊',
+                        content: detail_buyer,
+                        buttons: {
+                          	  確定: {
+                                text: '確定',
+                                btnClass: 'btn-red',           
+                                action: function () {                                    
+                                    //document.location.href ="order_tracking.html";
+                                }
+                            }
+                        }
+                    })
+                })
+       			$("#order"+id).click(function(){
+         		   
+         		  	$("#orderNO").empty();
+         		  	$("#sent").hide();
+         			$("#reached").hide();
+         			$("#finished").hide();
+         			if(client_isSeller==1)
+         			{	$("#sent").show();
+             			$("#reached").show();}
+         			else
+         				$("#finished").show();
+         		  $("#orderNO").append("訂單編號:"+id);
+         		   	if(status==1){
+         		   	document.getElementById("status_progress").style.width = "25%";   
          		   		for(var i=1;i<=4;i++){
          	           	   	if(i==1){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -289,7 +332,9 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	}
-         			else if(status==2)
+         		   	}
+         			else if(status==2){         			
+         				document.getElementById("status_progress").style.width = "50%";   
          				for(i=1;i<=4;i++){
          	           	   	if(i==2){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -297,7 +342,9 @@
          	           	   else
          	           	   		document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(status==3)
+       			}
+         		   	else if(status==3){
+         		   	document.getElementById("status_progress").style.width = "75%";   
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==3){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -305,7 +352,9 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
-         		   	else if(status==4)
+         		   	}
+         		   	else if(status==4){
+         		   	document.getElementById("status_progress").style.width = "100%";   
          		   		for(i=1;i<=4;i++){
          	           	   	if(i==4){
          	           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -313,27 +362,58 @@
          	           	   else
          	           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
          	           	   }
+       			}
          	   })
          	   
-            })
+       	   })
        	   }
-           function updateTable(data) {
+           function updateBuyingTable(data) {
                $("#table > tbody").empty();
                  //data是一個陣列，每一筆value包含了兩個物件---order_info和product_info
                  var table_html="";
                $.each(data, function(index, value) {
             	  
-            	   table_html += '<tr id="order'+data[index].order_info.idtbl_order +'"><td scope="row" align="center"><button id="order_'+ data[index].order_info.idtbl_order+'">查看訂單詳細內容</button></td>';
-                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
-                   table_html += '<td align="center">' + data[index].order_info.idtbl_order + '</td>';
-                   table_html += '<td align="center">' + Math.round(data[index].order_info.total_price * 100) / 100 + '</td>';
-                   table_html += '<td align="center">' + data[index].order_info.product_delivery + '</td>';
-                   table_html += '<td align="center">' + data[index].order_info.create+ '</td>';
+            	 //訂單編號連結的詳細資訊button
+            	   table_html += '<tr id="order'+value.order_info.idtbl_order +'"><td scope="row" align="center"><button class="btn btn-primary" id="detail_'+ value.order_info.idtbl_order+'">查看訂單</button></td>';
+            	 //買進/賣出
+            	   table_html += '<td align="center">買進</td>';
+            	 //訂單編號
+            	   table_html += '<td align="center">' + value.order_info.idtbl_order + '</td>';
+            	 //訂單總金額
+            	   table_html += '<td align="center">' + Math.round(value.order_info.total_price * 100) / 100 + '</td>';
+                 //運送方式
+            	   table_html += '<td align="center">' + value.order_info.product_delivery + '</td>';
+                 //訂單建立時間
+            	   table_html += '<td align="center">' + value.order_info.create+ '</td>';
+                   
+               })
+               $("#table > tbody").append(table_html);
+           }
+           
+          
+           function updateSellingTable(data) {
+                 //data是一個陣列，每一筆value包含了兩個物件---order_info和product_info
+                 var orderIdentify=['買進','賣出'];
+                 var table_html="";
+               $.each(data, function(index, value) {
+            	 //訂單編號連結的詳細資訊button
+            	   table_html += '<tr id="order'+value.order_info.idtbl_order +'"><td scope="row" align="center"><button id="detail_'+ value.order_info.idtbl_order+'">查看訂單</button></td>';
+            	 //買進/賣出
+            	   table_html += '<td align="center">賣出</td>';
+            	 //訂單編號
+            	   table_html += '<td align="center">' + value.order_info.idtbl_order + '</td>';
+            	 //訂單總金額(該賣家應收帳款)
+            	   table_html += '<td align="center">' + Math.round(value.order_info.total_price * 100) / 100 + '</td>';
+                 //運送方式
+            	   table_html += '<td align="center">' + value.order_info.product_delivery + '</td>';
+                 //訂單建立時間
+            	   table_html += '<td align="center">' + value.order_info.create+ '</td>';
                    
                })
 
                $("#table > tbody").append(table_html);
            }
+           
            
            function updateAndReturnOrderStatus(){
         	   $.ajax({
@@ -344,10 +424,12 @@
                    dataType: 'json',
                    timeout: 50000,
                    success: function (response) {
+                	   console.log(response);
                        if(response.status == 200){
                            updateTable(response.response.data);
+                           
                            showOrderStatus(response.response.data);
-                         
+                          
                        }
                        console.log(response);
                    },
@@ -359,7 +441,7 @@
            
          
            $("#sent").click(function(){
-        	   
+        	   document.getElementById("status_progress").style.width = "50%";   
         	   for(var i=1;i<=4;i++){
         	   	if(i==2){
         		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
@@ -369,8 +451,20 @@
         	   }
         	});
            $("#reached").click(function(){
+        	   document.getElementById("status_progress").style.width = "75%";   
         	   for(var i=1;i<=4;i++){
            	   	if(i==3){
+           		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
+           		   }
+           	   else
+           	   	document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 2.png";        	   
+           	   }
+           });
+           $("#finished").click(function(){
+        	 
+        	   document.getElementById("status_progress").style.width = "100%";        	   
+        	   for(var i=1;i<=4;i++){
+           	   	if(i==4){
            		   document.getElementById("status"+i).src="statics/img/ordertrace/Ellipse 1.png";
            		   }
            	   else

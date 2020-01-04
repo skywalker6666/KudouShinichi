@@ -210,16 +210,27 @@
                         	var dateString = this.created;
 
                         	var date = new Date(Date.parse(dateString.replace(/-/g,"/")));                       	
-                      
-                        	var d = new Date();                       	
-                        	var n = d.getUTCHours()+8;
-                     //   	alert(n);
-                     //   	alert(date.getHours());
-                        	if((n-date.getHours())<=8)
-                        	{
-                        //		alert("新");
-                        		new_product_panel += addProduct(this);
-                        	}
+                      		var date_year=date.getFullYear();
+                      		var date_month=date.getMonth();
+                      		var date_day=date.getDay();
+                      		var date_hour=date.getHours();
+                        	
+                        	
+                        	
+                        	var d = new Date();   
+                        	var utcyear =d.getFullYear();
+                        	var utcmonth=d.getMonth();
+                        	var utcday = d.getDay();
+                        	var utchour=d.getHours();
+                        	
+                        	//時間演算法
+                        	if((utcyear-date_year)<=1)
+                        		if((utcmonth-date_month)<=0||(utcmonth-date_month)==-11)
+                        			if((utcday-date_day)<1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
+                        				if((utchour-date_hour)<=12)
+                        				{
+                        					new_product_panel += addProduct(this);
+                        				}
                         	           
                         })
 						

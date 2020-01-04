@@ -134,7 +134,7 @@ public class Product {
 		this.type=type;
 		this.category=category;
 	}
-
+	
     /**
      * 取得產品編號
      *
