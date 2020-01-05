@@ -6,42 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
     <style>
-        .button {
-
-            background-color: #FF8787;
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px 10px;
-            font-family: DFKai-sb;
-        }
-
-        .button:hover {
-            background-color: #f44336;
-            color: white;
-        }
+       
     </style>
-    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
-    <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+  
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-confirm.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
 <body bgcolor="#BCE2FF">
 
-    <ul>
-        <li><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
-                    width="100px"></img></a></li>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="productIndex.html">商品總覽</a></li>
-        <li><a href="order_tracking.html">訂單追蹤</a></li>
-        <li><a href="shoppingcart.html">購物車</a></li>
-        <li style="float: right"><a href="login_selected.html">會員註冊/登入</a></li>
-    </ul>
+ <div class="bd-example">
+  
+
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarColor03" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</div>
+   
 
     <div style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
         <font face="DFKai-sb" size="6" color="blue"> <label style="margin-left: 32px; line-height: 50px">會員登入</label>

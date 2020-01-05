@@ -2,164 +2,193 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <title>Home</title>
+<title>Home</title>
 
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 
 
-    <style>
-    </style>
-    
-    <link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet"></link>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.css"
-	rel="stylesheet"></link>
+<style>
+</style>
+
+<link href="statics/css/smart.css" rel="stylesheet">
+
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+
+
+
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/jquery.smartmenus.min.js'></script>
+ src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/jquery.smartmenus.min.js'></script>
 <script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js'></script>
+ src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js'></script>
     
-    
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="statics/css/navbar.css">
-    <link rel="stylesheet" href="statics/css/themebox.css">
-    <link rel="stylesheet" href="statics/css/card.css">
-    <link rel="stylesheet" href="statics/css/product.css">
 
     <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
-<body bgcolor="#BCE2FF">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light " style="background-color: #e3f2fd">
+	<a class="navbar-brand" href="index.html"><img
+		src="statics/img/navbar/icon.png" style="float: left" height="50px"
+		width="50px"></img></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarColor03" aria-controls="navbarColor03"
+		aria-expanded="true" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-    <ul class="navbar">
-        <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
-                    height="100px" width="100px"></img></a></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-        <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-        <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
-        <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+	<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				href="index.html">Home <span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="productIndex.html">商品總覽</a></li>
+			<li class="nav-item" id="track"><a class="nav-link"
+				href="order_tracking.html">訂單追蹤</a></li>
+			<li class="nav-item" id="shopcart"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+			<li class="nav-item" id="mymarket"><a class="nav-link" href="my_market.html">我的賣場</a>
+			</li>
+		</ul>
 
-        <div id="member_center1" class="mediumbox" style="float: right">
-            <li style="float: left"><a id="member_center" class="navbarFloating" href="member_change.html">會員中心</a></li>
-            <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
-            <li style="float: left">
+	</div>
 
-        </div>
-        <div id="member_center2" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
-            </li>
-            <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-        </div>
-        <div id="member_center3" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
-            <li id="user_name" class="navbarFloating">user</li>
-        </div>
-    </ul>
-    <div class="frame">
+	<ul class="navbar-nav mr-auto">
 
-        <div class="generalbox">
-        <p>商品目錄</p>
-            <!--下拉選單-->
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="#">篩選項目<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">男人館<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a id="man_winter" href="#">秋冬季衣著</a></li>
-									<li><a id="man_summer"href="#">春夏季衣著</a></li>
-									<li><a id="man_exercise"href="#">運動休閒類型</a></li>
-									<li><a id="man_suit"href="#">西裝/套裝</a></li>
-									<li><a id="man_child"href="#">童裝</a></li>
-									<li><a id="man_socks"href="#">襪子</a></li>
-									<li><a id="man_shoes"href="#">鞋子</a></li>
-									<li><a id="man_accessories"href="#">配件</a></li>
-								</ul></li>
-							<li><a href="#">女人館<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a id="woman_winter" href="#">秋冬季衣著</a></li>
-									<li><a id="woman_summer" href="#">春夏季衣著</a></li>
-									<li><a id="woman_exercise" href="#">運動休閒類型</a></li>
-									<li><a id="woman_suit" href="#">西裝/套裝</a></li>
-									<li><a id="woman_child" href="#">童裝</a></li>
-									<li><a id="woman_socks" href="#">襪子</a></li>
-									<li><a id="woman_shoes" href="#">鞋子</a></li>
-									<li><a id="woman_accessories" href="#">配件</a></li>
-								</ul></li>
-							<li><a href="#">兒童館<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#">秋冬季衣著</a></li>
-									<li><a href="#">春夏季衣著</a></li>
-									<li><a href="#">運動休閒類型</a></li>
-									<li><a href="#">西裝/套裝</a></li>
-									<li><a href="#">童裝</a></li>
-									<li><a href="#">襪子</a></li>
-									<li><a href="#">鞋子</a></li>
-									<li><a href="#">配件</a></li>
-								</ul></li>
-						</ul></li>
-				</ul>
+		<li class="nav-item" id="member_center1">
+			<a class="nav-link" href="#">
+				<img src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img>
+			</a>
+		</li>
+		<li  id="member_center2"><a class="nav-link" href="shoppingcart.html">購物車</a></li>
+
+
+		<li id="signup_in" class="nav-item"><a class="nav-link"
+			href="login_selected.html">會員註冊/登入</a></li>
+	
+		<li class="nav-item" id="member_center3">
+		<a class="nav-link" href="#">
+		<img src="statics/img/navbar/user.png" height="20px" width="20px"></img>
+		</a>
+		</li>
+			
+		<li class="nav-item"><a id="user_name" class="nav-link"
+			href="#">user</a></li>
+
+		<li class="nav-item"  id="member_center4"><a id="member_center" class="nav-link"
+			href="member_change.html">會員中心</a></li>
+
+		<li class="nav-item"  id="member_center5"><a id="remove" class="nav-link"
+			href="index.html">&nbsp;登出 </a></li>
+
+	</ul>
+<!--下拉選單-->
+		
+			<ul class="nav navbar-nav">
+				<li><a class=""href="#">篩選項目<span class="caret"></span></a>
+					<ul class="dropdown-menu" style="font-size: 1.5rem;">
+						<li><a href="#">男人館<span class="caret"></span></a>
+							<ul class="dropdown-menu" style="font-size: 1.5rem;">
+								<li><a id="man_winter" href="#">秋冬季衣著</a></li>
+								<li><a id="man_summer" href="#">春夏季衣著</a></li>
+								<li><a id="man_exercise" href="#">運動休閒類型</a></li>
+								<li><a id="man_suit" href="#">西裝/套裝</a></li>
+								<li><a id="man_child" href="#">童裝</a></li>
+								<li><a id="man_socks" href="#">襪子</a></li>
+								<li><a id="man_shoes" href="#">鞋子</a></li>
+								<li><a id="man_accessories" href="#">配件</a></li>
+							</ul></li>
+						<li><a href="#">女人館<span class="caret"></span></a>
+							<ul class="dropdown-menu" style="font-size: 1.5rem;">
+								<li><a id="woman_winter" href="#">秋冬季衣著</a></li>
+								<li><a id="woman_summer" href="#">春夏季衣著</a></li>
+								<li><a id="woman_exercise" href="#">運動休閒類型</a></li>
+								<li><a id="woman_suit" href="#">西裝/套裝</a></li>
+								<li><a id="woman_child" href="#">童裝</a></li>
+								<li><a id="woman_socks" href="#">襪子</a></li>
+								<li><a id="woman_shoes" href="#">鞋子</a></li>
+								<li><a id="woman_accessories" href="#">配件</a></li>
+							</ul></li>
+						<li><a href="#">兒童館<span class="caret"></span></a>
+							<ul class="dropdown-menu" style="font-size: 1.5rem;">
+								<li><a href="#">秋冬季衣著</a></li>
+								<li><a href="#">春夏季衣著</a></li>
+								<li><a href="#">運動休閒類型</a></li>
+								<li><a href="#">西裝/套裝</a></li>
+								<li><a href="#">童裝</a></li>
+								<li><a href="#">襪子</a></li>
+								<li><a href="#">鞋子</a></li>
+								<li><a href="#">配件</a></li>
+							</ul></li>
+					</ul></li>
+			</ul>
+		
+<!--下拉選單-->
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search"
+			aria-label="Search">
+		<button class="btn btn-outline-primary " type="submit">Search</button>
+	</form>
+	
+</nav>
+<div class="frame">
+
+	<div style="margin-top:150px">
+		<p>商品目錄</p>
+		
+
+		<div class="album py-5 bg-light">
+			<p>篩選商品</p>
+			<div class="container">
+				<div id="filter_product_panel" class="row"></div>
 			</div>
-			<!--下拉選單-->
-            
-          	 	 <div class="album py-5 bg-light">
-					<p>篩選商品</p>
-                	<div class="container">
-                  		<div id="filter_product_panel" class="row"></div>
-                	</div>
-            	</div>
-            	 <div class="album py-5 bg-light">
-					<p>熱賣商品</p>
-                	<div class="container">
-                  		<div id="hot_product_panel" class="row"></div>
-                	</div>
-            	</div>
-            	<div class="album py-5 bg-light">
-					<p>新商品</p>
-                	<div class="container">
-                  		<div id="new_product_panel" class="row"></div>
-                	</div>
-            	</div>
-                <div class="album py-5 bg-light">
-					<p>平價商品</p>
-                	<div class="container">
-                  		<div id="parity_product_panel" class="row"></div>
-                	</div>
-            	</div>
-            	<div class="album py-5 bg-light">
-					<p>男人館</p>
-                	<div class="container">
-                  		<div id="man_product_panel" class="row"></div>
-                	</div>
-            	</div>
-            	<div class="album py-5 bg-light">
-					<p>女人館</p>
-                	<div class="container">
-                  		<div id="woman_product_panel" class="row"></div>
-                	</div>
-            	</div>
-            	<div class="album py-5 bg-light">
-					<p>兒童館</p>
-                	<div class="container">
-                  		<div id="child_product_panel" class="row"></div>
-                	</div>
-            	</div>
-        </div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>熱賣商品</p>
+			<div class="container">
+				<div id="hot_product_panel" class="row"></div>
+			</div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>新商品</p>
+			<div class="container">
+				<div id="new_product_panel" class="row"></div>
+			</div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>平價商品</p>
+			<div class="container">
+				<div id="parity_product_panel" class="row"></div>
+			</div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>男人館</p>
+			<div class="container">
+				<div id="man_product_panel" class="row"></div>
+			</div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>女人館</p>
+			<div class="container">
+				<div id="woman_product_panel" class="row"></div>
+			</div>
+		</div>
+		<div class="album py-5 bg-light">
+			<p>兒童館</p>
+			<div class="container">
+				<div id="child_product_panel" class="row"></div>
+			</div>
+		</div>
+	</div>
 
-    </div>
+</div>
 
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
         var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
 
 
@@ -592,32 +621,45 @@
                 $("#member_center1").show();
                 $("#member_center2").show();
                 $("#member_center3").show();
+                $("#member_center4").show();
+                $("#member_center5").show();
                 $("#signup_in").hide();
             }else if(manager_id.length != 0) {//登入管理員
                 $("#user_name").html(manager_name);
-                $("#member_center1").show();
+                $("#member_center1").hide();
                 $("#member_center").hide();//隱藏會員中心
                 $("#member_center2").hide();
                 $("#member_center3").show();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+                
                 $("#signup_in").hide();
             }else { //登出
+            	$("#user_name").hide();
                 $("#member_center1").hide();
                 $("#member_center2").hide();
                 $("#member_center3").hide();
+                $("#member_center4").hide();
+                $("#member_center5").hide();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
             } 
         });
 
     </script>
 
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-        </div>
-    </footer>
+<footer class="text-muted">
+	<div class="container">
+		<p class="float-right">
+			<a href="#">Back to top</a>
+		</p>
+	</div>
+</footer>
 
 
 </body>
 
 </html>
+
