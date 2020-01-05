@@ -144,6 +144,35 @@ public class OrderController extends HttpServlet {
         /** 透過 JsonReader 物件回傳到前端（以 JSONObject 方式） */
         jsr.response(resp, response);
 	}
-	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
+	        /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
+	        JsonReader jsr = new JsonReader(request);
+	        JSONObject jso = jsr.getObject();
+	        
+	        /** 取出經解析到JSONObject之Request參數 */
+	        //String orderID = jsr.getParameter("orderID");
+	        //String order_status = jsr.getParameter("order_status");
+	        int orderID = jso.getInt("orderID");
+	        int order_status=jso.getInt("order_status");
+
+	        /** 透過傳入之參數，新建一個以這些參數之商品Product物件 */
+	        
+	        
+	        /** 透過Member物件的update()方法至資料庫更新該名會員資料，回傳之資料為JSONObject物件 */
+	    
+	        /** 新建一個JSONObject用於將回傳之資料進行封裝 */
+	        JSONObject resp = new JSONObject();
+	        
+	            JSONObject data = oh.updateOrderStatus(order_status,orderID);
+	            System.out.println("putbyID");
+	            resp.put("status", "200");
+	            resp.put("message", "所有結帳之商品資料更新成功");
+	            resp.put("response", data);
+	        
+	        /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
+	        jsr.response(resp, response);
+	    }
+
 
 }

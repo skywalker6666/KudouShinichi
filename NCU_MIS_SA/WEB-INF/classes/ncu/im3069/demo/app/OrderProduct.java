@@ -32,7 +32,9 @@ public class OrderProduct {
 	private String payment;
 	private String product_delivery;
 	private Timestamp create;
-    
+	private int order_status;
+	private String cellphone;
+	private int productid;
 
     /**
      * 實例化（Instantiates）一個新的（new）OrderProduct 物件<br>
@@ -59,7 +61,7 @@ public class OrderProduct {
      * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID) {
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID,int order_status,String cellphone) {
         this.idtbl_ordeproduct = idtbl_ordeproduct;
         this.order_id=order_id;
         getProductFromDB(product_id);
@@ -73,6 +75,26 @@ public class OrderProduct {
         this.product_delivery=product_delivery;
         this.create=create;
         this.memberID=memberID;
+        this.cellphone=cellphone;
+        this.order_status=order_status;
+    }
+    public OrderProduct(int productid,int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID,int order_status,String cellphone) {
+        this.idtbl_ordeproduct = idtbl_ordeproduct;
+        this.productid=productid;
+        this.order_id=order_id;
+        getProductFromDB(product_id);
+        getSellerFromDB(seller_id);
+        this.price = price;
+        this.product_quantities = product_quantities;
+        this.buyer_name=buyer_name;
+        this.address=address;
+        this.subtotal = subtotal;
+        this.payment=payment;
+        this.product_delivery=product_delivery;
+        this.create=create;
+        this.memberID=memberID;
+        this.cellphone=cellphone;
+        this.order_status=order_status;
     }
 
     /**
@@ -98,6 +120,7 @@ public class OrderProduct {
      * @return Product 回傳產品
      */
     public Product getProduct() {
+    	
         return this.pd;
     }
     public Order getOrder() {
@@ -175,6 +198,8 @@ public class OrderProduct {
         data.put("payment", getPayment());
         data.put("product_delivery", getProductDelivery());
         data.put("create", getCreateTime());
+        data.put("order_status", getOrderStatus());
+        data.put("cellphone", getCellphone());
         
         
 
@@ -202,4 +227,11 @@ public class OrderProduct {
 	public Timestamp getCreateTime() {
         return this.create;
     }
+	public String getCellphone() {
+        return this.cellphone;
+    }
+	public int getOrderStatus() {
+        return this.order_status;
+    }
+	
 }

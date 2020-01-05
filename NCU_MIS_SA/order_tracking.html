@@ -12,6 +12,12 @@
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
+    nav.navbar fixed-top navbar-expand-lg navbar-light{
+    	z-index:-1;
+    }
+    nav#navbar-example2{
+    	z-index:1;	
+    }
     </style>
 
     <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
@@ -21,8 +27,7 @@
 <body>
 	<div id="header">
 		<!--容器分為左圖右導覽連結 -->
-		<nav class="navbar fixed-top navbar-expand-lg navbar-light "
-			style="background-color: #e3f2fd;">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light"	style="background-color: #e3f2fd;">
 			<a class="navbar-brand" href="index.html"><img
 				src="statics/img/navbar/icon.png" style="float: left" height="50px"
 				width="50px"></img></a>
@@ -101,9 +106,6 @@
         </thead>
         <tbody>
             <tr style="text-align:center">
-                <td></td>
-                <td><button class="btn btn-success" id="started">開始處理</button></td>
-                <td><button class="btn btn-success" id="finished">已收到商品</button></td>
             </tr>
         </tbody>
     </table>             
@@ -124,6 +126,8 @@
                     <th>商品總金額</th>
                     <th>運送方式</th>
                     <th>訂單建立時間</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -140,9 +144,8 @@
         $(document).ready(function () {
 
             $("#myMarket").hide();
-            $("#started").hide();
-            $("#reached").hide();
-            $("#finished").hide();
+            //$("#started_"+id).hide();            
+            //$("#finished_"+id).hide();
             if (parseInt(client_isSeller.toString()) == 1) {
                 $("#myMarket").show();
             getMySellingOrder();
@@ -248,11 +251,12 @@
 
         function updateSellingTable(data) {
             //data是一個陣列，每一筆value包含了兩個物件---order_info和product_info
-            var orderIdentify = ['買進', '賣出'];
+           
             var table_html = "";
             $.each(data, function (index, value) {
+            	
                 //訂單編號連結的詳細資訊button
-                table_html += '<tr id="order' + value.orderID +
+                table_html += '<tr name="row[]" id="order_' + value.orderID +
                     '"><td scope="row" align="center"><button class="btn btn-primary" id="detail_' + value.idtbl_orderproduct +
                     '">查看訂單</button></td>';
                 //買進/賣出
@@ -266,10 +270,14 @@
                 table_html += '<td align="center">' + value.product_delivery + '</td>';
                 //訂單建立時間
                 table_html += '<td align="center">' + value.create+ '</td>';
-
+                
+                table_html += '<td scope="row" align="center"><button class="btn btn-success" name="start[]" id="started_' + value.orderID +
+                '">開始處理</button></td>';
+                table_html += '<td scope="row" align="center"><button class="btn btn-success" name="finish[]" id="finished_' + value.orderID +
+                '">完成訂單</button></td></tr>';
             })
-
             $("#table > tbody").append(table_html);
+        
         }
 
         function showBuyingOrderStatus(data) {
@@ -315,31 +323,31 @@
                 $("#order" + id).click(function () {
 				
                     $("#orderNO").empty();
-                    $("#started").hide();                    
-                    $("#finished").hide();
+                    $("#started_"+id).hide();                    
+                    $("#finished_"+id).hide();
                     if (client_isSeller == 1) {
-                        $("#started").show();                       
+                        $("#started_"+id).show();                       
                     } else
-                        $("#finished").show();
+                        $("#finished_"+id).show();
                     $("#orderNO").append("訂單編號:" + id);
                     if (status == 1 ) {
                     	document.getElementById("status_progress").style.width = "33%";
                     	if (client_isSeller==0 ){//BuyerID==memberID即代表此筆訂單一定是買進
-                        	$("#finished").hide();//對買家而言，本來會顯示的按鈕為"完成訂單"，所以此處要隱藏起來
+                        	$("#finished_"+id).hide();//對買家而言，本來會顯示的按鈕為"完成訂單"，所以此處要隱藏起來
                     	} 
                     	else if(client_isSeller==1 && buyerID==memberID){
-                    		$("#finished").hide();
-                    		$("#started").hide();
+                    		$("#finished_"+id).hide();
+                    		$("#started_"+id).hide();
                     	}
                     	
                     		
                     } 
                     else if (status == 2) {
-                    	$("#started").hide();
+                    	$("#started_"+id).hide();
                     	document.getElementById("status_progress").style.width = "67%";
                     	
                     	if(client_isSeller==1&&buyerID==memberID){
-                    		$("#finished").show();
+                    		$("#finished_"+id).show();
                     	}
                     	
                 	} 
@@ -347,10 +355,10 @@
                         document.getElementById("status_progress").style.width = "100%";
                         $.alert("此訂單已完成");
                         if(client_isSeller==0){
-                    		$("#finished").hide();
+                    		$("#finished_"+id).hide();
                     	}
                         else if(client_isSeller==1){
-                    		$("#started").hide();
+                    		$("#started_"+id).hide();
                     	}
                     } 
                     
@@ -371,7 +379,7 @@
                 detail_buyer += "訂單編號：" + val.orderID + "<br><br>";
                 detail_buyer +="購買者ID："+val.memberID+"<br>";                
                 detail_buyer += "收件人：" + val.buyer_name + "<br>";
-                //detail_buyer += "連絡電話：" + val.cellphone + "<br>";
+                detail_buyer += "連絡電話：" + val.cellphone + "<br>";
                 detail_buyer += "寄送地址：" + val.ship_address + "<br><br>";
                 
                 //detail_buyer += "商品名稱：" + val.price + "<br>";
@@ -405,52 +413,7 @@
                         }
                     })
                 })
-                $("#order" + id).click(function () {
-				
-                    $("#orderNO").empty();
-                    $("#started").hide();                    
-                    $("#finished").hide();
-                    if (client_isSeller == 1) {
-                        $("#started").show();                       
-                    } else
-                        $("#finished").show();
-                    $("#orderNO").append("訂單編號:" + id);
-                    if (status == 1 ) {
-                    	document.getElementById("status_progress").style.width = "33%";
-                    	if (client_isSeller==0 ){//BuyerID==memberID即代表此筆訂單一定是買進
-                        	$("#finished").hide();//對買家而言，本來會顯示的按鈕為"完成訂單"，所以此處要隱藏起來
-                    	} 
-                    	else if(client_isSeller==1 && buyerID==memberID){
-                    		$("#finished").hide();
-                    		$("#started").hide();
-                    	}
-                    	
-                    		
-                    } 
-                    else if (status == 2) {
-                    	$("#started").hide();
-                    	document.getElementById("status_progress").style.width = "67%";
-                    	
-                    	if(client_isSeller==1&&buyerID==memberID){
-                    		$("#finished").show();
-                    	}
-                    	
-                	} 
-                    else if (status == 3) {
-                        document.getElementById("status_progress").style.width = "100%";
-                        $.alert("此訂單已完成");
-                        if(client_isSeller==0){
-                    		$("#finished").hide();
-                    	}
-                        else if(client_isSeller==1){
-                    		$("#started").hide();
-                    	}
-                    } 
-                    
-                    
-                    
-                    
-                })
+                
 			    	       
     		
             })
@@ -459,42 +422,162 @@
         }
         
         
-        $("#started").click(function () {
-            
-            $.confirm({
+        function updateOrderStatus(status,orderID) {
+        	
+        	var data_object = {
+        			"order_status":status,
+                    "orderID":orderID                     
+                };
+                var data_string = JSON.stringify(data_object);
+
+			
+            $.ajax({
+                type: "PUT",
+                url: "api/order.do",
+                crossDomain: true,
+                cache: false,
+                data:data_string,
+                dataType: 'json',
+                timeout: 50000,
+                success: function (response) {
+                    console.log(response);
+                    if (response.status == 200) {   
+                    	$.alert("水喔!")
+                    }
+                },
+                error: function () {
+                    	$.alert("幹");
+                }
+            });
+        }
+
+        
+        
+        
+        
+        //全域的ajax get
+        $.ajax({
+            type: "GET",
+            url: "api/order.do",
+            crossDomain: true,
+            cache: false,
+            data: "buyerID=" + memberID,
+            dataType: 'json',
+            timeout: 50000,
+            success: function (response) {
+                console.log(response);
+                if (response.status == 200) {
+                    
+                    var status=response.response.data
+                }
+            },
+            error: function () {
+                alert("無法連線到伺服器！");
+            }
+        });
+        //function ReturnOrderStatus(id){
+        	 ///var order_status=response.response.data[`]
+        	//return order_status;
+        //}
+        
+        //function ReturnMemberID(rID){
+        	
+       // }
+        
+        $('button[name="start[]"').hide();
+        $('button[name="finish[]"').hide(); 
+        
+        //開始處理按鈕觸發事件
+        $('button[name="start[]"').click(function() {        	
+        	var sID = (this.id).split('_')[1];
+        	
+        	$.confirm({
             	title: '開始處理訂單',
         	    content: '準備好就開始吧!',
         	    buttons: {
         	        確認: function () {
         	        	document.getElementById("status_progress").style.width = "67%";
-        	        	$("#started").hide();
-        	        	//status=2;
-        	        	//updateOrderStatus(status,id);
+        	        	$("#started_"+sID).hide();
+        	        	
+        	        	updateOrderStatus(2,sID);
         	        	
         	        },
         	        取消: function () {
         	        }
         	    }
             });
-       })
-        $("#finished").click(function () {
-          
-          $.confirm({
+        	
+        });
+      //完成訂單按鈕觸發事件
+        $('button[name="finish[]"').click(function() {
+        	var fID = (this.id).split('_')[1];
+        	alert(fID);
+        	$.confirm({
         	    title: '即將完成訂單',
         	    content: '請確認是否收到商品!',
         	    buttons: {
         	        確認: function () {
         	        	document.getElementById("status_progress").style.width = "100%";
-        	        	$("#finished").hide();
-        	        	//status=3;
-        	        	//updateOrderStatus(status,id);
+        	        	$("#finished_"+fID).hide();        	        	
+        	        	updateOrderStatus(3,fID);
         	        },
         	        取消: function () {
         	        }
         	    }
         	});
-       })
+        });
+        
+     //if (parseInt(client_isSeller.toString()) == 1) {
+        	 //$('button[name="start[]"').show();}
+   // else{
+        	//$('button[name="finish[]"').show();}
+        
+        
+      
+       
+        
+        $('tr[name="row[]"').click(function() {
+        	var rID = (this.id).split('_')[1];
+        	alert(rID);
+        	var status=ReturnOrderStatus(rID);
+        	var memberID=ReturnMemberID(rID);
+            $("#orderNO").empty();  
+            $("#orderNO").append("訂單編號:" + rID);
+            
+            if (status == 1 ) {
+            	document.getElementById("status_progress").style.width = "33%";
+            	if (client_isSeller==0 ){//BuyerID==memberID即代表此筆訂單一定是買進
+                	$("#finished_"+rID).hide();//對買家而言，本來會顯示的按鈕為"完成訂單"，所以此處要隱藏起來
+            	} 
+            	else if(client_isSeller==1 && buyerID==memberID){
+            		$("#finished_"+rID).hide();
+            		$("#started_"+rID).hide();
+            	}
+            } 
+            else if (status == 2) {
+            	$("#started_"+rID).hide();
+            	document.getElementById("status_progress").style.width = "67%";
+            	
+            	if(client_isSeller==1&&buyerID==memberID){
+            		$("#finished_"+rID).show();
+            	}
+            	
+        	} 
+            else if (status == 3) {
+                document.getElementById("status_progress").style.width = "100%";
+                $.alert("此訂單已完成");
+                if(client_isSeller==0){
+            		$("#finished_"+rID).hide();
+            	}
+                else if(client_isSeller==1){
+            		$("#started_"+rID).hide();
+            	}
+            } 
+        })
 
+		            
+
+	  
         
 
         /*------------登入登出實作member cookie-----------*/

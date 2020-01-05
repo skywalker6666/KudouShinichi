@@ -207,9 +207,11 @@ public class OrderProductHelper {
                 String product_delivery = rs.getString("product_delivery");
                 Timestamp create =rs.getTimestamp("create");
                 int memberID=rs.getInt("memberID");
+                int order_status=rs.getInt("order_status");
+                String cellphone=rs.getString("cellphone");
                 System.out.println(orderID);
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, seller_id, unit_price, product_quantities, buyer_name,address,subtotal,payment,product_delivery,create,memberID);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, seller_id, unit_price, product_quantities, buyer_name,address,subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
                 System.out.println("就是我在搗蛋拉幹:"+op.getorderId());
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(op.getData());
@@ -276,10 +278,11 @@ public class OrderProductHelper {
                 String product_delivery=rs.getString("product_delivery");
                 Timestamp create=rs.getTimestamp("create");
                 int memberID=rs.getInt("memberID");
-                
+                int order_status=rs.getInt("order_status");
+                String cellphone=rs.getString("cellphone");
                 
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, sellerID, unit_price, product_quantities,buyer_name,ship_address, subtotal,payment,product_delivery,create,memberID);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, sellerID, unit_price, product_quantities,buyer_name,ship_address, subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
                
                 
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */

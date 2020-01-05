@@ -101,6 +101,7 @@ public class Product {
 		this.type=type;
 		this.category=category;
 	}
+	
 
     /**
      * 實例化（Instantiates）一個新的（new）Product 物件<br>

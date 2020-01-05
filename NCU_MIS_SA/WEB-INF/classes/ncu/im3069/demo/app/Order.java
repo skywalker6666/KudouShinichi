@@ -179,6 +179,7 @@ public class Order {
      * @return String 回傳運送方式
      */
     public String getProductDelivery() {
+    	
         return this.product_delivery;
     }
     /**
