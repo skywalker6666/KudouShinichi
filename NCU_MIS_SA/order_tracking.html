@@ -18,32 +18,65 @@
     <script src="statics/js/jquery-confirm.js"></script>
 </head>
 
-<body bgcolor="#BCE2FF">
-    <ul class="navbar">
-        <li><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
-                    width="100px"></img></a></li>
-        <li><a class="navbarItem" href="index.html">Home</a></li>
-        <li><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-        <li><a id="orderTracking" href="order_tracking.html">訂單追蹤</a></li>
-        <li><a id="shoppingcart" href="shoppingcart.html">購物車</a></li>
-        <li><a id="myMarket" href="my_market.html">我的賣場</a></li>
-        <li id="signup_in" style="float: right"><a href="login_selected.html">會員註冊/登入</a></li>
-        <div id="member_center1" style="float: right">
-            <li style="float: left"><a href="member_change.html">會員中心</a></li>
-            <li style="float: left"><a id="remove" href="index.html">&nbsp;登出 </a></li>
-            <li style="float: left">
+<body>
+	<div id="header">
+		<!--容器分為左圖右導覽連結 -->
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light "
+			style="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="50px"
+				width="50px"></img></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor03" aria-controls="navbarColor03"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-        </div>
-        <div id="member_center2">
-            <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
-            </li>
-            <li><a href="shoppingcart.html">購物車</a></li>
-        </div>
-        <div id="member_center3" style="float: right">
-            <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
-            <li id="user_name">user</li>
-        </div>
-    </ul>
+			<div class="navbar-collapse collapse show" id="navbarColor03"
+				style="">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						href="index.html">Home <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="productIndex.html">商品總覽</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="order_tracking.html">訂單追蹤</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="shoppingcart.html">購物車</a></li>
+					<li class="nav-item"><a class="nav-link" href="my_market.html">我的賣場</a>
+					</li>
+				</ul>
+
+			</div>
+
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><img
+					src="statics/img/navbar/shoppingcart.png" height="20px"
+					width="20px"></img></li>
+				<li><a class="nav-link" href="shoppingcart.html">購物車</a></li>
+
+
+				<li id="signup_in" class="nav-item"><a class="nav-link"
+					href="login_selected.html">會員註冊/登入</a></li>
+
+				<li class="nav-item"><img src="statics/img/navbar/user.png"
+					height="20px" width="20px"></img></li>
+				<li id="user_name" class="nav-link">user</li>
+
+				<li class="nav-item"><a id="member_center" class="nav-link"
+					href="member_change.html">會員中心</a></li>
+
+				<li class="nav-item"><a id="remove" class="nav-link"
+					href="index.html">&nbsp;登出 </a></li>
+
+			</ul>
+
+			<form class="form-inline">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-primary " type="submit">Search</button>
+			</form>
+		</nav>
     <nav id="navbar-example2" class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">訂單追蹤</a>
         <ul class="nav nav-pills">
@@ -96,6 +129,7 @@
             <tbody>
             </tbody>
         </table>
+    </div>
     </div>    
     <script type="text/javascript">
         var [client_isSeller] = getisSellerFromClient();
@@ -111,7 +145,7 @@
             $("#finished").hide();
             if (parseInt(client_isSeller.toString()) == 1) {
                 $("#myMarket").show();
-                getMySellingOrder();
+                //getMySellingOrder();
                 getMyBuyingOrder();
             } else getMyBuyingOrder();
         });

@@ -2,89 +2,112 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <title>ProductIndex</title>
+<title>ProductIndex</title>
 
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="statics/css/navbar.css">
-    <link rel="stylesheet" href="statics/css/themebox.css">
-    <link rel="stylesheet" href="statics/css/card.css">
-    <link rel="stylesheet" href="statics/css/product.css">
-	
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
-</head>
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+<!-- Custom styles for this template -->
 
-<body bgcolor="#BCE2FF">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" />
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<script src="statics/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+		src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" />
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
-    <ul class="navbar">
-        <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
-                    height="100px" width="100px"></img></a></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-        <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-        <li class="navbar"><a  id="shoppingcart" class="navbarItem" href="shoppingcart.html">購物車</a></li>
-        <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
-        <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+</head>
 
-        <div id="member_center1" class="mediumbox" style="float: right">
-            <li style="float: left"><a class="navbarFloating" href="member_change.html">會員中心</a></li>
-            <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
-            <li style="float: left">
+<body>
+	
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light "
+		style="background-color: #e3f2fd">
+		<a class="navbar-brand" href="index.html"><img
+			src="statics/img/navbar/icon.png" style="float: left" height="50px"
+			width="50px"></img></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-        </div>
-        <div id="member_center2" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
-            </li>
-            <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+		<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="index.html">Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="productIndex.html">商品總覽</a></li>
+				<li class="nav-item" id="track"><a class="nav-link"
+					href="order_tracking.html">訂單追蹤</a></li>
+				<li class="nav-item" id="shopcart"><a class="nav-link"
+					href="shoppingcart.html">購物車</a></li>
+				<li class="nav-item" id="mymarket"><a class="nav-link"
+					href="my_market.html">我的賣場</a></li>
+			</ul>
 
-        </div>
-        <div id="member_center3" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
-            <li id="user_name" class="navbarFloating">user</li>
-        </div>
-    </ul>
+		</div>
 
-    <div class="frame">
+		<ul class="navbar-nav mr-auto">
 
-        <div class="generalbox">
-            <p>商品目錄</p>
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div id="product_panel" class="row">
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-
-    </div>
+			<li class="nav-item" id="member_center1"><img
+				src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+			<li id="member_center2"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
 
 
+			<li id="signup_in" class="nav-item"><a class="nav-link"
+				href="login_selected.html">會員註冊/登入</a></li>
 
-    <script>
+			<li class="nav-item" id="member_center3"><img
+				src="statics/img/navbar/user.png" height="20px" width="20px"></img></li>
+			<li id="user_name" class="nav-link">user</li>
+
+			<li class="nav-item" id="member_center4"><a id="member_center"
+				class="nav-link" href="member_change.html">會員中心</a></li>
+
+			<li class="nav-item" id="member_center5"><a id="remove"
+				class="nav-link" href="index.html">&nbsp;登出 </a></li>
+
+		</ul>
+
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-primary " type="submit">Search</button>
+		</form>
+	</nav>
+	<div class="frame">
+
+		<div class="generalbox" style="margin-top: 100px">
+			<p>商品目錄</p>
+			<div class="album py-5 bg-light">
+				<div class="container">
+					<div id="product_panel" class="row"></div>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
         /**
          * 進入網頁時，先去 cookie 裡面找有無暫存資料，並把此暫存資料存到二維陣列中。
          * 設定一個二維陣列：[商品編號,商品數量]。
@@ -312,7 +335,7 @@
         /*------------登入登出實作member cookie-----------*/
 
         var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
-
+        var [manager_id, manager_name, manager_isLeader] = getManagerDataFromClient();
         function getMemberDataFromClient() {
             let id = JSON.parse(localStorage.getItem("client_id"));
             let name = JSON.parse(localStorage.getItem("client_name"));
@@ -323,6 +346,16 @@
             isSeller = !isSeller ? new Array() : isSeller;
             return [id, name, isSeller];
         }
+        function getManagerDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("manager_id"));
+            let name = JSON.parse(localStorage.getItem("manager_name"));
+            let isLeader = JSON.parse(localStorage.getItem("manager_isLeader"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isLeader = !isLeader ? new Array() : isLeader;
+            return [id, name, isLeader];
+        }
 
         function updateMemberDataToClent() {
             localStorage.setItem("client_id", JSON.stringify(client_id));
@@ -331,6 +364,11 @@
             localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
             localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
 
+        }
+        function updateManagerDataToClent() {
+            localStorage.setItem("manager_id", JSON.stringify(manager_id));
+            localStorage.setItem("manager_name", JSON.stringify(manager_name));
+            localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
         }
 
         function loguot() {
@@ -344,6 +382,11 @@
             $("#member_center1").hide();
             $("#member_center2").hide();
             $("#member_center3").hide();
+            $("#member_center4").hide();
+            $("#member_center5").hide();
+            $("#shopcart").hide();
+            $("#track").hide();
+            $("#mymarket").hide();            
             $("#signup_in").show();
             $("#user_name").empty();
         }
@@ -355,31 +398,48 @@
 
         $(document).ready(function () {
         	setButtonFunction();
-            if (client_id.length == 0) { //登出
-                $("#member_center1").hide();
-                $("#member_center2").hide();
-                $("#member_center3").hide();
-            } else {//登入
+        	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
                 $("#member_center2").show();
                 $("#member_center3").show();
+                $("#member_center4").show();
+                $("#member_center5").show();
                 $("#signup_in").hide();
-            }
+            }else if(manager_id.length != 0) {//登入管理員
+                $("#user_name").html(manager_name);
+                $("#member_center1").hide();
+                $("#member_center").hide();//隱藏會員中心
+                $("#member_center2").hide();
+                $("#member_center3").show();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+                
+                $("#signup_in").hide();
+            }else { //登出
+            	$("#user_name").hide();
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+                $("#member_center4").hide();
+                $("#member_center5").hide();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+            } 
         });
 
         /*----------------------------------------*/
     </script>
 
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-        </div>
-    </footer>
-
-
+		<footer class="text-muted">
+			<div class="container">
+				<p class="float-right">
+					<a href="#">Back to top</a>
+				</p>
+			</div>
+		</footer>
 </body>
 
 </html>

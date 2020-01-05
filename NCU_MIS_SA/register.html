@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html style="overflow:hidden">
 
 <head>
 <meta charset="utf-8" name="viewport"
@@ -8,65 +7,19 @@
 
 <title>Register</title>
 <style>
-.switch {
-	position: relative;
-	display: inline-block;
-	width: 60px;
-	height: 34px;
-}
-
-input:checked+.slider {
-	background-color: #2196F3;
-}
-
-input:focus+.slider {
-	box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
-	transform: translateX(26px);
-}
-/* Rounded sliders */
-.slider.round {
-	border-radius: 34px;
-}
-
-.slider.round:before {
-	border-radius: 50%;
-}
-
-.box {
-	width: 800px;
-	height: 500px;
-	position: absolute;
-	left: 50%;
-	top: 60%;
-	margin-top: -250px;
-	margin-left: -400px;
-}
-
-.box2 {
-	width: 600px;
-	height: 400px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-top: -200px;
-	margin-left: -300px;
-}
-
 .button {
 	background-color: #FF8787;
 	border: none;
 	color: white;
-	padding: 15px 32px;
+	padding: 10px 25px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
 	border-radius: 10px;
+	cursor: pointer;
+	margin: 20px 10px;
+	font-family: DFKai-sb;
 }
 
 .button:hover {
@@ -75,303 +28,318 @@ input:checked+.slider:before {
 }
 </style>
 
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/register&login.css">
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 
 </head>
-<body bgcolor="#BCE2FF">
 
-	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
+<div class="container-fluid " style="height: 100%">
+	<div class="row ">
+		<div class="col-md-6">
+			<a class="navbar-brand" href="index.html"><img
 				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
-	</ul>
-
-	<div class="box" style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員註冊</font>
-		<div class="box2" style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-			<font face="DFKai-sb">
-
-				<form id="form" accept-charset="utf-8">
-					<div style="display: none;">
-						<input type="hidden" name="_method" value="POST">
-					</div>
-					<div class="input text required">
-						<label for="member_name">會員帳號:</label> <input class="field"
-							name="name" type="text" id="member_name" required="required">
-					</div>
-					<div class="input password required">
-						<label for="member_password">登入密碼:</label> <input class="field"
-							name="password" type="password" id="member_password"
-							required="required">
-					</div>
-					<div class="input confirmpassword required">
-						<label for="member_confirmpassword">確認密碼:</label> <input
-							class="field" name="confirmpassword" type="password"
-							id="member_confirmpassword" required="required">
-					</div>
-					<div class="input email required">
-						<label for="member_email">電子郵件:</label> <input class="field"
-							name="email" type="email" id="member_email" required="required">
-					</div>
-					<div class="input birth required">
-						<label for="member_birth">西元生日:</label> 
-						<input type="date" id="birth" name="birth" min="" max="">
-							
-						<!-- <input class="field_birthMandD" name="birth2" type="birth"
-							id="birth2">月 <input class="field_birthMandD"
-							name="birth3" type="birth" id="birth3">日 -->
-					</div>
-					
-						<div class="input headSticker">
-						<label for="member_email">會員頭貼:</label> <input class="field"
-							name="headSticker" id="member_headSticker" placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg">
-					</div>
-					
-					<input type="button" class="button" value="註冊為買家帳號" id="submit_buyer">
-					<input type="button" class="button" value="註冊為賣家帳號" id="submit_seller">
-					
-				</form>
-		
-				<script type="text/javascript">
-				var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
-				
-				function getMemberDataFromClient() {
-			    	let id = JSON.parse(localStorage.getItem("client_id"));
-			    	let name = JSON.parse(localStorage.getItem("client_name"));
-			    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
-
-			    	id = !id ? new Array() : id;
-			    	name = !name ? new Array() : name;
-			    	isSeller = !isSeller ? new Array() : isSeller;
-
-			    	return [id, name, isSeller];
-			    }
-				
-				
-				function addDataToMember(id, name, isSeller) {
-			    	if (!(client_id.includes(id))) {
-			    		client_id.push(id);
-			    		client_name.push(name);
-			    		client_isSeller.push(isSeller)
-			    		updateMemberDataToClent();
-			    	}
-			    }
-				
-			    
-			     function updateMemberDataToClent() {
-			     	localStorage.setItem("client_id", JSON.stringify(client_id));
-			     	localStorage.setItem("client_name", JSON.stringify(client_name));
-			     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-
-			     }
-			     
-		$(document).ready(
-			function() {
-			// 處理表單點擊事件
-				var $form_submit_buyer = $('#submit_buyer');
-				$form_submit_buyer.click(function() {
-					submit_buyer();
-				});
-				var $form_submit_seller = $('#submit_seller');
-				$form_submit_seller.click(function() {
-					submit_seller();
-				});
-		});
-							function submit_buyer() {
-								var name = $('#member_name').val();
-								var email = $('#member_email').val();
-								var password = $('#member_password').val();
-								var birthday = $('#birth').val();
-								var headSticker = $('#member_headSticker').val();
-								var isSeller = 0;
-									// 將資料組成JSON格式
-									var data_object = {
-										"name" : name,
-										"email" : email,
-										"password" : password,
-										"birthday" : birthday,
-										"headSticker" : headSticker,
-										"isSeller" : isSeller
-									};
-									// 將JSON格式轉換成字串
-									var data_string = JSON.stringify(data_object);
-									
-									pass_vaild = vaildData(data_object);
-									 if (pass_vaild) {
-									// 發出POST的AJAX請求
-									$.ajax({
-												type : "POST",
-												url : "api/member.do",
-												data : data_string,
-												crossDomain : true,
-												cache : false,
-												dataType : 'json',
-												timeout : 5000,
-												success : function(response) {
-													$('#flashMessage').html(response.message);
-													$('#flashMessage').show();
-													if (response.status == 200) {
-														updateSQLTable(response.response);
-														
-														//取回此筆資料localstorage
-														getThisMember();
-														
-														alert(response.message);
-														document.location.href = "member_change.html"; 
-													}else{
-														alert(response.message);
-													}	
-												},
-												error : function() {
-													alert("無法連線到伺服器！");
-												}
-											});
-									 }
-								
-							}
-							
-							function submit_seller() {
-								var name = $('#member_name').val();
-								var email = $('#member_email').val();
-								var password = $('#member_password').val();
-								var birthday = $('#birth').val();
-								var headSticker = $('#member_headSticker').val();
-								var isSeller = 1;
-									// 將資料組成JSON格式
-									var data_object = {
-										"name" : name,
-										"email" : email,
-										"password" : password,
-										"birthday" : birthday,
-										"headSticker" : headSticker,
-										"isSeller" : isSeller
-									};
-									// 將JSON格式轉換成字串
-									var data_string = JSON.stringify(data_object);
-									
-									pass_vaild = vaildData(data_object);
-									 if (pass_vaild) {
-									// 發出POST的AJAX請求
-									$.ajax({
-												type : "POST",
-												url : "api/member.do",
-												data : data_string,
-												crossDomain : true,
-												cache : false,
-												dataType : 'json',
-												timeout : 5000,
-												success : function(response) {
-													$('#flashMessage').html(response.message);
-													$('#flashMessage').show();
-													if (response.status == 200) {
-														console.log(response);
-														updateSQLTable(response.response);
-														//取回此筆資料localstorage
-														getThisMember();
-														alert(response.message);
-														document.location.href = "member_change.html"; 
-													}else{
-														alert(response.message);
-													}
-													
-													
-												},
-												error : function() {
-													alert("無法連線到伺服器！");
-												}
-											});
-									 }
-								
-							}
-							function vaildData(data) {
-						    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-								var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-
-								var confirmpassword = $("#member_confirmpassword").val();
-								
-								if (!email_rule.test(data['email'])) {
-									alert("Email格式不符！");
-								}else if(data['password'] != "" && !password_rule.test(data['password'])) {
-					                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-					            }else if(confirmpassword != data['password']){
-					            	alert("確認密碼不一致");
-					            }
-						     	else{//都正確
-						     		return true;
-						     	}
-
-						     	return false;
-						     }
-							function getThisMember() {
-								 var data = {
-							    			"name": $("#member_name").val(),
-							     			"password": $("#member_password").val()
-							     	}
-						     	// 驗證輸入的資料
-						     	
-						    	 if (pass_vaild) {
-									$.ajax({
-										type : "GET",
-										url : "api/member.do",
-										crossDomain : true,
-										data : data,
-										cache : false,
-										dataType : 'json',
-										timeout : 5000,
-										success : function(response) {
-											
-											if (response.status == 200) {
-												var id = response.response.data["0"].idtbl_member;
-												var name = response.response.data["0"].name;
-												var isSeller = response.response.data["0"].isSeller;
-
-												addDataToMember(id,name,isSeller); 					 
-											}
-											console.log(response);
-										},
-										error : function() {
-											alert("無法連線到伺服器！");
-										}
-									});
-						     }
-						  }
-							function updateSQLTable(data) {
-								$("#sql_log > tbody").empty();
-								var time = (data.time / 1000000).toFixed(2);
-								var table_html = "";
-
-								table_html += '<tr>';
-								table_html += '<td>' + '1' + '</td>';
-								table_html += '<td>' + data.sql + '</td>';
-								table_html += '<td style="text-align: right">'
-										+ '0' + '</td>';
-								table_html += '<td style="text-align: right">'
-										+ data.row + '</td>';
-								table_html += '<td style="text-align: right">'
-										+ data.row + '</td>';
-								table_html += '<td style="text-align: right">'
-										+ time + '</td>';
-								table_html += '</tr>';
-								$("#sql_log > tbody").append(table_html);
-								$("#sql_summary").html(
-										"(default) " + data.row
-												+ " queries took " + time
-												+ " ms");
-							}
+				width="100px"></img></a> <br>
+			<label style="font-size: 30px; margin-top: 120px; margin-left: 250px">為什麼柯南不買新衣服?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因為其他人會說
+				<br>
+			<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;「這是新衣」
+			</label><br>
+			<br> <label style="font-size: 20px; margin-left: 250px">歡迎註冊會員，加入新衣的行列</label>
+		</div>
+		<div class="col-md-6" style="background-color: #fafafa">
+			<form id="form" accept-charset="utf-8" style="margin-top:15%;margin-bottom:50%;margin-left:30%">	
+								<div style="display: none;">
+									<input type="hidden" name="_method" value="POST">
+								</div>
+								<div class="row">
 						
-		
-	</script>
-	
-</body>
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_name">會員帳號</label> <input
+											class="form-control" name="name" maxlength="30" type="text"
+											id="member_name" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
 
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_password">會員密碼</label> <input
+											class="form-control" name="password" type="password"
+											id="member_password" required="required" style="width:300px"
+											placeholder="長度至少8，且至少包含一個數字和英文字母！">
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_confirmpassword">確認密碼</label> <input
+											class="form-control" name="confirmpassword" type="password"
+											id="member_confirmpassword" required="required" style="width:300px"
+											placeholder="長度至少8，且至少包含一個數字和英文字母！">
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_email">電子郵件</label> <input
+											class="form-control" name="email" maxlength="50" type="email"
+											id="member_email" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_birth">西元生日</label> <input
+											class="form-control" type="date" id="birth" name="birth"
+											min="" max="" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
+
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_headSticker">個性頭貼</label> <input
+											class="form-control" name="headSticker" type="text"
+											id="member_headSticker" style="width:300px"
+											placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg"
+											required="required">
+									</div>
+									
+								</div> <br><input type="button" class="btn btn-outline-info" value="註冊為買家帳號"
+								id="submit_buyer"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info"
+								value="註冊為賣家帳號" id="submit_seller">
+						</form>
+			</div>
+		</div>
+	</div>	
+
+				<script type="text/javascript">
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+
+            return [id, name, isSeller];
+        }
+
+
+        function addDataToMember(id, name, isSeller) {
+            if (!(client_id.includes(id))) {
+                client_id.push(id);
+                client_name.push(name);
+                client_isSeller.push(isSeller)
+                updateMemberDataToClent();
+            }
+        }
+
+
+        function updateMemberDataToClent() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+
+        }
+
+        $(document).ready(
+            function () {
+                // 處理表單點擊事件
+                var $form_submit_buyer = $('#submit_buyer');
+                $form_submit_buyer.click(function () {
+                    submit_buyer();
+                });
+                var $form_submit_seller = $('#submit_seller');
+                $form_submit_seller.click(function () {
+                    submit_seller();
+                });
+            });
+        function submit_buyer() {
+            var name = $('#member_name').val();
+            var email = $('#member_email').val();
+            var password = $('#member_password').val();
+            var birthday = $('#birth').val();
+            var headSticker = $('#member_headSticker').val();
+            var isSeller = 0;
+            // 將資料組成JSON格式
+            var data_object = {
+                "name": name,
+                "email": email,
+                "password": password,
+                "birthday": birthday,
+                "headSticker": headSticker,
+                "isSeller": isSeller
+            };
+            // 將JSON格式轉換成字串
+            var data_string = JSON.stringify(data_object);
+
+            pass_vaild = vaildData(data_object);
+            if (pass_vaild) {
+                // 發出POST的AJAX請求
+                $.ajax({
+                    type: "POST",
+                    url: "api/member.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        $('#flashMessage').html(response.message);
+                        $('#flashMessage').show();
+                        if (response.status == 200) {
+                            updateSQLTable(response.response);
+
+                            //取回此筆資料localstorage
+                            getThisMember();
+
+                            alert(response.message);
+                            document.location.href = "member_change.html";
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+            }
+
+        }
+
+        function submit_seller() {
+            var name = $('#member_name').val();
+            var email = $('#member_email').val();
+            var password = $('#member_password').val();
+            var birthday = $('#birth').val();
+            var headSticker = $('#member_headSticker').val();
+            var isSeller = 1;
+            // 將資料組成JSON格式
+            var data_object = {
+                "name": name,
+                "email": email,
+                "password": password,
+                "birthday": birthday,
+                "headSticker": headSticker,
+                "isSeller": isSeller
+            };
+            // 將JSON格式轉換成字串
+            var data_string = JSON.stringify(data_object);
+
+            pass_vaild = vaildData(data_object);
+            if (pass_vaild) {
+                // 發出POST的AJAX請求
+                $.ajax({
+                    type: "POST",
+                    url: "api/member.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        $('#flashMessage').html(response.message);
+                        $('#flashMessage').show();
+                        if (response.status == 200) {
+                            console.log(response);
+                            updateSQLTable(response.response);
+                            //取回此筆資料localstorage
+                            getThisMember();
+                            alert(response.message);
+                            document.location.href = "member_change.html";
+                        } else {
+                            alert(response.message);
+                        }
+
+
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+            }
+
+        }
+        function vaildData(data) {
+            var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+            var confirmpassword = $("#member_confirmpassword").val();
+
+            if (!email_rule.test(data['email'])) {
+                alert("Email格式不符！");
+            } else if (data['password'] != "" && !password_rule.test(data['password'])) {
+                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+            } else if (confirmpassword != data['password']) {
+                alert("確認密碼不一致");
+            }
+            else {//都正確
+                return true;
+            }
+
+            return false;
+        }
+        function getThisMember() {
+            var data = {
+                "name": $("#member_name").val(),
+                "password": $("#member_password").val()
+            }
+            // 驗證輸入的資料
+
+            if (pass_vaild) {
+                $.ajax({
+                    type: "GET",
+                    url: "api/member.do",
+                    crossDomain: true,
+                    data: data,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+
+                        if (response.status == 200) {
+                            var id = response.response.data["0"].idtbl_member;
+                            var name = response.response.data["0"].name;
+                            var isSeller = response.response.data["0"].isSeller;
+
+                            addDataToMember(id, name, isSeller);
+                        }
+                        console.log(response);
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+            }
+        }
+        function updateSQLTable(data) {
+            $("#sql_log > tbody").empty();
+            var time = (data.time / 1000000).toFixed(2);
+            var table_html = "";
+
+            table_html += '<tr>';
+            table_html += '<td>' + '1' + '</td>';
+            table_html += '<td>' + data.sql + '</td>';
+            table_html += '<td style="text-align: right">'
+                + '0' + '</td>';
+            table_html += '<td style="text-align: right">'
+                + data.row + '</td>';
+            table_html += '<td style="text-align: right">'
+                + data.row + '</td>';
+            table_html += '<td style="text-align: right">'
+                + time + '</td>';
+            table_html += '</tr>';
+            $("#sql_log > tbody").append(table_html);
+            $("#sql_summary").html(
+                "(default) " + data.row
+                + " queries took " + time
+                + " ms");
+        }
+
+
+    </script>
+
+				</body>
 </html>

@@ -15,125 +15,13 @@
 
 
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-.box {
-	width: 800px;
-	height: 500px;
-	position: absolute;
-	left: 50%;
-	top: 60%;
-	margin-top: -250px;
-	margin-left: -400px;
-}
-
-.box2 {
-	width: 600px;
-	height: 400px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-top: -200px;
-	margin-left: -300px;
-}
-
-input {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 225px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
-
-input:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-textarea {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 225px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
-
-textarea:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-select {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 245px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
-
-select:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-.button {
-	background-color: #FF8787;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 10px;
-}
-
-.button:hover {
-	background-color: #f44336;
-	color: white;
-}
 </style>
 
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
-<link rel="stylesheet" href="statics/css/card.css">
-<link href="statics/css/product.css" rel="stylesheet">
-<link href="statics/css/jquery-confirm.css" rel="stylesheet">
+
+
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 <script src="statics/js/jquery-confirm.js"></script>
@@ -144,50 +32,50 @@ select:focus {
 <body>
 	<div id="header">
 		<!--容器分為左圖右導覽連結 -->
-		<div class="navbar">
+		<div >
 			<a href="index.html"><img src="statics/img/navbar/icon.png"
 				width="70" alt="logo" /></a>
 			<!--導覽列 -->
-			<ul class="navbar">
-				<li class="navbar"><a href="index.html"><img
+			<ul >
+				<li ><a href="index.html"><img
 						src="statics/img/navbar/icon.png" style="float: left"
 						height="100px" width="100px"></img></a></li>
-				<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-				<li class="navbar"><a class="navbarItem"
+				<li ><a  href="index.html">Home</a></li>
+				<li ><a 
 					href="productIndex.html">商品總覽</a></li>
-				<li class="navbar"><a class="navbarItem"
+				<li ><a 
 					href="order_tracking.html">訂單追蹤</a></li>
-				<li class="navbar"><a class="navbarItem"
+				<li ><a 
 					href="shoppingcart.html">購物車</a></li>
-				<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
+				<li ><a  href="my_market.html">我的賣場</a></li>
 				<li id="signup_in" style="float: right"><a
 					class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
 
-				<div id="member_center1" class="mediumbox" style="float: right">
-					<li style="float: left"><a class="navbarFloating"
+				<div id="member_center1"  style="float: right">
+					<li style="float: left"><a 
 						href="member_change.html">會員中心</a></li>
-					<li style="float: left"><a id="remove" class="navbarFloating"
+					<li style="float: left"><a id="remove" 
 						href="index.html">&nbsp;登出 </a></li>
 					<li style="float: left">
 				</div>
-				<div id="member_center2" class="smallbox" style="float: right">
+				<div id="member_center2"  style="float: right">
 					<li><img src="statics/img/navbar/shoppingcart.png"
 						style="float: left" height="20px" width="20px"></img></li>
-					<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
+					<li><a  href="shoppingcart.html">購物車</a></li>
 				</div>
-				<div id="member_center3" class="smallbox" style="float: right">
+				<div id="member_center3"  style="float: right">
 					<li><img src="statics/img/navbar/user.png" style="float: left"
 						height="20px" width="20px"></img></li>
-					<li id="user_name" class="navbarFloating">user</li>
+					<li id="user_name" >user</li>
 				</div>
 			</ul>
 			</nav>
 		</div>
 	</div>
-	<div class="box"
+	<div 
 		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
 		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
-		<div class="box2"
+		<div 
 			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 
 

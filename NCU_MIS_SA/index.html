@@ -7,63 +7,85 @@
     <title>Home</title>
 
     <!-- Bootstrap core CSS -->
-
+	
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
+<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+<link href="statics/icon/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 
     <style>
     </style>
     
-    <link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet"></link>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.css"
-	rel="stylesheet"></link>
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/jquery.smartmenus.min.js'></script>
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery.smartmenus/1.1.0/addons/bootstrap/jquery.smartmenus.bootstrap.min.js'></script>
     
     
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="statics/css/navbar.css">
-    <link rel="stylesheet" href="statics/css/themebox.css">
-    <link rel="stylesheet" href="statics/css/card.css">
-    <link rel="stylesheet" href="statics/css/product.css">
-
+    <!-- Custom styles for this template -->  
     <script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
-<body bgcolor="#BCE2FF">
+<body>
+	<div id="header">
+		<!--容器分為左圖右導覽連結 -->
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light "
+			style="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="50px"
+				width="50px"></img></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor03" aria-controls="navbarColor03"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-    <ul class="navbar">
-        <li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
-                    height="100px" width="100px"></img></a></li>
-        <li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-        <li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-        <li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-        <li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-        <li class="navbar"><a id="myMarket" class="navbarItem" href="my_market.html">我的賣場</a></li>
-        <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
+			<div class="navbar-collapse collapse show" id="navbarColor03"
+				style="">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						href="index.html">Home <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="productIndex.html">商品總覽</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="order_tracking.html">訂單追蹤</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="shoppingcart.html">購物車</a></li>
+					<li class="nav-item"><a class="nav-link" href="my_market.html">我的賣場</a>
+					</li>
+				</ul>
 
-        <div id="member_center1" class="mediumbox" style="float: right">
-            <li style="float: left"><a id="member_center" class="navbarFloating" href="member_change.html">會員中心</a></li>
-            <li style="float: left"><a id="remove" class="navbarFloating" href="index.html">&nbsp;登出 </a></li>
-            <li style="float: left">
+			</div>
 
-        </div>
-        <div id="member_center2" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px" width="20px"></img>
-            </li>
-            <li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-        </div>
-        <div id="member_center3" class="smallbox" style="float: right">
-            <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img></li>
-            <li id="user_name" class="navbarFloating">user</li>
-        </div>
-    </ul>
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><img
+					src="statics/img/navbar/shoppingcart.png" height="20px"
+					width="20px"></img></li>
+				<li><a class="nav-link" href="shoppingcart.html">購物車</a></li>
+
+
+				<li id="signup_in" class="nav-item"><a class="nav-link"
+					href="login_selected.html">會員註冊/登入</a></li>
+
+				<li class="nav-item"><img src="statics/img/navbar/user.png"
+					height="20px" width="20px"></img></li>
+				<li id="user_name" class="nav-link">user</li>
+
+				<li class="nav-item"><a id="member_center" class="nav-link"
+					href="member_change.html">會員中心</a></li>
+
+				<li class="nav-item"><a id="remove" class="nav-link"
+					href="index.html">&nbsp;登出 </a></li>
+
+			</ul>
+
+			<form class="form-inline">
+				<input class="form-control mr-sm-2" type="search"
+					placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-primary " type="submit">Search</button>
+			</form>
+		</nav>
     <div class="frame">
 
         <div class="generalbox">
@@ -156,7 +178,7 @@
         </div>
 
     </div>
-
+</div>
 
 
     <script type="text/javascript">
