@@ -1,5 +1,7 @@
 package ncu.im3069.demo.app;
 
+import java.sql.Timestamp;
+
 import org.json.JSONObject;
 import ncu.im3069.demo.util.Arith;
 
@@ -7,9 +9,11 @@ public class OrderProduct {
 
     /** id，產品細項編號 */
     private int idtbl_ordeproduct;
+    private int order_id;
 
     /** pd，產品 */ 
     private Product pd;
+    private Order od;
 
     /** product_quantities，產品數量 */
     private int product_quantities;
@@ -19,9 +23,16 @@ public class OrderProduct {
 
     /** subtotal，產品小計 */
     private double subtotal;
+    private String buyer_name;
+    private String address;
+    private int memberID;
 
     /** ph，ProductHelper 之物件與 OrderProduct 相關之資料庫方法（Sigleton） */
     private ProductHelper ph =  ProductHelper.getHelper();
+	private String payment;
+	private String product_delivery;
+	private Timestamp create;
+    
 
     /**
      * 實例化（Instantiates）一個新的（new）OrderProduct 物件<br>
@@ -48,14 +59,29 @@ public class OrderProduct {
      * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities, double subtotal) {
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID) {
         this.idtbl_ordeproduct = idtbl_ordeproduct;
-        this.product_quantities = product_quantities;
-        this.price = price;
-        this.subtotal = subtotal;
+        this.order_id=order_id;
         getProductFromDB(product_id);
+        getSellerFromDB(seller_id);
+        this.price = price;
+        this.product_quantities = product_quantities;
+        this.buyer_name=buyer_name;
+        this.address=address;
+        this.subtotal = subtotal;
+        this.payment=payment;
+        this.product_delivery=product_delivery;
+        this.create=create;
+        this.memberID=memberID;
     }
 
+    /**
+     * 從 DB 中取得產品
+     */
+    private void getSellerFromDB(int seller_id) {
+        String id = String.valueOf(seller_id);
+        this.pd = ph.getBySellerId(id);
+    }
     /**
      * 從 DB 中取得產品
      */
@@ -63,8 +89,10 @@ public class OrderProduct {
         String id = String.valueOf(product_id);
         this.pd = ph.getById(id);
     }
-
+    
+    
     /**
+    
      * 取得產品
      *
      * @return Product 回傳產品
@@ -72,7 +100,10 @@ public class OrderProduct {
     public Product getProduct() {
         return this.pd;
     }
-
+    public Order getOrder() {
+        return this.od;
+    }
+   
     /**
      * 設定訂單細項編號
      */
@@ -94,6 +125,10 @@ public class OrderProduct {
      *
      * @return double 回傳產品價格
      */
+    public int getorderId() {
+        return this.order_id;
+    }
+
     public int getPrice() {
         return this.price;
     }
@@ -115,7 +150,12 @@ public class OrderProduct {
     public int getQuantity() {
         return this.product_quantities;
     }
-
+    public String getPayment() {
+        return this.payment;
+    }
+    public String getProductDelivery() {
+        return this.product_delivery;
+    }
     /**
      * 取得產品細項資料
      *
@@ -124,12 +164,42 @@ public class OrderProduct {
     public JSONObject getData() {
         JSONObject data = new JSONObject();
         data.put("idtbl_orderproduct", getId());
-        data.put("productID", getProduct().getData());
-        data.put("sellerID", getProduct().getData());
+        data.put("orderID", getorderId());
+        data.put("memberID", getmemberID());
+        data.put("product_info", getProduct().getData());        
         data.put("price", getPrice());
         data.put("product_quantities", getQuantity());
+        data.put("buyer_name", getbuyerName());
+        data.put("ship_address", getAddress());        
         data.put("subtotal", getSubTotal());
+        data.put("payment", getPayment());
+        data.put("product_delivery", getProductDelivery());
+        data.put("create", getCreateTime());
+        
+        
 
         return data;
+    }
+
+	public String getAddress() {
+		return this.address;
+	}
+	
+	public int getmemberID() {
+		return this.memberID;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getbuyerName() {
+		return this.buyer_name;
+	}
+
+	public void setbuyerName(String buyer_name) {
+		this.buyer_name = buyer_name;
+	}
+	public Timestamp getCreateTime() {
+        return this.create;
     }
 }

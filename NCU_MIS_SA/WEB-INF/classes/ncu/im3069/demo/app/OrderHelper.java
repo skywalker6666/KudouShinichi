@@ -167,7 +167,7 @@ public class OrderHelper {
 
         return response;
     }
-    
+    //買家訂單追蹤
     public JSONObject getByMemberId(String memberID) {
     	JSONArray jsa = new JSONArray();
         Order o = null;
@@ -260,7 +260,7 @@ public JSONObject getByOrderId(String order_id) {
         /** 取得資料庫之連線 */
         conn = DBMgr.getConnection();
         /** SQL指令 */
-        String sql = "SELECT * FROM `missa`.`tbl_order` WHERE `idtbl_order` = ?";
+        String sql = "SELECT * FROM `missa`.`tbl_order` WHERE `idtbl_order`= ?";
         
         /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
         pres = conn.prepareStatement(sql);

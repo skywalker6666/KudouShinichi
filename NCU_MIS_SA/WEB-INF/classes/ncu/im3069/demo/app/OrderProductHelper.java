@@ -41,6 +41,7 @@ public class OrderProductHelper {
             /** 取得所需之參數 */
             int productID = op.getProduct().getID();
             int sellerID = op.getProduct().getSellerID();
+            int order_id = op.getorderId();
             int unit_price = op.getPrice();
             int product_quantities = op.getQuantity();
             double subtotal = op.getSubTotal();
@@ -56,7 +57,7 @@ public class OrderProductHelper {
                 
                 /** 將參數回填至SQL指令當中 */
                 pres = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pres.setLong(1, orderID);
+                pres.setLong(1, order_id);
                 pres.setInt(2, productID);
                 pres.setInt(3, sellerID);
                 pres.setInt(4, unit_price);
@@ -163,6 +164,7 @@ public class OrderProductHelper {
 }
 
 
+    //就是我有問題:沒有回傳orderID
     public JSONObject getOrderProductBySellerId(String sellerID) {
         //ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
         JSONArray jsa = new JSONArray();
@@ -186,25 +188,31 @@ public class OrderProductHelper {
             
             /** 紀錄真實執行的SQL指令，並印出 **/
             exexcute_sql = pres.toString();
-            System.out.println(exexcute_sql);
+            System.out.println("我是問題兒童"+exexcute_sql);
             
             while(rs.next()) {
                 /** 每執行一次迴圈表示有一筆資料 */
                 
                 /** 將 ResultSet 之資料取出 */
                 int idtbl_orderproduct= rs.getInt("idtbl_orderproduct");
-                int productID = rs.getInt("productID");
                 int orderID = rs.getInt("orderID");
+                int productID = rs.getInt("productID");
                 int seller_id= rs.getInt("sellerID");
                 int unit_price = rs.getInt("unit_price");
-                int product_quantities = rs.getInt("product_quantities");
+                int product_quantities = rs.getInt("product_quantities");   
+                String buyer_name = rs.getString("buyer_name");
+                String address = rs.getString("ship_address"); 
                 double subtotal = rs.getDouble("subtotal");
-                
+                String payment = rs.getString("payment");
+                String product_delivery = rs.getString("product_delivery");
+                Timestamp create =rs.getTimestamp("create");
+                int memberID=rs.getInt("memberID");
+                System.out.println(orderID);
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, seller_id, unit_price, product_quantities, subtotal);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, seller_id, unit_price, product_quantities, buyer_name,address,subtotal,payment,product_delivery,create,memberID);
+                System.out.println("就是我在搗蛋拉幹:"+op.getorderId());
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 jsa.put(op.getData());
-
             }
         } catch (SQLException e) {
             /** 印出JDBC SQL指令錯誤 **/
@@ -224,6 +232,9 @@ public class OrderProductHelper {
         response.put("data", jsa);
         return response;
     }
+ 
+    
+    //order.api印出由orderID從orderproduct取回的資料
     public ArrayList<OrderProduct> getOrderProductByOrderId(int orderID) {
         ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
         /** 記錄實際執行之SQL指令 */
@@ -235,7 +246,7 @@ public class OrderProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_orderproduct` WHERE `tbl_orderproduct`.`orderID` = ?";
+            String sql = "SELECT * FROM (SELECT * FROM `missa`.`tbl_orderproduct`,`tbl_order` where `tbl_orderproduct`.orderID=`tbl_order`.idtbl_order)AS tbl1	WHERE `tbl_orderproduct`.`orderID` = ?";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -253,14 +264,24 @@ public class OrderProductHelper {
                 
                 /** 將 ResultSet 之資料取出 */
                 int idtbl_orderproduct= rs.getInt("idtbl_orderproduct");
+                
                 int productID = rs.getInt("productID");
                 int sellerID = rs.getInt("sellerID");
                 int unit_price = rs.getInt("unit_price");
                 int product_quantities = rs.getInt("product_quantities");
+                String buyer_name=rs.getString("buyer_name");
+                String ship_address=rs.getString("ship_address");
                 double subtotal = rs.getDouble("subtotal");
+                String payment=rs.getString("payment");
+                String product_delivery=rs.getString("product_delivery");
+                Timestamp create=rs.getTimestamp("create");
+                int memberID=rs.getInt("memberID");
+                
                 
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, sellerID, unit_price, product_quantities, subtotal);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, sellerID, unit_price, product_quantities,buyer_name,ship_address, subtotal,payment,product_delivery,create,memberID);
+               
+                
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
                 result.add(op);
             }

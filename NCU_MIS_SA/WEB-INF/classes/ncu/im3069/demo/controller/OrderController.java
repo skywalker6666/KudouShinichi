@@ -55,6 +55,7 @@ public class OrderController extends HttpServlet {
         /** 判斷該字串是否存在，若存在代表要取回個別訂單之資料，否則代表要取回全部資料庫內訂單之資料 */
         if (!idtbl_order.isEmpty()) {
           /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
+        	System.out.println("進入getByorderId");
           JSONObject query = oh.getByOrderId(idtbl_order);
           resp.put("status", "200");
           resp.put("message", "單筆訂單資料取得成功");
@@ -68,7 +69,7 @@ public class OrderController extends HttpServlet {
             resp.put("response", query);
         }
         else if(!sellerID.isEmpty()) {
-        	System.out.println("進入getBysellperId");
+        	System.out.println("進入getOPBysellerId");
         	JSONObject query = oph.getOrderProductBySellerId(sellerID);
             resp.put("status", "200");
             resp.put("message", "單筆訂單資料取得成功");

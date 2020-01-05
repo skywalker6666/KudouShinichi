@@ -193,7 +193,7 @@
             return [isSeller];
         }
         /*--------------GET各種類型的商品--------------*/
-        function getAllProduct() {
+         function getAllProduct() {
             $.ajax({
                 type: "GET",
                 url: "api/product.do",
@@ -244,11 +244,13 @@
                         	var utcmonth=d.getMonth();
                         	var utcday = d.getDay();
                         	var utchour=d.getHours();
-                        	
+                      
+
+
                         	//時間演算法
                         	if((utcyear-date_year)<=1)
                         		if((utcmonth-date_month)<=0||(utcmonth-date_month)==-11)
-                        			if((utcday-date_day)<1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
+                        			if((utcday-date_day)<1)
                         				if((utchour-date_hour)<=12)
                         				{
                         					new_product_panel += addProduct(this);

@@ -29,7 +29,7 @@ public class ProductController extends HttpServlet {
         String id_list = jsr.getParameter("id_list");
         String sellerID = jsr.getParameter("sellerID");
         String productID=jsr.getParameter("productID");
-        
+
         
         JSONObject resp = new JSONObject();
         /** 判斷該字串是否存在，若存在代表要取回購物車內產品之資料，否則代表要取回全部資料庫內產品之資料 */

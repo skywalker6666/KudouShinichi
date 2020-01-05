@@ -234,7 +234,7 @@ public class Order {
         ArrayList<OrderProduct> data = oph.getOrderProductByOrderId(this.idtbl_order);
         this.list = data;
     }
-
+    
     /**
      * 取得訂單基本資料
      *
