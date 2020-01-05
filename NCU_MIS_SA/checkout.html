@@ -242,7 +242,7 @@
                                         btnClass: 'btn-blue',
                                         action: function () {
                                             cleanAllData();
-                                            updateProductInventory();
+                                            //updateProductInventory();
 
                                             document.location.href =
                                                 "order_tracking.html";
@@ -481,77 +481,7 @@
         }
 
         function updateProductInventory() {
-            $.ajax({
-                    type: "GET",
-                    url: "api/product.do",
-                    crossDomain: true,
-                    cache: false,
-                    data: "id_list=" + client_cart_obj.toString(),
-                    dataType: 'json',
-                    timeout: 5000,
-                    success: function (response) {
-                        if (response.status == 200) {
-                            innerPut(response.response.data);
-                        	}
-                        },
-                        error: function () {
-                            alert("無法連線到伺服器！");
-                        }
-                    });
-
-                function innerPut(data) {
-                    var IdInventory;
-                    var IdBought;
-                    var IdArray;
-                    $.each(data, function (index, value) {
-                        IdInventory[index] = value.inventory; //{4,250},{5,70},{10,60}
-                        IdArray[index] = value.idtbl_product;
-                    })
-                    $.each(productData, function (ind, val) {
-                        IdBought[ind] = productData[1][
-                            ind
-                        ]; //   {4,50}-IdBought[0,0],{5,10}-IdBought[0,1],{10,25}-IdBought[0,2]      
-
-                    })
-
-                    $.each(InventoryResult, function (ind, val) {
-                        var InventoryResult;
-                        InventoryResult[ind] = IdInventory[ind] - IdBought[ind];
-
-
-
-                        var data_object = {
-                            "productID": IdArray[ind],
-                            "Sinventory": InventoryResult[ind].toString();
-                        };
-                        var data_string = JSON.stringify(data_object);
-                        $.ajax({
-                            type: "PUT",
-                            url: "api/product.do",
-                            data: data_string,
-                            crossDomain: true,
-                            cache: false,
-                            dataType: 'json',
-                            timeout: 5000,
-                            success: function (response) {
-                                $('#flashMessage').html(
-                                    response.message);
-                                $('#flashMessage').show();
-                                if (response.status == 200) {
-                                    alert("產品修改成功！");
-                                }
-
-
-                            },
-                            error: function () {
-                                alert("無法連線到伺服器！");
-
-                            }
-                        })
-
-
-                    })
-                }
+            
             }
 
 

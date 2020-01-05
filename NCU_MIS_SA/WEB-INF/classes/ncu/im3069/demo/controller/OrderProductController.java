@@ -56,20 +56,27 @@ public class OrderProductController extends HttpServlet {
         String image=jsr.getParameter("image");
         String product_info=jsr.getParameter("product_info");
         String total=jsr.getParameter("Total");
-        
-        
-        
-        JSONObject query=oph.getAllHotProduct();
-        /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
+        String idtbl_order = jsr.getParameter("idtbl_order");
+        String buyerID = jsr.getParameter("buyerID");
+        String sellerID = jsr.getParameter("sellerID");
         JSONObject resp = new JSONObject();
-        
-        resp.put("status", 20000);
-        resp.put("message", "所有熱門商品取得成功");
-        resp.put("response", query);
-
+        if (!sellerID.isEmpty()) {
+            /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
+            JSONObject query = oh.getByOrderId(idtbl_order);
+            resp.put("status", "200");
+            resp.put("message", "單筆訂單資料取得成功");
+            resp.put("response", query);
+        }
+        else {
+	        JSONObject query=oph.getAllHotProduct();
+	        /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */                
+	        resp.put("status", "20000");
+	        resp.put("message", "所有熱門商品取得成功");
+	        resp.put("response", query);
+        }
         /** 判斷該字串是否存在，若存在代表要取回個別訂單之資料，否則代表要取回全部資料庫內訂單之資料 */
        
-       System.out.println("進入Hotproduct");
+       
        
         
         /** 透過 JsonReader 物件回傳到前端（以 JSONObject 方式） */
