@@ -1,117 +1,116 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow:hidden">
 
 <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" name="viewport"
+	content="width=device-width, initial-scale=1">
 
-    <title>Register</title>
-    <style>
-        .button {
+<title>Register</title>
+<style>
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+	cursor: pointer;
+	margin: 20px 10px;
+	font-family: DFKai-sb;
+}
 
-            background-color: #FF8787;
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px 10px;
-            font-family: DFKai-sb;
-        }
+.button:hover {
+	background-color: #f44336;
+	color: white;
+}
+</style>
 
-        .button:hover {
-            background-color: #f44336;
-            color: white;
-        }
-    </style>
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
-
-        <script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body bgcolor="#BCE2FF">
+<div class="container-fluid " style="height: 100%">
+	<div class="row ">
+		<div class="col-md-6">
+			<a class="navbar-brand" href="index.html"><img
+				src="statics/img/navbar/icon.png" style="float: left" height="100px"
+				width="100px"></img></a> <br>
+			<label style="font-size: 30px; margin-top: 120px; margin-left: 250px">為什麼柯南不買新衣服?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因為其他人會說
+			<br><br>&nbsp;「你看！是新衣耶！」
+			</label><br>
+			<br> <label style="font-size: 20px; margin-left: 250px">歡迎註冊會員，加入新衣的行列！</label>
+		</div>
+		<div class="col-md-6" style="background-color: #fafafa">
+			<form id="form" accept-charset="utf-8" style="margin-top:15%;margin-bottom:50%;margin-left:30%">	
+								<div style="display: none;">
+									<input type="hidden" name="_method" value="POST">
+								</div>
+								<div class="row">
+						
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_name">會員帳號</label> <input
+											class="form-control" name="name" maxlength="30" type="text"
+											id="member_name" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
 
-    <ul>
-        <li><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
-                    width="100px"></img></a></li>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="productIndex.html">商品總覽</a></li>
-        <li><a href="order_tracking.html">訂單追蹤</a></li>
-        <li><a href="shoppingcart.html">購物車</a></li>
-        <li style="float: right"><a href="login_selected.html">會員註冊/登入</a></li>
-    </ul>
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_password">會員密碼</label> <input
+											class="form-control" name="password" type="password"
+											id="member_password" required="required" style="width:300px"
+											placeholder="長度至少8，且至少包含一個數字和英文字母！">
+									</div>
+								</div>
+								<div class="row">
 
-    <div style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-        <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員註冊</font>
-        <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_confirmpassword">確認密碼</label> <input
+											class="form-control" name="confirmpassword" type="password"
+											id="member_confirmpassword" required="required" style="width:300px"
+											placeholder="長度至少8，且至少包含一個數字和英文字母！">
+									</div>
+								</div>
+								<div class="row">
 
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_email">電子郵件</label> <input
+											class="form-control" name="email" maxlength="50" type="email"
+											id="member_email" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
 
-            <form id="form" accept-charset="utf-8">
-                <font face="DFKai-sb">
-                    <div style="display: none;">
-                        <input type="hidden" name="_method" value="POST">
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_name">會員帳號</label> <input class="form-control" name="name" maxlength="30"
-                                type="text" id="member_name" required="required">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_password">會員密碼</label> <input class="form-control" name="password"
-                                type="password" id="member_password" required="required" placeholder="長度至少8，且至少包含一個數字和英文字母！">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_confirmpassword">確認密碼</label> <input class="form-control"
-                                name="confirmpassword" type="password" id="member_confirmpassword" required="required" placeholder="長度至少8，且至少包含一個數字和英文字母！">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_email">電子郵件</label> <input class="form-control" name="email"
-                                maxlength="50" type="email" id="member_email" required="required">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_birth">西元生日</label> <input class="form-control" type="date" id="birth"
-                                name="birth" min="" max="" required="required">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_headSticker">個性頭貼</label> <input class="form-control" name="headSticker"
-                                type="text" id="member_headSticker"
-                                placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg"
-                                required="required">
-                        </div>
-                    </div>
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_birth">西元生日</label> <input
+											class="form-control" type="date" id="birth" name="birth"
+											min="" max="" required="required" style="width:300px">
+									</div>
+								</div>
+								<div class="row">
 
+									<div class="col-md-4 col-md-offset-4">
+										<label for="member_headSticker">個性頭貼</label> <input
+											class="form-control" name="headSticker" type="text"
+											id="member_headSticker" style="width:300px"
+											placeholder="請輸入完整路徑如下：https://visualhunt.com/photos/l/7/architecture-store-building.jpg"
+											required="required">
+									</div>
+									
+								</div> <br><input type="button" class="btn btn-outline-info" value="註冊為買家帳號"
+								id="submit_buyer"> &nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-outline-info"
+								value="註冊為賣家帳號" id="submit_seller">
+						</form>
+			</div>
+		</div>
+	</div>	
 
-
-                    <input type="button" class="button" value="註冊為買家帳號" id="submit_buyer">
-                    <input type="button" class="button" value="註冊為賣家帳號" id="submit_seller">
-                </font>
-            </form>
-
-        </div>
-    </div>
-
-    <script type="text/javascript">
+				<script type="text/javascript">
         var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
 
         function getMemberDataFromClient() {
@@ -341,6 +340,5 @@
 
     </script>
 
-</body>
-
+				</body>
 </html>

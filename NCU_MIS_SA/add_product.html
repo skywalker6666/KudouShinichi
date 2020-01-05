@@ -47,42 +47,66 @@
 </head>
 
 <body>
-    <div id="header">
-        <!--容器分為左圖右導覽連結 -->
-        <div>
-            <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo" /></a>
-            <!--導覽列 -->
-            <ul>
-                <li><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px"
-                            width="100px"></img></a></li>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="productIndex.html">商品總覽</a></li>
-                <li><a href="order_tracking.html">訂單追蹤</a></li>
-                <li><a href="shoppingcart.html">購物車</a></li>
-                <li><a href="my_market.html">我的賣場</a></li>
-                <li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a>
-                </li>
+    
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light "
+		style="background-color: #e3f2fd">
+		<a class="navbar-brand" href="index.html"><img
+			src="statics/img/navbar/icon.png" style="float: left" height="50px"
+			width="50px"></img></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-                <div id="member_center1" style="float: right">
-                    <li style="float: left"><a href="member_change.html">會員中心</a></li>
-                    <li style="float: left"><a id="remove" href="index.html">&nbsp;登出 </a></li>
-                    <li style="float: left">
-                </div>
-                <div id="member_center2" style="float: right">
-                    <li><img src="statics/img/navbar/shoppingcart.png" style="float: left" height="20px"
-                            width="20px"></img></li>
-                    <li><a href="shoppingcart.html">購物車</a></li>
-                </div>
-                <div id="member_center3" style="float: right">
-                    <li><img src="statics/img/navbar/user.png" style="float: left" height="20px" width="20px"></img>
-                    </li>
-                    <li id="user_name">user</li>
-                </div>
-            </ul>
-            </nav>
-        </div>
-    </div>
-    <div style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+		<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="index.html">Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="productIndex.html">商品總覽</a></li>
+				<li class="nav-item" id="track"><a class="nav-link"
+					href="order_tracking.html">訂單追蹤</a></li>
+				<li class="nav-item" id="shopcart"><a class="nav-link"
+					href="shoppingcart.html">購物車</a></li>
+				<li class="nav-item" id="mymarket"><a class="nav-link"
+					href="my_market.html">我的賣場</a></li>
+			</ul>
+
+		</div>
+
+		<ul class="navbar-nav mr-auto">
+
+			<li class="nav-item" id="member_center1"><img
+				src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+			<li id="member_center2"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+
+
+			<li id="signup_in" class="nav-item"><a class="nav-link"
+				href="login_selected.html">會員註冊/登入</a></li>
+
+			<li class="nav-item" id="member_center3"><img
+				src="statics/img/navbar/user.png" height="20px" width="20px"></img></li>
+			<li id="user_name" class="nav-link">user</li>
+
+			<li class="nav-item" id="member_center4"><a id="member_center"
+				class="nav-link" href="member_change.html">會員中心</a></li>
+
+			<li class="nav-item" id="member_center5"><a id="remove"
+				class="nav-link" href="index.html">&nbsp;登出 </a></li>
+
+		</ul>
+
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-primary " type="submit">Search</button>
+		</form>
+	</nav>
+    
+    
+    <div style="border: 0px #FBEE98 solid; border-radius: 50px; margin-top:80px;">
         <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
         <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
 
@@ -106,9 +130,9 @@
                   
                     <div class="row">
                         <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4"><label for="address"
-                                style="vertical-align: top;">商品簡介</label>
-                            <textarea class="form-control" cols="50" rows="5" id="productinfo" maxlength="100" required>
+                        <div class="col-md-4 col-md-offset-4">
+                        	<label for="address" style="vertical-align:top;">商品簡介</label>
+                            <textarea id="productinfo" class="form-control" cols="10" rows="5" maxlength="100" required>
                             </textarea>
                         </div>
                     </div>
@@ -152,7 +176,8 @@
             </form>
 
             <div>
-                <input type="button" class="button" value="完成" id="finish">
+            <br>
+                <input type="button" class="btn btn-outline-success" value="完成" id="finish">
             </div>
 
             </font>
@@ -219,7 +244,7 @@
 
                     },
                     error: function () {
-                        alert("無法連線到伺服器！");
+                        alert("不符合欄位格式！");
                     }
                 });
 
@@ -279,17 +304,26 @@
         });
 
         $(document).ready(function () {
-            if (client_id.length == 0) { //登出
-                $("#member_center1").hide();
-                $("#member_center2").hide();
-                $("#member_center3").hide();
-            } else {//登入
+        	if(client_id.length != 0) {//登入會員
+        		
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
                 $("#member_center2").show();
                 $("#member_center3").show();
+                $("#member_center4").show();
+                $("#member_center5").show();
                 $("#signup_in").hide();
-            }
+            }else { //登出
+            	$("#user_name").hide();
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+                $("#member_center4").hide();
+                $("#member_center5").hide();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+            } 
         });
 
         /*----------------------------------------*/

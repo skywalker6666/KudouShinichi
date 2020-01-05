@@ -1,204 +1,174 @@
 <!DOCTYPE html>
-<html>
-
+<html style="overflow:hidden">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <style>
-       
-    </style>
-    <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
-  
-<script src="statics/js/jquery-3.4.1.min.js"></script>
-<script src="statics/js/jquery-confirm.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login</title>
+
+
+<link rel="stylesheet" href="statics/css/register&login.css">
+
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+	<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+	
+<style>
+ 
+
+</style>
 </head>
 
-<body bgcolor="#BCE2FF">
 
- <div class="bd-example">
-  
+	
+		
+		
+	
+	<div class="container-fluid " style="height:100%">
+		<div class="row " >
+			<div class="col-md-6">
+				<a class="navbar-brand" href="index.html" ><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px"></img></a>
+				<br><label style="font-size:30px;margin-top:120px;margin-left:250px">為什麼柯南不買新衣服?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因為其他人會說
+				<br><br>&nbsp;「你看！是新衣耶！」</label><br><br>
+				<label style="font-size:20px;margin-left:250px">歡迎註冊會員，加入新衣的行列！</label>
+			</div>
+			<div class="col-md-6" style="background-color:#fafafa">
+			<form id="form" accept-charset="utf-8"style="margin-top:30%;margin-bottom:50%;margin-left:30%">
 
+				<div class="input text required" style="line-height: 50px">
+					<label for="member_name">會員帳號</label> <input class="form-control"
+						name="name" type="text" id="member_name" required="required" style="width:300px">
+				</div>
+				<div class="input password required" style="line-height: 50px">
+					<label for="password">會員密碼</label> <input class="form-control"
+						name="password" type="password" id="member_password" required="required" style="width:300px">
+				</div>
 
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="true" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+				<br><button id="login" type="button" class="btn btn-outline-success" style="margin-left:45%">登入</button><br><br>
+				<a href="register.html">
+				<button type="button" class="btn btn-outline-danger" style="margin-left:38%" >還沒註冊?</button>
+				</a>
+			</form>
+			</div>
+		</div>
+	</div>
 
-    <div class="navbar-collapse collapse" id="navbarColor03" style="">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-</div>
-   
+	<script type="text/javascript">
+		
+		var password = $('#member_password').val();
+		
+		var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
+		
+		function getMemberDataFromClient() {
+	    	let id = JSON.parse(localStorage.getItem("client_id"));
+	    	let name = JSON.parse(localStorage.getItem("client_name"));
+	    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-    <div style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-        <font face="DFKai-sb" size="6" color="blue"> <label style="margin-left: 32px; line-height: 50px">會員登入</label>
-        </font>
-        <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+	    	id = !id ? new Array() : id;
+	    	name = !name ? new Array() : name;
+	    	isSeller = !isSeller ? new Array() : isSeller;
 
-            <form id="form" accept-charset="utf-8">
-                <font face="DFKai-sb">
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="member_name">會員帳號</label> <input class="form-control" name="name" maxlength="30"
-                                type="text" id="member_name" required="required">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 col-md-offset-4">
-                            <label for="password">會員密碼</label> <input class="form-control" name="password"
-                                type="password" id="member_password" required="required" >
-                        </div>
-                    </div>
-                    <input type="button" class="button" value="登入帳號" id="login">
+	    	return [id, name, isSeller];
+	    }
+		
+		
+		function addDataToMember(id, name, isSeller) {
+	    	if (!(client_id.includes(id))) {
+	    		client_id.push(id);
+	    		client_name.push(name);
+	    		client_isSeller.push(isSeller)
+	    		updateMemberDataToClent();
+	    	}
+	    }
+		
+	    
+	     function updateMemberDataToClent() {
+	     	localStorage.setItem("client_id", JSON.stringify(client_id));
+	     	localStorage.setItem("client_name", JSON.stringify(client_name));
+	     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
 
-                </font>
-            </form>
+	     }
+	     
+	     function getThisMember() {
+	    	 var name = $('#member_name').val();
+	    	 var data = {
+	    			"name": $("#member_name").val(),
+	     			"password": $("#member_password").val()
+	     	}
+	     	// 驗證輸入的資料
+	     	pass_vaild = vaildData(data);
+	    	 if (pass_vaild) {
+				$.ajax({
+					type : "GET",
+					url : "api/member.do",
+					crossDomain : true,
+					data : data,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						
+						if (response.status == 200) {
+							var id = response.response.data["0"].idtbl_member;
+							var name = response.response.data["0"].name;
+							var isSeller = response.response.data["0"].isSeller;
 
-        </div>
-    </div>
-
-    <script type="text/javascript">
-
-        var password = $('#member_password').val();
-
-        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
-
-        function getMemberDataFromClient() {
-            let id = JSON.parse(localStorage.getItem("client_id"));
-            let name = JSON.parse(localStorage.getItem("client_name"));
-            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
-
-            id = !id ? new Array() : id;
-            name = !name ? new Array() : name;
-            isSeller = !isSeller ? new Array() : isSeller;
-
-            return [id, name, isSeller];
-        }
-
-
-        function addDataToMember(id, name, isSeller) {
-            if (!(client_id.includes(id))) {
-                client_id.push(id);
-                client_name.push(name);
-                client_isSeller.push(isSeller)
-                updateMemberDataToClent();
-            }
-        }
-
-
-        function updateMemberDataToClent() {
-            localStorage.setItem("client_id", JSON.stringify(client_id));
-            localStorage.setItem("client_name", JSON.stringify(client_name));
-            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-
-        }
-
-        function getThisMember() {
-            var name = $('#member_name').val();
-            var data = {
-                "name": $("#member_name").val(),
-                "password": $("#member_password").val()
-            }
-            // 驗證輸入的資料
-            pass_vaild = vaildData(data);
-            if (pass_vaild) {
-                $.ajax({
-                    type: "GET",
-                    url: "api/member.do",
-                    crossDomain: true,
-                    data: data,
-                    cache: false,
-                    dataType: 'json',
-                    timeout: 5000,
-                    success: function (response) {
-
-                        if (response.status == 200) {
-                            var id = response.response.data["0"].idtbl_member;
-                            var name = response.response.data["0"].name;
-                            var isSeller = response.response.data["0"].isSeller;
-
-                            addDataToMember(id, name, isSeller);
-                            document.location.href = "index.html";
-
-                        }
-                        alert(response.message);
-                        console.log(response);
+							addDataToMember(id,name,isSeller); 
+ 							document.location.href = "index.html"; 
+ 
+						}
+						alert(response.message);
+						console.log(response);
 
 
 
-                    },
-                    error: function () {
-                        alert("無法連線到伺服器！");
-                    }
-                });
-            }
-        }
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+	     }
+			}
+	     
+	  // 更新會員列表表格
+	     function updateTable(data) {
+	         $("#table > tbody").empty();
+	         var table_html = '';
+	         $.each(data, function(index, value) {
+	             table_html += '<tr><td scope="row">' + value['idtbl_member'] + '</td>';
+	             table_html += '<td>' + value['name'] + '</td>';
+	             table_html += '<td>' + value['email'] + '</td>';
+	             table_html += '<td>' + value['birthday'] + '</td>';
+	             table_html += '<td>' + value['isSeller'] + '</td>';
+	             table_html += '<td>';
+	             table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
+	         })
 
-        // 更新會員列表表格
-        function updateTable(data) {
-            $("#table > tbody").empty();
-            var table_html = '';
-            $.each(data, function (index, value) {
-                table_html += '<tr><td scope="row">' + value['idtbl_member'] + '</td>';
-                table_html += '<td>' + value['name'] + '</td>';
-                table_html += '<td>' + value['email'] + '</td>';
-                table_html += '<td>' + value['birthday'] + '</td>';
-                table_html += '<td>' + value['isSeller'] + '</td>';
-                table_html += '<td>';
-                table_html += '<a href="javascript: deleteMember(' + value['idtbl_member'] + ');">刪除</a></td></tr>';
-            })
 
+	         $("#table > tbody").append(table_html);
+	     }	
+	  
+	     function vaildData(data) {
+	    	var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-            $("#table > tbody").append(table_html);
-        }
-
-        function vaildData(data) {
-            var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-            if (data["name"] == "" || data["password"] == "") {
-                alert("必填寫欄位不得有空值！");
-            } else if (data['password'] != "" && !password_rule.test(data['password'])) {
+	     	if (data["name"] == "" || data["password"] == ""){
+	     		alert("必填寫欄位不得有空值！");
+	     	}else if(data['password'] != "" && !password_rule.test(data['password'])) {
                 alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
             }
-            else {//都正確
-                return true;
-            }
+	     	else{//都正確
+	     		return true;
+	     	}
 
-            return false;
-        }
-
-        $(document).ready(function () {
-            $("#login").click(function () {
-                getThisMember();
-            });
-        });
-    </script>
+	     	return false;
+	     }
+	     
+		$(document).ready(function() {
+			$("#login").click(function() {
+				getThisMember();
+			});
+		});
+	</script>
 
 </body>
 

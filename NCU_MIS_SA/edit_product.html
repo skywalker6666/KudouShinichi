@@ -43,24 +43,65 @@
 </head>
 
 <body>
-    <div id="header">
-        <!--容器分為左圖右導覽連結 -->
-        <div >
-            <a href="index.html"><img src="statics/img/navbar/icon.png" width="70" alt="logo" /></a>
-            <!--導覽列 -->
-            <nav>
-                <ul >
-                    <li ><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left"
-                                height="100px" width="100px"></img></a></li>
-                    <li ><a  href="index.html">Home</a></li>
-                    <li ><a  href="productIndex.html">商品總覽</a></li>
-                    <li ><a  href="order_tracking.html">訂單追蹤</a></li>
-                    <li ><a  href="shoppingcart.html">購物車</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <div  style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light "
+		style="background-color: #e3f2fd">
+		<a class="navbar-brand" href="index.html"><img
+			src="statics/img/navbar/icon.png" style="float: left" height="50px"
+			width="50px"></img></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="index.html">Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="productIndex.html">商品總覽</a></li>
+				<li class="nav-item" id="track"><a class="nav-link"
+					href="order_tracking.html">訂單追蹤</a></li>
+				<li class="nav-item" id="shopcart"><a class="nav-link"
+					href="shoppingcart.html">購物車</a></li>
+				<li class="nav-item" id="mymarket"><a class="nav-link"
+					href="my_market.html">我的賣場</a></li>
+			</ul>
+
+		</div>
+
+		<ul class="navbar-nav mr-auto">
+
+			<li class="nav-item" id="member_center1"><img
+				src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+			<li id="member_center2"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+
+
+			<li id="signup_in" class="nav-item"><a class="nav-link"
+				href="login_selected.html">會員註冊/登入</a></li>
+
+			<li class="nav-item" id="member_center3"><img
+				src="statics/img/navbar/user.png" height="20px" width="20px"></img></li>
+			<li id="user_name" class="nav-link">user</li>
+
+			<li class="nav-item" id="member_center4"><a id="member_center"
+				class="nav-link" href="member_change.html">會員中心</a></li>
+
+			<li class="nav-item" id="member_center5"><a id="remove"
+				class="nav-link" href="index.html">&nbsp;登出 </a></li>
+
+		</ul>
+
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-primary " type="submit">Search</button>
+		</form>
+	</nav>
+    
+    
+    <div  style="border: 0px #FBEE98 solid; border-radius: 50px; margin-top:80px;">
         <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;修改商品</font>
         <div 
             style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
@@ -129,7 +170,8 @@
                         </div>
                     </div>
                     <div>
-                         <input type="button" class="button" value="完成" id="finish">
+                    <br>
+                         <input type="button" class="btn btn-outline-success" value="完成" id="finish">
 
                     </div>
             </form>
@@ -255,12 +297,10 @@
                                 alert("產品修改成功！");
                                 document.location.href = "my_market.html";
                             }
-
-
                         },
                         error: function () {
-                            alert("無法連線到伺服器！");
-                            alert(productID);
+                            alert("不符合欄位格式！");
+                            //alert(productID);
                         }
                     });
 
@@ -274,7 +314,74 @@
 
             return [id];
         }
+        /*------------登入登出實作member cookie-----------*/
 
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+            return [id, name, isSeller];
+        }
+
+        function updateMemberDataToClent() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+
+        }
+
+        function loguot() {
+            client_id = [];
+            client_name = [];
+            client_cart_obj = [];
+            client_cart_amount = [];
+            updateMemberDataToClent();
+            client_isSeller = [];
+            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+            $("#signup_in").show();
+            $("#user_name").empty();
+        }
+
+        $("#remove").click(function () {
+            console.log("[@Action]登出");
+            loguot();
+        });
+
+        $(document).ready(function () {
+        	if(client_id.length != 0) {//登入會員
+        		
+                $("#user_name").html(client_name);
+                $("#member_center1").show();
+                $("#member_center2").show();
+                $("#member_center3").show();
+                $("#member_center4").show();
+                $("#member_center5").show();
+                $("#signup_in").hide();
+            }else { //登出
+            	$("#user_name").hide();
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+                $("#member_center4").hide();
+                $("#member_center5").hide();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+            } 
+        });
+
+        /*----------------------------------------*/
 
 
     </script>

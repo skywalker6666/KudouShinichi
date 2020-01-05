@@ -14,7 +14,8 @@
 
 <link href="statics/css/smart.css" rel="stylesheet">
 
-<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link href="statics/css/bootstrap-smart.min.css" rel="stylesheet">
+<link href="statics/css/font-awesome.min.css" rel="stylesheet">
 
 
 
@@ -114,14 +115,14 @@
 							</ul></li>
 						<li><a href="#">兒童館<span class="caret"></span></a>
 							<ul class="dropdown-menu" style="font-size: 1.5rem;">
-								<li><a href="#">秋冬季衣著</a></li>
-								<li><a href="#">春夏季衣著</a></li>
-								<li><a href="#">運動休閒類型</a></li>
-								<li><a href="#">西裝/套裝</a></li>
-								<li><a href="#">童裝</a></li>
-								<li><a href="#">襪子</a></li>
-								<li><a href="#">鞋子</a></li>
-								<li><a href="#">配件</a></li>
+								<li><a id="child_winter" href="#">秋冬季衣著</a></li>
+								<li><a id="child_summer" href="#">春夏季衣著</a></li>
+								<li><a id="child_exercise" href="#">運動休閒類型</a></li>
+								<li><a id="child_suit" href="#">西裝/套裝</a></li>
+								<li><a id="child_child" href="#">童裝</a></li>
+								<li><a id="child_socks" href="#">襪子</a></li>
+								<li><a id="child_shoes" href="#">鞋子</a></li>
+								<li><a id="child_accessories" href="#">配件</a></li>
 							</ul></li>
 					</ul></li>
 			</ul>
@@ -253,10 +254,10 @@
                         	var utchour=d.getHours();
                         	
                         	//時間演算法
-                        	if((utcyear-date_year)<=1)
-                        		if((utcmonth-date_month)<=0||(utcmonth-date_month)==-11)
-                        			if((utcday-date_day)<1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
-                        				if((utchour-date_hour)<=12)
+                     if((utcyear-date_year)<=1)
+                          if((utcmonth-date_month)==0||(utcmonth-date_month)==0||(utcmonth-date_month)==-11)
+                           if((utcday-date_day)==0||(utcday-date_day)==1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
+                            if((utchour-date_hour)<=23)
                         				{
                         					new_product_panel += addProduct(this);
                         				}
@@ -616,6 +617,58 @@
         	 getFilterProduct(type,category);
         });
          
+         
+         $("#child_winter").click(function () {
+            	
+        	 var type = "兒童館";
+        	 var category = "秋冬季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_summer").click(function () {
+            	
+        	 var type = "兒童館";
+        	 var category = "春夏季衣著";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_exercise").click(function () {
+         	
+        	 var type = "兒童館";
+        	 var category = "運動休閒類型";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_suit").click(function () {
+          	
+        	 var type = "兒童館";
+        	 var category = "西裝/套裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_child").click(function () {
+           	
+        	 var type = "兒童館";
+        	 var category = "童裝";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_socks").click(function () {
+            	
+        	 var type = "兒童館";
+        	 var category = "襪子";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_shoes").click(function () {
+            	
+        	 var type = "兒童館";
+        	 var category = "鞋子";
+        	 getFilterProduct(type,category);
+        });
+         $("#child_accessories").click(function () {
+            	
+        	 var type = "兒童館";
+        	 var category = "配件";
+        	 getFilterProduct(type,category);
+        });
+         
+         
+         
         	if(client_id.length != 0) {//登入會員
                 $("#user_name").html(client_name);
                 $("#member_center1").show();
@@ -653,7 +706,7 @@
 <footer class="text-muted">
 	<div class="container">
 		<p class="float-right">
-			<a href="#">Back to top</a>
+			<a href="#"><button class="btn btn-outline-secondary">Back to top</button></a>
 		</p>
 	</div>
 </footer>

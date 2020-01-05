@@ -2,110 +2,133 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <title>my_market</title>
+<title>my_market</title>
 
-    <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-        .button {
-	
-            background-color: #FF8787;
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px 10px;
-            font-family:DFKai-sb;
-        }
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
+.button {
+	background-color: #FF8787;
+	border: none;
+	color: white;
+	padding: 10px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 10px;
+	cursor: pointer;
+	margin: 20px 10px;
+	font-family: DFKai-sb;
+}
+
 .button:hover {
-            background-color: #f44336;
-            color: white;
-        	  }
-    </style>
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="statics/css/navbar.css">
-    <link rel="stylesheet" href="statics/css/themebox.css">
-    <link rel="stylesheet" href="statics/css/card.css">
-    <link rel="stylesheet" href="statics/css/product.css">
-   
+	background-color: #f44336;
+	color: white;
+}
+</style>
+<link href="statics/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="statics/css/themebox.css">
+<link rel="stylesheet" href="statics/css/card.css">
+<link rel="stylesheet" href="statics/css/product.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 
-    <script src="statics/js/jquery-3.4.1.min.js"></script>
+<script src="statics/js/jquery-3.4.1.min.js"></script>
 </head>
 
-<body bgcolor="#BCE2FF">
 
-   <ul class="navbar">
-		<li class="navbar"><a href="index.html"><img src="statics/img/navbar/icon.png" style="float: left" height="100px" width="100px" ></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem" href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
-		<li id="signup_in" style="float: right"><a class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
-		
-		<div id="member_center1" class="mediumbox" style="float: right">
-			<li style="float: left"><a class="navbarFloating"
-				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating" href="index.html"
-				>&nbsp;登出 </a></li>
-			<li style="float: left">
-	
-		</div>
-		<div id="member_center2" class="smallbox" style="float: right"> 
-			<li><img src="statics/img/navbar/shoppingcart.png"
-				style="float: left" height="20px" width="20px"></img></li>
-			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-		</div>
-		<div id="member_center3" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/user.png" style="float: left"
-				height="20px" width="20px"></img></li>
-			<li id="user_name"class="navbarFloating">user</li>
-		</div>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light "
+	style="background-color: #e3f2fd;">
+	<a class="navbar-brand" href="index.html"><img
+		src="statics/img/navbar/icon.png" style="float: left" height="50px"
+		width="50px"></img></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarColor03" aria-controls="navbarColor03"
+		aria-expanded="true" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				href="index.html">Home <span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="productIndex.html">商品總覽</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="order_tracking.html">訂單追蹤</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+			<li class="nav-item"><a class="nav-link" href="my_market.html">我的賣場</a>
+			</li>
+		</ul>
+
+	</div>
+
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item"><img
+			src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+		<li><a class="nav-link" href="shoppingcart.html">購物車</a></li>
+
+
+		<li id="signup_in" class="nav-item"><a class="nav-link"
+			href="login_selected.html">會員註冊/登入</a></li>
+
+		<li class="nav-item"><img src="statics/img/navbar/user.png"
+			height="20px" width="20px"></img></li>
+		<li id="user_name" class="nav-link">user</li>
+
+		<li class="nav-item"><a id="member_center" class="nav-link"
+			href="member_change.html">會員中心</a></li>
+
+		<li class="nav-item"><a id="remove" class="nav-link"
+			href="index.html">&nbsp;登出 </a></li>
+
 	</ul>
+	<form class="form-inline">
+		<input class="form-control mr-sm-2" type="search" placeholder="Search"
+			aria-label="Search">
+		<button class="btn btn-outline-primary " type="submit">Search</button>
+	</form>
+</nav>
 
-    <div class="frame">
-
-        <div class="generalbox">
-            <font face="DFKai-sb" size="6" color="blue"> 我的賣場</font>
-            <div><button id="add_product" name="add_product" type="button" class="button"
-                    onclick="location.href='add_product.html'">新增商品</button><Br><Br>
-            </div>
-
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div id="product_panel" class="row">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+<div style="margin-top:80px">
+		
+	<div class="album py-5 bg-light">
+		<div class="container">
+		
+			<button id="add_product" name="add_product" type="button"
+			class="btn btn-outline-success" onclick="location.href='add_product.html'">新增商品</button>
+			<br></br>
+			<div id="product_panel" class="row"></div>
+		</div>
+	</div>
+</div>
 
 
 
-    <script>
+
+<script>
     
     var [client_id]  = getIDFromClient();
     var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
@@ -165,20 +188,20 @@
             $.each(data, function (index, val) {
                 inner_html += '<div class="col-md-4" style="float:left;">';
                 inner_html += '<div class="card-header"> <font face="DFKai-sb" color="blue"> ';
-                inner_html += '<h1 class="font-weight-normal text-center text-truncate">' + val['product_name'] + '</h1>';
+                inner_html += '<h3 class="font-weight-normal text-center text-truncate">' + val['product_name'] + '</h3>';
                 inner_html += '</div>';
                 inner_html += '<div class="card mb-4 shadow-sm">';
                 inner_html += '<img src="' + val['image'] + '" width="200px" height="200px" hspace="50px">';
                 inner_html += '<div class="card-body">';
-                inner_html += '<h2 class="card-title pricing-card-title">$' + val['price'] + ' <small class="text-muted">/ NTD</small></h2>';
-                inner_html += '<h3 class="card-text">商品簡介:' + val['product_info'] + '</h3>';
-                inner_html += '<h3 class="card-text">inventory:' + val['inventory'] + '</h3>';
-                inner_html += '<h3 class="card-text">類別:' + val['type'] + '</h3>';
-                inner_html += '<h3 class="card-text">種類:' + val['category'] + '</h3>';
+                inner_html += '<h4 class="card-title pricing-card-title">$' + val['price'] + ' <small class="text-muted">/ NTD</small></h4>';
+                inner_html += '<h5 class="card-text">商品簡介:' + val['product_info'] + '</h5>';
+                inner_html += '<h5 class="card-text">庫存:' + val['inventory'] + '</h5>';
+                inner_html += '<h5 class="card-text">類別:' + val['type'] + '</h5>';
+                inner_html += '<h5 class="card-text">種類:' + val['category'] + '</h5><br>';
                 inner_html += '<div class="d-flex justify-content-between align-items-center">';
                 inner_html += '<div class="btn-group">';
-                inner_html += '<a class="button" href="edit_product.html?id=' + val['idtbl_product'] + '">修改商品</a>';
-                inner_html += '<a class="button" href="javascript: deleteMember(' + val['idtbl_product'] + ');">刪除商品</a>';
+                inner_html += '<a class="btn btn-outline-warning" href="edit_product.html?id=' + val['idtbl_product'] + '">修改商品</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+                inner_html += '<a class="btn btn-outline-danger" href="javascript: deleteMember(' + val['idtbl_product'] + ');">刪除商品</a>&nbsp;&nbsp;';
                 inner_html += '</div><small class="text-muted">id:' + val['idtbl_product'] + '</small></font>';
                 inner_html += '</div></div></div></div>';
             })
@@ -280,15 +303,15 @@
        /*----------------------------------------*/
     </script>
 
-    <footer class="text-muted">
-        <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-        </div>
-    </footer>
+<footer class="text-muted">
+	<div class="container">
+		<p class="float-right">
+			<a href="#"><button class="btn btn-outline-secondary">Back to top</button></a>
+
+		</p>
+	</div>
+</footer>
 
 
 </body>
-
 </html>
