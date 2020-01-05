@@ -10,6 +10,94 @@
 
 
     <style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+    
     </style>
     
     <link
@@ -225,8 +313,8 @@
                         	
                         	//時間演算法
                         	if((utcyear-date_year)<=1)
-                        		if((utcmonth-date_month)<=0||(utcmonth-date_month)==-11)
-                        			if((utcday-date_day)<1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
+                        		if((utcmonth-date_month)==0||(utcmonth-date_month)==0||(utcmonth-date_month)==-11)
+                        			if((utcday-date_day)==0||(utcday-date_day)==1||(utcday-date_day)==-30||(utcday-date_day)==-29||(utcday-date_day)==-28||(utcday-date_day)==-27)
                         				if((utchour-date_hour)<=12)
                         				{
                         					new_product_panel += addProduct(this);
@@ -340,7 +428,7 @@
             inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
             inner_html += '</div>';
             inner_html += '<div class="card mb-4 shadow-sm">';
-            inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
+            inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px" class="image">';
             inner_html += '<div class="card-body">';
             inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
             inner_html += '<p class="card-text">' + data.product_info + '</p>';
