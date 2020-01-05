@@ -2,389 +2,338 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author"
-	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="generator" content="Jekyll v3.8.5">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
 
-<title>AddProduct</title>
+    <title>AddProduct</title>
 
 
 
-<style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
+    <style>
+    .button {
+	
+            background-color: #FF8787;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px 10px;
+            font-family:DFKai-sb;
+        }
+	.button:hover {
+            background-color: #f44336;
+            color: white;
+        	  }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
+    </style>
 
-.box {
-	width: 800px;
-	height: 500px;
-	position: absolute;
-	left: 50%;
-	top: 60%;
-	margin-top: -250px;
-	margin-left: -400px;
-}
+    <!-- Custom styles for this template -->
 
-.box2 {
-	width: 600px;
-	height: 400px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-top: -200px;
-	margin-left: -300px;
-}
 
-input {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 225px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
+    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 
-input:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-textarea {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 225px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
-
-textarea:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-select {
-	outline-style: none;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 9px 9px;
-	width: 245px;
-	font-size: 14px;
-	font-weight: 700;
-	font-family: "Microsoft soft";
-}
-
-select:focus {
-	border-color: #66afe9;
-	outline: 0;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
-		rgba(102, 175, 233, .6)
-}
-
-.button {
-	background-color: #FF8787;
-	border: none;
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	border-radius: 10px;
-}
-
-.button:hover {
-	background-color: #f44336;
-	color: white;
-}
-</style>
-
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
-<link rel="stylesheet" href="statics/css/card.css">
-<link href="statics/css/product.css" rel="stylesheet">
-<link href="statics/css/jquery-confirm.css" rel="stylesheet">
-
-<script src="statics/js/jquery-3.4.1.min.js"></script>
-<script src="statics/js/jquery-confirm.js"></script>
-<script src="statics/js/popper.min.js"></script>
+    <script src="statics/js/jquery-3.4.1.min.js"></script>
+    <script src="statics/js/jquery-confirm.js"></script>
+    <script src="statics/js/popper.min.js"></script>
 
 </head>
 
 <body>
-	<div id="header">
-		<!--容器分為左圖右導覽連結 -->
-		<div class="navbar">
-			<a href="index.html"><img src="statics/img/navbar/icon.png"
-				width="70" alt="logo" /></a>
-			<!--導覽列 -->
-			<ul class="navbar">
-				<li class="navbar"><a href="index.html"><img
-						src="statics/img/navbar/icon.png" style="float: left"
-						height="100px" width="100px"></img></a></li>
-				<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-				<li class="navbar"><a class="navbarItem"
+    
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light "
+		style="background-color: #e3f2fd">
+		<a class="navbar-brand" href="index.html"><img
+			src="statics/img/navbar/icon.png" style="float: left" height="50px"
+			width="50px"></img></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="index.html">Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
 					href="productIndex.html">商品總覽</a></li>
-				<li class="navbar"><a class="navbarItem"
+				<li class="nav-item" id="track"><a class="nav-link"
 					href="order_tracking.html">訂單追蹤</a></li>
-				<li class="navbar"><a class="navbarItem"
+				<li class="nav-item" id="shopcart"><a class="nav-link"
 					href="shoppingcart.html">購物車</a></li>
-				<li class="navbar"><a class="navbarItem" href="my_market.html">我的賣場</a></li>
-				<li id="signup_in" style="float: right"><a
-					class="navbarItemSide" href="login_selected.html">會員註冊/登入</a></li>
-
-				<div id="member_center1" class="mediumbox" style="float: right">
-					<li style="float: left"><a class="navbarFloating"
-						href="member_change.html">會員中心</a></li>
-					<li style="float: left"><a id="remove" class="navbarFloating"
-						href="index.html">&nbsp;登出 </a></li>
-					<li style="float: left">
-				</div>
-				<div id="member_center2" class="smallbox" style="float: right">
-					<li><img src="statics/img/navbar/shoppingcart.png"
-						style="float: left" height="20px" width="20px"></img></li>
-					<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-				</div>
-				<div id="member_center3" class="smallbox" style="float: right">
-					<li><img src="statics/img/navbar/user.png" style="float: left"
-						height="20px" width="20px"></img></li>
-					<li id="user_name" class="navbarFloating">user</li>
-				</div>
+				<li class="nav-item" id="mymarket"><a class="nav-link"
+					href="my_market.html">我的賣場</a></li>
 			</ul>
-			</nav>
-		</div>
-	</div>
-	<div class="box"
-		style="border: 0px #FBEE98 solid; border-radius: 50px; background-color: #FBEE98;">
-		<font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
-		<div class="box2"
-			style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
-
-
-			<div>
-				<font face="DFKai-sb">
-					<div>
-						<label for="lastName">商品名稱</label> <input type="text"
-							id="product_name" maxlength="45" value="" required>
-					</div>
-					<div>
-						<label for="firstName">商品售價</label> <input type="text"
-							id="product_price" maxlength="11" placeholder="" value=""
-							required>
-					</div>
-					<div>
-						<label for="phonenum">商品庫存</label> <input type="text"
-							id="product_inventory" maxlength="11" required>
-					</div>
-					<div>
-						<label for="address" style="vertical-align: top;">商品簡介</label>
-						<textarea cols="50" rows="5" id="productinfo" maxlength="100"
-							required>
-						</textarea>
-					</div>
-					<div>
-						<label for="lastName">商品圖片</label> <input type="text"
-							id="image_name" maxlength="2000" value="" placeholder="請輸入完整路徑"
-							required>
-					</div>
-					<div>
-						<label for="lastName">商品類別</label> 
-						<select name="YourLocation" id="type">
-						　<option value="男人館">男人館</option>
-						　<option value="女人館">女人館</option>
-						　<option value="兒童館">兒童館</option>
-						</select>
-					</div>
-					<div>
-						<label for="lastName">商品種類</label> 
-						<select name="YourLocation" id="category">
-						　<option value="秋冬季衣著">秋冬季衣著</option>
-						　<option value="春夏季衣著">春夏季衣著</option>
-						　<option value="運動休閒類型">運動休閒類型</option>
-						　<option value="西裝/套裝">西裝/套裝</option>
-						　<option value="童裝">童裝</option>
-						　<option value="襪子">襪子</option>
-						　<option value="鞋子">鞋子</option>
-						　<option value="配件">配件</option>
-						</select>
-					</div>
-			</div>
-
-			<div>
-				<input type="button" class="button" value="完成" id="finish">
-			</div>
-
-			</font>
-
 
 		</div>
-	</div>
+
+		<ul class="navbar-nav mr-auto">
+
+			<li class="nav-item" id="member_center1"><img
+				src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+			<li id="member_center2"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+
+
+			<li id="signup_in" class="nav-item"><a class="nav-link"
+				href="login_selected.html">會員註冊/登入</a></li>
+
+			<li class="nav-item" id="member_center3"><img
+				src="statics/img/navbar/user.png" height="20px" width="20px"></img></li>
+			<li id="user_name" class="nav-link">user</li>
+
+			<li class="nav-item" id="member_center4"><a id="member_center"
+				class="nav-link" href="member_change.html">會員中心</a></li>
+
+			<li class="nav-item" id="member_center5"><a id="remove"
+				class="nav-link" href="index.html">&nbsp;登出 </a></li>
+
+		</ul>
+
+
+	</nav>
+    
+    
+    <div style="border: 0px #FBEE98 solid; border-radius: 50px; margin-top:80px;">
+        <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;新增商品</font>
+        <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+
+
+            <form class="needs-validatiion" novalidate>
+                <font face="DFKai-sb">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"><label for="lastName">商品名稱</label> <input
+                                class="form-control" type="text" id="product_name" maxlength="45" value="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2 "><label for="firstName">商品售價</label> <input
+                                class="form-control" type="text" id="product_price" maxlength="11" placeholder=""
+                                value="" required></div>
+                        <div class="col-md-2 col-md-offset-4"><label for="phonenum">商品庫存</label> <input
+                         class="form-control" type="text" id="product_inventory" maxlength="11" required></div>
+                    </div>
+                  
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4">
+                        	<label for="address" style="vertical-align:top;">商品簡介</label>
+                            <textarea id="productinfo" class="form-control" cols="10" rows="5" maxlength="100" required>
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品圖片</label> <input
+                                class="form-control" type="text" id="image_name" maxlength="2000" value=""
+                                placeholder="請輸入完整路徑" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品類別</label>
+                            <select class="form-control" name="YourLocation" id="type">
+			                                　<option value="男人館">男人館</option>
+			                                　<option value="女人館">女人館</option>
+			                                　<option value="兒童館">兒童館</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 col-md-offset-4"> <label for="lastName">商品種類</label>
+                            <select class="form-control" name="YourLocation" id="category">
+			                                　<option value="秋冬季衣著">秋冬季衣著</option>
+			                                　<option value="春夏季衣著">春夏季衣著</option>
+			                                　<option value="運動休閒類型">運動休閒類型</option>
+			                                　<option value="西裝/套裝">西裝/套裝</option>
+			                                　<option value="童裝">童裝</option>
+			                                　<option value="襪子">襪子</option>
+			                                　<option value="鞋子">鞋子</option>
+			                                　<option value="配件">配件</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+            </form>
+
+            <div>
+            <br>
+                <input type="button" class="btn btn-outline-success" value="完成" id="finish">
+            </div>
+
+            </font>
+
+
+        </div>
+    </div>
+<br><br>
 
 
 
+    <script type="text/javascript">
+        var [client_id] = getIDFromClient();
 
-	<script type="text/javascript">
-	var [client_id]  = getIDFromClient();
-	
-		$(document).ready(function() {
-			// 處理表單點擊事件
-			$('#finish').click(function() {
-				submit();
-			});
-			
-
-			function submit() {
-				var name = $('#product_name').val();
-				var price = $('#product_price').val();
-				var inventory = $('#product_inventory').val();
-				var sellerID = parseInt(client_id.toString());
-				var image = $('#image_name').val();
-				var productinfo = $('#productinfo').val();
-				var type = $('#type').val();
-				var category = $('#category').val();
+        $(document).ready(function () {
+            // 處理表單點擊事件
+            $('#finish').click(function () {
+                submit();
+            });
 
 
-				// 將資料組成JSON格式
-				var data_object = {
-					"product_name" : name,
-					"price" : price,
-					"inventory" : inventory,
-					"sellerID" : sellerID,
-					"image" : image,
-					"product_info" : productinfo,
-					"type" : type,
-					"category" : category
-				};
+            function submit() {
+                var name = $('#product_name').val();
+                var price = $('#product_price').val();
+                var inventory = $('#product_inventory').val();
+                var sellerID = parseInt(client_id.toString());
+                var image = $('#image_name').val();
+                var productinfo = $('#productinfo').val();
+                var type = $('#type').val();
+                var category = $('#category').val();
 
-				// 將JSON格式轉換成字串
-				var data_string = JSON.stringify(data_object);
 
-				// 發出POST的AJAX請求
-				$.ajax({
-					type : "POST",
-					url : "api/product.do",
-					data : data_string,
-					crossDomain : true,
-					cache : false,
-					dataType : 'json',
-					timeout : 5000,
-					success : function(response) {
-						$('#flashMessage').html(response.message);
-						$('#flashMessage').show();
-						if (response.status == 200) {
-							alert("產品新增成功！");
-							document.location.href = "my_market.html";
-						}
+                // 將資料組成JSON格式
+                var data_object = {
+                    "product_name": name,
+                    "price": price,
+                    "inventory": inventory,
+                    "sellerID": sellerID,
+                    "image": image,
+                    "product_info": productinfo,
+                    "type": type,
+                    "category": category
+                };
 
-					},
-					error : function() {
-						alert("無法連線到伺服器！");
-					}
-				});
+                // 將JSON格式轉換成字串
+                var data_string = JSON.stringify(data_object);
 
-			}
-		})
-		
-		function getIDFromClient() {
-        	let id = JSON.parse(localStorage.getItem("client_id"));
-        	
-        	id = !id ? new Array() : id;
-        	
-        	return [id];
+                // 發出POST的AJAX請求
+                $.ajax({
+                    type: "POST",
+                    url: "api/product.do",
+                    data: data_string,
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        $('#flashMessage').html(response.message);
+                        $('#flashMessage').show();
+                        if (response.status == 200) {
+                            alert("產品新增成功！");
+                            document.location.href = "my_market.html";
+                        }
+
+                    },
+                    error: function () {
+                        alert("不符合欄位格式！");
+                    }
+                });
+
+            }
+        })
+
+        function getIDFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+
+            id = !id ? new Array() : id;
+
+            return [id];
         }
-		
-		 /*------------登入登出實作member cookie-----------*/
-   
-     var [client_id, client_name, client_isSeller]  = getMemberDataFromClient();
 
-    function getMemberDataFromClient() {
-    	let id = JSON.parse(localStorage.getItem("client_id"));
-    	let name = JSON.parse(localStorage.getItem("client_name"));
-    	let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+        /*------------登入登出實作member cookie-----------*/
 
-    	id = !id ? new Array() : id;
-    	name = !name ? new Array() : name;
-    	isSeller = !isSeller ? new Array() : isSeller;
-    	return [id, name, isSeller];
-    }
-	
-     function updateMemberDataToClent() {
-     	localStorage.setItem("client_id", JSON.stringify(client_id));
-     	localStorage.setItem("client_name", JSON.stringify(client_name));
-     	localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-        localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-        localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
 
-     }
-    
-    function loguot() {
-      client_id = [];
-      client_name = [];
-      client_cart_obj = [];
-      client_cart_amount = [];
-      updateMemberDataToClent();
-      client_isSeller = [];
-      updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
-      $("#member_center1").hide();
-      $("#member_center2").hide();
-      $("#member_center3").hide();
-      $("#signup_in").show();
-      $("#user_name").empty();
-    }
-    
-    $("#remove").click(function () {
-     	console.log("[@Action]登出");
-     	loguot();
-     });
-    
-    $(document).ready(function(){
-    	 if(client_id.length == 0){ //登出
-    		 $("#member_center1").hide();
-    	     $("#member_center2").hide();
-    	     $("#member_center3").hide();  
-    	 }else{//登入
-    		 $("#user_name").html(client_name);
-       	 	 $("#member_center1").show();
-       	 	 $("#member_center2").show();
-       	     $("#member_center3").show();
-       		 $("#signup_in").hide();
-    	 }
-    });
-   
-    /*----------------------------------------*/
-	</script>
+        function getMemberDataFromClient() {
+            let id = JSON.parse(localStorage.getItem("client_id"));
+            let name = JSON.parse(localStorage.getItem("client_name"));
+            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
+            id = !id ? new Array() : id;
+            name = !name ? new Array() : name;
+            isSeller = !isSeller ? new Array() : isSeller;
+            return [id, name, isSeller];
+        }
 
+        function updateMemberDataToClent() {
+            localStorage.setItem("client_id", JSON.stringify(client_id));
+            localStorage.setItem("client_name", JSON.stringify(client_name));
+            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+
+        }
+
+        function loguot() {
+            client_id = [];
+            client_name = [];
+            client_cart_obj = [];
+            client_cart_amount = [];
+            updateMemberDataToClent();
+            client_isSeller = [];
+            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+            $("#member_center1").hide();
+            $("#member_center2").hide();
+            $("#member_center3").hide();
+            $("#signup_in").show();
+            $("#user_name").empty();
+        }
+
+        $("#remove").click(function () {
+            console.log("[@Action]登出");
+            loguot();
+        });
+
+        $(document).ready(function () {
+        	if(client_id.length != 0) {//登入會員
+        		
+                $("#user_name").html(client_name);
+                $("#member_center1").show();
+                $("#member_center2").show();
+                $("#member_center3").show();
+                $("#member_center4").show();
+                $("#member_center5").show();
+                $("#signup_in").hide();
+            }else { //登出
+            	$("#user_name").hide();
+                $("#member_center1").hide();
+                $("#member_center2").hide();
+                $("#member_center3").hide();
+                $("#member_center4").hide();
+                $("#member_center5").hide();
+                $("#shopcart").hide();
+                $("#track").hide();
+                $("#mymarket").hide();
+            } 
+        });
+
+        /*----------------------------------------*/
+    </script>
+
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; 工藤新衣電商網站工作團隊</small>
+      <br>
+      <small>聯絡信箱 : alan40406@gmail.com   連絡電話: 0978771295</small>
+      <br>
+      <small>誠徵外包專案</small>
+    </div>
+  </footer>
 </body>
 
 

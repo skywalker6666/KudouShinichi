@@ -151,7 +151,8 @@ input:checked+.slider:before {
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(
+		$(document)
+				.ready(
 						function() {
 							// 處理表單點擊事件
 							var $form = $('#submit_Highmanager');
@@ -208,7 +209,7 @@ input:checked+.slider:before {
 																.show();
 														if (response.status == 200) {
 															updateSQLTable(response.response);
-															alert("新增管理員成功！");
+															alert("註冊成功！");
 															document.location.href = "manager_center.html";
 														}
 														if (response.status == 400) {
@@ -267,7 +268,7 @@ input:checked+.slider:before {
 																.show();
 														if (response.status == 200) {
 															updateSQLTable(response.response);
-															alert("新增管理員成功！");
+															alert("註冊成功！");
 															document.location.href = "manager_center.html";
 														}
 														if (response.status == 400) {
