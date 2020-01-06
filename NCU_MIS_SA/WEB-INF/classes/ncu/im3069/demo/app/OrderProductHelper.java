@@ -177,8 +177,7 @@ public class OrderProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT* FROM(SELECT * FROM missa.tbl_orderproduct,tbl_order where tbl_orderproduct.orderID=tbl_order.idtbl_order)AS tbl1 WHERE sellerID= ? ";
-            
+            String sql = "SELECT * FROM `tbl_order` AS a JOIN `tbl_orderproduct` AS b JOIN `tbl_product` AS c ON (a.`idtbl_order`= b.`orderID`) AND (b.`productID` = c.`idtbl_product`) WHERE ‵`sellerID`=?"; 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, sellerID);

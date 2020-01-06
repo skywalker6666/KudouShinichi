@@ -329,7 +329,7 @@ public class ProductHelper {
 
         return p;
     }
-    public int getProductIdByOrderProduct(OrderProduct idtbl_product) {
+    public Product getProductIdByOrderProduct(String idtbl_product) {
         /** 新建一個 Product 物件之 m 變數，用於紀錄每一位查詢回之商品資料 */
         Product p = null;
         /** 記錄實際執行之SQL指令 */
@@ -341,7 +341,7 @@ public class ProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `missa`.`tbl_product` WHERE `tbl_product`.`idtbl_product` = ? LIMIT 1";
+            String sql = "SELECT  FROM `missa`.`tbl_product` WHERE `tbl_product`.`idtbl_product` = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
