@@ -229,12 +229,12 @@ public class Product {
 		return this.created;
 	}
 
-    /**
+	/**
      * 取得產品資訊
      *
      * @return JSONObject 回傳產品資訊
      */
-	public JSONObject getData() {
+ public JSONObject getData() {
         /** 透過JSONObject將該項產品所需之資料全部進行封裝*/
         JSONObject jso = new JSONObject();
         jso.put("idtbl_product", getID());
@@ -247,7 +247,6 @@ public class Product {
         jso.put("product_info", getProductInfo());
         jso.put("type", getType());
         jso.put("category", getCategory());
-        jso.put("created", getCreated());
 
         return jso;
     }

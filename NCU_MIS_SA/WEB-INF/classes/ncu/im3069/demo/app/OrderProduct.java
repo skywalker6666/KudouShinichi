@@ -35,6 +35,8 @@ public class OrderProduct {
 	private int order_status;
 	private String cellphone;
 	private int productid;
+	private String product_name;
+	private int sellerid;
 
     /**
      * 實例化（Instantiates）一個新的（new）OrderProduct 物件<br>
@@ -61,8 +63,10 @@ public class OrderProduct {
      * @param product_quantities 產品數量
      * @param subtotal 小計
      */
-    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID,int order_status,String cellphone) {
-        this.idtbl_ordeproduct = idtbl_ordeproduct;
+    //賣家訂單追蹤用到的
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id,String product_name, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID,int order_status,String cellphone) {
+
+    	this.idtbl_ordeproduct = idtbl_ordeproduct;
         this.order_id=order_id;
         getProductFromDB(product_id);
         getSellerFromDB(seller_id);
@@ -77,24 +81,32 @@ public class OrderProduct {
         this.memberID=memberID;
         this.cellphone=cellphone;
         this.order_status=order_status;
+        this.product_name=product_name;
     }
-    public OrderProduct(int productid,int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities,String buyer_name,String address, double subtotal,String payment,String product_delivery,Timestamp create,int memberID,int order_status,String cellphone) {
-        this.idtbl_ordeproduct = idtbl_ordeproduct;
-        this.productid=productid;
+  //買家訂單追蹤用到的
+    public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities, double subtotal) {
+        
+    	this.idtbl_ordeproduct = idtbl_ordeproduct;
+        
         this.order_id=order_id;
         getProductFromDB(product_id);
         getSellerFromDB(seller_id);
         this.price = price;
         this.product_quantities = product_quantities;
-        this.buyer_name=buyer_name;
-        this.address=address;
         this.subtotal = subtotal;
-        this.payment=payment;
-        this.product_delivery=product_delivery;
-        this.create=create;
-        this.memberID=memberID;
-        this.cellphone=cellphone;
-        this.order_status=order_status;
+      
+    }
+  public OrderProduct( int order_id, int product_id, int seller_id, int price, int product_quantities, double subtotal) {
+        
+  
+        
+        this.order_id=order_id;
+        getProductFromDB(product_id);
+        getSellerFromDB(seller_id);
+        this.price = price;
+        this.product_quantities = product_quantities;
+        this.subtotal = subtotal;
+      
     }
 
     /**
@@ -184,12 +196,14 @@ public class OrderProduct {
      *
      * @return JSONObject 回傳產品細項資料
      */
-    public JSONObject getData() {
+    public JSONObject getSellerNeedData() {
         JSONObject data = new JSONObject();
         data.put("idtbl_orderproduct", getId());
         data.put("orderID", getorderId());
+        data.put("sellerID", getsellerID()); 
         data.put("memberID", getmemberID());
-        data.put("product_info", getProduct().getData());        
+        data.put("productID", getproductID());         
+        data.put("product_name", getProductName());        
         data.put("price", getPrice());
         data.put("product_quantities", getQuantity());
         data.put("buyer_name", getbuyerName());
@@ -204,8 +218,22 @@ public class OrderProduct {
         
 
         return data;
-    }
+    }/**
+     * 取得產品細項資料
+    *
+    * @return JSONObject 回傳產品細項資料
+    */
+   public JSONObject getData() {
+       JSONObject data = new JSONObject();
+       data.put("idtbl_orderproduct", getId());
+       data.put("productID", getProduct().getData());
+       data.put("sellerID", getProduct().getData());
+       data.put("price", getPrice());
+       data.put("product_quantities", getQuantity());
+       data.put("subtotal", getSubTotal());
 
+       return data;
+   }
 	public String getAddress() {
 		return this.address;
 	}
@@ -233,5 +261,13 @@ public class OrderProduct {
 	public int getOrderStatus() {
         return this.order_status;
     }
-	
+	public String getProductName() {
+        return this.product_name;
+    }
+	public int getproductID() {
+		return this.productid;
+	}
+	public int getsellerID() {
+		return this.sellerid;
+	}
 }

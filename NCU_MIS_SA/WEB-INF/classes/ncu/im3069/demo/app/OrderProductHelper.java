@@ -177,7 +177,8 @@ public class OrderProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `tbl_order` AS a JOIN `tbl_orderproduct` AS b JOIN `tbl_product` AS c ON (a.`idtbl_order`= b.`orderID`) AND (b.`productID` = c.`idtbl_product`) WHERE ‵`sellerID`=?"; 
+            String sql = "SELECT * FROM tbl_order AS a JOIN tbl_orderproduct AS b JOIN tbl_product AS c ON (a.idtbl_order= b.orderID) AND (b.productID = c.idtbl_product) WHERE b.sellerID=?;";
+            
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, sellerID);
@@ -195,7 +196,9 @@ public class OrderProductHelper {
                 /** 將 ResultSet 之資料取出 */
                 int idtbl_orderproduct= rs.getInt("idtbl_orderproduct");
                 int orderID = rs.getInt("orderID");
-                int productID = rs.getInt("productID");
+                int productID = rs.getInt("productID");                
+                int memberID=rs.getInt("memberID");                   
+                String product_name=rs.getString("product_name");
                 int seller_id= rs.getInt("sellerID");
                 int unit_price = rs.getInt("unit_price");
                 int product_quantities = rs.getInt("product_quantities");   
@@ -205,15 +208,14 @@ public class OrderProductHelper {
                 String payment = rs.getString("payment");
                 String product_delivery = rs.getString("product_delivery");
                 Timestamp create =rs.getTimestamp("create");
-                int memberID=rs.getInt("memberID");
                 int order_status=rs.getInt("order_status");
                 String cellphone=rs.getString("cellphone");
                 System.out.println(orderID);
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, seller_id, unit_price, product_quantities, buyer_name,address,subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID,product_name, seller_id, unit_price, product_quantities, buyer_name,address,subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
                 System.out.println("就是我在搗蛋拉幹:"+op.getorderId());
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
-                jsa.put(op.getData());
+                jsa.put(op.getSellerNeedData());
             }
         } catch (SQLException e) {
             /** 印出JDBC SQL指令錯誤 **/
@@ -236,7 +238,7 @@ public class OrderProductHelper {
  
     
     //order.api印出由orderID從orderproduct取回的資料
-    public ArrayList<OrderProduct> getOrderProductByOrderId(int orderID) {
+    public ArrayList<OrderProduct> getOrderProductByOrderId(int sellerID) {
         ArrayList<OrderProduct> result = new ArrayList<OrderProduct>();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -247,11 +249,11 @@ public class OrderProductHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM (SELECT * FROM `missa`.`tbl_orderproduct`,`tbl_order` where `tbl_orderproduct`.orderID=`tbl_order`.idtbl_order)AS tbl1	WHERE `tbl_orderproduct`.`orderID` = ?";
+            String sql = "SELECT * FROM tbl_order AS a JOIN tbl_orderproduct AS b JOIN tbl_product AS c ON (a.idtbl_order= b.orderID) AND (b.productID = c.idtbl_product);";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, orderID);
+            pres.setInt(1, sellerID);
             
             /** 執行新增之SQL指令並記錄影響之行數 */
             rs = pres.executeQuery();
@@ -267,7 +269,9 @@ public class OrderProductHelper {
                 int idtbl_orderproduct= rs.getInt("idtbl_orderproduct");
                 
                 int productID = rs.getInt("productID");
-                int sellerID = rs.getInt("sellerID");
+                String product_name = rs.getString("product_name");
+                int orderID = rs.getInt("orderID");
+                int seller_id = rs.getInt("sellerID");
                 int unit_price = rs.getInt("unit_price");
                 int product_quantities = rs.getInt("product_quantities");
                 String buyer_name=rs.getString("buyer_name");
@@ -281,7 +285,7 @@ public class OrderProductHelper {
                 String cellphone=rs.getString("cellphone");
                 
                 /** 將每一筆會員資料產生一名新orderproduct物件 */
-                op = new OrderProduct(idtbl_orderproduct, orderID, productID, sellerID, unit_price, product_quantities,buyer_name,ship_address, subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
+                op = new OrderProduct(idtbl_orderproduct, orderID, productID, product_name,seller_id, unit_price, product_quantities,buyer_name,ship_address, subtotal,payment,product_delivery,create,memberID,order_status,cellphone);
                
                 
                 /** 取出該名會員之資料並封裝至 JSONsonArray 內 */
