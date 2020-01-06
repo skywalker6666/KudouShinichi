@@ -10,35 +10,37 @@
 
 
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+
+.pic{width:254.5px; height:254.5px;overflow:hidden;margin:0px 0px;}
+.pic img {
+  opacity: 1.0;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+  transform:scale(1,1);transition: all 1s ease-out;
 }
 
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
+.pic img:hover {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0.5;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
+  transform:scale(1.2,1.2);
 }
+
+
 </style>
 <!-- Custom styles for this template -->
 
 <link href="statics/css/bootstrap.min.css" rel="stylesheet">
 <script src="statics/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript"
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<link rel="stylesheet"
-		href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" />
-	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
 </head>
 
 <body>
-	
+
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light "
 		style="background-color: #e3f2fd">
 		<a class="navbar-brand" href="index.html"><img
@@ -89,25 +91,30 @@
 
 		</ul>
 
-		<form class="form-inline">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-primary " type="submit">Search</button>
-		</form>
+
 	</nav>
-	<div class="frame">
 
-		<div class="generalbox" style="margin-top: 100px">
-			<p>商品目錄</p>
-			<div class="album py-5 bg-light">
-				<div class="container">
-					<div id="product_panel" class="row"></div>
 
-				</div>
+	<div class="generalbox" style="margin-top: 70px" align='right'>
+		<div class="album py-5 bg-light">
+			<div class="container">
+				<div id="product_panel" class="row"></div>
+				<br>
+					<div align='right'><a href="#" ><button class="btn btn-outline-secondary ">Back to top</button></a>				
+					</div>
 			</div>
 		</div>
-
-		<script>
+	</div>
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; 工藤新衣電商網站工作團隊</small>
+      <br>
+      <small>聯絡信箱 : alan40406@gmail.com   連絡電話: 0978771295</small>
+      <br>
+      <small>誠徵外包專案</small>
+    </div>
+  </footer>
+	<script>
         /**
          * 進入網頁時，先去 cookie 裡面找有無暫存資料，並把此暫存資料存到二維陣列中。
          * 設定一個二維陣列：[商品編號,商品數量]。
@@ -173,10 +180,7 @@
                         
                         setButtonFunction();
                         checkIfExistInCart();
-                        if(client_isSeller.length==0){
-                         	//console.log("Hi")
-                         	$('.productcard').attr('disabled', true);
-                         }
+                        
                     }
                     console.log(response);
                 },
@@ -201,12 +205,12 @@
             let inner_html = '';
             
             
-            inner_html += '<div class="col-md-4" style="float:left;">';
+            inner_html += '<div class="col-md-3" style="float:left;">';
             inner_html += '<div class="card-header">';
-            inner_html += '<h4 class="font-weight-normal text-center text-truncate">' + data.product_name + '</h4>';
+            inner_html += '<h5 class="font-weight-bold text-center text-truncate">' + data.product_name + '</h5>';
             inner_html += '</div>';
             inner_html += '<div class="card mb-4 shadow-sm">';
-            inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
+            inner_html += '<div class="pic"><img src="' + data.image + '" height="254.5px" width="254.5px" ></div>';
             inner_html += '<div class="card-body">';
 			
             	productidname="anly"+data.idtbl_product;
@@ -215,9 +219,12 @@
 				
 				
 				//詳細資料
+				
 				inner_html += '<img src="' + data.image + '" height="200px" width="200px" hspace="50px">';
+				
+
 				inner_html += '<div>產品簡介:<br>'+data.product_info+'</div>';
-	            inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
+	            inner_html += '<h4 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ NTD</small></h4>';
 //	            inner_html += '<p class="card-text">' + data.product_info + '</p>';
 	            inner_html += '<div class="d-flex justify-content-between align-items-center">';
 	            inner_html += '<div class="btn-group">';
@@ -228,12 +235,14 @@
 
             
             
-            inner_html += '<h1 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ USD</small></h1>';
-            inner_html += '<p class="card-text">' + data.product_info + '</p>';
+            inner_html += '<h4 class="card-title pricing-card-title">$' + data.price + ' <small class="text-muted">/ NTD</small></h4>';
+        //    inner_html += '<p class="card-text">' + data.product_info + '</p>';
             inner_html += '<div class="d-flex justify-content-between align-items-center">';
             inner_html += '<div class="btn-group">';
-            inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard">加入購物車</button>';
-            inner_html += '</div><small class="text-muted">id: ' + data.idtbl_product + '</small>';
+            if(client_id.length!=0){
+             	inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard btn btn-outline-dark" >加入購物車</button>';
+             }
+            inner_html += '</div><small class="text-muted">商品編號: ' + data.idtbl_product + '</small>';
             inner_html += '</div></div></div></div>';
 
             return inner_html;
@@ -433,13 +442,10 @@
         /*----------------------------------------*/
     </script>
 
-		<footer class="text-muted">
-			<div class="container">
-				<p class="float-right">
-					<a href="#">Back to top</a>
-				</p>
-			</div>
-		</footer>
+				
+	
+ 
+
 </body>
 
 </html>

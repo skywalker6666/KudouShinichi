@@ -49,6 +49,14 @@ div.absolute {
 	align: center;
 	top: 100px;
 }
+.my-custom-scrollbar {
+position: relative;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
 </style>
 
 <link rel="stylesheet" href="statics/css/register&login.css">
@@ -93,23 +101,28 @@ div.absolute {
 				style="margin-top: 20px; margin-left: 0px" value="檢視所有管理員"
 				id="manager">
 		</div>
-		<div class="container">
-			<table id="table" class="table table-striped">
+		<div class="table-wrapper-scroll-y my-custom-scrollbar">
+			<table id="table" class="table table-bordered table-striped mb-0">
 				<thead id="tit">
 					<tr>
-						<th>編號</th>
-						<th>姓名</th>
-						<th>電郵</th>
-						<th>生日</th>
-						<th>買賣方</th>
-						<th>功能</th>
+						<th scope="col">編號</th>
+						<th scope="col">姓名</th>
+						<th scope="col">電子信箱</th>
+						<th scope="col">生日</th>
+						<th scope="col">買賣方</th>
+						<th scope="col">功能</th>
 					</tr>
 				</thead>
 				<tbody>
+				
 				</tbody>
 			</table>
 		</div>
 	</div>
+
+
+
+
 
 		
 	<script type="text/javascript">
@@ -245,7 +258,7 @@ div.absolute {
 		// 更新會員列表表格
 		function updateTable(data) {
 			$("#table > thead").empty();
-			var changetable = "<tr><th>編號</th><th>姓名</th><th>電郵</th><th>生日</th><th>買賣方</th><th>功能</th></tr>";
+			var changetable = "<tr><th>編號</th><th>姓名</th><th>電子信箱</th><th>生日</th><th>買賣方</th><th>功能</th></tr>";
 			$("#table >thead").append(changetable);
 			$("#table > tbody").empty();
 			var table_html = '';

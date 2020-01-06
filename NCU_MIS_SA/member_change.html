@@ -2,195 +2,255 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MemberCenter</title>
-<style>
-</style>
-<link rel="stylesheet" href="statics/css/register&login.css">
-<link rel="stylesheet" href="statics/css/navbar.css">
-<link rel="stylesheet" href="statics/css/themebox.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MemberCenter</title>
+    <style>
+        .button {
+
+            background-color: #FF8787;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px 10px;
+            font-family: DFKai-sb;
+        }
+
+        .button:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+    <link href="statics/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 </head>
 
-<body bgcolor="#BCE2FF">
-	<ul class="navbar">
-		<li class="navbar"><a href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="100px"
-				width="100px"></img></a></li>
-		<li class="navbar"><a class="navbarItem" href="index.html">Home</a></li>
-		<li class="navbar"><a class="navbarItem" href="productIndex.html">商品總覽</a></li>
-		<li class="navbar"><a class="navbarItem"
-			href="order_tracking.html">訂單追蹤</a></li>
-		<li class="navbar"><a class="navbarItem" href="shoppingcart.html">購物車</a></li>
-		<li class="navbar"><a id="myMarket" class="navbarItem"
-			href="my_market.html">我的賣場</a></li>
-		<li id="signup_in" style="float: right"><a class="navbarItemSide"
-			href="login_selected.html">會員註冊/登入</a></li>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light "
+		style="background-color: #e3f2fd;">
+		<a class="navbar-brand" href="index.html"><img
+			src="statics/img/navbar/icon.png" style="float: left" height="50px"
+			width="50px"></img></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarColor03" aria-controls="navbarColor03"
+			aria-expanded="true" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-		<div id="member_center1" class="mediumbox" style="float: right">
-			<li style="float: left"><a class="navbarFloating"
-				href="member_change.html">會員中心</a></li>
-			<li style="float: left"><a id="remove" class="navbarFloating"
-				href="index.html">&nbsp;登出 </a></li>
-			<li style="float: left">
+		<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="index.html">Home <span class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="productIndex.html">商品總覽</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="order_tracking.html">訂單追蹤</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="shoppingcart.html">購物車</a></li>
+				<li class="nav-item"><a class="nav-link" href="my_market.html">我的賣場</a>
+				</li>
+			</ul>
+
 		</div>
-		<div id="member_center2" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/shoppingcart.png"
-				style="float: left" height="20px" width="20px"></img></li>
-			<li><a class="navbarFloating" href="shoppingcart.html">購物車</a></li>
-		</div>
-		<div id="member_center3" class="smallbox" style="float: right">
-			<li><img src="statics/img/navbar/user.png" style="float: left"
-				height="20px" width="20px"></img></li>
-			<li id="user_name" class="navbarFloating">user</li>
-		</div>
-	</ul>
-	<div class="box">
-		<label class="box_text">會員中心</label>
-		<div id="head_sticker" class="row" ></div>
-		<div class="box2" style= margin-top:-100px;height:450px >
-			<form class="form" id="form" accept-charset="utf-8">
-				<div class="input text required">
-					<label for="member_name">會員帳號：</label> <input name="name"
-						maxlength="30" type="text" id="member_name" required="required">
-				</div>
-				<div class="input email required">
-					<label for="member_email">電子郵件：</label> <input name="email"
-						maxlength="50" type="email" id="member_email" required="required">
-				</div>
-				<div class="input password required">
-					<label for="member_password">會員密碼：</label> <input name="password"
-						type="password" id="member_password" required="required">
-				</div>
-				<div>
-					<label>西元生日：</label> <input type="date" id="datepicker" value="1999-01-01"
-						required="required" style=width:156px>
-				</div>
-				<div class="input headSticker">
-					<label for="member_headSticker">個性頭貼：</label> <input
-						name="headSticker" id="member_headSticker" >
-				</div>
-				<div class="input text required">
-					<label for="member_isSeller">買家賣家：</label> <input name="isSeller"
-						type="text" id="member_isSeller" required="required">
-				</div>
-			
+
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><img
+				src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img></li>
+			<li><a class="nav-link" href="shoppingcart.html">購物車</a></li>
+
+
+			<li id="signup_in" class="nav-item"><a class="nav-link"
+				href="login_selected.html">會員註冊/登入</a></li>
 				
-				<a class="button"  id="submit" >送出</a>
-				<a class="button" href="member_change.html">取消</a>
-		</div>
-		</form>
-	</div>
+			<li class="nav-item"><img src="statics/img/navbar/user.png"
+				height="20px" width="20px"></img></li>
+			<li id="user_name" class="nav-link">user</li>
 
-	</div>
+			<li class="nav-item"><a id="member_center" class="nav-link"
+				href="member_change.html">會員中心</a></li>
 
-	<script type="text/javascript">
-        var [client_id, client_name] = getMemberDataFromClient();
+			<li class="nav-item"><a id="remove" class="nav-link"
+				href="index.html">&nbsp;登出 </a></li>
 
-        function getMemberDataFromClient() {
-            let id = JSON.parse(localStorage.getItem("client_id"));
-            let name = JSON.parse(localStorage.getItem("client_name"));
-            id = !id ? new Array() : id;
-            name = !name ? new Array() : name;
-            return [id, name];
-        }
-		
-        var [client_isSeller] = getisSellerFromClient();
-        $("#myMarket").hide();
-        if (parseInt(client_isSeller.toString()) == 1) {
-            $("#myMarket").show();
-        }
+		</ul>
 
-        function getisSellerFromClient() {
-            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-            isSeller = !isSeller ? new Array() : isSeller;
+	</nav>
+	        <div style="margin-top:80px">
+            <font face="DFKai-sb" size="6" color="blue"> &nbsp;&nbsp;會員中心</font>
+            <div style="border: 0px #FBEE98 solid; text-align: center; border-radius: 50px; background-color: white;">
+                <div id="head_sticker"></div>
 
-            return [isSeller];
-        }
 
-      var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
-      
-      function getCartDataFromClient(){
-    	  let client_cart_obj = JSON.parse(localStorage.getItem("client_cart_obj"));
-    	  let client_cart_amount = JSON.parse(localStorage.getItem("client_cart_amount"));
-    	  
-    	  client_cart_obj = !client_cart_obj? new Array() : client_cart_obj;
-    	  client_cart_amount = !client_cart_amount? new Array() : client_cart_amount;
-    	  return [client_cart_obj, client_cart_amount];
-      }
-      
-      function addDataToMember(id, name, isSeller) {
-	    	if (!(client_id.includes(id))) {
-	    		client_id.push(id);
-	    		client_name.push(name);
-	    		client_isSeller.push(isSeller)
-	    		updateMemberDataToClent();
-	    	}
-	    }
+                <form id="form" accept-charset="utf-8">
+                    <font face="DFKai-sb">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 col-md-offset-4">
+                                <label for="member_name">會員帳號</label> <input class="form-control" name="name"
+                                    maxlength="30" type="text" id="member_name" required="required">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 col-md-offset-4">
+                                <label for="member_email">電子郵件</label> <input class="form-control" name="email" maxlength="50" type="email"
+                                id="member_email" required="required">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 col-md-offset-4">
+                                <label for="member_password">會員密碼</label> <input class="form-control" name="password" type="password"
+                                id="member_password" required="required">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+	                        <div class="col-md-4"></div>
+	                        <div class="col-md-2 ">    <label>西元生日</label> <input class="form-control" type="date" id="datepicker" value="1999-01-01"
+                                required="required"></div>
+	                        <div class="col-md-2 col-md-offset-4">  <label for="member_isSeller">買家賣家</label>  
+                                <select class="form-control" name="YourLocation" id="member_isSeller">
+				                                　<option value="0">買家</option>
+				                                　<option value="1">賣家</option>
+                         	   </select></div>
+                    	</div>
+                  
+                        
+                     
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 col-md-offset-4">
+                                <label for="member_headSticker">個性頭貼</label> <input class="form-control" name="headSticker" type="text"
+                                id="member_headSticker" required="required">
+                            </div>
+                        </div>
+                  
 
-      
-        /*------------登入登出實作member cookie-----------*/
 
-        var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var idtbl_member = JSON.parse(localStorage.getItem("client_id"));
-        var sql_num = 0;
-        
+						<br>
+                        <input type="button" class="btn btn-outline-success" value="送出" id="submit">&nbsp;&nbsp;
+                        <input type="button" class="btn btn-outline-danger" value="取消" onclick="location.href='index.html'">
+                    </font>
 
-        function getMemberDataFromClient() {
-            let id = JSON.parse(localStorage.getItem("client_id"));
-            let name = JSON.parse(localStorage.getItem("client_name"));
-            let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-            id = !id ? new Array() : id;
-            name = !name ? new Array() : name;
-            isSeller = !isSeller ? new Array() : isSeller;
-            return [id, name, isSeller];
-        }
-       
-        function updateMember(idtbl_member) {
-            var name = $('#member_name').val();
-            var email = $('#member_email').val();
-            var password = $('#member_password').val();
-            var birthday = $('#datepicker').val();
-            var headSticker = $('#member_headSticker').val();
-            var isSeller = $('#member_isSeller').val();
-            var idtbl_member = parseInt(client_id);
-            
-            var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-            var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                </form>
+            </div>
 
-            if (!email_rule.test(email)) {
-                alert("不符合電子郵件格式！");
+        </div>
+<br><br>
+        <script type="text/javascript">
+            var [client_id, client_name] = getMemberDataFromClient();
+
+            function getMemberDataFromClient() {
+                let id = JSON.parse(localStorage.getItem("client_id"));
+                let name = JSON.parse(localStorage.getItem("client_name"));
+                id = !id ? new Array() : id;
+                name = !name ? new Array() : name;
+                return [id, name];
             }
-            if(!password_rule.test(password)) {
-                alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
-           
+
+            var [client_isSeller] = getisSellerFromClient();
+            $("#myMarket").hide();
+            if (parseInt(client_isSeller.toString()) == 1) {
+                $("#myMarket").show();
             }
-            else {
-            	
-                // 將資料組成JSON格式
-                var data_object = {
-                    "idtbl_member": idtbl_member,
-                    "name": name,
-                    "email": email,
-                    "password": password,
-                    "birthday": birthday,
-                    "headSticker": headSticker,
-                    "isSeller": isSeller
-                };
 
-                // 將JSON格式轉換成字串
-                var data_string = JSON.stringify(data_object);
+            function getisSellerFromClient() {
+                let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
 
-                // 發出POST的PUT請求
-                $.ajax({
+                isSeller = !isSeller ? new Array() : isSeller;
+
+                return [isSeller];
+            }
+
+            var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
+
+            function getCartDataFromClient() {
+                let client_cart_obj = JSON.parse(localStorage.getItem("client_cart_obj"));
+                let client_cart_amount = JSON.parse(localStorage.getItem("client_cart_amount"));
+
+                client_cart_obj = !client_cart_obj ? new Array() : client_cart_obj;
+                client_cart_amount = !client_cart_amount ? new Array() : client_cart_amount;
+                return [client_cart_obj, client_cart_amount];
+            }
+
+            function addDataToMember(id, name, isSeller) {
+                if (!(client_id.includes(id))) {
+                    client_id.push(id);
+                    client_name.push(name);
+                    client_isSeller.push(isSeller)
+                    updateMemberDataToClent();
+                }
+            }
+
+
+            /*------------登入登出實作member cookie-----------*/
+
+            var [client_id, client_name, client_isSeller] = getMemberDataFromClient();
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var idtbl_member = JSON.parse(localStorage.getItem("client_id"));
+            var sql_num = 0;
+
+
+            function getMemberDataFromClient() {
+                let id = JSON.parse(localStorage.getItem("client_id"));
+                let name = JSON.parse(localStorage.getItem("client_name"));
+                let isSeller = JSON.parse(localStorage.getItem("client_isSeller"));
+
+                id = !id ? new Array() : id;
+                name = !name ? new Array() : name;
+                isSeller = !isSeller ? new Array() : isSeller;
+                return [id, name, isSeller];
+            }
+
+            function updateMember(idtbl_member) {
+                var name = $('#member_name').val();
+                var email = $('#member_email').val();
+                var password = $('#member_password').val();
+                var birthday = $('#datepicker').val();
+                var headSticker = $('#member_headSticker').val();
+                var isSeller = $('#member_isSeller').val();
+                var idtbl_member = parseInt(client_id);
+
+                var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+                var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+
+                if (!email_rule.test(email)) {
+                    alert("不符合電子郵件格式！");
+                }
+                if (!password_rule.test(password)) {
+                    alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+
+                }
+                else {
+
+                    // 將資料組成JSON格式
+                    var data_object = {
+                        "idtbl_member": idtbl_member,
+                        "name": name,
+                        "email": email,
+                        "password": password,
+                        "birthday": birthday,
+                        "headSticker": headSticker,
+                        "isSeller": isSeller
+                    };
+
+                    // 將JSON格式轉換成字串
+                    var data_string = JSON.stringify(data_object);
+
+                    // 發出POST的PUT請求
+                    $.ajax({
                         type: "PUT",
                         url: "api/member.do",
                         data: data_string,
@@ -201,7 +261,7 @@
                         success: function (response) {
                             $('#flashMessage').html(response.message);
                             $('#flashMessage').show();
-                            if(response.status == 200){
+                            if (response.status == 200) {
                                 getMember();
                                 client_id = [];
                                 client_name = [];
@@ -210,119 +270,132 @@
                                 client_cart_amount = [];
                                 updateMemberDataToClent();
                                 addDataToMember(idtbl_member, name, isSeller);
-                                
+
                                 alert("更新成功！！");
-      	                        document.location.href = "member_change.html";
+                                document.location.href = "member_change.html";
                             }
                         },
                         error: function () {
                             alert("每個欄位都必須填寫！");
                         }
+                    });
+                }
+            }
+            /*
+            // 更新SQL指令歷史表格
+            function updateSQLTable(data) {
+                var time = (data.time / 1000000).toFixed(2);
+                var table_html = "";
+                
+                sql_num += 1
+    
+                table_html += '<tr>';
+                table_html += '<td>' + sql_num + '</td>';
+                table_html += '<td>' + data.sql + '</td>';
+                table_html += '<td style="text-align: right">' + '0' + '</td>';
+                table_html += '<td style="text-align: right">' + data.row + '</td>';
+                table_html += '<td style="text-align: right">' + data.row + '</td>';
+                table_html += '<td style="text-align: right">' + time + '</td>';
+                table_html += '</tr>';
+                $("#sql_log > tbody").append(table_html);
+                $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
+            }
+            */
+            function getMember() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "api/member.do",
+                    crossDomain: true,
+                    data: "idtbl_member=" + idtbl_member,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        if (response.status == 200) {
+                            document.getElementById('member_name').value = response['response']['data'][0]['name'];
+                            document.getElementById('member_email').value = response['response']['data'][0]['email'];
+                            document.getElementById('member_password').value = response['response']['data'][0]['password'];
+                            document.getElementById('datepicker').value = response['response']['data'][0]['birthday'];
+                            document.getElementById('member_headSticker').value = response['response']['data'][0]['headSticker'];
+                            document.getElementById('member_isSeller').value = response['response']['data'][0]['isSeller'];
+                            var headSticker = response['response']['data'][0]['headSticker'];
+                            var inner_html = '<img src="' + headSticker + '" height="200px" width="200px" hspace="50px">';
+                            $("#head_sticker").append(inner_html);
+
+                        }
+                        console.log(response);
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
                 });
             }
-        }
-        /*
-        // 更新SQL指令歷史表格
-        function updateSQLTable(data) {
-            var time = (data.time / 1000000).toFixed(2);
-            var table_html = "";
-            
-            sql_num += 1
 
-            table_html += '<tr>';
-            table_html += '<td>' + sql_num + '</td>';
-            table_html += '<td>' + data.sql + '</td>';
-            table_html += '<td style="text-align: right">' + '0' + '</td>';
-            table_html += '<td style="text-align: right">' + data.row + '</td>';
-            table_html += '<td style="text-align: right">' + data.row + '</td>';
-            table_html += '<td style="text-align: right">' + time + '</td>';
-            table_html += '</tr>';
-            $("#sql_log > tbody").append(table_html);
-            $("#sql_summary").html("(default) " + data.row + " queries took " + time + " ms");
-        }
-		*/ 
-        function getMember() {
-        	
-            $.ajax({
-                type: "GET",
-                url: "api/member.do",
-                crossDomain: true,
-                data: "idtbl_member=" + idtbl_member,
-                cache: false,
-                dataType: 'json',
-                timeout: 5000,
-                success: function (response) {
-                    if(response.status == 200){                    	
-                    	document.getElementById('member_name').value = response['response']['data'][0]['name'];
-                    	document.getElementById('member_email').value = response['response']['data'][0]['email'];
-                    	document.getElementById('member_password').value = response['response']['data'][0]['password'];
-                    	document.getElementById('datepicker').value = response['response']['data'][0]['birthday'];
-                    	document.getElementById('member_headSticker').value = response['response']['data'][0]['headSticker'];
-                    	document.getElementById('member_isSeller').value = response['response']['data'][0]['isSeller'];
-                    	var headSticker = response['response']['data'][0]['headSticker'];
-                    	var inner_html = '<img src="' + headSticker + '" height="200px" width="200px" hspace="300px" padding:50px>';
-                    	$("#head_sticker").append(inner_html);
-                    	
-                    }
-                    console.log(response);
-                },
-                error: function () {
-                    alert("無法連線到伺服器！");
-                }
+
+            $('#submit').click(function () {
+                updateMember(idtbl_member);
+
             });
-        }
 
-        $('#submit').click(function() {
-            updateMember(idtbl_member);
-        });
-       
-        function updateMemberDataToClent() {
-            localStorage.setItem("client_id", JSON.stringify(client_id));
-            localStorage.setItem("client_name", JSON.stringify(client_name));
-            localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
-            localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
-            localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
-        }
+            function updateMemberDataToClent() {
+                localStorage.setItem("client_id", JSON.stringify(client_id));
+                localStorage.setItem("client_name", JSON.stringify(client_name));
+                localStorage.setItem("client_isSeller", JSON.stringify(client_isSeller));
+                localStorage.setItem("client_cart_obj", JSON.stringify(client_cart_obj));
+                localStorage.setItem("client_cart_amount", JSON.stringify(client_cart_amount));
+            }
 
-        function loguot() {
-            client_id = [];
-            client_name = [];
-            client_cart_obj = [];
-            client_isSeller = [];
-            client_cart_amount = [];
-            updateMemberDataToClent();
-            $("#member_center1").hide();
-            $("#member_center2").hide();
-            $("#member_center3").hide();
-            $("#signup_in").show();
-            $("#user_name").empty();
-        }
-
-        $("#remove").click(function () {
-            console.log("[@Action]登出");
-            loguot();
-        });
-	
-
-        $(document).ready(function () {
-        	getMember();
-        	
-            if (client_id.length == 0) { //登出
+            function loguot() {
+                client_id = [];
+                client_name = [];
+                client_cart_obj = [];
+                client_isSeller = [];
+                client_cart_amount = [];
+                updateMemberDataToClent();
                 $("#member_center1").hide();
                 $("#member_center2").hide();
                 $("#member_center3").hide();
-            } else {//登入
-                $("#user_name").html(client_name);
-                $("#member_center1").show();
-                $("#member_center2").show();
-                $("#member_center3").show();
-                $("#signup_in").hide();
+                $("#signup_in").show();
+                $("#user_name").empty();
             }
-        });
-        
 
-        /*----------------------------------------*/
-    </script>
+            $("#remove").click(function () {
+                console.log("[@Action]登出");
+                loguot();
+            });
+
+
+            $(document).ready(function () {
+                getMember();
+
+                if (client_id.length == 0) { //登出
+                    $("#member_center1").hide();
+                    $("#member_center2").hide();
+                    $("#member_center3").hide();
+                } else {//登入
+                    $("#user_name").html(client_name);
+                    $("#member_center1").show();
+                    $("#member_center2").show();
+                    $("#member_center3").show();
+                    $("#signup_in").hide();
+                }
+            });
+
+
+            /*----------------------------------------*/
+        </script>
+
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; 工藤新衣電商網站工作團隊</small>
+      <br>
+      <small>聯絡信箱 : alan40406@gmail.com   連絡電話: 0978771295</small>
+      <br>
+      <small>誠徵外包專案</small>
+    </div>
+  </footer>
+
 </body>
 
 </html>

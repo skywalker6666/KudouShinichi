@@ -39,6 +39,10 @@
 		font-size: 3.5rem;
 	}
 }
+*,h4{
+font-weight: bold;
+
+}
 </style>
 
 <!-- Custom styles for this template -->
@@ -100,11 +104,7 @@
 
 			</ul>
 
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-primary " type="submit">Search</button>
-			</form>
+			
 		</nav>
 		<div>
 			<div class="container" style="margin-top:80px">
@@ -132,7 +132,7 @@
 									</div> <span id="total_quantity" class="text-success">0</span>
 								</li>
 								<li class="list-group-item d-flex justify-content-between"><span>Total
-										(USD)</span> <strong>$ <span id="summary">0.00</span></strong></li>
+										(NTD)</span> <strong>$ <span id="summary">0.00</span></strong></li>
 							</ul>
 							<button id="check" class="btn btn-primary btn-lg btn-block"
 								type="button">結帳</button>
@@ -171,10 +171,10 @@
 								<div class="col-md-4">
 									<label for="firstName">姓名</label> <input type="text"
 										class="form-control" id="buyer_name" maxlength="10"
-										placeholder="" value="" style="width: 200px" required>
+										placeholder="請輸入完整姓名！" value="" style="width: 200px" required>
 								</div>
 								<div class="col-md-4">
-									<label for="phonenum">手機號碼:</label><br /> <input
+									<label for="phonenum">手機號碼</label><br /> <input
 										id="cellphone" type="tel" class="form-control" maxlength="12"
 										placeholder="09xx-xxx-xxx" style="width: 200px" required>
 								</div>
@@ -186,13 +186,13 @@
 							</div>
 							<div class="row">
 								<div class="col-md-4">
-									運送方式:<br> <input id="PD1" type="radio"
+									運送方式<br> <input id="PD1" type="radio"
 										name="ProductDelivery" value="超商取貨" /> 超商取貨 <br> <input
 										id="PD2" type="radio" name="ProductDelivery" value="宅配到府" />
 									宅配到府
 								</div>
 								<div class="col-md-4">
-									付款方式:<br> <input type="radio" name="Payment" value="貨到付款" />
+									付款方式<br> <input type="radio" name="Payment" value="貨到付款" />
 									貨到付款 <br> <input type="radio" name="Payment" value="信用卡付款" />
 									信用卡付款
 								</div>

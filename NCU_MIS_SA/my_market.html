@@ -105,20 +105,21 @@
 			href="index.html">&nbsp;登出 </a></li>
 
 	</ul>
-	<form class="form-inline">
-		<input class="form-control mr-sm-2" type="search" placeholder="Search"
-			aria-label="Search">
-		<button class="btn btn-outline-primary " type="submit">Search</button>
-	</form>
+
 </nav>
 
 <div style="margin-top:80px">
 		
 	<div class="album py-5 bg-light">
 		<div class="container">
+		
 			<button id="add_product" name="add_product" type="button"
-			class="button" onclick="location.href='add_product.html'">新增商品</button>
+			class="btn btn-outline-success" onclick="location.href='add_product.html'">新增商品</button>
+			<br></br>
 			<div id="product_panel" class="row"></div>
+			<br>
+			<div align='right'><a href="#" align='right'><button class="btn btn-outline-secondary">Back to top</button></a>
+					</div>	
 		</div>
 	</div>
 </div>
@@ -186,21 +187,21 @@
             $.each(data, function (index, val) {
                 inner_html += '<div class="col-md-4" style="float:left;">';
                 inner_html += '<div class="card-header"> <font face="DFKai-sb" color="blue"> ';
-                inner_html += '<h1 class="font-weight-normal text-center text-truncate">' + val['product_name'] + '</h1>';
+                inner_html += '<h3 class="font-weight-normal text-center text-truncate">' + val['product_name'] + '</h3>';
                 inner_html += '</div>';
                 inner_html += '<div class="card mb-4 shadow-sm">';
-                inner_html += '<img src="' + val['image'] + '" width="200px" height="200px" hspace="50px">';
+                inner_html += '<img src="' + val['image'] + '" width="200px" height="200px" hspace="62px" vspace="10px">';
                 inner_html += '<div class="card-body">';
-                inner_html += '<h2 class="card-title pricing-card-title">$' + val['price'] + ' <small class="text-muted">/ NTD</small></h2>';
-                inner_html += '<h3 class="card-text">商品簡介:' + val['product_info'] + '</h3>';
-                inner_html += '<h3 class="card-text">inventory:' + val['inventory'] + '</h3>';
-                inner_html += '<h3 class="card-text">類別:' + val['type'] + '</h3>';
-                inner_html += '<h3 class="card-text">種類:' + val['category'] + '</h3>';
-                inner_html += '<div class="d-flex justify-content-between align-items-center">';
-                inner_html += '<div class="btn-group">';
-                inner_html += '<a class="button" href="edit_product.html?id=' + val['idtbl_product'] + '">修改商品</a>';
-                inner_html += '<a class="button" href="javascript: deleteMember(' + val['idtbl_product'] + ');">刪除商品</a>';
-                inner_html += '</div><small class="text-muted">id:' + val['idtbl_product'] + '</small></font>';
+                inner_html += '<h4 class="card-title pricing-card-title">$' + val['price'] + ' <small class="text-muted">/ NTD</small></h4>';
+                inner_html += '<h5 class="card-text">商品簡介:' + val['product_info'] + '</h5>';
+                inner_html += '<h5 class="card-text">庫存:' + val['inventory'] + '</h5>';
+                inner_html += '<h5 class="card-text">類別:' + val['type'] + '</h5>';
+                inner_html += '<h5 class="card-text">種類:' + val['category'] + '</h5>';
+                inner_html += '<div class="d-flex justify-content-between align-items-center"><br>';
+                inner_html += '<p class="text-muted">商品編號:' + val['idtbl_product'] + '</p><div class="btn-group">';
+                inner_html += '<a class="btn btn-outline-warning" href="edit_product.html?id=' + val['idtbl_product'] + '">修改商品</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+                inner_html += '<a class="btn btn-outline-danger" href="javascript: deleteMember(' + val['idtbl_product'] + ');">刪除商品</a>&nbsp;&nbsp;';
+                inner_html += '</div></font>';
                 inner_html += '</div></div></div></div>';
             })
             return inner_html;
@@ -301,14 +302,17 @@
        /*----------------------------------------*/
     </script>
 
-<footer class="text-muted">
-	<div class="container">
-		<p class="float-right">
-			<a href="#">Back to top</a>
-		</p>
-	</div>
-</footer>
 
+
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; 工藤新衣電商網站工作團隊</small>
+      <br>
+      <small>聯絡信箱 : alan40406@gmail.com   連絡電話: 0978771295</small>
+      <br>
+      <small>誠徵外包專案</small>
+    </div>
+  </footer>
 
 </body>
 </html>
