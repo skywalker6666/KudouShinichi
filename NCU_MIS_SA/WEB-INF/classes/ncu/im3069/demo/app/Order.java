@@ -179,6 +179,7 @@ public class Order {
      * @return String 回傳運送方式
      */
     public String getProductDelivery() {
+    	
         return this.product_delivery;
     }
     /**
@@ -234,7 +235,7 @@ public class Order {
         ArrayList<OrderProduct> data = oph.getOrderProductByOrderId(this.idtbl_order);
         this.list = data;
     }
-
+    
     /**
      * 取得訂單基本資料
      *

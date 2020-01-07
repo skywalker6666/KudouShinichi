@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
 <link href="statics/icon/favicon.ico" type="image/x-icon"
 	rel="shortcut icon">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <style>
 #customers {
 	align: center;
@@ -48,6 +49,14 @@ div.absolute {
 	align: center;
 	top: 100px;
 }
+.my-custom-scrollbar {
+position: relative;
+height: 500px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
 </style>
 
 <link rel="stylesheet" href="statics/css/register&login.css">
@@ -82,121 +91,44 @@ div.absolute {
 		<label class="box_text">管理員中心</label>
 		<div>
 			<input class="button" type="button"
-				style="margin-top: 20px; margin-left: 30px" value="檢視所有成員"
-				id="member"> <input class="button" type="button"
-				style="margin-top: 20px; margin-left: 0px" value="檢視所有管理員"
-				id="manager"> <input class="button" type="button"
-				style="margin-top: 20px; margin-left: 0px" value="檢視所有賣家"
-				id="seller"> <input class="button" type="button"
+				style="margin-top: 20px; margin-left: 30px" value="檢視所有會員"
+				id="member">  <input class="button" type="button"
 				style="margin-top: 20px; margin-left: 0px" value="檢視所有買家" id="buyer">
+				 <input class="button" type="button"
+				style="margin-top: 20px; margin-left: 0px" value="檢視所有賣家"
+				id="seller">
+				<input class="button" type="button"
+				style="margin-top: 20px; margin-left: 0px" value="檢視所有管理員"
+				id="manager">
 		</div>
-		<div class="container">
-			<table id="table" class="table table-striped">
+		<div class="table-wrapper-scroll-y my-custom-scrollbar">
+			<table id="table" class="table table-bordered table-striped mb-0">
 				<thead id="tit">
 					<tr>
-						<th>編號</th>
-						<th>姓名</th>
-						<th>電郵</th>
-						<th>生日</th>
-						<th>買賣方</th>
-						<th>功能</th>
+						<th scope="col">編號</th>
+						<th scope="col">姓名</th>
+						<th scope="col">電子信箱</th>
+						<th scope="col">生日</th>
+						<th scope="col">買賣方</th>
+						<th scope="col">功能</th>
 					</tr>
 				</thead>
 				<tbody>
+				
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<script>
-		function display_members() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ //還沒設定
-							'<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>管理員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="manager"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_managers()">'
-							+ '</div>' + '</div>').appendTo('#display_member')
-		}
 
-		function display_sellers() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute" style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ '<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>賣家會員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
-							+ '</div>').appendTo('#display_member')
-		}
 
-		function display_buyers() {
-			$('#display_member').html("");
-			$(
-					'<div class="absolute"  style="margin-top:30px;margin-left:30px">'
-							+ '<input placeholder="搜尋"  class="field" >'
-							+ '<button type="submit">搜尋</button>'
-							+ '<table id="customers">'
-							+ '<tr>'
-							+ '<th>刪除</th>'
-							+ '<th>買家會員帳號</th>'
-							+ '<th>電子郵件</th>'
-							+ '<th>生日</th>'
-							+ '<th>上次登入時間</th>'
-							+ '</tr>'
-							+ '<tr>'
-							+ '<td><input type="checkbox" name="delete" value="seller"></td>'
-							+ '<td>Maria Anders</td>'
-							+ '<td>Germanydsafasfasfsa@gmail.com</td>'
-							+ '<td>2555-12-12</td>'
-							+ '<td>2019-10-10 22:22:44</td>'
-							+ '</tr>'
-							+ '</table>'
-							+ '<div>'
-							+ '<button class="button" id="save" style="margin-left:260px">儲存</button>'
-							+ '<input class="button" type="button" value="取消" onclick="display_sellers()">'
-							+ '</div>').appendTo('#display_member')
 
-		}
-	</script>
+
+
+		
 	<script type="text/javascript">
 		var sql_num = 0;
-
+		//現在button所案的位子
+		var now_button = 0;
 		function deleteMember(id) {
 			var check = window.confirm("確認刪除會員？");
 			if (check == true) {
@@ -217,7 +149,13 @@ div.absolute {
 						if (response.status == 200) {
 							$("#flashMessage").html("成功! 已經成功刪除會員...");
 							$("#flashMessage").show();
-							getAllMember();
+							if(now_button==0){
+								getAllMember();
+							}else if(now_button==1){
+								getBuyerMember();
+							}else{
+								getSellerMember();
+							}
 						}
 						console.log(response);
 					},
@@ -320,7 +258,7 @@ div.absolute {
 		// 更新會員列表表格
 		function updateTable(data) {
 			$("#table > thead").empty();
-			var changetable = "<tr><th>編號</th><th>姓名</th><th>電郵</th><th>生日</th><th>買賣方</th><th>功能</th></tr>";
+			var changetable = "<tr><th>編號</th><th>姓名</th><th>電子信箱</th><th>生日</th><th>買賣方</th><th>功能</th></tr>";
 			$("#table >thead").append(changetable);
 			$("#table > tbody").empty();
 			var table_html = '';
@@ -423,15 +361,19 @@ div.absolute {
 				}
 			getAllMember();
 			$('#member').click(function() {
+				now_button=0;
 				getAllMember();
 			});
 			$('#buyer').click(function() {
+				now_button=1;
 				getBuyerMember();
 			});
 			$('#seller').click(function() {
+				now_button=2;
 				getSellerMember();
 			});
 			$('#manager').click(function() {
+				now_button=3;
 				getAllManager();
 			});
 	    	let accountname = JSON.parse(localStorage.getItem("manager_name"));

@@ -33,7 +33,9 @@ public class Product {
 	
 	/** product_info，產品種類 */
 	private String category;
-
+	
+	private String created;
+	private int total;
     /**
      * 實例化（Instantiates）一個新的（new）Product 物件<br>
      * 採用多載（overload）方法進行，此建構子用於新增產品時
@@ -52,6 +54,16 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
+	public Product (int idtbl_product, String product_name,int price,int is_Deleted,String image, String product_info,int Total){
+		this.product_name = product_name;
+		this.price = price;
+		this.idtbl_product=idtbl_product;
+		this.is_deleted=is_Deleted;
+		this.total=Total;
+		this.image = image;
+		this.product_info=product_info;
+
+	}
 	public Product(String product_name, int price, int inventory, int sellerID,  String image, String product_info, String type, String category) {
 		this.product_name = product_name;
 		this.price = price;
@@ -61,9 +73,23 @@ public class Product {
 		this.product_info=product_info;
 		this.type=type;
 		this.category=category;
+	//	this.created=created;
 	}
-	
-	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, int is_deleted,  String image,String product_info,String type,String category) {
+	public Product(int idtbl_product,String product_name, int price,int inventory,int sellerID,int is_deleted,String image,String product_info,String type,String category,String created)
+	{
+		this.idtbl_product = idtbl_product;
+		this.product_name = product_name;
+		this.price = price;
+		this.inventory=inventory;
+		this.sellerID=sellerID;		
+		this.is_deleted=is_deleted;
+		this.image = image;
+		this.product_info=product_info;
+		this.type=type;
+		this.category=category;
+		this.created=created;
+	}
+	public Product(int idtbl_product, String product_name, int price, int inventory, int sellerID, int is_deleted, String image,String product_info,String type,String category) {
 		this.idtbl_product = idtbl_product;
 		this.product_name = product_name;
 		this.price = price;
@@ -75,6 +101,7 @@ public class Product {
 		this.type=type;
 		this.category=category;
 	}
+	
 
     /**
      * 實例化（Instantiates）一個新的（new）Product 物件<br>
@@ -198,13 +225,16 @@ public class Product {
 	public String getCategory() {
 		return this.category;
 	}
+	public String getCreated() {
+		return this.created;
+	}
 
-    /**
+	/**
      * 取得產品資訊
      *
      * @return JSONObject 回傳產品資訊
      */
-	public JSONObject getData() {
+ public JSONObject getData() {
         /** 透過JSONObject將該項產品所需之資料全部進行封裝*/
         JSONObject jso = new JSONObject();
         jso.put("idtbl_product", getID());
@@ -217,6 +247,7 @@ public class Product {
         jso.put("product_info", getProductInfo());
         jso.put("type", getType());
         jso.put("category", getCategory());
+        jso.put("created", getCreated());
 
         return jso;
     }

@@ -29,13 +29,14 @@ public class ProductController extends HttpServlet {
         String id_list = jsr.getParameter("id_list");
         String sellerID = jsr.getParameter("sellerID");
         String productID=jsr.getParameter("productID");
-        
+
         
         JSONObject resp = new JSONObject();
         /** 判斷該字串是否存在，若存在代表要取回購物車內產品之資料，否則代表要取回全部資料庫內產品之資料 */
         if(id_list.isEmpty()&&sellerID.isEmpty()){
+        	System.out.println("getALL");
             JSONObject query = ph.getAll();
-            System.out.println("getALL");
+            
             resp.put("status", "200");
             resp.put("message", "所有商品資料取得成功");
             resp.put("response", query);
@@ -125,7 +126,7 @@ public class ProductController extends HttpServlet {
 		        int sellerID = jso.getInt("sellerID");	        
 		        String image = jso.getString("image");
 		        String product_info = jso.getString("productinfo");
-		        int idtbl_product = jso.getInt("idtbl_product");	  
+		        int idtbl_product = jso.getInt("productID");	  
 		        String type = jso.getString("type");
 		        String category = jso.getString("category");
 
