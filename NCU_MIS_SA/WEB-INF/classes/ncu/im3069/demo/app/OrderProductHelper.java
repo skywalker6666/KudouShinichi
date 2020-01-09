@@ -76,6 +76,7 @@ public class OrderProductHelper {
 
                 if (rs.next()) {
                     int id = rs.getInt(1);
+                    System.out.println("hihi");
                     jsa.put(id);
                 }
             } catch (SQLException e) {
@@ -88,6 +89,7 @@ public class OrderProductHelper {
                 /** 關閉連線並釋放所有資料庫相關之資源 **/
                 DBMgr.close(pres, conn);
             }
+            
         }
         
         return jsa;

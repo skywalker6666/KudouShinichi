@@ -71,6 +71,7 @@ public class OrderHelper {
             if (rs.next()) {
                 idtbl_order = rs.getInt(1);
                 ArrayList<OrderProduct> opd = order.getOrderProduct();
+                System.out.println("happy");
                 opa = oph.createByList(idtbl_order, opd);
             }
         } catch (SQLException e) {

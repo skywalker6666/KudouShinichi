@@ -109,6 +109,7 @@ public class Order {
      */
     public void addOrderProduct(Product pd, int quantity) {
         this.list.add(new OrderProduct(pd, quantity));
+        System.out.println("yaya");
     }
 
     /**

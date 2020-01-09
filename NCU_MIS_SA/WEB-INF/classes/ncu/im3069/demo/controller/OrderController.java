@@ -132,8 +132,8 @@ public class OrderController extends HttpServlet {
         JSONObject result = oh.create(od);
 
         /** 設定回傳回來的訂單編號與訂單細項編號 */
-        od.setId((int) result.getLong("order_id"));
-        od.setOrderProductId(result.getJSONArray("order_product_id"));
+        od.setId((int) result.getLong("idtbl_order"));
+        od.setOrderProductId(result.getJSONArray("idtbl_orderproduct"));
 
         /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */
         JSONObject resp = new JSONObject();
