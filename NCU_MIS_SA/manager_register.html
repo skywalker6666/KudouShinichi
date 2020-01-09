@@ -113,7 +113,7 @@ input:checked+.slider:before {
 			<li class="navbar"><a class="btn btn-outline-primary"
 				href="manager_edit.html">編輯帳密</a></li>
 			<li class="navbar"><a class="btn btn-outline-secondary"
-				href="index.html">登出</a></li>
+				href="index.html" id='logout'>登出</a></li>
 		</div>
 	</ul>
 
@@ -151,6 +151,14 @@ input:checked+.slider:before {
 	</div>
 
 	<script type="text/javascript">
+	$('#logout').click(function(){
+		var manager_id=[];
+		var manager_name=[];
+		var manager_isLeader=[];
+		localStorage.setItem("manager_id", JSON.stringify(manager_id));
+     	localStorage.setItem("manager_name", JSON.stringify(manager_name));
+     	localStorage.setItem("manager_isLeader", JSON.stringify(manager_isLeader));
+	})
 		$(document)
 				.ready(
 						function() {

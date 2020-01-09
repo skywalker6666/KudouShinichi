@@ -62,12 +62,16 @@ public class OrderProductController extends HttpServlet {
         JSONObject resp = new JSONObject();
         if (!sellerID.isEmpty()) {
             /** 透過 orderHelper 物件的 getByID() 方法自資料庫取回該筆訂單之資料，回傳之資料為 JSONObject 物件 */
+
+        	System.out.println("getByOrderId");
             JSONObject query = oh.getByOrderId(idtbl_order);
             resp.put("status", "200");
             resp.put("message", "單筆訂單資料取得成功");
             resp.put("response", query);
         }
         else {
+        	System.out.println("getAllHotProduct");
+
 	        JSONObject query=oph.getAllHotProduct();
 	        /** 新建一個 JSONObject 用於將回傳之資料進行封裝 */                
 	        resp.put("status", "20000");
@@ -118,7 +122,7 @@ public class OrderProductController extends HttpServlet {
             int amount = quantity.getInt(i);
 
             /** 透過 ProductHelper 物件之 getById()，取得產品的資料並加進訂單物件裡 */
-            Product pd = ph.getById(product_id);
+            Product pd = ph.getByProductId(product_id);
             od.addOrderProduct(pd, amount);
         }
 

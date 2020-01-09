@@ -86,8 +86,7 @@ public class OrderProduct {
   //買家訂單追蹤用到的
     public OrderProduct(int idtbl_ordeproduct, int order_id, int product_id, int seller_id, int price, int product_quantities, double subtotal) {
         
-    	this.idtbl_ordeproduct = idtbl_ordeproduct;
-        
+    	this.idtbl_ordeproduct = idtbl_ordeproduct;        
         this.order_id=order_id;
         getProductFromDB(product_id);
         getSellerFromDB(seller_id);
@@ -121,7 +120,7 @@ public class OrderProduct {
      */
     private void getProductFromDB(int product_id) {
         String id = String.valueOf(product_id);
-        this.pd = ph.getById(id);
+        this.pd = ph.getByProductId(id);
     }
     
     

@@ -207,7 +207,7 @@ font-weight: bold;
 			<p>兒童館</p>
 				<div id="child_product_panel" class="row border border-primary" style="padding-top:10px;"></div>
 				<br>
-					<div align='right'><a href="#" align='right'><button class="btn btn-outline-secondary">Back to top</button></a>
+					<div align='right'><a href="#" style="text-align:'right'"><button class="btn btn-outline-secondary">Back to top</button></a>
 					</div>	
 			</div>
 		</div>
@@ -238,6 +238,7 @@ font-weight: bold;
                 dataType: 'json',
                 timeout: 5000,
                 success: function (response) {
+                	 console.log(response);
                     if (response.status == 200) {
                         var parity_product_panel = '';
                         var man_product_panel = '';
@@ -266,6 +267,21 @@ font-weight: bold;
                 			}
                         	
                         	var dateString = this.created;
+							var date = new Date(Date.parse(dateString.replace(/-/g,"/")));                       	
+                      		var date_year=date.getFullYear();
+                      		var date_month=date.getMonth();
+                      		var date_day=date.getDay();
+                      		var date_hour=date.getHours();
+                        	
+                        	
+                        	
+                        	var d = new Date();   
+                        	var utcyear =d.getFullYear();
+                        	var utcmonth=d.getMonth();
+                        	var utcday = d.getDay();
+                        	var utchour=d.getHours();
+                        	
+                        	//時間演算法
 
                         	var date = new Date(Date.parse(dateString.replace(/-/g,"/")));                       	
                       		var date_year=date.getFullYear();
@@ -301,6 +317,7 @@ font-weight: bold;
                         $("#man_product_panel").append(man_product_panel);
                         $("#woman_product_panel").append(woman_product_panel);
                         $("#child_product_panel").append(child_product_panel);
+
                         $("#new_product_panel").append(new_product_panel);
                         setButtonFunction();
                         checkIfExistInCart();
@@ -785,4 +802,3 @@ font-weight: bold;
 </body>
 
 </html>
-

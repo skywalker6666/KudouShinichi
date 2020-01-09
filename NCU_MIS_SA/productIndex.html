@@ -62,7 +62,7 @@
 					href="order_tracking.html">訂單追蹤</a></li>
 				<li class="nav-item" id="shopcart"><a class="nav-link"
 					href="shoppingcart.html">購物車</a></li>
-				<li class="nav-item" id="mymarket"><a class="nav-link"
+				<li class="nav-item" id="myMarket"><a class="nav-link"
 					href="my_market.html">我的賣場</a></li>
 			</ul>
 
@@ -166,12 +166,7 @@
                         var product_panel = '';
 
                         $.each(response.response.data, function () {
-                        	//賣家不能買自己的產品
-                        	if(this.sellerID!=parseInt(client_id.toString()))
-                        		{
-                        		 product_panel += addProduct(this);
-                        		}
-                           
+                        	product_panel += addProduct(this);
                         })
 
                         $("#product_panel").append(product_panel);
@@ -203,7 +198,7 @@
          */
         function addProduct(data) {
             let inner_html = '';
-            
+            let add_to_cart_button ='';
             
             inner_html += '<div class="col-md-3" style="float:left;">';
             inner_html += '<div class="card-header">';
@@ -215,7 +210,6 @@
 			
             	productidname="anly"+data.idtbl_product;
 				inner_html += "<div title='"+data.product_name+"' id='"+productidname+"' style='width:300px;height=10000px; padding: 0.5em;  display: none;'>"
-				
 				
 				
 				//詳細資料
@@ -239,9 +233,20 @@
         //    inner_html += '<p class="card-text">' + data.product_info + '</p>';
             inner_html += '<div class="d-flex justify-content-between align-items-center">';
             inner_html += '<div class="btn-group">';
-            if(client_id.length!=0){
-             	inner_html += '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard btn btn-outline-dark" >加入購物車</button>';
-             }
+          
+            if(client_id.length==0){//訪客:不印加入購物車
+            }
+            else if(data.sellerID==parseInt(client_id.toString()))//賣家不能買自己的產品:跳出alert提醒視窗
+        	{
+             	add_to_cart_button = '<button id="cannot_buy_your_product_' + data.idtbl_product + '" name="cannot_buy_your_product" type="button" class="productcard btn btn-outline-dark" >加入購物車</button>';
+        	}else//買家可以買商品，賣家也可以買別人商品
+        	{
+        		add_to_cart_button = '<button id="add_cart_' + data.idtbl_product + '" name="add_cart" type="button" class="productcard btn btn-outline-dark" >加入購物車</button>';
+
+        	}
+        		
+           
+            inner_html += add_to_cart_button;
             inner_html += '</div><small class="text-muted">商品編號: ' + data.idtbl_product + '</small>';
             inner_html += '</div></div></div></div>';
 
@@ -268,6 +273,10 @@
                 var id = (this.id).split('_')[2];
                 addProductToCart(id, 1);
             });
+            $('button[name="cannot_buy_your_product"]').click(function () {
+                alert("不能購買自己的商品");
+            });
+            
         }
 
         /**
@@ -381,14 +390,17 @@
         }
 
         function loguot() {
-            client_id = [];
+        	client_id = [];
             client_name = [];
-            updateMemberDataToClent();
             client_isSeller = [];
+            updateMemberDataToClent();
             client_cart_obj = [];
             client_cart_amount = [];
-            updateMemberDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
-            $("#member_center1").hide();
+        	updateCartDataToClent();//有點奇怪，指呼叫一次的話不能刪乾淨，所以呼叫兩次updateMemberDataToClent
+        	manager_id=[];
+        	manager_name=[];
+        	manager_isLeader=[];
+        	updateManagerDataToClent(); $("#member_center1").hide();
             $("#member_center2").hide();
             $("#member_center3").hide();
             $("#member_center4").hide();

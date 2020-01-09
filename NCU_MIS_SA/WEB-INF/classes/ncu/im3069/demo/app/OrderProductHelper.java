@@ -63,10 +63,11 @@ public class OrderProductHelper {
                 pres.setInt(4, unit_price);
                 pres.setInt(5, product_quantities);
                 pres.setDouble(6, subtotal);
-                
+                System.out.println("再見");
                 /** 執行新增之SQL指令並記錄影響之行數 */
                 pres.executeUpdate();
-                
+               
+
                 /** 紀錄真實執行的SQL指令，並印出 **/
                 exexcute_sql = pres.toString();
                 System.out.println(exexcute_sql);

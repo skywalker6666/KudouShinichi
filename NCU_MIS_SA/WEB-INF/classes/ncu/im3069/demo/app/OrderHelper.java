@@ -65,9 +65,9 @@ public class OrderHelper {
             /** 紀錄真實執行的SQL指令，並印出 **/
             execute_sql = pres.toString();
             System.out.println(execute_sql);
-            
+            System.out.println("我快死了");
             ResultSet rs = pres.getGeneratedKeys();
-
+            System.out.println("我不玩了");
             if (rs.next()) {
                 idtbl_order = rs.getInt(1);
                 ArrayList<OrderProduct> opd = order.getOrderProduct();

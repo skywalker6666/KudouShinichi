@@ -247,6 +247,7 @@ public class Product {
         jso.put("product_info", getProductInfo());
         jso.put("type", getType());
         jso.put("category", getCategory());
+        jso.put("created", getCreated());
 
         return jso;
     }

@@ -75,7 +75,7 @@ public class ProductHelper {
                 String type = rs.getString("type");
                 String category = rs.getString("category");
                 String created = rs.getString("created");
-                
+
                 /** 將每一筆商品資料產生一名新Product物件 */
               
                 p = new Product(idtbl_product, product_name, price, inventory, sellerID, is_deleted, image, product_info, type, category,created);
@@ -276,8 +276,8 @@ public class ProductHelper {
         return response;
     }
     ///由productID get product全部資料
-    public Product getById(String idtbl_product) {
-        /** 新建一個 Product 物件之 m 變數，用於紀錄每一位查詢回之商品資料 */
+    public Product getByProductId(String idtbl_product) {
+    	/** 新建一個 Product 物件之 m 變數，用於紀錄每一位查詢回之商品資料 */
         Product p = null;
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -328,6 +328,7 @@ public class ProductHelper {
         }
 
         return p;
+     
     }
     public Product getByIdUsedForOrdertracking(String idtbl_product) {
         /** 新建一個 Product 物件之 m 變數，用於紀錄每一位查詢回之商品資料 */

@@ -16,11 +16,14 @@
     	z-index:0;
     	position:relative;
     	
-    	overflow:hidden;
     }
     nav#navbar-example2{
     	position:relative;
-    	z-index:1;	
+    	z-index:1;    	
+    }
+    #orderNO{
+    	position:relative;
+    	z-index:2;   
     }
     </style>
 
@@ -29,77 +32,69 @@
 </head>
 
 <body>
-	<div id="header">
-		<!--容器分為左圖右導覽連結 -->
-		<nav class="navbar fixed-top navbar-expand-lg navbar-light"	style="background-color: #e3f2fd;">
-			<a class="navbar-brand" href="index.html"><img
-				src="statics/img/navbar/icon.png" style="float: left" height="50px"
-				width="50px"></img></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarColor03" aria-controls="navbarColor03"
-				aria-expanded="true" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-
-			<div class="navbar-collapse collapse show" id="navbarColor03"
-				style="">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link"
-						href="index.html">Home <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="productIndex.html">商品總覽</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="order_tracking.html">訂單追蹤</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="shoppingcart.html">購物車</a></li>
-					<li class="nav-item"><a class="nav-link" href="my_market.html">我的賣場</a>
-					</li>
-				</ul>
-
-			</div>
-
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><img
-					src="statics/img/navbar/shoppingcart.png" height="20px"
-					width="20px"></img></li>
-				<li><a class="nav-link" href="shoppingcart.html">購物車</a></li>
 
 
-				<li id="signup_in" class="nav-item"><a class="nav-link"
-					href="login_selected.html">會員註冊/登入</a></li>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light " style="background-color: #e3f2fd">
+	<a class="navbar-brand" href="index.html"><img
+		src="statics/img/navbar/icon.png" style="float: left" height="50px"
+		width="50px"></img></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarColor03" aria-controls="navbarColor03"
+		aria-expanded="true" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-				<li class="nav-item"><img src="statics/img/navbar/user.png"
-					height="20px" width="20px"></img></li>
-				<li id="user_name" class="nav-link">user</li>
+	<div class="navbar-collapse collapse show" id="navbarColor03" style="">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				href="index.html">Home <span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="productIndex.html">商品總覽</a></li>
+			<li class="nav-item" id="track"><a class="nav-link"
+				href="order_tracking.html">訂單追蹤</a></li>
+			<li class="nav-item" id="shopcart"><a class="nav-link"
+				href="shoppingcart.html">購物車</a></li>
+			<li class="nav-item" id="mymarket"><a class="nav-link" href="my_market.html">我的賣場</a>
+			</li>
+		</ul>
 
-				<li class="nav-item"><a id="member_center" class="nav-link"
-					href="member_change.html">會員中心</a></li>
+	</div>
 
-				<li class="nav-item"><a id="remove" class="nav-link"
-					href="index.html">&nbsp;登出 </a></li>
+	<ul class="navbar-nav mr-auto">
 
-			</ul>
+		<li class="nav-item" id="member_center1">
+			<a class="nav-link" href="#">
+				<img src="statics/img/navbar/shoppingcart.png" height="20px" width="20px"></img>
+			</a>
+		</li>
+		<li  id="member_center2"><a class="nav-link" href="shoppingcart.html">購物車</a></li>
 
-			<form class="form-inline">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-primary " type="submit">Search</button>
-			</form>
-		</nav>
-    <nav id="navbar-example2" class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">訂單追蹤</a>
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link" href="#all-order">買進</a>
-            </li>
-           
-            <li class="nav-item">
-                <a class="nav-link" href="#st" class="nav-link active">賣出</a>
-            </li>
-        </ul> 
-    </nav>
+
+		<li id="signup_in" class="nav-item"><a class="nav-link"
+			href="login_selected.html">會員註冊/登入</a></li>
+	
+		<li class="nav-item" id="member_center3">
+		<a class="nav-link" href="#">
+		<img src="statics/img/navbar/user.png" height="20px" width="20px"></img>
+		</a>
+		</li>
+			
+		<li class="nav-item"><a id="user_name" class="nav-link"
+			href="#">user</a></li>
+
+		<li class="nav-item"  id="member_center4"><a id="member_center" class="nav-link"
+			href="member_change.html">會員中心</a></li>
+
+		<li class="nav-item"  id="member_center5"><a id="remove" class="nav-link"
+			href="index.html">&nbsp;登出 </a></li>
+
+	</ul>
+	
+	
+</nav>
+			
    <nav id="navbar-example2" class="navbar navbar-light bg-light sticky-top">     
-   	<a class="navbar-brand" href="#" id="orderNO"></a>           
+   	<div class="navbar-brand"  id="orderNO"></div>           
         <table id="st" style="width:100%">
         <thead style="text-align:center">
             <tr>
@@ -113,7 +108,7 @@
             </tr>
         </tbody>
     </table>             
-    </nav>
+   </nav>
 	 <div class="progress sticky-top">
         	<div id="status_progress" class="progress-bar" role="progressbar" style="width:0%;" aria-valuenow="0"
             aria-valuemin="0" aria-valuemax="100"></div>
@@ -138,7 +133,6 @@
             </tbody>
         </table>
     </div>
-    </div>    
     <script type="text/javascript">
         var [client_isSeller] = getisSellerFromClient();
         var [client_cart_obj, client_cart_amount] = getCartDataFromClient();
@@ -347,10 +341,8 @@
                     	} 
                     	else if(client_isSeller==1 && buyerID==memberID){
                     		$("#finished_"+id).hide();
-                    		$("#started_"+id).hide();
-                    	}
-                    	
-                    		
+                    		$("#started_"+id).hide(); 
+                    	}                    	
                     } 
                     else if (status == 2) {
                     	$("#started_"+id).hide();
@@ -379,8 +371,6 @@
 			    	       
     		
             })
-            
-
         }
 
         function showSellingOrderStatus(data) {
@@ -480,9 +470,7 @@
                 })
 			    	       
     		
-            })
-            
-
+            })            
         }
         
         
@@ -510,7 +498,7 @@
                     }
                 },
                 error: function () {
-                    	$.alert("幹");
+                    	$.alert("!");
                 }
             });
         }

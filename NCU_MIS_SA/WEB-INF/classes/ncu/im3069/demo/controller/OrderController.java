@@ -111,7 +111,6 @@ public class OrderController extends HttpServlet {
         String payment=jso.getString("payment");
         int order_status=jso.getInt("order_status");
         double total_price=jso.getDouble("total_price");
-        
         JSONArray item = jso.getJSONArray("item");
         JSONArray quantity = jso.getJSONArray("quantity");
 
@@ -122,9 +121,10 @@ public class OrderController extends HttpServlet {
         for(int i=0 ; i < item.length() ; i++) {
             String product_id = item.getString(i);
             int amount = quantity.getInt(i);
+            System.out.println(product_id);
 
             /** 透過 ProductHelper 物件之 getById()，取得產品的資料並加進訂單物件裡 */
-            Product pd = ph.getById(product_id);
+            Product pd = ph.getByProductId(product_id);
             od.addOrderProduct(pd, amount);
         }
 
