@@ -191,7 +191,7 @@ public class OrderProductHelper {
             
             /** 紀錄真實執行的SQL指令，並印出 **/
             exexcute_sql = pres.toString();
-            System.out.println("我是問題兒童"+exexcute_sql);
+            //System.out.println("我是問題兒童"+exexcute_sql);
             
             while(rs.next()) {
                 /** 每執行一次迴圈表示有一筆資料 */
@@ -263,7 +263,7 @@ public class OrderProductHelper {
             
             /** 紀錄真實執行的SQL指令，並印出 **/
             exexcute_sql = pres.toString();
-            System.out.println(exexcute_sql);
+            //System.out.println(exexcute_sql+"我來過這");
             
             while(rs.next()) {
                 /** 每執行一次迴圈表示有一筆資料 */
